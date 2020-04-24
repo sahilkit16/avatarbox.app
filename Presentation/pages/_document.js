@@ -43,6 +43,7 @@ class AvatarBoxSite extends Document {
         <body>
           <Main />
           <NextScript />
+          <script async type="text/javascript" src="../js/bulma.js"></script>
         </body>
       </Html>
     );
