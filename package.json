@@ -4,9 +4,9 @@
   "description": "landing page for avatarbox.io",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "start": "next -p 8801 ./Presentation",
+    "build": "next build ./Presentation",
+    "start:prod": "next start -p 8801 ./Presentation"
   },
   "keywords": [],
   "author": "",
