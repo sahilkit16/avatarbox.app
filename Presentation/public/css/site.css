@@ -1,0 +1,16 @@
+/* http://smacss.com */
+/* base */
+/* layout */
+/* module */
+/* state */
+/* theme */
+
+/* utility */
+
+a.navbar-item.is-transparent {
+    background-color: transparent !important;
+}
+
+div.navbar-menu.is-transparent {
+    background-color: transparent !important;
+}

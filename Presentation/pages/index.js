@@ -9,10 +9,10 @@ class Index extends React.Component {
           <title>Sign Up | AvatarBox</title>
         </Head>
         <div className="hero-head">
-          <nav className="navbar">
+          <nav className="navbar is-transparent">
             <div className="container">
               <div className="navbar-brand">
-                <a className="navbar-item" href="#">
+                <a className="navbar-item is-transparent" href="#">
                   <img src="/images/avatarbox.png" alt="Logo" />
                 </a>
                 <span className="navbar-burger burger" data-target="navbarMenu">
@@ -21,7 +21,7 @@ class Index extends React.Component {
                   <span></span>
                 </span>
               </div>
-              <div id="navbarMenu" className="navbar-menu">
+              <div id="navbarMenu" className="navbar-menu is-transparent">
                 <div className="navbar-end">
                   <span className="navbar-item">
                     <a className="button is-white is-outlined"
