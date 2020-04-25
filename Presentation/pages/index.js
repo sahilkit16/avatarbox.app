@@ -21,14 +21,14 @@ class Index extends React.Component {
                   <span></span>
                 </span>
                 <noscript>
-                  <a href="#navbarMenu" className="progressive navbar-burger burger">
+                  <a href="#navbarMenu" className="navbar-burger burger is-progressive">
                     <span></span>
                     <span></span>
                     <span></span>
                   </a>
                 </noscript>
               </div>
-              <div id="navbarMenu" className="navbar-menu is-transparent">
+              <div id="navbarMenu" className="navbar-menu is-transparent has-text-centered">
                 <div className="navbar-end">
                   <span className="navbar-item">
                     <a className="button is-white is-outlined"
@@ -48,6 +48,15 @@ class Index extends React.Component {
                       <span>View Source</span>
                     </a>
                   </span>
+                  <noscript>
+                    <a href="#" className="button is-transparent">
+                      <span className="navbar-burger burger is-active is-progressive">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </span>
+                    </a>
+                  </noscript>
                 </div>
               </div>
             </div>

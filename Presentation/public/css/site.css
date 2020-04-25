@@ -23,7 +23,16 @@ div.navbar-menu.is-transparent {
     display: block;
 }
 
-.progressive.navbar-burger.burger{
+a.navbar-burger.burger.is-progressive {
     position: fixed;
     right: 0px;
+}
+
+span.navbar-burger.burger.is-progressive {
+    color: #ffffff;
+}
+
+.button.is-transparent {
+    border: none;
+    background-color: transparent;
 }
