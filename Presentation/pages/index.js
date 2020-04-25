@@ -53,7 +53,7 @@ class Index extends React.Component {
                 New Avatar, Daily
                     </h1>
               <h2 className="subtitle">
-                The best way to update your Gravatar icon
+                A handy gadget to update your Gravatar icon
                     </h2>
               <div className="box">
                 <div className="field is-grouped">
