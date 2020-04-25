@@ -15,11 +15,18 @@ class Index extends React.Component {
                 <a className="navbar-item is-transparent" href="#">
                   <img src="/images/avatarbox.png" alt="Logo" />
                 </a>
-                <span className="navbar-burger burger" data-target="navbarMenu">
+                <span className="navbar-burger burger is-hidden" data-target="navbarMenu">
                   <span></span>
                   <span></span>
                   <span></span>
                 </span>
+                <noscript>
+                  <a href="#navbarMenu" className="progressive navbar-burger burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </a>
+                </noscript>
               </div>
               <div id="navbarMenu" className="navbar-menu is-transparent">
                 <div className="navbar-end">
@@ -51,7 +58,7 @@ class Index extends React.Component {
             <div className="column is-6 is-offset-3">
               <h1 className="title">
                 New Avatar, Daily
-                    </h1>
+              </h1>
               <h2 className="subtitle">
                 A handy gadget to update your Gravatar icon
               </h2>

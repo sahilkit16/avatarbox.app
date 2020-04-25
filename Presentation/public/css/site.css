@@ -18,3 +18,12 @@ div.navbar-menu.is-transparent {
 .input.email {
     font-family: Arial, FontAwesome;
 }
+
+#navbarMenu:target{
+    display: block;
+}
+
+.progressive.navbar-burger.burger{
+    position: fixed;
+    right: 0px;
+}
