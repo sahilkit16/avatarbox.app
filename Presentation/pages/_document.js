@@ -34,6 +34,7 @@ class AvatarBoxSite extends Document {
           <link rel="manifest" href="/manifest.json" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000"></meta>
           <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon"/>
           <link rel="stylesheet" type="text/css" href="../css/reset.css" />
           <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>

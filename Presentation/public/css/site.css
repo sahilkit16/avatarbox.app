@@ -14,3 +14,7 @@ a.navbar-item.is-transparent {
 div.navbar-menu.is-transparent {
     background-color: transparent !important;
 }
+
+.input.email {
+    font-family: Arial, FontAwesome;
+}
