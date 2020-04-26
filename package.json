@@ -4,7 +4,7 @@
   "description": "landing page for avatarbox.io",
   "main": "index.js",
   "scripts": {
-    "start": "next -p 8801 ./Presentation",
+    "start": "node ./Presentation/server.js",
     "build": "next build ./Presentation",
     "start:prod": "next start -p 8801 ./Presentation"
   },
@@ -19,6 +19,9 @@
   },
   "homepage": "https://bitbucket.org/mrtillman/avatarbox.web/src/master/README.md",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "next": "^9.3.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
