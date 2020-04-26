@@ -19,7 +19,7 @@ div.navbar-menu.is-transparent {
     font-family: Arial, FontAwesome;
 }
 
-#navbarMenu:target{
+#navbarMenu:target {
     display: block;
 }
 

@@ -22,6 +22,7 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "grav.client": "^2.3.14",
     "next": "^9.3.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
