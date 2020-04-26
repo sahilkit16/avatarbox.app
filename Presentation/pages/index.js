@@ -71,18 +71,20 @@ class Index extends React.Component {
               <h2 className="subtitle">
                 A handy resource to update your Gravatar icon
               </h2>
-              <div className="box">
+              <form className="box" method="post" action="/register" >
                 <div className="field is-grouped">
                   <p className="control is-expanded">
-                    <input className="input email" type="email" placeholder="&#xf003; Email Address" />
+                    <input className="input email" name="email" type="email" placeholder="&#xf003; Email Address" />
                   </p>
                   <p className="control">
-                    <a className="button is-info">
-                      Get Started
-                    </a>
+                    <input 
+                      type="submit" 
+                      value="Get Started" 
+                      className="button is-info" 
+                    />
                   </p>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
