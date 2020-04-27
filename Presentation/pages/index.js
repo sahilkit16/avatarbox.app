@@ -82,6 +82,9 @@ class Index extends React.Component {
                       value="Get Started" 
                       className="button is-info" 
                     />
+                    <noscript className="is-hidden">
+                      <input name="isProgressive" value="true"/>
+                    </noscript>
                   </p>
                 </div>
               </form>
