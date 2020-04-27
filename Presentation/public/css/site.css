@@ -7,6 +7,18 @@
 
 /* utility */
 
+#hero .step-2 {
+    display: none;
+}
+
+#hero:target .step-1 {
+    display: none;
+}
+
+#hero:target .step-2 {
+    display: block;
+}
+
 a.navbar-item.is-transparent {
     background-color: transparent !important;
 }
@@ -15,7 +27,7 @@ div.navbar-menu.is-transparent {
     background-color: transparent !important;
 }
 
-.input.email {
+.input.email, input.text {
     font-family: Arial, FontAwesome;
 }
 

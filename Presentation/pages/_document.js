@@ -47,6 +47,7 @@ class AvatarBoxSite extends Document {
           <Main />
           <NextScript />
           <script async type="text/javascript" src="../js/bulma.js"></script>
+          <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"></script>
         </body>
       </Html>
     );

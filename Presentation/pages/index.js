@@ -6,7 +6,7 @@ import HeroSection from '../components/hero-section';
 class Index extends React.Component {
   render() {
     return (
-      <HeroSection title="Sign Up | AvatarBox">
+      <HeroSection title="Sign Up | Avatar Box">
         <HeroHead />
         <HeroBody
           headline="New Avatar, Daily"
