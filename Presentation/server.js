@@ -16,6 +16,8 @@ const bodyParser = require('body-parser');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }))
+app.set('views', './Presentation/views');
+app.set('view engine', 'pug');
 
 nx.prepare().then(() => {
     const port = process.env.PORT || 8801;
@@ -25,9 +27,14 @@ nx.prepare().then(() => {
         var client = new GravatarClient(email, null);
         var redirectUrl = `/?hash=${client.emailHash}`;
         if(isProgressive){
-          redirectUrl = redirectUrl.replace("/","/#upload");
+          redirectUrl += "#hero";
         }
         res.redirect(redirectUrl);
+    });
+
+    app.post('/encrypt', (req, res) => {
+        var { password } = req.body;
+        res.render("ciphertext", { ciphertext: `this is the ciphertext for ${password}` });
     });
 
     app.get('/*', (req, res) => {
