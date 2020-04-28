@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./Presentation/server.js",
-    "build": "next build ./Presentation",
-    "start:prod": "next start -p 8801 ./Presentation"
+    "build": "next build ./Presentation"
   },
   "repository": {
     "type": "git",
