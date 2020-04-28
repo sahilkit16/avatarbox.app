@@ -17,7 +17,7 @@ function Encrypt() {
   return (
     <form method="post">
       <input id="password" name="password" type="password" placeholder="Gravatar Password" />
-      <input type="submit" value="Submit" onClick={encryptUserPassword} />
+      <input type="submit" readOnly={true} value="Submit" onClick={encryptUserPassword} />
       {/* <textarea id="ciphertext" name="ciphertext" placeholder="ciphertext">
       </textarea> */}
     </form>
