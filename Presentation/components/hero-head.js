@@ -1,6 +1,11 @@
+import Head from 'next/head';
+
 function HeroHead() {
   return (
     <div className="hero-head">
+      <Head>
+        <link rel="stylesheet" type="text/css" href="../css/landing.css"/>
+      </Head>
       <nav className="navbar is-transparent">
         <div className="container">
           <div className="navbar-brand">
