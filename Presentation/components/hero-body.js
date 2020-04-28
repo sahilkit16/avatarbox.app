@@ -20,7 +20,6 @@ function HeroBody(props) {
                   name="ciphertext" 
                   type="password" 
                   placeholder="&#xf084; Password Ciphertext"
-                  title="Do not type your password here. Use an encrypted value instead."
                 />
               </p>
               <p className="control">
