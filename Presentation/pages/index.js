@@ -8,7 +8,9 @@ class Index extends React.Component {
     super(props);
   }
   static getInitialProps = async ctx => {
-    return { user: ctx.query.user };
+    const user = ctx.query.user || null;
+    const action = `/register/${user ? 'submit' : 'get-started'}`;
+    return { user, action };
   }
   render() {
     return (
@@ -16,6 +18,7 @@ class Index extends React.Component {
         <HeroHead />
         <HeroBody
           user={this.props.user}
+          action={this.props.action}
           headline="New Avatar, Daily"
           proposition="A handy resource to update your Gravatar icon"
         />

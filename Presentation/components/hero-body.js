@@ -9,7 +9,7 @@ function HeroBody(props) {
           <h2 className="subtitle">
             {props.proposition}
           </h2>
-          <form className="box" method="post" action="/register" >
+          <form className="box" method="post" action={props.action} >
             <input type="hidden" name="user" readOnly={true} value={props.user} />
             <div className="field is-grouped">
               <p id="email-input" className="control is-expanded step-1">
