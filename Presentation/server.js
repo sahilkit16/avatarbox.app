@@ -6,6 +6,7 @@ const next = require('next');
 const { exec } = require('child_process');
 const { GravatarClient } = require('grav.client');
 const { join } = require('path');
+const CacheService = require('../Services/cache.service');
 
 // workaround for dev container
 // see https://github.com/zeit/next.js/issues/4022
@@ -16,8 +17,12 @@ const nx = next({ dev, dir: 'Presentation' });
 const handle = nx.getRequestHandler();
 const bodyParser = require('body-parser');
 
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.set('views', './Presentation/views');
 app.set('view engine', 'pug');
 
@@ -25,18 +30,23 @@ nx.prepare().then(() => {
     const port = process.env.PORT || 8801;
 
     app.post('/register', (req, res) => {
-        var { email, isProgressive, ciphertext } = req.body;
-        var client = new GravatarClient(email, null);
-        var redirectUrl = `/?hash=${client.emailHash}`;
+        const { email, user, isProgressive, ciphertext } = req.body;
+        let client, redirectUrl = "/";
+        if(email){
+            client = new GravatarClient(email, null);
+            redirectUrl += `?user=${client.emailHash}`;
+            CacheService.set(client.emailHash, email);
+        }
         if(isProgressive){
           redirectUrl += "#hero";
         }
-        if(ciphertext){
+        if(ciphertext && user){
           const path = join(__dirname, '../_/rsa.private');
           exec(`echo ${ciphertext} | base64 -d | openssl rsautl -decrypt -inkey ${path}`,
           (err, sdtout) => {
               if(err) throw err;
-              console.log(sdtout);
+              const _email = CacheService.get(user);
+              console.log('email: ', _email, ' password: ', sdtout);
               //res.render("dashboard", { ciphertext: sdtout });
           });
         }
