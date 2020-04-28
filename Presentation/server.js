@@ -3,7 +3,7 @@ const express = require('express');
 const http = require('http');
 const app = express();
 const next = require('next');
-const { exec } = require('child_process');
+const { exec, execSync } = require('child_process');
 const { GravatarClient } = require('grav.client');
 const { join } = require('path');
 const CacheService = require('../Services/cache.service');
@@ -42,15 +42,18 @@ nx.prepare().then(() => {
         }
         if(ciphertext && user){
           const path = join(__dirname, '../_/rsa.private');
-          exec(`echo ${ciphertext} | base64 -d | openssl rsautl -decrypt -inkey ${path}`,
-          (err, sdtout) => {
-              if(err) throw err;
-              const _email = CacheService.get(user);
-              console.log('email: ', _email, ' password: ', sdtout);
-              //res.render("dashboard", { ciphertext: sdtout });
+          const _email = CacheService.get(user);
+          const password = execSync(`echo ${ciphertext.trim()} | base64 -d | openssl rsautl -decrypt -inkey ${path}`).toString();
+          client = new GravatarClient(_email.trim().toString(), password.trim().toString());
+          client.userImages().then(result => {
+            res.render("dashboard", { images: result.Value.userImages });
+          }).catch((err) => {
+            console.log(err);
+            res.end();
           });
+        } else {
+          res.redirect(redirectUrl);
         }
-        res.redirect(redirectUrl);
     });
 
     app.post('/encrypt', (req, res) => {
