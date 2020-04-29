@@ -23,31 +23,31 @@ class Encrypt extends React.Component {
   }
   render() {
     return (
-      <section class="hero is-success is-fullheight">
+      <section className="hero is-success is-fullheight">
         <Head>
           <title>Encryption Tool | Avatar Box</title>
           <link rel="stylesheet" type="text/css" href="../css/encrypt.css"/>
         </Head>
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="column is-4 is-offset-4">
-                    <h3 class="title has-text-black">Encryption Tool</h3>
-                    <hr class="login-hr"/>
-                    <p class="subtitle has-text-black">Please encrypt your password</p>
-                    <div class="box">
-                        <figure class="avatar">
+        <div className="hero-body">
+            <div className="container has-text-centered">
+                <div className="column is-4 is-offset-4">
+                    <h3 className="title has-text-black">Encryption Tool</h3>
+                    <hr className="login-hr"/>
+                    <p className="subtitle has-text-black">Please encrypt your password</p>
+                    <div className="box">
+                        <figure className="avatar">
                             <img src="../images/lock.jpeg" width="128" height="128"/>
                         </figure>
                         <form method="post" action="/encrypt">
-                            <div class="field">
-                                <div class="control">
-                                    <input class="input is-large" id="password" name="password" type="password" placeholder="Password"/>
+                            <div className="field">
+                                <div className="control">
+                                    <input className="input is-large" id="password" name="password" type="password" placeholder="Password"/>
                                 </div>
                             </div>
-                            <button type="submit" class="button is-block is-info is-large is-fullwidth">Encrypt <i class="fa fa-random" aria-hidden="true"></i></button>
+                            <button type="submit" className="button is-block is-info is-large is-fullwidth">Encrypt <i className="fa fa-random" aria-hidden="true"></i></button>
                         </form>
                     </div>
-                    <p class="has-text-grey">
+                    <p className="has-text-grey">
                         <a href="/">Home</a> &nbsp;·&nbsp;
                         <a href="https://bitbucket.org/mrtillman/avatarbox.web/wiki/Authentication">Need Help?</a>
                     </p>
