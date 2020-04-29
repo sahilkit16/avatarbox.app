@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Calendar | Avatar Box
+        link(rel='apple-touch-icon' sizes='180x180' href='/images/apple-touch-icon.png')
+        link(rel='icon' type='image/png' sizes='32x32' href='/images/favicon-32x32.png')
+        link(rel='icon' type='image/png' sizes='16x16' href='/images/favicon-16x16.png')
+        meta(charset='utf-8')
+        link(rel='manifest' href='/manifest.json')
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        meta(name='theme-color' content='#000000')
+        link(rel='shortcut icon' href='../images/fav_icon.png' type='image/x-icon')
+        link(rel='stylesheet' type='text/css' href='../css/reset.css')
+        link(rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+        link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet')
+        link(rel='stylesheet' type='text/css' href='https://unpkg.com/bulma@0.8.0/css/bulma.min.css')
+        link(rel='stylesheet' type='text/css' href='../css/site.css')
+        meta(name='viewport' content='width=device-width')
+        meta(charset='utf-8')
+        title Dashboard | Avatar Box
+    body
+      .container
+        .container.column.is-4.is-offset-4
+          .panel
+            .panel-heading
+              p.has-text-centered Calendar
+            .panel-block
+              .slides.is-block-centered
+                each image in images
+                  figure 
+                    img.is-block-centered(src=image.url)
+                    p.has-text-grey.is-size-7 #{image.day}
+            .panel-block
+              .pagination.is-rounded.is-block-centered(role='navigation' aria-label='pagination')
+                a.button.is-rounded.is-danger(href='#')
+                  | Cancel &nbsp; 
+                  i.fa.fa-close(aria-hidden='true')
+                a.button.is-rounded.is-success(href='#')
+                  | Start &nbsp; 
+                  i.fa.fa-check(aria-hidden='true')

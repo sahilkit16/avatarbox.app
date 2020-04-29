@@ -4,6 +4,7 @@ const { GravatarClient } = require('grav.client');
 const { join } = require('path');
 const CacheService = require('../../Services/cache.service');
 const router = Router();
+const BuildCalendarUseCase = require('../../Application/build-calendar.use-case');
 
 router.post('/get-started', (req, res) => {
   const { email, isProgressive } = req.body;
@@ -22,17 +23,16 @@ router.post('/get-started', (req, res) => {
 router.post('/submit', (req, res) => {
   const { user, isProgressive, ciphertext } = req.body;
   if (ciphertext && user) {
-    const path = join(__dirname, '../../_/rsa.private');
+    const privateKeyPath = join(__dirname, '../../_/rsa.private');
     const email = CacheService.get(user);
-    exec(`echo ${ciphertext.trim()} | base64 -d | openssl rsautl -decrypt -inkey ${path}`,
+    exec(`echo ${ciphertext.trim()} | base64 -d | openssl rsautl -decrypt -inkey ${privateKeyPath}`,
       (err, password) => {
         if (err) throw err;
         const client = new GravatarClient(email.trim(), password.trim());
-        client.userImages().then(result => {
-          if(result.DidFail) throw result.ErrorMessage;
-          return result;
-        }).then(result => {
-          res.render("dashboard", { images: result.Value.userImages });
+        const buildCalendar = new BuildCalendarUseCase();
+        buildCalendar.client = client;
+        buildCalendar.execute().then(calendar => {
+          res.render("calendar", calendar);
         }).catch((err) => {
           console.log(err);
           res.end();

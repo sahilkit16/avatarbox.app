@@ -1,12 +1,3 @@
-/* http://smacss.com */
-/* base */
-/* layout */
-/* module */
-/* state */
-/* theme */
-
-/* utility */
-
 #hero .step-2 {
     display: none;
 }
@@ -47,4 +38,56 @@ span.navbar-burger.burger.is-progressive {
 .button.is-transparent {
     border: none;
     background-color: transparent;
+}
+
+.is-block-centered {
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+  
+.slides {
+  display: flex;
+  width: 300px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slides::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+.slides::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border-radius: 10px;
+}
+.slides::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.slides > figure {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 300px;
+  height: 300px;
+  margin-right: 50px;
+  border-radius: 10px;
+  transform-origin: center center;
+  transform: scale(1);
+  transition: transform 0.5s;
+  position: relative;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slides > figure p {
+  margin-top:10px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
