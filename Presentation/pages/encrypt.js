@@ -24,7 +24,7 @@ class Encrypt extends React.Component {
   }
   render() {
     return (
-      <section className="hero is-success is-fullheight">
+      <section className="hero is-light is-fullheight">
         <Head>
           <title>Encrypt | Avatar Box</title>
           <link rel="stylesheet" type="text/css" href="../css/encrypt.css"/>
@@ -34,7 +34,7 @@ class Encrypt extends React.Component {
             <div className="container has-text-centered">
                 <div className="column is-4 is-offset-4">
                     <h3 className="title has-text-black">Encryption Tool</h3>
-                    <hr className="login-hr"/>
+                    <hr />
                     <p className="subtitle has-text-black">Please encrypt your password</p>
                     <div className="box">
                         <figure className="avatar">

@@ -13,11 +13,11 @@ html, body {
   display: inline-block;
 }
 
-.hero.is-success {
-  background: #F2F6FA;
+hr {
+  border-bottom: 1px solid #a9a9a9;
 }
 
-.hero .nav, .hero.is-success .nav {
+.hero .nav, .hero.is-light .nav {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
