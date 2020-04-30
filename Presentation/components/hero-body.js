@@ -20,7 +20,7 @@ function HeroBody(props) {
                   className="input text" 
                   name="ciphertext" 
                   type="password"
-                  placeholder="&#xf084; Password Ciphertext"
+                  placeholder="&#xf084; Encrypted Password"
                 />
               </p>
               <p className="control">
@@ -38,6 +38,7 @@ function HeroBody(props) {
             </div>
           </form>
         </div>
+        <a href="/encrypt" target="blank" className="step-2 has-text-white has-text-centered is-size-6">Encrypt My Password</a>
       </div>
     </div>
   );
