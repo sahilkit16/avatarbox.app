@@ -15,11 +15,6 @@ function rotateLeft(collection, _targetIndex) {
   return [...begin, ...end];
 }
 
-const today = new Date();
-const dayOfWeek = today.getDay();
-
 module.exports = {
-  dayOfWeek,
   rotateLeft,
-  today
 };
