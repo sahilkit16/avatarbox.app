@@ -1,6 +1,6 @@
 # avatarbox.web
 
-[avatarbox.io](https://avatarbox.io) web server
+web server for [avatarbox.io](https://avatarbox.io)
 
 ---
 

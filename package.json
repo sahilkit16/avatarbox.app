@@ -1,7 +1,7 @@
 {
   "name": "avatarbox.web",
   "version": "1.0.0-alpha",
-  "description": "avatarbox.io web server",
+  "description": "web server for avatarbox.io",
   "main": "index.js",
   "scripts": {
     "start": "node ./Presentation/server.js",
