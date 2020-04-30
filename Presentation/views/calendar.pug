@@ -18,26 +18,31 @@ html(lang="en")
         link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet')
         link(rel='stylesheet' type='text/css' href='https://unpkg.com/bulma@0.8.0/css/bulma.min.css')
         link(rel='stylesheet' type='text/css' href='../css/site.css')
+        link(rel='stylesheet' type='text/css' href='../css/calendar.css')
         meta(name='viewport' content='width=device-width')
         meta(charset='utf-8')
         title Dashboard | Avatar Box
     body
-      .container
-        .container.column.is-4.is-offset-4
-          .panel
-            .panel-heading
-              p.has-text-centered Calendar
-            .panel-block
-              .slides.is-block-centered
-                each image in images
-                  figure 
-                    img.is-block-centered(src=image.url)
-                    p.has-text-grey.is-size-7 #{image.day}
-            .panel-block
-              .pagination.is-rounded.is-block-centered(role='navigation' aria-label='pagination')
-                a.button.is-rounded.is-danger(href='#')
-                  | Cancel &nbsp; 
-                  i.fa.fa-close(aria-hidden='true')
-                a.button.is-rounded.is-success(href='#')
-                  | Start &nbsp; 
-                  i.fa.fa-check(aria-hidden='true')
+      section.hero.is-success.is-fullheight
+        .hero-body
+          .container.has-text-centered
+            .container
+              .container.column.is-4.is-offset-4
+                .panel
+                  .panel-heading
+                    p.has-text-centered Calendar
+                  .panel-block
+                    .slides.is-block-centered
+                      each image in images
+                        figure 
+                          img.is-block-centered(src=image.url)
+                          p.has-text-grey.is-size-7 #{image.day}
+                  .panel-block
+                    .pagination.is-rounded.is-block-centered(role='navigation' aria-label='pagination')
+                      a.button.is-rounded.is-danger(href='#')
+                        | Cancel &nbsp; 
+                        i.fa.fa-close(aria-hidden='true')
+                      | &nbsp;
+                      a.button.is-rounded.is-success(href='#')
+                        | Start &nbsp; 
+                        i.fa.fa-check(aria-hidden='true')

@@ -1,3 +1,16 @@
+html, body {
+  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.hero.is-success {
+  background: #F2F6FA;
+}
+
+.hero .nav, .hero.is-success .nav {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 #hero .step-2 {
     display: none;
 }
@@ -19,7 +32,7 @@ div.navbar-menu.is-transparent {
 }
 
 .input.email, input.text {
-    font-family: Arial, FontAwesome;
+    font-family: "Open Sans", Arial, FontAwesome;
 }
 
 #navbarMenu:target {
@@ -44,50 +57,4 @@ span.navbar-burger.burger.is-progressive {
   display: block;
   margin-left: auto !important;
   margin-right: auto !important;
-}
-  
-.slides {
-  display: flex;
-  width: 300px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
-.slides::-webkit-scrollbar {
-  width: 10px;
-  height: 5px;
-}
-.slides::-webkit-scrollbar-thumb {
-  background: #e1e1e1;
-  border-radius: 10px;
-}
-.slides::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.slides > figure {
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  width: 300px;
-  height: 300px;
-  margin-right: 50px;
-  border-radius: 10px;
-  transform-origin: center center;
-  transform: scale(1);
-  transition: transform 0.5s;
-  position: relative;
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.slides > figure p {
-  margin-top:10px;
-  text-transform: uppercase;
-  font-weight: bold;
 }

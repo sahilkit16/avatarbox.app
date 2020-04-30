@@ -41,10 +41,10 @@ class Encrypt extends React.Component {
                         <form method="post" action="/encrypt">
                             <div className="field">
                                 <div className="control">
-                                    <input className="input is-large" id="password" name="password" type="password" placeholder="Password"/>
+                                    <input className="input" id="password" name="password" type="password" placeholder="Password"/>
                                 </div>
                             </div>
-                            <button type="submit" className="button is-block is-info is-large is-fullwidth">Encrypt <i className="fa fa-random" aria-hidden="true"></i></button>
+                            <button type="submit" className="button is-block is-info is-fullwidth">Encrypt <i className="fa fa-random" aria-hidden="true"></i></button>
                         </form>
                     </div>
                     <p className="has-text-grey">
