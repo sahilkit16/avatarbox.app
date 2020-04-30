@@ -1,12 +1,5 @@
 /* eslint-disable react/no-danger */
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { useAmp } from 'next/amp';
-
-function AmpWrap({ ampOnly, nonAmp }) {
-  const isAmp = useAmp();
-  if (ampOnly) return isAmp && ampOnly;
-  return !isAmp && nonAmp;
-}
 
 class AvatarBoxSite extends Document {
   render() {
