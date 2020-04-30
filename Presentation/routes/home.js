@@ -29,7 +29,10 @@ router.post('/connect', async (req, res) => {
     const buildCalendar = new BuildCalendarUseCase();
     buildCalendar.client = client;
     buildCalendar.execute().then(calendar => {
-      res.render("calendar", calendar);
+      res.render("calendar", {
+        title: "Calendar | Avatar Box",
+        images: calendar.images
+      });
     }).catch((err) => {
       console.log(err);
       res.end();
