@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const { exec } = require('child_process');
 const { GravatarClient } = require('grav.client');
-const { join } = require('path');
 const CacheService = require('../../Services/cache.service');
-const router = Router();
+const RsaService = require('../../Services/rsa.service');
 const BuildCalendarUseCase = require('../../Application/build-calendar.use-case');
+
+const router = Router();
 
 router.post('/get-started', (req, res) => {
   const { email, isProgressive } = req.body;
@@ -20,24 +20,20 @@ router.post('/get-started', (req, res) => {
   res.redirect(redirectUrl);
 })
 
-router.post('/submit', (req, res) => {
+router.post('/connect', async (req, res) => {
   const { user, isProgressive, ciphertext } = req.body;
   if (ciphertext && user) {
-    const privateKeyPath = join(__dirname, '../../_/rsa.private');
     const email = CacheService.get(user);
-    exec(`echo ${ciphertext.trim()} | base64 -d | openssl rsautl -decrypt -inkey ${privateKeyPath}`,
-      (err, password) => {
-        if (err) throw err;
-        const client = new GravatarClient(email.trim(), password.trim());
-        const buildCalendar = new BuildCalendarUseCase();
-        buildCalendar.client = client;
-        buildCalendar.execute().then(calendar => {
-          res.render("calendar", calendar);
-        }).catch((err) => {
-          console.log(err);
-          res.end();
-        });
-      });
+    const password = await RsaService.decrypt(ciphertext);
+    const client = new GravatarClient(email, password);
+    const buildCalendar = new BuildCalendarUseCase();
+    buildCalendar.client = client;
+    buildCalendar.execute().then(calendar => {
+      res.render("calendar", calendar);
+    }).catch((err) => {
+      console.log(err);
+      res.end();
+    });
   }
 })
 

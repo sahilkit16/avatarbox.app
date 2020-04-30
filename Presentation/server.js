@@ -5,7 +5,7 @@ const app = express();
 const next = require('next');
 
 const encryptRoute = require('./routes/encrypt');
-const registerRoute = require('./routes/register');
+const homeRoute = require('./routes/home');
 
 // workaround for dev container
 // see https://github.com/zeit/next.js/issues/4022
@@ -30,7 +30,7 @@ nx.prepare().then(() => {
 
     app.use('/encrypt', encryptRoute);
 
-    app.use('/register', registerRoute);
+    app.use('/home', homeRoute);
 
     app.get('/*', (req, res) => {
         return handle(req, res);

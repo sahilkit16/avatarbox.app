@@ -9,13 +9,13 @@ class Index extends React.Component {
   }
   static getInitialProps = async ctx => {
     const user = ctx.query.user || null;
-    const action = `/register/${user ? 'submit' : 'get-started'}`;
+    const action = `/home/${user ? 'connect' : 'get-started'}`;
     return { user, action };
   }
   render() {
     return (
-      <HeroSection title="Sign Up | Avatar Box">
-        <HeroHead />
+      <HeroSection>
+        <HeroHead title="Home | Avatar Box" />
         <HeroBody
           user={this.props.user}
           action={this.props.action}
