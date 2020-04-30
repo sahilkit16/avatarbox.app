@@ -58,3 +58,10 @@ span.navbar-burger.burger.is-progressive {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+
+@media screen and (max-width:768px){
+    .hero-body {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
