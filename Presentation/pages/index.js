@@ -20,7 +20,7 @@ class Index extends React.Component {
           user={this.props.user}
           action={this.props.action}
           headline="New Avatar, Daily"
-          subtext="A handy resource to update your Gravatar icon"
+          subtext="A handy resource to auto update your Gravatar icon"
         />
       </HeroSection>
     );
