@@ -1,5 +1,8 @@
 extends _layout.pug
 
+block styles
+  link(rel='stylesheet' type='text/css' href='../css/confirm.css')
+
 block content
   section.hero.is-light.is-fullheight
     .hero-head
@@ -7,5 +10,21 @@ block content
     .hero-body
       .container
         .container.column.is-6.is-offset-3
-          h1.title.has-text-centered.is-size-1 That's all, thank you!
-          h1.subtitle.has-text-centered We really appreciate your time.
+          div
+            h1.title.has-text-centered.is-size-1 That's all, thank you!
+            h1.subtitle.has-text-centered We really appreciate your time.
+          hr
+          div
+            p.cta.has-text-centered Tell your friends!
+          div#icons.is-size-3.container.column.is-4.is-offset-4
+              a.icon
+                i.fa.fa-facebook
+              a.icon
+                i.fa.fa-twitter
+              a.icon
+                i.fa.fa-envelope
+              a.icon
+                i.fa.fa-google
+          hr
+          p.has-text-centered.is-size-7
+            | PS: If you found this valuable, pass it on to your friends.
