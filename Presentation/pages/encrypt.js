@@ -25,7 +25,7 @@ class Encrypt extends React.Component {
     return (
       <section className="hero is-success is-fullheight">
         <Head>
-          <title>Encryption Tool | Avatar Box</title>
+          <title>Encrypt | Avatar Box</title>
           <link rel="stylesheet" type="text/css" href="../css/encrypt.css"/>
         </Head>
         <div className="hero-body">
