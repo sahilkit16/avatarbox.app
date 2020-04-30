@@ -1,9 +1,10 @@
 import Head from 'next/head';
 
-function HeroHead() {
+function HeroHead(props) {
   return (
     <div className="hero-head">
       <Head>
+        <title>{props.title}</title>
         <link rel="stylesheet" type="text/css" href="../css/landing.css"/>
       </Head>
       <nav className="navbar is-transparent">
