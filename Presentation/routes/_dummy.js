@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
-router.get('/calendar', async (req, res) => {
+router.get('/calendar', (req, res) => {
   res.render("calendar", {
     title: "Calendar | Avatar Box",
     images: [
@@ -13,5 +13,9 @@ router.get('/calendar', async (req, res) => {
     ]
   });
 });
+
+router.get('/confirm', (req, res) => {
+  res.render('confirm');
+})
 
 module.exports = router;

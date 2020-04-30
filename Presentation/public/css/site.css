@@ -2,6 +2,17 @@ html, body {
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
+.navbar.is-centered .navbar-brand {
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.navbar.is-centered .navbar-brand > .navbar-item,
+.navbar.is-centered .navbar-brand .navbar-link {
+  display: inline-block;
+}
+
 .hero.is-success {
   background: #F2F6FA;
 }
