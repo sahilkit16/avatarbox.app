@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import NavBarBrand from '../components/navbar-brand';
 
 function encryptUserPassword() {
   const encrypt = new JSEncrypt();
@@ -28,6 +29,7 @@ class Encrypt extends React.Component {
           <title>Encrypt | Avatar Box</title>
           <link rel="stylesheet" type="text/css" href="../css/encrypt.css"/>
         </Head>
+        <NavBarBrand />
         <div className="hero-body">
             <div className="container has-text-centered">
                 <div className="column is-4 is-offset-4">

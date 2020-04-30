@@ -4,26 +4,27 @@ block styles
   link(rel='stylesheet' type='text/css' href='../css/calendar.css')
 
 block content
-      section.hero.is-success.is-fullheight
-        .hero-body
-          .container.has-text-centered
-            .container
-              .container.column.is-4.is-offset-4
-                .panel
-                  .panel-heading
-                    p.has-text-centered Calendar
-                  .panel-block
-                    .slides.is-block-centered
-                      each image in images
-                        figure 
-                          img.is-block-centered(src=image.url)
-                          p.has-text-grey.is-size-7 #{image.day}
-                  .panel-block
-                    .pagination.is-rounded.is-block-centered(role='navigation' aria-label='pagination')
-                      a.button.is-rounded.is-danger(href='#')
-                        | Cancel &nbsp; 
-                        i.fa.fa-close(aria-hidden='true')
-                      | &nbsp;
-                      a.button.is-rounded.is-success(href='#')
-                        | Start &nbsp; 
-                        i.fa.fa-check(aria-hidden='true')
+  section.hero.is-success.is-fullheight
+    .hero-head
+      include navbar-brand.pug
+    .hero-body
+        .container
+          .container.column.is-4.is-offset-4
+            .panel
+              .panel-heading
+                p.has-text-centered Calendar
+              .panel-block
+                .slides.is-block-centered
+                  each image in images
+                    figure 
+                      img.is-block-centered(src=image.url)
+                      p.has-text-grey.is-size-7 #{image.day}
+              .panel-block
+                .pagination.is-rounded.is-block-centered(role='navigation' aria-label='pagination')
+                  a.button.is-rounded.is-danger(href='/')
+                    | Cancel &nbsp; 
+                    i.fa.fa-close(aria-hidden='true')
+                  | &nbsp;
+                  a.button.is-rounded.is-success(href='#')
+                    | Ok &nbsp; 
+                    i.fa.fa-check(aria-hidden='true')
