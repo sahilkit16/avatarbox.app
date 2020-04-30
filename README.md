@@ -1,6 +1,6 @@
 # avatarbox.web
 
-landing page for [avatarbox.io](https://avatarbox.io)
+[avatarbox.io](https://avatarbox.io) web server
 
 ---
 
