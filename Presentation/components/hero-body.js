@@ -7,7 +7,7 @@ function HeroBody(props) {
             {props.headline}
           </h1>
           <h2 className="subtitle">
-            {props.proposition}
+            {props.subtext}
           </h2>
           <form className="box" method="post" action={props.action} >
             <input type="hidden" name="user" readOnly={true} value={props.user} />
@@ -19,7 +19,7 @@ function HeroBody(props) {
                 <input 
                   className="input text" 
                   name="ciphertext" 
-                  type="password" 
+                  type="password"
                   placeholder="&#xf084; Password Ciphertext"
                 />
               </p>
