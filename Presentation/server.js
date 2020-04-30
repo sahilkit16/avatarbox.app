@@ -5,6 +5,7 @@ const app = express();
 const next = require('next');
 
 const dummyRoute = require('./routes/_dummy');
+const calendarRoute = require('./routes/calendar');
 const encryptRoute = require('./routes/encrypt');
 const homeRoute = require('./routes/home');
 
@@ -32,6 +33,8 @@ nx.prepare().then(() => {
     if(dev){
         app.use('/dummy', dummyRoute);
     }
+    
+    app.use('/calendar', calendarRoute);
 
     app.use('/encrypt', encryptRoute);
 

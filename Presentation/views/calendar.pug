@@ -4,7 +4,7 @@ block styles
   link(rel='stylesheet' type='text/css' href='../css/calendar.css')
 
 block content
-  section.hero.is-success.is-fullheight
+  section.hero.is-light.is-fullheight
     .hero-head
       include navbar-brand.pug
     .hero-body
@@ -24,7 +24,7 @@ block content
                       img.is-block-centered(src=image.url)
                       p.has-text-grey.is-size-7 #{image.day}
               .panel-block
-                form.pagination.is-rounded.is-block-centered(action="#test" role='navigation' aria-label='pagination')
+                form.pagination.is-rounded.is-block-centered(action="/calendar/activate" method="post" role='navigation' aria-label='pagination')
                   a#home.button.is-rounded.is-danger(href='/')
                     i.fa.fa-home(aria-hidden='true')
                     | &nbsp; Home
