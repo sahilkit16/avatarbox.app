@@ -8,8 +8,10 @@ router.post('/get-started', (req, res) => {
   let client, redirectUrl = "/";
   if (email) {
     client = new GravatarClient(email, null);
-    redirectUrl += `?user=${client.emailHash}`;
-    CacheService.set(client.emailHash, email);
+    const userid = client.emailHash;
+    req.session.userid = userid;
+    CacheService.set(userid, email);
+    redirectUrl += `?next=1`;
   }
   if (isProgressive) {
     redirectUrl += "#hero";
@@ -17,16 +19,17 @@ router.post('/get-started', (req, res) => {
   res.redirect(redirectUrl);
 })
 
-router.post('/signin', async (req, res) => {
-  const { user, isProgressive, ciphertext } = req.body;
-  if (ciphertext && user) {
-    const email = CacheService.get(user);
+router.post('/sign-in', async (req, res) => {
+  const { isProgressive, ciphertext } = req.body;
+  const { userid } = req.session;
+  if (userid && ciphertext) {
+    const email = CacheService.get(userid);
     req.session.user = { email, password: ciphertext };
     res.redirect('/calendar');
   }
 })
 
-router.get('/signout', (req, res) => {
+router.get('/sign-out', (req, res) => {
   req.session.user = null;
   res.redirect('/');
 })

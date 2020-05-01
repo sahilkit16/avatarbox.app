@@ -10,7 +10,7 @@ function HeroHead(props) {
       <nav className="navbar is-transparent">
         <div className="container">
           <div className="navbar-brand">
-            <a className="navbar-item is-transparent" href="#">
+            <a className="navbar-item is-transparent" href="/">
               <img src="/images/avatarbox.png" alt="Logo" />
             </a>
             <span className="navbar-burger burger is-hidden" data-target="navbarMenu">
@@ -46,8 +46,8 @@ function HeroHead(props) {
                   <span>View Source</span>
                 </a>
               </span>
-              <span className={props.isAuthenticated ? "navbar-item" : "is-hidden"}>
-                <a className="has-text-white" href="/home/signout">
+              <span className={props.user ? "navbar-item" : "is-hidden"}>
+                <a className="has-text-white" href="/home/sign-out">
                     Sign Out
                 </a>
               </span>

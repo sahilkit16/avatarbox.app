@@ -10,7 +10,6 @@ function HeroBody(props) {
             {props.subtext}
           </h2>
           <form className="box" method="post" action={props.action} >
-            <input type="hidden" name="user" readOnly={true} value={props.user} />
             <div className="field is-grouped">
               <p id="email-input" className="control is-expanded step-1">
                 <input className="input email" name="email" type="email" placeholder="&#xf003; Email Address" />

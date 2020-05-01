@@ -8,20 +8,18 @@ class Index extends React.Component {
     super(props);
   }
   static getInitialProps = async ctx => {
-    const isAuthenticated = ctx.req.session.user;
-    const { user } = ctx.query;
-    const action = `/home/${user ? 'signin' : 'get-started'}`;
-    return { user, action, isAuthenticated };
+    const userid = (ctx.query.next && ctx.req.session.userid);
+    const action = `/home/${userid ? 'sign-in' : 'get-started'}`;
+    return { action, user: ctx.req.session.user };
   }
   render() {
     return (
       <HeroSection>
         <HeroHead 
           title="Home | Avatar Box" 
-          isAuthenticated={this.props.isAuthenticated}
+          user={this.props.user}
         />
         <HeroBody
-          user={this.props.user}
           action={this.props.action}
           headline="New Avatar, Daily"
           subtext="A handy resource to auto update your Gravatar icon"
