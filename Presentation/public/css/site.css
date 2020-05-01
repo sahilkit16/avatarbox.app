@@ -22,15 +22,15 @@ hr {
   box-shadow: none;
 }
 
-#hero .step-2 {
+#here .step-2 {
     display: none;
 }
 
-#hero:target .step-1 {
+#here:target .step-1 {
     display: none;
 }
 
-#hero:target .step-2 {
+#here:target .step-2 {
     display: block;
 }
 

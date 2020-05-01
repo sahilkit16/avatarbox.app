@@ -35,7 +35,7 @@ class AvatarBoxSite extends Document {
           <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
           <link rel="stylesheet" type="text/css" href="../css/site.css" />
         </Head>
-        <body>
+        <body id="here">
           <Main />
           <NextScript />
           <script async type="text/javascript" src="../js/bulma.js"></script>

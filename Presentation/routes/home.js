@@ -14,7 +14,7 @@ router.post('/get-started', (req, res) => {
     redirectUrl += `?next=1`;
   }
   if (isProgressive) {
-    redirectUrl += "#hero";
+    redirectUrl += "#here";
   }
   res.redirect(redirectUrl);
 })
