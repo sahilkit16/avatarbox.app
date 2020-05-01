@@ -1,9 +1,5 @@
 const { Router } = require('express');
-const { GravatarClient } = require('grav.client');
 const CacheService = require('../../Services/cache.service');
-const RsaService = require('../../Services/rsa.service');
-const BuildCalendarUseCase = require('../../Application/build-calendar.use-case');
-
 const router = Router();
 
 router.post('/get-started', (req, res) => {
@@ -24,20 +20,8 @@ router.post('/connect', async (req, res) => {
   const { user, isProgressive, ciphertext } = req.body;
   if (ciphertext && user) {
     const email = CacheService.get(user);
-    const password = await RsaService.decrypt(ciphertext);
-    const client = new GravatarClient(email, password);
-    const buildCalendar = new BuildCalendarUseCase();
-    buildCalendar.client = client;
-    buildCalendar.execute().then(calendar => {
-      req.session.user = { email, password: ciphertext };
-      res.render("calendar", {
-        title: "Calendar | Avatar Box",
-        images: calendar.images
-      });
-    }).catch((err) => {
-      console.log(err);
-      res.end();
-    });
+    req.session.user = { email, password: ciphertext };
+    res.redirect('/calendar');
   }
 })
 
