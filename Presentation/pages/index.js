@@ -8,14 +8,18 @@ class Index extends React.Component {
     super(props);
   }
   static getInitialProps = async ctx => {
-    const user = ctx.query.user || null;
+    const isAuthenticated = ctx.req.session.user;
+    const { user } = ctx.query;
     const action = `/home/${user ? 'connect' : 'get-started'}`;
-    return { user, action };
+    return { user, action, isAuthenticated };
   }
   render() {
     return (
       <HeroSection>
-        <HeroHead title="Home | Avatar Box" />
+        <HeroHead 
+          title="Home | Avatar Box" 
+          isAuthenticated={this.props.isAuthenticated}
+        />
         <HeroBody
           user={this.props.user}
           action={this.props.action}
