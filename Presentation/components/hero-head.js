@@ -46,6 +46,11 @@ function HeroHead(props) {
                   <span>View Source</span>
                 </a>
               </span>
+              <span className={props.isAuthenticated ? "navbar-item" : "is-hidden"}>
+                <a className="has-text-white" href="/home/signout">
+                    Sign Out
+                </a>
+              </span>
               <noscript>
                 <a href="#" className="button is-transparent">
                   <span className="navbar-burger burger is-active is-progressive">
