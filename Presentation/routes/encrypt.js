@@ -7,7 +7,8 @@ router.post('/', async (req,res) => {
     const ciphertext = await RsaService.encrypt(password);
     res.render("encrypt", {
         title: "Encrypt | Avatar Box",
-        ciphertext
+        ciphertext,
+        navbar: { isCentered: true }
     });
 });
 

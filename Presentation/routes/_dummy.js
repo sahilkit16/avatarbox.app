@@ -15,7 +15,9 @@ router.get('/calendar', (req, res) => {
 });
 
 router.get('/confirm', (req, res) => {
-  res.render('confirm');
+  res.render('confirm', {
+    navbar: { isCentered: true }
+  });
 })
 
 module.exports = router;
