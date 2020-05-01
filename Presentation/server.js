@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const app = express();
 const next = require('next');
+const cookieSession = require('cookie-session');
 
 const dummyRoute = require('./routes/_dummy');
 const calendarRoute = require('./routes/calendar');
@@ -17,6 +18,12 @@ const nx = next({ dev, dir: 'Presentation' });
 
 const handle = nx.getRequestHandler();
 const bodyParser = require('body-parser');
+
+app.use(cookieSession({
+  name: 'session',
+  keys: [process.env.SESSION_KEY],
+  httpOnly: !dev,
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

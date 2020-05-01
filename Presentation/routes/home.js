@@ -25,6 +25,7 @@ router.post('/connect', async (req, res) => {
   if (ciphertext && user) {
     const email = CacheService.get(user);
     const password = await RsaService.decrypt(ciphertext);
+    req.session.user = { email, password };
     const client = new GravatarClient(email, password);
     const buildCalendar = new BuildCalendarUseCase();
     buildCalendar.client = client;
