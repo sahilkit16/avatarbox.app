@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { GravatarClient } = require('grav.client');
 const CacheService = require('../../Services/cache.service');
 const router = Router();
 
@@ -16,7 +17,7 @@ router.post('/get-started', (req, res) => {
   res.redirect(redirectUrl);
 })
 
-router.post('/connect', async (req, res) => {
+router.post('/signin', async (req, res) => {
   const { user, isProgressive, ciphertext } = req.body;
   if (ciphertext && user) {
     const email = CacheService.get(user);

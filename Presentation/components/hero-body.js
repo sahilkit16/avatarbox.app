@@ -29,7 +29,7 @@ function HeroBody(props) {
                   className="button is-info"
                 >
                   <span className="step-1">Get Started</span>
-                  <span className="step-2">Connect</span>
+                  <span className="step-2">Sign In</span>
                 </button>
                 <noscript className="is-hidden">
                   <input name="isProgressive" readOnly={true} value={true} />

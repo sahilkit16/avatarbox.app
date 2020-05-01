@@ -10,7 +10,7 @@ class Index extends React.Component {
   static getInitialProps = async ctx => {
     const isAuthenticated = ctx.req.session.user;
     const { user } = ctx.query;
-    const action = `/home/${user ? 'connect' : 'get-started'}`;
+    const action = `/home/${user ? 'signin' : 'get-started'}`;
     return { user, action, isAuthenticated };
   }
   render() {
