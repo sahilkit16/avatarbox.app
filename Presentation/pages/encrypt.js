@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import NavBar from '../components/navbar';
+import EncryptView from '../view-models/encrypt';
 
 function encryptUserPassword() {
   const encrypt = new JSEncrypt();
@@ -21,6 +22,7 @@ function encryptUserPassword() {
 class Encrypt extends React.Component {
   constructor(props){
     super(props);
+    this.model = new EncryptView();
   }
   render() {
     return (
@@ -29,12 +31,10 @@ class Encrypt extends React.Component {
           <title>Encrypt | Avatar Box</title>
           <link rel="stylesheet" type="text/css" href="../css/encrypt.css"/>
         </Head>
-        <NavBar isCentered={true} />
+        <NavBar model={this.model.navbar} />
         <div className="hero-body">
             <div className="container has-text-centered">
                 <div className="column is-4 is-offset-4">
-                    <h3 className="title has-text-black">Encryption Tool</h3>
-                    <hr />
                     <p className="subtitle has-text-black">Please encrypt your password</p>
                     <div className="box">
                         <figure className="avatar">

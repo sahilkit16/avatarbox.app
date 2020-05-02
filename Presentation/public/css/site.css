@@ -46,7 +46,7 @@ div.navbar-menu.is-transparent {
     font-family: "Open Sans", Arial, FontAwesome;
 }
 
-#navbarMenu:target {
+#here:target #navbar-menu {
     display: block;
 }
 
@@ -68,6 +68,23 @@ span.navbar-burger.burger.is-progressive {
   display: block;
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+#social-icons {
+  display: flex;
+}
+
+a {
+  color: #C8C8C8;
+}
+
+#social-icons > a {
+  flex: 1;
+}
+
+#social-icons > a:hover {
+  transition: 1000ms color;
+  color: black;
 }
 
 @media screen and (max-width:768px){

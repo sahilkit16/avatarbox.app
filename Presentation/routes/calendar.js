@@ -2,6 +2,8 @@ const { Router } = require('express');
 const { GravatarClient } = require('grav.client');
 const RsaService = require('../../Services/rsa.service');
 const BuildCalendarUseCase = require('../../Application/build-calendar.use-case');
+const ThanksView = require('../view-models/thanks');
+
 const router = Router();
 
 router.get('/', async (req, res) => {
@@ -16,7 +18,8 @@ router.get('/', async (req, res) => {
   buildCalendar.execute().then(calendar => {
     res.render("calendar", {
       title: "Calendar | Avatar Box",
-      images: calendar.images
+      images: calendar.images,
+      navbar: { isCosmetic: false, isTransparent: false, user }
     });
   }).catch((err) => {
     console.log(err);
@@ -25,7 +28,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/activate', (req, res) => {
-  res.render('confirm');
+  res.render('thanks', new ThanksView());
 })
 
 module.exports = router;

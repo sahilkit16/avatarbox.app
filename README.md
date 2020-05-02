@@ -12,7 +12,7 @@ web server for [avatarbox.io](https://avatarbox.io)
 
 ## Tests
 
-## Launching the App
+## Launching the Server
 
 ## Usage
 

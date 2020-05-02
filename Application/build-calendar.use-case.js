@@ -23,7 +23,7 @@ class BuildCalendarUseCase {
     ), -1);
     const images = rotateLeft(userImages, (primaryImageIndex + 1)).map((img, index) => ({
       url: `${img.url}?size=200`,
-      day: (index == 0 ? "Now" : (
+      day: (index == 0 ? "Next" : (
       (index == 1 ? "Tomorrow" : days[(dayOfWeek + index) % 7])))
     }));
     return { images };
