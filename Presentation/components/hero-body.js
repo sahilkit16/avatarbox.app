@@ -37,7 +37,7 @@ function HeroBody(props) {
             </div>
           </form>
         </div>
-        <a href="/encrypt" target="blank" className="step-2 has-text-white has-text-centered is-size-6">Encrypt My Password</a>
+        <a href="/encrypt" className="step-2 has-text-white has-text-centered is-size-6">Encrypt My Password</a>
       </div>
     </div>
   );

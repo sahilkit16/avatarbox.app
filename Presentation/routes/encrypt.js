@@ -7,10 +7,9 @@ router.post('/', async (req,res) => {
     const { password } = req.body;
     const ciphertext = await RsaService.encrypt(password);
     const model = new EncryptView();
-    res.render("encrypt", Object.assign(model, { 
-      title: "Encrypt | Avatar Box",
-      ciphertext,
-    }));
+    model.title = "Encrypt | Avatar Box";
+    model.ciphertext = ciphertext;
+    res.render("encrypt", model);
 });
 
 module.exports = router;

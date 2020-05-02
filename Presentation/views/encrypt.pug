@@ -9,9 +9,8 @@ block content
     .hero-body
       .container.has-text-centered
         .column.is-4.is-offset-4
-          h3.title.has-text-black Encryption Tool
-          hr.login-hr
           p.subtitle.has-text-black Password encrypted successfully!
+          hr
           .box
             figure.avatar
               img(src='../images/lock.jpeg' width='128' height='128')
@@ -19,6 +18,9 @@ block content
               .field
                 .control
                   textarea.textarea(readonly='true') #{ciphertext}
+              a(href="/?next=1#here" class="button is-block is-info is-fullwidth")
+                i.fa.fa-chevron-left &nbsp;
+                | Back
           p.has-text-grey
             a(href='/') Home
             |   &middot; 

@@ -6,6 +6,7 @@ html, body {
   text-align: center;
   display: block;
   width: 100%;
+  padding-top:5px;
 }
 
 .navbar.is-centered .navbar-brand > .navbar-item,
@@ -51,7 +52,7 @@ div.navbar-menu.is-transparent {
 }
 
 a.navbar-burger.burger.is-progressive {
-    position: fixed;
+    position: absolute;
     right: 0px;
 }
 
@@ -74,12 +75,9 @@ span.navbar-burger.burger.is-progressive {
   display: flex;
 }
 
-a {
-  color: #C8C8C8;
-}
-
 #social-icons > a {
   flex: 1;
+  color: #C8C8C8;
 }
 
 #social-icons > a:hover {
@@ -88,8 +86,8 @@ a {
 }
 
 @media screen and (max-width:768px){
-    .hero-body {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
+  .hero-body {
+      padding-left: 0px;
+      padding-right: 0px;
+  }
 }
