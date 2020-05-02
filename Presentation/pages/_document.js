@@ -4,7 +4,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 class AvatarBoxSite extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" id="here">
         <Head>
           <link
             rel="apple-touch-icon"
@@ -35,7 +35,7 @@ class AvatarBoxSite extends Document {
           <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
           <link rel="stylesheet" type="text/css" href="../css/site.css" />
         </Head>
-        <body id="here">
+        <body id="menu">
           <Main />
           <NextScript />
           <script async type="text/javascript" src="../js/bulma.js"></script>

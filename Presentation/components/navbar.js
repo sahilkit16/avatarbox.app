@@ -27,7 +27,7 @@ function NavBar({ model }) {
           </span>
           <noscript>
             <a 
-              href="#here" 
+              href="#menu" 
               data-target="navbar-menu"
               className={
                 classNames("navbar-burger", "burger", "is-progressive", {

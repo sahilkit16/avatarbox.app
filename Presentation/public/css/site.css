@@ -46,7 +46,7 @@ div.navbar-menu.is-transparent {
     font-family: "Open Sans", Arial, FontAwesome;
 }
 
-#here:target #navbar-menu {
+#menu:target #navbar-menu {
     display: block;
 }
 
