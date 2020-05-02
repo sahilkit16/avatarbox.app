@@ -1,19 +1,19 @@
 const { Router } = require('express');
 const router = Router();
 const ThanksView = require('../view-models/thanks');
+const CalendarView = require('../view-models/calendar');
 
 router.get('/calendar', (req, res) => {
-  res.render("calendar", {
-    title: "Calendar | Avatar Box",
-    images: [
-      { day: "Now", url: "https://via.placeholder.com/200" },
-      { day: "Tomorrow", url: "https://via.placeholder.com/200" },
-      { day: "Monday", url: "https://via.placeholder.com/200" },
-      { day: "Tuesday", url: "https://via.placeholder.com/200" },
-      { day: "Wednesday", url: "https://via.placeholder.com/200" }
-    ],
-    navbar: { isCosmetic: false }
-  });
+  const model = new CalendarView();
+  model.title = "Calendar | Avatar Box";
+  model.images = [
+    { day: "Now", url: "https://via.placeholder.com/200" },
+    { day: "Tomorrow", url: "https://via.placeholder.com/200" },
+    { day: "Monday", url: "https://via.placeholder.com/200" },
+    { day: "Tuesday", url: "https://via.placeholder.com/200" },
+    { day: "Wednesday", url: "https://via.placeholder.com/200" }
+  ];
+  res.render("calendar", model);
 });
 
 router.get('/thanks', (req, res) => {
