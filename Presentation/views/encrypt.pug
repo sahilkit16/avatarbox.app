@@ -18,7 +18,7 @@ block content
               .field
                 .control
                   textarea.textarea(readonly='true') #{ciphertext}
-              a(href="/?next=1#here" class="button is-block is-info is-fullwidth")
+              a(href="/?next=1#here" class=(userid ? "button is-block is-info is-fullwidth": "is-hidden"))
                 i.fa.fa-chevron-left &nbsp;
                 | Back
           p.has-text-grey

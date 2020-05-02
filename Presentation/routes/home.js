@@ -30,6 +30,7 @@ router.post('/sign-in', async (req, res) => {
 })
 
 router.get('/sign-out', (req, res) => {
+  req.session.userid = null;
   req.session.user = null;
   res.redirect('/');
 })

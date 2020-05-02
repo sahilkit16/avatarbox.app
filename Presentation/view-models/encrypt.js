@@ -4,6 +4,7 @@ class EncryptView extends ThanksView {
   constructor() {
     super();
     this.ciphertext = null;
+    this.userid = null;
   }
 }
 
