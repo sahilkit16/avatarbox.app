@@ -1,6 +1,5 @@
 import React from 'react';
 import HeroHead from '../components/hero-head';
-import HeroBody from '../components/hero-body';
 import HeroSection from '../components/hero-section';
 import HomeView from '../view-models/home';
 
@@ -23,11 +22,53 @@ class Index extends React.Component {
           title="Home | Avatar Box" 
           user={this.props.user}
         />
-        <HeroBody
-          action={this.props.action}
-          headline="New Avatar, Daily"
-          subtext="A handy resource to auto update your Gravatar icon"
-        />
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <div className="column is-6 is-offset-3">
+              <h1 className="title">
+                New Avatar, Daily
+              </h1>
+              <h2 className="subtitle">
+                A handy resource to auto update your Gravatar icon
+              </h2>
+              <div className={`${!this.props.user && "is-hidden" }`}>
+                <a className="button is-white" href="/calendar">
+                  <i className="fa fa-calendar"></i>
+                  &nbsp; Calendar
+                </a>
+              </div>
+              <form className={`${this.props.user ? "is-hidden" : "box"}`} 
+                    method="post" action={this.props.action} >
+                <div className="field is-grouped">
+                  <p id="email-input" className="control is-expanded step-1">
+                    <input className="input email" name="email" type="email" placeholder="&#xf003; Email Address" />
+                  </p>
+                  <p className="control is-expanded step-2">
+                    <input 
+                      className="input text" 
+                      name="ciphertext" 
+                      type="password"
+                      placeholder="&#xf084; Encrypted Password"
+                    />
+                  </p>
+                  <p className="control">
+                    <button
+                      type="submit"
+                      className="button is-info"
+                    >
+                      <span className="step-1">Get Started</span>
+                      <span className="step-2">Sign In</span>
+                    </button>
+                    <noscript className="is-hidden">
+                      <input name="isProgressive" readOnly={true} value={true} />
+                    </noscript>
+                  </p>
+                </div>
+              </form>
+            </div>
+            <a href="/encrypt" className="step-2 has-text-white has-text-centered is-size-6">Encrypt My Password</a>
+          </div>
+        </div>
       </HeroSection>
     );
   }
