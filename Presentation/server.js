@@ -9,6 +9,16 @@ const dummyRoute = require('./routes/_dummy');
 const calendarRoute = require('./routes/calendar');
 const encryptRoute = require('./routes/encrypt');
 const homeRoute = require('./routes/home');
+const mongoose = require('mongoose');
+
+mongoose.connect(
+  `mongodb://avatarbox:27017/avbx`,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (error) => {
+    if (error) throw new Error('db connection failed');
+    console.log('db connected');
+  },
+);
 
 // workaround for dev container
 // see https://github.com/zeit/next.js/issues/4022
