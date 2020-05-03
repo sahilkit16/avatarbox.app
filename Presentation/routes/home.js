@@ -1,7 +1,10 @@
 const { Router } = require("express");
 const { GravatarClient } = require("grav.client");
 const CacheService = require("../../Services/cache.service");
+const UserService = require("../../Services/user.service");
 const router = Router();
+
+const User = new UserService();
 
 router.post("/get-started", (req, res) => {
   const { email, isProgressive } = req.body;
@@ -26,7 +29,12 @@ router.post("/sign-in", async (req, res) => {
   if (userid && ciphertext) {
     const email = CacheService.get(userid);
     req.session.user = { email, password: ciphertext };
-    res.redirect("/calendar");
+    User.create(email, ciphertext).then(() => {
+      res.redirect("/calendar");
+    }).catch(err => {
+      console.log(err);
+      res.end();
+    })
   }
 });
 
