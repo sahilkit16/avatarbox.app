@@ -29,12 +29,14 @@ router.post("/sign-in", async (req, res) => {
   if (userid && ciphertext) {
     const email = CacheService.get(userid);
     req.session.user = { email, password: ciphertext };
-    User.create(email, ciphertext).then(() => {
-      res.redirect("/calendar");
-    }).catch(err => {
-      console.log(err);
-      res.end();
-    })
+    User.create(email, ciphertext)
+      .then(() => {
+        res.redirect("/calendar");
+      })
+      .catch((err) => {
+        console.log(err);
+        res.end();
+      });
   }
 });
 

@@ -1,4 +1,4 @@
-const { config } = require('dotenv');
+const { config } = require("dotenv");
 const { exec } = require("child_process");
 
 config();
@@ -18,7 +18,9 @@ class RsaService {
   static async decrypt(ciphertext) {
     return new Promise((resolve, reject) => {
       exec(
-        `echo ${ciphertext.trim()} | base64 -d | openssl rsautl -decrypt -inkey ${process.env.PRIVATE_KEY_PATH}`,
+        `echo ${ciphertext.trim()} | base64 -d | openssl rsautl -decrypt -inkey ${
+          process.env.PRIVATE_KEY_PATH
+        }`,
         (err, stdout) => {
           if (err) return reject(err);
           resolve(stdout.trim());

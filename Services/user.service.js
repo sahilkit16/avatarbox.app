@@ -1,5 +1,5 @@
-const UserRepo = require('../Infrastructure/user.repo');
-const { CalendarSchema } = require('../Infrastructure/calendar.schema');
+const UserRepo = require("../Infrastructure/user.repo");
+const { CalendarSchema } = require("../Infrastructure/calendar.schema");
 
 class UserService {
   create(email, ciphertext) {
@@ -12,10 +12,10 @@ class UserService {
           UserRepo.create({ email, ciphertext }, (_err, _user) => {
             if (err) return reject(err);
             resolve(_user);
-          })
+          });
         }
-      })
-    })
+      });
+    });
   }
 }
 
