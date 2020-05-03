@@ -4,6 +4,7 @@
   "description": "web server for avatarbox.io",
   "main": "index.js",
   "scripts": {
+    "format": "prettier --write \"Application/**/*.ts\" \"Common/**/*.ts\" \"Domain/**/*.ts\" \"Infrastructure/**/*.ts\" \"Presentation/**/*.ts\" \"Services/**/*.ts\" \"Specification/**/*.ts\" \"Tests/**/*.ts\"",
     "start": "node ./Presentation/server.js",
     "build": "next build ./Presentation"
   },
@@ -25,6 +26,7 @@
     "express": "^4.17.1",
     "grav.client": "^2.3.14",
     "next": "^9.3.5",
+    "prettier": "^2.0.5",
     "pug": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
