@@ -1,9 +1,9 @@
 const days = require('../Domain/days');
 const { rotateLeft } = require('../Common/utilities');
-const { dayOfWeek } = require('../Common/constants');
 const { GravatarClient, GetPrimaryImageUseCase } = require('grav.client');
 const ImageCountError = require('../Domain/image-count.error');
 const ErrorCode = require('../Domain/error-code');
+const moment = require('moment');
 
 class BuildCalendarUseCase {
   constructor() {
@@ -24,7 +24,7 @@ class BuildCalendarUseCase {
     const images = rotateLeft(userImages, (primaryImageIndex + 1)).map((img, index) => ({
       url: `${img.url}?size=200`,
       day: (index == 0 ? "Next" : (
-      (index == 1 ? "Tomorrow" : days[(dayOfWeek + index) % 7])))
+      (index == 1 ? "Tomorrow" : days[(moment().day() + index) % 7])))
     }));
     return { images };
   }
