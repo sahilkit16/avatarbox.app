@@ -1,6 +1,7 @@
+const { config } = require('dotenv');
 const { exec } = require("child_process");
-const { join } = require("path");
-const privateKeyPath = join(__dirname, "../_/rsa.private");
+
+config();
 
 class RsaService {
   static async encrypt(value) {
@@ -17,7 +18,7 @@ class RsaService {
   static async decrypt(ciphertext) {
     return new Promise((resolve, reject) => {
       exec(
-        `echo ${ciphertext.trim()} | base64 -d | openssl rsautl -decrypt -inkey ${privateKeyPath}`,
+        `echo ${ciphertext.trim()} | base64 -d | openssl rsautl -decrypt -inkey ${process.env.PRIVATE_KEY_PATH}`,
         (err, stdout) => {
           if (err) return reject(err);
           resolve(stdout.trim());
