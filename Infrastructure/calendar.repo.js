@@ -1,12 +1,13 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 export const CalendarSchema = new Schema({
   name: { type: String, required: true, default: "Daily" },
   isEnabled: { type: Boolean, required: true },
-  isFailing: { 
+  isFailing: {
     default: false,
     type: Boolean,
-    required: true },
+    required: true,
+  },
   createdAt: {
     default: new Date(),
     type: Date,
@@ -16,7 +17,7 @@ export const CalendarSchema = new Schema({
     default: new Date(),
     type: Date,
     required: true,
-  }
+  },
 });
 
-export const CalendarRepo = model('Calendars', CalendarSchema);
+export const CalendarRepo = model("Calendars", CalendarSchema);

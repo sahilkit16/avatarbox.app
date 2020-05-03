@@ -4,7 +4,7 @@
   "description": "web server for avatarbox.io",
   "main": "index.js",
   "scripts": {
-    "format": "prettier --write \"Application/**/*.ts\" \"Common/**/*.ts\" \"Domain/**/*.ts\" \"Infrastructure/**/*.ts\" \"Presentation/**/*.ts\" \"Services/**/*.ts\" \"Specification/**/*.ts\" \"Tests/**/*.ts\"",
+    "format": "prettier --write \"Application/**/*.js\" \"Common/**/*.js\" \"Domain/**/*.js\" \"Infrastructure/**/*.js\" \"Presentation/**/*.js\" \"Services/**/*.js\" \"Specification/**/*.js\" \"Tests/**/*.js\"",
     "start": "node ./Presentation/server.js",
     "build": "next build ./Presentation"
   },

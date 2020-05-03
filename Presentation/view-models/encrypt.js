@@ -1,4 +1,4 @@
-const ThanksView = require('./thanks');
+const ThanksView = require("./thanks");
 
 class EncryptView extends ThanksView {
   constructor() {

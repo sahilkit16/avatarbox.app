@@ -1,7 +1,7 @@
-import React from 'react';
-import Head from 'next/head';
-import NavBar from '../components/navbar';
-import EncryptView from '../view-models/encrypt';
+import React from "react";
+import Head from "next/head";
+import NavBar from "../components/navbar";
+import EncryptView from "../view-models/encrypt";
 
 function encryptUserPassword() {
   const encrypt = new JSEncrypt();
@@ -20,7 +20,7 @@ function encryptUserPassword() {
 }
 
 class Encrypt extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.model = new EncryptView();
   }
@@ -29,32 +29,47 @@ class Encrypt extends React.Component {
       <section className="hero is-light is-fullheight">
         <Head>
           <title>Encrypt | Avatar Box</title>
-          <link rel="stylesheet" type="text/css" href="../css/encrypt.css"/>
+          <link rel="stylesheet" type="text/css" href="../css/encrypt.css" />
         </Head>
         <NavBar model={this.model.navbar} />
         <div className="hero-body">
-            <div className="container has-text-centered">
-                <div className="column is-4 is-offset-4">
-                    <p className="subtitle has-text-black">Please encrypt your password</p>
-                    <div className="box">
-                        <figure className="avatar">
-                            <img src="../images/lock.jpeg" width="128" height="128"/>
-                        </figure>
-                        <form method="post" action="/encrypt">
-                            <div className="field">
-                                <div className="control">
-                                    <input className="input" id="password" name="password" type="password" placeholder="Password"/>
-                                </div>
-                            </div>
-                            <button type="submit" className="button is-block is-info is-fullwidth">Encrypt <i className="fa fa-random" aria-hidden="true"></i></button>
-                        </form>
+          <div className="container has-text-centered">
+            <div className="column is-4 is-offset-4">
+              <p className="subtitle has-text-black">
+                Please encrypt your password
+              </p>
+              <div className="box">
+                <figure className="avatar">
+                  <img src="../images/lock.jpeg" width="128" height="128" />
+                </figure>
+                <form method="post" action="/encrypt">
+                  <div className="field">
+                    <div className="control">
+                      <input
+                        className="input"
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                      />
                     </div>
-                    <p className="has-text-grey">
-                        <a href="/">Home</a> &nbsp;·&nbsp;
-                        <a href="https://bitbucket.org/mrtillman/avatarbox.web/wiki/Authentication">Need Help?</a>
-                    </p>
-                </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="button is-block is-info is-fullwidth"
+                  >
+                    Encrypt <i className="fa fa-random" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </div>
+              <p className="has-text-grey">
+                <a href="/">Home</a> &nbsp;·&nbsp;
+                <a href="https://bitbucket.org/mrtillman/avatarbox.web/wiki/Authentication">
+                  Need Help?
+                </a>
+              </p>
             </div>
+          </div>
         </div>
       </section>
     );

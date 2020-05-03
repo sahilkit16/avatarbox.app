@@ -1,4 +1,4 @@
-const NavBarView = require('./_navbar');
+const NavBarView = require("./_navbar");
 
 class CalendarView {
   constructor() {

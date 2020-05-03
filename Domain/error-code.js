@@ -1,4 +1,4 @@
 module.exports = {
-    NoImages: 0,
-    SoleImage: 1,
-}
+  NoImages: 0,
+  SoleImage: 1,
+};

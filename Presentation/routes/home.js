@@ -1,11 +1,12 @@
-const { Router } = require('express');
-const { GravatarClient } = require('grav.client');
-const CacheService = require('../../Services/cache.service');
+const { Router } = require("express");
+const { GravatarClient } = require("grav.client");
+const CacheService = require("../../Services/cache.service");
 const router = Router();
 
-router.post('/get-started', (req, res) => {
+router.post("/get-started", (req, res) => {
   const { email, isProgressive } = req.body;
-  let client, redirectUrl = "/";
+  let client,
+    redirectUrl = "/";
   if (email) {
     client = new GravatarClient(email, null);
     const userid = client.emailHash;
@@ -17,22 +18,22 @@ router.post('/get-started', (req, res) => {
     redirectUrl += "#here";
   }
   res.redirect(redirectUrl);
-})
+});
 
-router.post('/sign-in', async (req, res) => {
+router.post("/sign-in", async (req, res) => {
   const { isProgressive, ciphertext } = req.body;
   const { userid } = req.session;
   if (userid && ciphertext) {
     const email = CacheService.get(userid);
     req.session.user = { email, password: ciphertext };
-    res.redirect('/calendar');
+    res.redirect("/calendar");
   }
-})
+});
 
-router.get('/sign-out', (req, res) => {
+router.get("/sign-out", (req, res) => {
   req.session.userid = null;
   req.session.user = null;
-  res.redirect('/');
-})
+  res.redirect("/");
+});
 
 module.exports = router;
