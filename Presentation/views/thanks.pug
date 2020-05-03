@@ -9,14 +9,14 @@ block content
       include ../components/navbar.pug
     .hero-body
       .container
-        .container.column.is-6.is-offset-3
+        #thanks.container.column.is-5
           div
             h1.title.has-text-centered.is-size-1 That's all, thank you!
             h1.subtitle.has-text-centered We really appreciate your time.
-          hr
+            hr
           div
             p.cta.has-text-centered Tell your friends!
-          div#social-icons.is-size-3.container.column.is-4.is-offset-4
+          div#social-icons.is-size-3
               a.icon
                 i.fa.fa-facebook
               a.icon
@@ -25,6 +25,7 @@ block content
                 i.fa.fa-envelope
               a.icon
                 i.fa.fa-google
-          hr
-          p.has-text-centered.is-size-7
-            | PS: If you found this valuable, pass it on to your friends.
+          div
+            hr
+            p.has-text-centered.is-size-7
+              | PS: If you found this valuable, pass it on to your friends.

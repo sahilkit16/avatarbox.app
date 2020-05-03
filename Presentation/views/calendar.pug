@@ -8,34 +8,34 @@ block content
     .hero-head
       include ../components/navbar.pug
     .hero-body
-        .container
-          .container.column.is-4.is-offset-4
-            .panel
-              .panel-heading
-                p.has-text-centered 
-                  span#calendar-heading Calendar
-                  span#confirm Are You Sure?
-              .panel-block
-                #disclaimer.is-block-centered
-                    h2.has-text-centered Your Gravatar icon will be updated immediately, and then once a day, every day.
-                #slides.slides.is-block-centered
-                  each image in images
-                    figure 
-                      img.is-block-centered(src=image.url)
-                      p.has-text-grey.is-size-7 #{image.day}
-              .panel-block
-                form.pagination.is-rounded.is-block-centered(action="/calendar/activate" method="post" role='navigation' aria-label='pagination')
-                  a#home.button.is-rounded.is-danger(href='/')
-                    i.fa.fa-home(aria-hidden='true')
-                    | &nbsp; Home
-                  | &nbsp;
-                  a#back.button.is-rounded.is-danger(href='#')
-                    i.fa.fa-chevron-left(aria-hidden='true')
-                    | &nbsp; Back
-                  | &nbsp;
-                  a#next.button.is-rounded.is-primary(href='#here')
-                    | Start &nbsp; 
-                    i.fa.fa-chevron-right(aria-hidden='true')
-                  button(type=submit)#submit.button.is-rounded.is-success
-                    | Let it rip &nbsp; 
-                    i.fa.fa-send(aria-hidden='true')
+      .container
+        #calendar.column.is-5
+          .panel
+            .panel-heading
+              p.has-text-centered 
+                span#calendar-heading Calendar
+                span#confirm Are You Sure?
+            .panel-block
+              #disclaimer.is-block-centered
+                  h2.has-text-centered Your Gravatar icon will be updated immediately, and then once a day, every day.
+              #slides.slides.is-block-centered
+                each image in images
+                  figure 
+                    img.is-block-centered(src=image.url)
+                    p.has-text-grey.is-size-7 #{image.day}
+            .panel-block
+              form.pagination.is-rounded.is-block-centered(action="/calendar/submit" method="post" role='navigation' aria-label='pagination')
+                a#home.button.is-rounded.is-danger(href='/')
+                  i.fa.fa-home(aria-hidden='true')
+                  | &nbsp; Home
+                | &nbsp;
+                a#back.button.is-rounded.is-danger(href='#')
+                  i.fa.fa-chevron-left(aria-hidden='true')
+                  | &nbsp; Back
+                | &nbsp;
+                a#next.button.is-rounded.is-primary(href='#here')
+                  | Start &nbsp; 
+                  i.fa.fa-chevron-right(aria-hidden='true')
+                button(type=submit)#submit.button.is-rounded.is-success
+                  | Let it rip &nbsp; 
+                  i.fa.fa-send(aria-hidden='true')

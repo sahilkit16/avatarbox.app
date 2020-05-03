@@ -28,7 +28,8 @@ router.get('/', async (req, res) => {
   });
 })
 
-router.post('/activate', (req, res) => {
+router.post('/submit', (req, res) => {
+  req.session.userid = null;
   res.render('thanks', new ThanksView());
 })
 
