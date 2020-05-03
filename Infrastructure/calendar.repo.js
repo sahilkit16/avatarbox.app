@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+const { Schema, model } = require("mongoose");
 
-export const CalendarSchema = new Schema({
+const CalendarSchema = new Schema({
   name: { type: String, required: true, default: "Daily" },
   isEnabled: { type: Boolean, required: true },
   isFailing: {
@@ -20,4 +20,9 @@ export const CalendarSchema = new Schema({
   },
 });
 
-export const CalendarRepo = model("Calendars", CalendarSchema);
+const CalendarRepo = model("Calendars", CalendarSchema);
+
+module.exports = {
+  CalendarRepo,
+  CalendarSchema
+};
