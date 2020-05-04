@@ -4,10 +4,10 @@ class UserService {
   get(email) {
     return new Promise((resolve, reject) => {
       UserRepo.findOne({ email }, (err, user) => {
-        if(err) return reject(err);
+        if (err) return reject(err);
         resolve(user);
-      })
-    })
+      });
+    });
   }
   create(email, ciphertext) {
     return new Promise((resolve, reject) => {

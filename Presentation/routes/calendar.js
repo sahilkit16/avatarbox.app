@@ -1,10 +1,10 @@
 const { Router } = require("express");
-const { container } = require('../../Common/di-container');
+const { container } = require("../../Common/di-container");
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
 
-const isAuthenticated = require('../middleware/is-authenticated');
-const gravatarClientScope = require('../middleware/gravatar-client-scope');
+const isAuthenticated = require("../middleware/is-authenticated");
+const gravatarClientScope = require("../middleware/gravatar-client-scope");
 
 const router = Router();
 
@@ -20,14 +20,14 @@ router.get("/", async (req, res) => {
     model.navbar.user = user;
     res.render("calendar", model);
   };
-  const cacheService = container.resolve('cacheService');
+  const cacheService = container.resolve("cacheService");
   const calendarCacheKey = `${userid}:calendar`;
   const calendar = cacheService.get(calendarCacheKey);
   if (calendar) {
     return renderCalendar(calendar);
   }
-  const buildCalendar = container.resolve('buildCalendar');
-  buildCalendar.client = req.scope.resolve('gravatarClient');
+  const buildCalendar = container.resolve("buildCalendar");
+  buildCalendar.client = req.scope.resolve("gravatarClient");
   buildCalendar
     .execute()
     .then((calendar) => {

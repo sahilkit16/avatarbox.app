@@ -1,13 +1,13 @@
 const { Router } = require("express");
-const { container } = require('../../Common/di-container');
+const { container } = require("../../Common/di-container");
 const router = Router();
-const gravatarClientScope = require('../middleware/gravatar-client-scope');
+const gravatarClientScope = require("../middleware/gravatar-client-scope");
 
 router.use(gravatarClientScope);
 
 router.post("/get-started", (req, res) => {
-  const client = req.scope.resolve('gravatarClient');
-  const cacheService = container.resolve('cacheService');
+  const client = req.scope.resolve("gravatarClient");
+  const cacheService = container.resolve("cacheService");
   const { email, isProgressive } = req.body;
   let redirectUrl = "/";
   if (client) {
@@ -23,14 +23,15 @@ router.post("/get-started", (req, res) => {
 });
 
 router.post("/sign-in", async (req, res) => {
-  const cacheService = container.resolve('cacheService');
-  const userService = container.resolve('userService');
+  const cacheService = container.resolve("cacheService");
+  const userService = container.resolve("userService");
   const { isProgressive, ciphertext } = req.body;
   const { userid } = req.session;
   if (userid && ciphertext) {
     const email = cacheService.get(userid);
     req.session.user = { email, password: ciphertext };
-    userService.create(email, ciphertext)
+    userService
+      .create(email, ciphertext)
       .then(() => {
         res.redirect("/calendar");
       })

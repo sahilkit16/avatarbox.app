@@ -1,5 +1,5 @@
 require("dotenv").config();
-require('../Common/di-container').configureServices();
+require("../Common/di-container").configureServices();
 const express = require("express");
 const http = require("http");
 const app = express();
