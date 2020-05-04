@@ -53,11 +53,11 @@ nx.prepare().then(() => {
     app.use("/dummy", dummyRoute);
   }
 
-  app.use("/calendar", calendarRoute);
+  app.use("/calendar", calendarRoute());
 
-  app.use("/encrypt", encryptRoute);
+  app.use("/encrypt", encryptRoute());
 
-  app.use("/home", homeRoute);
+  app.use("/home", homeRoute());
 
   app.get("/*", (req, res) => {
     return handle(req, res);

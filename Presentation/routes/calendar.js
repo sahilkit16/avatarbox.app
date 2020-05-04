@@ -1,11 +1,7 @@
 const { Router } = require("express");
-const { GravatarClient } = require("grav.client");
-const RsaService = require("../../Services/rsa.service");
-const UserService = require("../../Services/user.service");
-const BuildCalendarUseCase = require("../../Application/build-calendar.use-case");
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
-const CacheService = require("../../Services/cache.service");
+const RouteOptions = require('./_routeOptions');
 
 const isAuthenticated = require('../middleware/is-authenticated');
 
@@ -13,6 +9,7 @@ const router = Router();
 
 router.use(isAuthenticated);
 
+module.exports = function calendarRoute(options = new RouteOptions.Calendar()){
 // TODO: refactor + simplify
 router.get("/", async (req, res) => {
   const { user, userid } = req.session;
@@ -24,30 +21,31 @@ router.get("/", async (req, res) => {
     res.render("calendar", model);
   };
   const calendarCacheKey = `${userid}:calendar`;
-  const calendar = CacheService.get(calendarCacheKey);
+  const calendar = options.cache.get(calendarCacheKey);
   if (calendar) {
     return renderCalendar(calendar);
   }
-  const password = await RsaService.decrypt(user.password);
-  const client = new GravatarClient(user.email, password);
-  const buildCalendar = new BuildCalendarUseCase();
-  const _user = await UserService.get(user.email);
+  const password = await options.rsa.decrypt(user.password);
+  const client = options.useGravatarClient(user.email, password);
+  const _user = await options.user.get(user.email);
+  const { buildCalendar } = options;
   buildCalendar.isEnabled = _user.calendars[0].isEnabled;
   buildCalendar.client = client;
   buildCalendar
     .execute()
     .then((calendar) => {
-      CacheService.set(calendarCacheKey, calendar);
+      options.cache.set(calendarCacheKey, calendar);
       renderCalendar(calendar);
     })
     .catch((err) => {
       console.log(err);
       res.end();
     });
-});
+  });
 
-router.post("/submit", (req, res) => {
-  res.render("thanks", new ThanksView());
-});
+  router.post("/submit", (req, res) => {
+    res.render("thanks", new ThanksView());
+  });
 
-module.exports = router;
+  return router;
+}
