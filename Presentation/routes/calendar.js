@@ -4,14 +4,26 @@ const RsaService = require("../../Services/rsa.service");
 const BuildCalendarUseCase = require("../../Application/build-calendar.use-case");
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
+const CacheService = require("../../Services/cache.service");
 
 const router = Router();
 
 router.get("/", async (req, res) => {
-  if (!req.session.user) {
+  const { user, userid } = req.session;
+  if (!user) {
     return res.redirect("/");
   }
-  const { user } = req.session;
+  const renderCalendar = (calendar) => {
+    const model = new CalendarView();
+    model.title = "Calendar | Avatar Box";
+    model.images = calendar.images;
+    model.navbar.user = user;
+    res.render("calendar", model);
+  };
+  const calendar = CacheService.get(`${userid}:calendar`);
+  if (calendar) {
+    return renderCalendar(calendar);
+  }
   const password = await RsaService.decrypt(user.password);
   const client = new GravatarClient(user.email, password);
   const buildCalendar = new BuildCalendarUseCase();
@@ -19,11 +31,8 @@ router.get("/", async (req, res) => {
   buildCalendar
     .execute()
     .then((calendar) => {
-      const model = new CalendarView();
-      model.title = "Calendar | Avatar Box";
-      model.images = calendar.images;
-      model.navbar.user = user;
-      res.render("calendar", model);
+      CacheService.set(`${userid}:calendar`, calendar);
+      renderCalendar(calendar);
     })
     .catch((err) => {
       console.log(err);
@@ -32,7 +41,6 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/submit", (req, res) => {
-  req.session.userid = null;
   res.render("thanks", new ThanksView());
 });
 
