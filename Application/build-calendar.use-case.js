@@ -4,14 +4,18 @@ const { GravatarClient, GetPrimaryImageUseCase } = require("grav.client");
 const ImageCountError = require("../Domain/image-count.error");
 const ErrorCode = require("../Domain/error-code");
 const moment = require("moment");
+const UserService = require('../Services/user.service');
 
 class BuildCalendarUseCase {
   constructor() {
     this.client = new GravatarClient();
+    this.userService = new UserService();
     this.isEnabled = false;
     this.getPrimaryImage = new GetPrimaryImageUseCase();
   }
   async execute() {
+    const user = await this.userService.get(this.client.email);
+    this.isEnabled = user.calendars[0].isEnabled;
     this.getPrimaryImage.client = this.client;
     const primaryImage = await this.getPrimaryImage.execute();
     const userImagesResult = await this.client.userImages();

@@ -1,16 +1,16 @@
 const { Router } = require("express");
+const { container } = require('../../Common/di-container');
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
-const RouteOptions = require('./_routeOptions');
 
 const isAuthenticated = require('../middleware/is-authenticated');
+const gravatarClientScope = require('../middleware/gravatar-client-scope');
 
 const router = Router();
 
 router.use(isAuthenticated);
+router.use(gravatarClientScope);
 
-module.exports = function calendarRoute(options = new RouteOptions.Calendar()){
-// TODO: refactor + simplify
 router.get("/", async (req, res) => {
   const { user, userid } = req.session;
   const renderCalendar = (calendar) => {
@@ -20,32 +20,28 @@ router.get("/", async (req, res) => {
     model.navbar.user = user;
     res.render("calendar", model);
   };
+  const cacheService = container.resolve('cacheService');
   const calendarCacheKey = `${userid}:calendar`;
-  const calendar = options.cache.get(calendarCacheKey);
+  const calendar = cacheService.get(calendarCacheKey);
   if (calendar) {
     return renderCalendar(calendar);
   }
-  const password = await options.rsa.decrypt(user.password);
-  const client = options.useGravatarClient(user.email, password);
-  const _user = await options.user.get(user.email);
-  const { buildCalendar } = options;
-  buildCalendar.isEnabled = _user.calendars[0].isEnabled;
-  buildCalendar.client = client;
+  const buildCalendar = container.resolve('buildCalendar');
+  buildCalendar.client = req.scope.resolve('gravatarClient');
   buildCalendar
     .execute()
     .then((calendar) => {
-      options.cache.set(calendarCacheKey, calendar);
+      cacheService.set(calendarCacheKey, calendar);
       renderCalendar(calendar);
     })
     .catch((err) => {
       console.log(err);
       res.end();
     });
-  });
+});
 
-  router.post("/submit", (req, res) => {
-    res.render("thanks", new ThanksView());
-  });
+router.post("/submit", (req, res) => {
+  res.render("thanks", new ThanksView());
+});
 
-  return router;
-}
+module.exports = router;

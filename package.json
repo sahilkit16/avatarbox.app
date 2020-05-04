@@ -19,6 +19,7 @@
   },
   "homepage": "https://bitbucket.org/mrtillman/avatarbox.web/src/master/README.md",
   "dependencies": {
+    "awilix": "^4.2.6",
     "body-parser": "^1.19.0",
     "classnames": "^2.2.6",
     "cookie-session": "^1.4.0",
