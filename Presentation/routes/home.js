@@ -4,8 +4,6 @@ const CacheService = require("../../Services/cache.service");
 const UserService = require("../../Services/user.service");
 const router = Router();
 
-const User = new UserService();
-
 router.post("/get-started", (req, res) => {
   const { email, isProgressive } = req.body;
   let client,
@@ -29,7 +27,7 @@ router.post("/sign-in", async (req, res) => {
   if (userid && ciphertext) {
     const email = CacheService.get(userid);
     req.session.user = { email, password: ciphertext };
-    User.create(email, ciphertext)
+    UserService.create(email, ciphertext)
       .then(() => {
         res.redirect("/calendar");
       })

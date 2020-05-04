@@ -1,8 +1,15 @@
 const UserRepo = require("../Infrastructure/user.repo");
-const { CalendarSchema } = require("../Infrastructure/calendar.schema");
 
 class UserService {
-  create(email, ciphertext) {
+  static get(email) {
+    return new Promise((resolve, reject) => {
+      UserRepo.findOne({ email }, (err, user) => {
+        if(err) return reject(err);
+        resolve(user);
+      })
+    })
+  }
+  static create(email, ciphertext) {
     return new Promise((resolve, reject) => {
       UserRepo.findOne({ email }, (err, user) => {
         if (err) return reject(err);
