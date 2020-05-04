@@ -4,7 +4,7 @@ const { exec } = require("child_process");
 config();
 
 class RsaService {
-  static async encrypt(value) {
+  async encrypt(value) {
     return new Promise((resolve, reject) => {
       exec(
         `echo ${value} | openssl rsautl -encrypt -inkey rsa.public -pubin | base64 -w 0`,
@@ -15,7 +15,7 @@ class RsaService {
       );
     });
   }
-  static async decrypt(ciphertext) {
+  async decrypt(ciphertext) {
     return new Promise((resolve, reject) => {
       exec(
         `echo ${ciphertext.trim()} | base64 -d | openssl rsautl -decrypt -inkey ${

@@ -1,7 +1,7 @@
 const UserRepo = require("../Infrastructure/user.repo");
 
 class UserService {
-  static get(email) {
+  get(email) {
     return new Promise((resolve, reject) => {
       UserRepo.findOne({ email }, (err, user) => {
         if(err) return reject(err);
@@ -9,7 +9,7 @@ class UserService {
       })
     })
   }
-  static create(email, ciphertext) {
+  create(email, ciphertext) {
     return new Promise((resolve, reject) => {
       UserRepo.findOne({ email }, (err, user) => {
         if (err) return reject(err);
