@@ -8,6 +8,7 @@ const moment = require("moment");
 class BuildCalendarUseCase {
   constructor() {
     this.client = new GravatarClient();
+    this.isEnabled = false;
     this.getPrimaryImage = new GetPrimaryImageUseCase();
   }
   async execute() {
@@ -28,12 +29,14 @@ class BuildCalendarUseCase {
           : targetIndex,
       -1
     );
-    const images = rotateLeft(userImages, primaryImageIndex + 1).map(
+    const targetIndex = this.isEnabled ? primaryImageIndex: (primaryImageIndex + 1);
+    const firstImageName = this.isEnabled ? "Now" : "Next";
+    const images = rotateLeft(userImages, targetIndex).map(
       (img, index) => ({
         url: `${img.url}?size=200`,
         day:
           index == 0
-            ? "Next"
+            ? firstImageName
             : index == 1
             ? "Tomorrow"
             : days[(moment().day() + index) % 7],

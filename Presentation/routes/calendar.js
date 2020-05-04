@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { GravatarClient } = require("grav.client");
 const RsaService = require("../../Services/rsa.service");
+const UserService = require("../../Services/user.service");
 const BuildCalendarUseCase = require("../../Application/build-calendar.use-case");
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
@@ -8,6 +9,7 @@ const CacheService = require("../../Services/cache.service");
 
 const router = Router();
 
+// TODO: refactor + simplify
 router.get("/", async (req, res) => {
   const { user, userid } = req.session;
   if (!user) {
@@ -27,6 +29,8 @@ router.get("/", async (req, res) => {
   const password = await RsaService.decrypt(user.password);
   const client = new GravatarClient(user.email, password);
   const buildCalendar = new BuildCalendarUseCase();
+  const _user = await UserService.get(user.email);
+  buildCalendar.isEnabled = _user.calendars[0].isEnabled;
   buildCalendar.client = client;
   buildCalendar
     .execute()
