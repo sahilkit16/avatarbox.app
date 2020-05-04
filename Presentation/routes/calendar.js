@@ -7,14 +7,15 @@ const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
 const CacheService = require("../../Services/cache.service");
 
+const isAuthenticated = require('../middleware/is-authenticated');
+
 const router = Router();
+
+router.use(isAuthenticated);
 
 // TODO: refactor + simplify
 router.get("/", async (req, res) => {
   const { user, userid } = req.session;
-  if (!user) {
-    return res.redirect("/");
-  }
   const renderCalendar = (calendar) => {
     const model = new CalendarView();
     model.title = "Calendar | Avatar Box";
@@ -22,7 +23,8 @@ router.get("/", async (req, res) => {
     model.navbar.user = user;
     res.render("calendar", model);
   };
-  const calendar = CacheService.get(`${userid}:calendar`);
+  const calendarCacheKey = `${userid}:calendar`;
+  const calendar = CacheService.get(calendarCacheKey);
   if (calendar) {
     return renderCalendar(calendar);
   }
@@ -35,7 +37,7 @@ router.get("/", async (req, res) => {
   buildCalendar
     .execute()
     .then((calendar) => {
-      CacheService.set(`${userid}:calendar`, calendar);
+      CacheService.set(calendarCacheKey, calendar);
       renderCalendar(calendar);
     })
     .catch((err) => {
