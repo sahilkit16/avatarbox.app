@@ -17,6 +17,7 @@ router.get("/", async (req, res) => {
     const model = new CalendarView();
     model.title = "Calendar | Avatar Box";
     model.images = calendar.images;
+    model.isEnabled = calendar.isEnabled;
     model.navbar.user = user;
     res.render("calendar", model);
   };

@@ -46,7 +46,7 @@ class BuildCalendarUseCase {
           ? "Tomorrow"
           : days[(moment().day() + index) % 7],
     }));
-    return { images };
+    return { images, isEnabled: this.isEnabled };
   }
 }
 

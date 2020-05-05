@@ -6,6 +6,7 @@ class CalendarView {
     this.navbar = new NavBarView();
     this.navbar.isCosmetic = false;
     this.navbar.isTransparent = false;
+    this.isEnabled = false;
   }
 }
 
