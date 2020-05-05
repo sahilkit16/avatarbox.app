@@ -43,17 +43,17 @@ router.get("/", async (req, res) => {
 
 router.post("/submit", async (req, res) => {
   const { user, userid, isNewUser } = req.session;
-  const cacheService = container.resolve('cacheService');
-  const userService = container.resolve('userService');
+  const cacheService = container.resolve("cacheService");
+  const userService = container.resolve("userService");
   const calendarCacheKey = `${userid}:calendar`;
   const currentCalendar = cacheService.get(calendarCacheKey);
   await userService.toggleCalendar(user.email, currentCalendar.isEnabled);
   cacheService.remove(calendarCacheKey);
-  if(isNewUser){
+  if (isNewUser) {
     delete req.session.isNewUser;
-    return res.render("thanks", new ThanksView()) 
+    return res.render("thanks", new ThanksView());
   }
-  res.redirect('/calendar');
+  res.redirect("/calendar");
 });
 
 module.exports = router;

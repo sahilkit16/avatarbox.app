@@ -28,16 +28,17 @@ class UserService {
   toggleCalendar(email, isEnabled) {
     return new Promise((resolve, reject) => {
       UserRepo.updateOne(
-        { email, calendars: { $elemMatch: { "name" : "Daily" } } }, 
-        { $set: { "calendars.$.isEnabled": !isEnabled } }, 
+        { email, calendars: { $elemMatch: { name: "Daily" } } },
+        { $set: { "calendars.$.isEnabled": !isEnabled } },
         (err, user) => {
           if (err) return reject(err);
           if (user) {
             resolve(user);
           } else {
             reject(`calendar not found for ${email}`);
+          }
         }
-      });
+      );
     });
   }
 }

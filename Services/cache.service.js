@@ -9,7 +9,7 @@ class CacheService {
   set(key, value) {
     _cache[key] = value;
   }
-  remove(key){
+  remove(key) {
     delete _cache[key];
   }
 }

@@ -32,8 +32,8 @@ router.post("/sign-in", async (req, res) => {
     req.session.user = { email, password: ciphertext };
     userService
       .create(email, ciphertext)
-      .then(user => {
-        if(user.isNew){
+      .then((user) => {
+        if (user.isNew) {
           req.session.isNewUser = true;
         }
         res.redirect("/calendar");
