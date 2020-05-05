@@ -17,8 +17,10 @@ block content
                 span#confirm Are You Sure?
             .panel-block
               #disclaimer.is-block-centered
-                  h2(class=(isEnabled ? "is-hidden" : "")).has-text-centered Your Gravatar icon will be updated immediately, and then once a day, every day.
-                  h2(class=(!isEnabled ? "is-hidden" : "")).has-text-centered Your Gravatar icon will no longer be updated.
+                  h2(class=(isEnabled ? "is-hidden" : "")).has-text-centered 
+                    | Your Gravatar icon will be updated immediately, and then once a day, every day.
+                  h2(class=(!isEnabled ? "is-hidden" : "")).has-text-centered
+                    | Your Gravatar icon will no longer be updated.
               #slides.slides.is-block-centered
                 each image in images
                   figure 
@@ -34,15 +36,15 @@ block content
                   i.fa.fa-chevron-left(aria-hidden='true')
                   | &nbsp; Back
                 | &nbsp;
-                a(class=(isEnabled ? "is-hidden" : ""))#next.button.is-rounded.is-primary(href='#here')
+                a(href='#here' class=(isEnabled ? "is-hidden" : "")).btn-next.button.is-rounded.is-primary
                   | Start &nbsp;
                   i.fa.fa-chevron-right(aria-hidden='true')
-                a(class=(!isEnabled ? "is-hidden" : ""))#next.button.is-rounded.is-danger(href='#here')
-                  | Stop &nbsp;
+                a(href='#here' class=(!isEnabled ? "is-hidden" : "")).btn-next.button.is-rounded.is-danger
+                  | Disable &nbsp;
                   i.fa.fa-close(aria-hidden='true')
-                button(type=submit class=(isEnabled ? "is-hidden" : ""))#submit.button.is-rounded.is-success
+                button(type=submit class=(isEnabled ? "is-hidden" : "")).btn-submit.button.is-rounded.is-success
                   | Let it rip &nbsp; 
                   i.fa.fa-send(aria-hidden='true')
-                button(type=submit class=(!isEnabled ? "is-hidden" : ""))#submit.button.is-rounded.is-success
+                button(type=submit class=(!isEnabled ? "is-hidden" : "")).btn-submit.button.is-rounded.is-success
                   | Okay &nbsp; 
                   i.fa.fa-check(aria-hidden='true')

@@ -50,18 +50,18 @@
   font-weight: bold;
 }
 
-#submit,
+.btn-submit,
 #back,
 #disclaimer,
 #confirm,
-#here:target #next,
+#here:target .btn-next,
 #here:target #home,
 #here:target #slides,
 #here:target #calendar-heading {
   display:none;
 }
 
-#here:target #submit,
+#here:target .btn-submit,
 #here:target #back,
 #here:target #confirm {
   display: inline-block;
