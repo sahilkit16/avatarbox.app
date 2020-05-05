@@ -1,19 +1,18 @@
 const RedisClient = require("../Infrastructure/redis.client");
 
-const _cache = {};
-
 class CacheService {
   constructor() {
     this._cache = new RedisClient();
   }
-  get(value) {
-    return _cache[value];
+  async get(value) {
+    const _value = await this._cache.get(value);
+    return JSON.parse(_value);
   }
-  set(key, value) {
-    _cache[key] = value;
+  async set(key, value) {
+    await this._cache.set(key, JSON.stringify(value));
   }
-  remove(key) {
-    delete _cache[key];
+  async delete(key) {
+    await this._cache.delete(key);
   }
 }
 
