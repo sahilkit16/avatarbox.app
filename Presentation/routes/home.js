@@ -33,9 +33,7 @@ router.post("/sign-in", async (req, res) => {
     userService
       .create(email, ciphertext)
       .then((user) => {
-        if (user.isNew) {
-          req.session.isNewUser = true;
-        }
+        req.session.isNewUser = user.isNew;
         res.redirect("/calendar");
       })
       .catch((err) => {

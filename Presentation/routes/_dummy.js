@@ -17,10 +17,7 @@ router.get("/calendar", (req, res) => {
 });
 
 router.get("/thanks", (req, res) => {
-  const model = new ThanksView();
-  model.navbar.isCosmetic = true;
-  model.navbar.isTransparent = false;
-  res.render("thanks", model);
+  res.render("thanks", new ThanksView());
 });
 
 module.exports = router;
