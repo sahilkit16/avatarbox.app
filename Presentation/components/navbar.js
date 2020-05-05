@@ -28,15 +28,10 @@ function NavBar({ model }) {
             <a
               href="#menu"
               data-target="navbar-menu"
-              className={classNames(
-                "navbar-burger",
-                "burger",
-                "noscript",
-                {
-                  "is-hidden": model.isCosmetic,
-                  "has-background-grey-darker": !model.isTransparent,
-                }
-              )}
+              className={classNames("navbar-burger", "burger", "noscript", {
+                "is-hidden": model.isCosmetic,
+                "has-background-grey-darker": !model.isTransparent,
+              })}
             >
               <span></span>
               <span></span>

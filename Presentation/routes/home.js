@@ -15,7 +15,7 @@ router.post("/get-started", async (req, res) => {
     req.session.email = email;
     redirectUrl += `?next=1`;
   }
-  if(req.is('application/x-www-form-urlencoded')){
+  if (req.is("application/x-www-form-urlencoded")) {
     redirectUrl += "#here";
     res.redirect(redirectUrl);
   } else {
