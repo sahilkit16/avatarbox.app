@@ -31,7 +31,7 @@ function NavBar({ model }) {
               className={classNames(
                 "navbar-burger",
                 "burger",
-                "is-progressive",
+                "noscript",
                 {
                   "is-hidden": model.isCosmetic,
                   "has-background-grey-darker": !model.isTransparent,
@@ -86,7 +86,7 @@ function NavBar({ model }) {
             </span>
             <noscript>
               <a href="#" className="button is-transparent">
-                <span className="navbar-burger burger is-active is-progressive">
+                <span className="navbar-burger burger is-active noscript">
                   <span></span>
                   <span></span>
                   <span></span>

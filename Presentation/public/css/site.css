@@ -51,12 +51,12 @@ div.navbar-menu.is-transparent {
     display: block;
 }
 
-a.navbar-burger.burger.is-progressive {
+a.navbar-burger.burger.noscript {
     position: absolute;
     right: 0px;
 }
 
-span.navbar-burger.burger.is-progressive {
+span.navbar-burger.burger.noscript {
     color: #ffffff;
 }
 

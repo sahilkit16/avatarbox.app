@@ -6,7 +6,7 @@ nav(class=(`navbar ${isCentered} ${isTransparent}`))
       a(class='navbar-item is-transparent' href='/')
         img(src='/images/avatarbox.png' alt='Logo')
       noscript
-        a(href="#menu" class=(navbar.isCosmetic ? "is-hidden" : "")).navbar-burger.burger.is-progressive
+        a(href="#menu" class=(navbar.isCosmetic ? "is-hidden" : "")).navbar-burger.burger.noscript
           span
           span
           span
@@ -17,7 +17,7 @@ nav(class=(`navbar ${isCentered} ${isTransparent}`))
             | Sign Out
         noscript
           a(href="#" class=(`button is-transparent`))    
-            span(class=(navbar.isCosmetic ? "is-hidden" : "")).navbar-burger.burger.is-progressive.is-active
+            span(class=(navbar.isCosmetic ? "is-hidden" : "")).navbar-burger.burger.noscript.is-active
               span
               span
               span
