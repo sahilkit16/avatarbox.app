@@ -1,8 +1,11 @@
+const RedisClient = require("../Infrastructure/redis.client");
+
 const _cache = {};
 
-// TODO: implement using redis client
-
 class CacheService {
+  constructor() {
+    this._cache = new RedisClient();
+  }
   get(value) {
     return _cache[value];
   }
