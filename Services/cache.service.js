@@ -9,6 +9,9 @@ class CacheService {
   set(key, value) {
     _cache[key] = value;
   }
+  remove(key){
+    delete _cache[key];
+  }
 }
 
 module.exports = CacheService;

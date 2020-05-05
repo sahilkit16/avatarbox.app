@@ -32,7 +32,10 @@ router.post("/sign-in", async (req, res) => {
     req.session.user = { email, password: ciphertext };
     userService
       .create(email, ciphertext)
-      .then(() => {
+      .then(user => {
+        if(user.isNew){
+          req.session.isNewUser = true;
+        }
         res.redirect("/calendar");
       })
       .catch((err) => {
@@ -43,8 +46,7 @@ router.post("/sign-in", async (req, res) => {
 });
 
 router.get("/sign-out", (req, res) => {
-  req.session.userid = null;
-  req.session.user = null;
+  req.session = null;
   res.redirect("/");
 });
 
