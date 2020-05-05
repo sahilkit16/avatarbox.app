@@ -59,13 +59,6 @@ class Index extends React.Component {
                       <span className="step-1">Get Started</span>
                       <span className="step-2">Sign In</span>
                     </button>
-                    <noscript className="is-hidden">
-                      <input
-                        name="isProgressive"
-                        readOnly={true}
-                        value={true}
-                      />
-                    </noscript>
                   </p>
                 </div>
               </form>

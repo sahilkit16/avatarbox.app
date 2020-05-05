@@ -7,7 +7,7 @@ router.use(gravatarClientScope);
 
 router.post("/get-started", async (req, res) => {
   const client = req.scope.resolve("gravatarClient");
-  const { email, isProgressive } = req.body;
+  const { email } = req.body;
   let redirectUrl = "/";
   if (client) {
     const userid = client.emailHash;
@@ -15,15 +15,17 @@ router.post("/get-started", async (req, res) => {
     req.session.email = email;
     redirectUrl += `?next=1`;
   }
-  if (isProgressive) {
+  if(req.is('application/x-www-form-urlencoded')){
     redirectUrl += "#here";
+    res.redirect(redirectUrl);
+  } else {
+    res.end();
   }
-  res.redirect(redirectUrl);
 });
 
 router.post("/sign-in", async (req, res) => {
   const userService = container.resolve("userService");
-  const { isProgressive, ciphertext } = req.body;
+  const { ciphertext } = req.body;
   const { userid, email } = req.session;
   if (userid && ciphertext) {
     req.session.user = { email, password: ciphertext };
