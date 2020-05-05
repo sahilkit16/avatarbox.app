@@ -5,15 +5,14 @@ const gravatarClientScope = require("../middleware/gravatar-client-scope");
 
 router.use(gravatarClientScope);
 
-router.post("/get-started", (req, res) => {
+router.post("/get-started", async (req, res) => {
   const client = req.scope.resolve("gravatarClient");
-  const cacheService = container.resolve("cacheService");
   const { email, isProgressive } = req.body;
   let redirectUrl = "/";
   if (client) {
     const userid = client.emailHash;
     req.session.userid = userid;
-    cacheService.set(userid, email);
+    req.session.email = email;
     redirectUrl += `?next=1`;
   }
   if (isProgressive) {
@@ -23,12 +22,10 @@ router.post("/get-started", (req, res) => {
 });
 
 router.post("/sign-in", async (req, res) => {
-  const cacheService = container.resolve("cacheService");
   const userService = container.resolve("userService");
   const { isProgressive, ciphertext } = req.body;
-  const { userid } = req.session;
+  const { userid, email } = req.session;
   if (userid && ciphertext) {
-    const email = cacheService.get(userid);
     req.session.user = { email, password: ciphertext };
     userService
       .create(email, ciphertext)

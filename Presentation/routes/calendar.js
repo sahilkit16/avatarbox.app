@@ -12,18 +12,15 @@ router.use(isAuthenticated);
 router.use(gravatarClientScope);
 
 router.get("/", async (req, res) => {
-  const { user, userid } = req.session;
-  const renderCalendar = (calendar) => {
+  const { user, calendar } = req.session;
+  const renderCalendar = ({ images, isEnabled }) => {
     const model = new CalendarView();
     model.title = "Calendar | Avatar Box";
-    model.images = calendar.images;
-    model.isEnabled = calendar.isEnabled;
+    model.images = images;
+    model.isEnabled = isEnabled;
     model.navbar.user = user;
     res.render("calendar", model);
   };
-  const cacheService = container.resolve("cacheService");
-  const calendarCacheKey = `${userid}:calendar`;
-  const calendar = cacheService.get(calendarCacheKey);
   if (calendar) {
     return renderCalendar(calendar);
   }
@@ -31,9 +28,9 @@ router.get("/", async (req, res) => {
   buildCalendar.client = req.scope.resolve("gravatarClient");
   buildCalendar
     .execute()
-    .then((calendar) => {
-      cacheService.set(calendarCacheKey, calendar);
-      renderCalendar(calendar);
+    .then(async (newCalendar) => {
+      req.session.calendar = newCalendar;
+      renderCalendar(newCalendar);
     })
     .catch((err) => {
       console.log(err);
@@ -42,13 +39,10 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/submit", async (req, res) => {
-  const { user, userid, isNewUser } = req.session;
-  const cacheService = container.resolve("cacheService");
+  const { user, isNewUser, calendar } = req.session;
   const userService = container.resolve("userService");
-  const calendarCacheKey = `${userid}:calendar`;
-  const currentCalendar = cacheService.get(calendarCacheKey);
-  await userService.toggleCalendar(user.email, currentCalendar.isEnabled);
-  cacheService.remove(calendarCacheKey);
+  await userService.toggleCalendar(user.email, calendar.isEnabled);
+  delete req.session.calendar;
   if (isNewUser) {
     delete req.session.isNewUser;
     return res.render("thanks", new ThanksView());
