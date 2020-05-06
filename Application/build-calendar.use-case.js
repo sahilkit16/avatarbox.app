@@ -1,7 +1,7 @@
 const days = require("../Domain/days");
 const { rotateLeft } = require("../Common/utilities");
 const { GravatarClient, GetPrimaryImageUseCase } = require("grav.client");
-const ImageCountError = require("../Domain/image-count.error");
+const ImageShortageError = require("../Domain/image-shortage.error");
 const ErrorCode = require("../Domain/error-code");
 const moment = require("moment");
 const UserService = require("../Services/user.service");
@@ -20,9 +20,9 @@ class BuildCalendarUseCase {
     const primaryImage = await this.getPrimaryImage.execute();
     const { userImages } = await this.client.userImages();
     if (!(userImages && userImages.length))
-      throw new ImageCountError(ErrorCode.NoImages);
+      throw new ImageShortageError(ErrorCode.NoImages);
     if (userImages && userImages.length == 1)
-      throw new ImageCountError(ErrorCode.SoleImage);
+      throw new ImageShortageError(ErrorCode.SingleImage);
     const primaryImageIndex = userImages.reduce(
       (targetIndex, image, currentIndex) =>
         targetIndex < 0 && image.name == primaryImage.name
