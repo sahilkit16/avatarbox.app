@@ -18,10 +18,7 @@ class BuildCalendarUseCase {
     this.isEnabled = user.calendars[0].isEnabled;
     this.getPrimaryImage.client = this.client;
     const primaryImage = await this.getPrimaryImage.execute();
-    const userImagesResult = await this.client.userImages();
-    if (userImagesResult.DidFail)
-      throw new Error(userImagesResult.ErrorMessage);
-    const { userImages } = userImagesResult.Value;
+    const { userImages } = await this.client.userImages();
     if (!(userImages && userImages.length))
       throw new ImageCountError(ErrorCode.NoImages);
     if (userImages && userImages.length == 1)

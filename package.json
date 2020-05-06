@@ -25,7 +25,7 @@
     "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "grav.client": "^2.3.14",
+    "grav.client": "^2.4.14",
     "next": "^9.3.5",
     "prettier": "^2.0.5",
     "pug": "^2.0.4",
