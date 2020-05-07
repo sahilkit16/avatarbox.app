@@ -2,6 +2,10 @@ html, body {
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
+.debug {
+  border: 1px solid red;
+}
+
 .navbar.is-centered .navbar-brand {
   text-align: center;
   display: block;

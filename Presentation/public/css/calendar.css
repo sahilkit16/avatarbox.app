@@ -8,12 +8,6 @@
   -webkit-overflow-scrolling: touch;
 }
 
-#disclaimer {
-  display: flex;
-  width: 300px;
-  height: 300px;
-}
-
 .slides::-webkit-scrollbar {
   width: 10px;
   height: 5px;
@@ -56,7 +50,7 @@
 #confirm,
 #here:target .btn-next,
 #here:target #home,
-#here:target #slides,
+#here:target .slides,
 #here:target #calendar-heading {
   display:none;
 }
@@ -64,7 +58,7 @@
 #here:target .btn-submit,
 #here:target #back,
 #here:target #confirm {
-  display: inline-block;
+  display: inherit;
 }
 
 #here:target #disclaimer {
@@ -73,7 +67,26 @@
   justify-content: center;
 }
 
-#calendar {
+.card-footer-item.btn-submit {
+  border: 0;
+  background: inherit;
+  cursor: pointer;
+  color: #3273dc;
+  font-size: 100%;
+}
+
+.card-footer-item.btn-submit:hover{
+  color: black;
+}
+
+.card-footer-item.btn-submit:focus {
+  outline: none;
+}
+
+.card-block {
+  min-width:300px;
+  height:300px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }

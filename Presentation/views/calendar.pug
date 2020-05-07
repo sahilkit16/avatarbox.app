@@ -9,42 +9,40 @@ block content
       include ../components/navbar.pug
     .hero-body
       .container
-        #calendar
-          .panel
-            .panel-heading
-              p.has-text-centered 
-                span#calendar-heading Calendar
-                span#confirm Are You Sure?
-            .panel-block
-              #disclaimer.is-block-centered
+        .columns.is-centered.is-marginless
+          .column.is-paddingless.is-two-thirds-tablet.is-half-desktop
+            .card
+              header.card-header
+                p.card-header-title
+                  span#calendar-heading Calendar
+                  span#confirm Are You Sure?
+              .card-content.card-block.is-paddingless
+                .slides.is-block-centered
+                  each image in images
+                    figure 
+                      img.is-block-centered(src=image.url)
+                      p.has-text-grey.is-size-7 #{image.day}
+                #disclaimer.is-block-centered
                   h2(class=(isEnabled ? "is-hidden" : "")).has-text-centered 
                     | Your Gravatar icon will be updated now, and then once a day, every day.
                   h2(class=(!isEnabled ? "is-hidden" : "")).has-text-centered
                     | Your Gravatar icon will no longer be updated.
-              #slides.slides.is-block-centered
-                each image in images
-                  figure 
-                    img.is-block-centered(src=image.url)
-                    p.has-text-grey.is-size-7 #{image.day}
-            .panel-block
-              form.pagination.is-rounded.is-block-centered(action="/calendar/submit" method="post" role='navigation' aria-label='pagination')
-                a#home.button.is-rounded.is-outlined(href='/')
+              form(action="/calendar/submit" method="post").card-footer
+                a#home.card-footer-item(href='/')
                   i.fa.fa-home(aria-hidden='true')
                   | &nbsp; Home
-                | &nbsp;
-                a#back.button.is-rounded.is-danger(href='#')
+                a#back.card-footer-item(href='#')
                   i.fa.fa-chevron-left(aria-hidden='true')
                   | &nbsp; Back
-                | &nbsp;
-                a(href='#here' class=(isEnabled ? "is-hidden" : "")).btn-next.button.is-rounded.is-primary
+                a(href='#here' class=(isEnabled ? "is-hidden" : "")).card-footer-item.btn-next
                   | Start &nbsp;
                   i.fa.fa-chevron-right(aria-hidden='true')
-                a(href='#here' class=(!isEnabled ? "is-hidden" : "")).btn-next.button.is-rounded.is-danger
+                a(href='#here' class=(!isEnabled ? "is-hidden" : "")).card-footer-item.btn-next
                   | Disable &nbsp;
                   i.fa.fa-close(aria-hidden='true')
-                button(type=submit class=(isEnabled ? "is-hidden" : "")).btn-submit.button.is-rounded.is-success
+                button(type="submit" class=(isEnabled ? "is-hidden" : "")).card-footer-item.btn-submit
                   | Let it rip &nbsp; 
                   i.fa.fa-send(aria-hidden='true')
-                button(type=submit class=(!isEnabled ? "is-hidden" : "")).btn-submit.button.is-rounded.is-success
+                button(type="submit" class=(!isEnabled ? "is-hidden" : "")).card-footer-item.btn-submit
                   | Okay &nbsp; 
                   i.fa.fa-check(aria-hidden='true')
