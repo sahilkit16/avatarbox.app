@@ -25,9 +25,12 @@ router.get("/home", (req, res) => {
   res.render("home", new HomeView());
 });
 
-// missing-email
-// invalid-email
-// invalid-password
+router.get("/invalid-creds", (req, res) => {
+  const model = new HomeView();
+  model.errorMessage = "Invalid email or password";
+  res.render("home", model);
+});
+
 // insufficient-images
 
 module.exports = router;

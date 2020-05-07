@@ -23,5 +23,7 @@ block content
                 button(type='submit' class='button is-info')
                   span(class='step-1') Get Started
                   span(class='step-2') Sign In
+            if errorMessage
+              span.has-text-danger #{errorMessage}
         a(href='/encrypt' class='step-2 has-text-white has-text-centered is-size-6')
           | Encrypt My Password
