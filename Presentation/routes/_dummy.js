@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
+const HomeView = require("../view-models/home");
 
 router.get("/calendar", (req, res) => {
   const model = new CalendarView();
@@ -19,5 +20,14 @@ router.get("/calendar", (req, res) => {
 router.get("/thanks", (req, res) => {
   res.render("thanks", new ThanksView());
 });
+
+router.get("/home", (req, res) => {
+  res.render("home", new HomeView());
+});
+
+// missing-email
+// invalid-email
+// invalid-password
+// insufficient-images
 
 module.exports = router;

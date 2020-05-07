@@ -1,7 +1,10 @@
+const NavBarView = require("./_navbar");
+
 class HomeView {
   constructor() {
-    this.action = "";
-    this.user = "";
+    this.navbar = new NavBarView();
+    this.action = "/home/sign-in";
+    this.user = null
   }
 }
 
