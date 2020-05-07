@@ -1,0 +1,11 @@
+.modal.is-active
+  .modal-background
+  .modal-content
+    .card
+      header.card-header
+        p.card-header-title.has-text-centered #{prompt.title}
+      .card-content
+        p.has-text-centered #{prompt.message} 
+          a(target="blank" href="https://en.gravatar.com/gravatars/new") #{prompt.linkText}
+      .card-footer
+        a(href="#" class="card-footer-item") Retry

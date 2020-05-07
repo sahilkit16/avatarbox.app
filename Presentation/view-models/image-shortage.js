@@ -4,7 +4,7 @@ const ErrorCode = require("../../Domain/error-code");
 
 class ImageShortagePrompt extends PromptView {
   constructor(error = new ImageShortageError()){
-    let title, message;
+    let name = "image-shortage", title, message;
     if(error.code == ErrorCode.NoImages) {
       title = "No Images";
       message = "Whoops, looks like you don't have any images yet!";
@@ -12,7 +12,7 @@ class ImageShortagePrompt extends PromptView {
       title = "Not Enough Images";
       message = "You need at least two images.";
     }
-    super(title, message);
+    super(name, title, message);
     this.linkText = "Add some by clicking here!";
   }
 }
