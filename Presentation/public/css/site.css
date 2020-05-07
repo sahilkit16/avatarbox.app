@@ -73,7 +73,7 @@ span.navbar-burger.burger.noscript {
 
 #social-icons {
   display: flex;
-  padding: 0px 50px;
+  padding: 0px 20%;
 }
 
 #social-icons > a {
