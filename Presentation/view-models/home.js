@@ -4,8 +4,9 @@ class HomeView {
   constructor() {
     this.navbar = new NavBarView();
     this.action = "/home/sign-in";
-    this.errorMessage = null;
-    this.user = null
+    this.validationMessage = null;
+    this.prompt = null;
+    this.user = null;
   }
 }
 

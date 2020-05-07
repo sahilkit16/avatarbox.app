@@ -3,6 +3,9 @@ const router = Router();
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
 const HomeView = require("../view-models/home");
+const ImageShortagePrompt = require("../view-models/image-shortage");
+const ImageShortageError = require("../../Domain/image-shortage.error");
+const ErrorCode = require("../../Domain/error-code");
 
 router.get("/calendar", (req, res) => {
   const model = new CalendarView();
@@ -27,10 +30,15 @@ router.get("/home", (req, res) => {
 
 router.get("/invalid-creds", (req, res) => {
   const model = new HomeView();
-  model.errorMessage = "Invalid email or password";
+  model.validationMessage = "Invalid email or password";
   res.render("home", model);
 });
 
-// insufficient-images
+router.get("/image-shortage", (req, res) => {
+  const model = new HomeView();
+  const error = new ImageShortageError(ErrorCode.NoImages);
+  model.prompt = new ImageShortagePrompt(error);
+  res.render("home", model);
+});
 
 module.exports = router;

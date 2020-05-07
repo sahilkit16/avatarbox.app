@@ -4,6 +4,8 @@ block styles
   link(rel='stylesheet' type='text/css' href='../css/landing.css')
 
 block content
+  if prompt && prompt.name == "image-shortage"
+    include ../components/prompt.image-shortage.pug  
   section#hero.hero.is-info.is-fullheight
     .hero-head
       include ../components/navbar.pug
@@ -23,7 +25,7 @@ block content
                 button(type='submit' class='button is-info')
                   span(class='step-1') Get Started
                   span(class='step-2') Sign In
-            if errorMessage
-              span.has-text-danger #{errorMessage}
+            if validationMessage
+              span.has-text-danger #{validationMessage}
         a(href='/encrypt' class='step-2 has-text-white has-text-centered is-size-6')
           | Encrypt My Password
