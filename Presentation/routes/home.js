@@ -1,8 +1,10 @@
 const { Router } = require("express");
+const { asValue } = require("awilix");
 const { container } = require("../../Common/di-container");
 const router = Router();
 const gravatarClientScope = require("../middleware/gravatar-client-scope");
 const { unauthorized } = require("../middleware/unauthorized");
+const { GravatarClient } = require("grav.client");
 
 router.use(unauthorized);
 router.use(gravatarClientScope);
@@ -26,25 +28,36 @@ router.post("/get-started", async (req, res) => {
   }
 });
 
-// TODO: authenticate before saving
-// what if user's first login is invalid?
-// also, what is user updates their password?
 router.post("/sign-in", async (req, res) => {
-  const userService = container.resolve("userService");
   const { ciphertext } = req.body;
   const { userid, email } = req.session;
-  if (userid && ciphertext) {
-    req.session.user = { email, password: ciphertext };
-    userService
+  if (userid && email && ciphertext) {
+    const rsaService = container.resolve("rsaService");
+    rsaService.decrypt(ciphertext).then(password => {
+      return new GravatarClient(email, password);
+    })
+    .then(async client => {
+      const { response } = await client.test();
+      if(!!response){
+        req.session.user = { email, password: ciphertext };
+        req.scope.register({
+          gravatarClient: asValue(client),
+        });
+      } else {
+        console.log('Gravatar ping failed');
+      }
+    })
+    .then(() => {
+      const userService = container.resolve("userService");
+      userService
       .findOrCreate(email, ciphertext)
       .then((user) => {
         req.session.isNewUser = user.isNew;
         res.redirect("/calendar");
       })
-      .catch((err) => {
-        console.log(err);
-        res.end();
-      });
+      .catch(req.unauthorized);
+    })
+    .catch(req.unauthorized);
   } else {
     req.unauthorized();
   }

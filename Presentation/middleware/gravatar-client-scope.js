@@ -19,17 +19,10 @@ async function gravatarClientScope(req, res, next) {
     const { user } = req.session;
     const rsaService = container.resolve("rsaService");
     rsaService.decrypt(user.password).then(password => {
-      return new GravatarClient(user.email, password);
-    })
-    .then(client => {
-      client.exists()
-        .then(() => {
-          req.scope.register({
-            gravatarClient: asValue(client),
-          });
-          next();
-        })
-        .catch(_unauthorized)
+      req.scope.register({
+        gravatarClient: asValue(new GravatarClient(user.email, password)),
+      });
+      next();
     }).catch(_unauthorized)
   }
 }
