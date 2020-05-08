@@ -9,7 +9,7 @@ class UserService {
       });
     });
   }
-  create(email, ciphertext) {
+  findOrCreate(email, ciphertext) {
     return new Promise((resolve, reject) => {
       UserRepo.findOne({ email }, (err, user) => {
         if (err) return reject(err);
