@@ -50,12 +50,14 @@ router.get("/", async (req, res) => {
 
 router.post("/submit", async (req, res) => {
   const { user, isNewUser, calendar } = req.session;
-  const userService = container.resolve("userService");
-  await userService.toggleCalendar(user.email, calendar.isEnabled);
-  delete req.session.calendar;
-  if (isNewUser) {
-    delete req.session.isNewUser;
-    return res.render("thanks", new ThanksView());
+  if(calendar){
+    const userService = container.resolve("userService");
+    await userService.toggleCalendar(user.email, calendar.isEnabled);
+    delete req.session.calendar;
+    if (isNewUser) {
+      delete req.session.isNewUser;
+      return res.render("thanks", new ThanksView());
+    }
   }
   res.redirect("/calendar");
 });
