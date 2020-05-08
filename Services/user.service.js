@@ -11,7 +11,7 @@ class UserService {
   }
   findOrCreate(email, ciphertext) {
     return new Promise((resolve, reject) => {
-      UserRepo.findOne({ email }, (err, user) => {
+      UserRepo.findOneAndUpdate({ email }, { ciphertext }, { new: true }, (err, user) => {
         if (err) return reject(err);
         if (user) {
           resolve(user);
