@@ -6,15 +6,26 @@ import HomeView from "../view-models/home";
 class Index extends React.Component {
   constructor(props) {
     super(props);
+    this.renderValidationMessage = this.renderValidationMessage.bind(this);
   }
+
   static getInitialProps = async (ctx) => {
     const userid = ctx.query.next && ctx.req.session.userid;
     const action = `/home/${userid ? "sign-in" : "get-started"}`;
     const model = new HomeView();
     model.action = action;
     model.user = ctx.req.session.user;
+    model.validationMessage = ctx.req.session.validationMessage;
     return model;
   };
+
+  renderValidationMessage() {
+    const { validationMessage } = this.props;
+    return (validationMessage
+            ? <span className="has-text-danger">{validationMessage}</span>
+            : null);
+  }
+
   render() {
     return (
       <HeroSection>
@@ -61,6 +72,7 @@ class Index extends React.Component {
                     </button>
                   </p>
                 </div>
+                {this.renderValidationMessage()}
               </form>
             </div>
             <a
