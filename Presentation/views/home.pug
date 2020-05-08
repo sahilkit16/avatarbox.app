@@ -15,7 +15,11 @@ block content
           h1(class='title') New Avatar, Daily
           h2(class='subtitle')
             | A handy resource to auto update your Gravatar icon
-          form(class='box' method='post' action=('' + action))
+          div(class=(!user && "is-hidden"))
+            a(class="button is-white"  href="/calendar")
+              i.fa.fa-calendar 
+              |&nbsp; Calendar
+          form(class=(user ? "is-hidden" : "box") method='post' action=('' + action))
             div(class='field is-grouped')
               p#email-input(class='control is-expanded step-1')
                 input(class='input email' name='email' type='email' placeholder=' Email Address')

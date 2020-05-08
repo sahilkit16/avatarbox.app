@@ -36,6 +36,7 @@ router.get("/invalid-creds", (req, res) => {
 
 router.get("/image-shortage", (req, res) => {
   const model = new HomeView();
+  model.user = model.navbar.user = true;
   const error = new ImageShortageError(ErrorCode.NoImages);
   model.prompt = new ImageShortagePrompt(error);
   res.render("home", model);
