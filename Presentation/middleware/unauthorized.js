@@ -2,7 +2,6 @@ function _handleUnauthorized(req, res){
   req.session = {
     validationMessage: "Invalid email or password"
   };
-  res.status(401);
   return res.redirect("/");
 }
 
