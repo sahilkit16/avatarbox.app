@@ -16,6 +16,7 @@ class Index extends React.Component {
     model.action = action;
     model.user = ctx.req.session.user;
     model.validationMessage = ctx.req.session.validationMessage;
+    ctx.req.session.validationMessage = null;
     return model;
   };
 
