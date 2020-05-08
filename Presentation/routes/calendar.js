@@ -2,6 +2,9 @@ const { Router } = require("express");
 const { container } = require("../../Common/di-container");
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
+const HomeView = require("../view-models/home");
+const ImageShortagePrompt = require("../view-models/image-shortage");
+const ImageShortageError = require("../../Domain/image-shortage.error");
 
 const isAuthenticated = require("../middleware/is-authenticated");
 const gravatarClientScope = require("../middleware/gravatar-client-scope");
@@ -33,8 +36,15 @@ router.get("/", async (req, res) => {
       renderCalendar(newCalendar);
     })
     .catch((err) => {
-      console.log(err);
-      res.end();
+      if(err instanceof ImageShortageError){
+        const model = new HomeView();
+        model.user = model.navbar.user = user;
+        model.prompt = new ImageShortagePrompt(err);
+        res.render('home', model);
+      } else {
+        console.log(err);
+        res.end();
+      }
     });
 });
 
