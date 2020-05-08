@@ -22,6 +22,10 @@ hr {
   border-bottom: 1px solid #a9a9a9;
 }
 
+hr.partition {
+  margin: 40px 20%;
+}
+
 .hero .nav, .hero.is-light .nav {
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -77,11 +81,10 @@ span.navbar-burger.burger.noscript {
 
 #social-icons {
   display: flex;
-  padding: 0px 20%;
 }
 
 #social-icons > a {
-  flex: 1;
+  margin: 0px 25px;
   color: #C8C8C8;
 }
 
@@ -94,5 +97,8 @@ span.navbar-burger.burger.noscript {
   .hero-body {
       padding-left: 0px;
       padding-right: 0px;
+  }
+  hr.partition {
+    margin: 40px 0%;
   }
 }

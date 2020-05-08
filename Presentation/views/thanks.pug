@@ -1,22 +1,22 @@
 extends _layout.pug
 
-block styles
-  link(rel='stylesheet' type='text/css' href='../css/thanks.css')
-
 block content
   section.hero.is-light.is-fullheight
     .hero-head
       include ../components/navbar.pug
     .hero-body
       .container
-        #thanks.container.column.is-5
-          div
-            h1.title.has-text-centered.is-size-1 That's all, thank you!
-            h1.subtitle.has-text-centered We really appreciate your time.
-            hr
-          div
+        section
+          h1.title.has-text-centered.is-size-1 That's all, thank you!
+          .level
+            h1.level-item.subtitle.has-text-centered We really appreciate your time.
+        hr.partition
+        .level
+          .level-item
             p.cta.has-text-centered Tell your friends!
-          div#social-icons.is-size-3
+        .level
+          .level-item
+            div#social-icons.is-size-3
               a.icon
                 i.fa.fa-facebook
               a.icon
@@ -25,7 +25,8 @@ block content
                 i.fa.fa-envelope
               a.icon
                 i.fa.fa-google
-          div
-            hr
+        hr.partition
+        .level
+          .level-item
             p.has-text-centered.is-size-7
               | PS: If you found this valuable, pass it on to your friends.
