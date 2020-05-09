@@ -1,12 +1,17 @@
 import React from "react";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import HomeView from "../view-models/home";
+import * as actions from "../actions/app.actions";
 
-class Index extends React.Component {
+class IndexPage extends React.Component {
   constructor(props) {
     super(props);
     this.renderValidationMessage = this.renderValidationMessage.bind(this);
+    this.getStarted = this.getStarted.bind(this);
+    this.updateEmailAddress = this.updateEmailAddress.bind(this);
   }
 
   static getInitialProps = async (ctx) => {
@@ -25,6 +30,16 @@ class Index extends React.Component {
     return (validationMessage
             ? <span className="has-text-danger">{validationMessage}</span>
             : null);
+  }
+
+  getStarted() {
+    this.props.updateUser({
+      email: this.state.email,
+    });
+  }
+
+  updateEmailAddress(event){
+    this.setState({ email: event.target.value });
   }
 
   render() {
@@ -56,6 +71,7 @@ class Index extends React.Component {
                       name="email"
                       type="email"
                       placeholder="&#xf003; Email Address"
+                      onChange={this.updateEmailAddress}
                     />
                   </p>
                   <p className="control is-expanded step-2">
@@ -67,10 +83,15 @@ class Index extends React.Component {
                     />
                   </p>
                   <p className="control">
-                    <button type="submit" className="button is-info">
-                      <span className="step-1">Get Started</span>
-                      <span className="step-2">Sign In</span>
+                    <button type="button" className="button is-info script-enabled cloak" onClick={this.getStarted}>
+                      Get Started
                     </button>
+                    <noscript>
+                      <button type="submit" className="button is-info">
+                        <span className="step-1">Get Started</span>
+                        <span className="step-2">Sign In</span>
+                      </button>
+                    </noscript>
                   </p>
                 </div>
                 {this.renderValidationMessage()}
@@ -89,4 +110,8 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(IndexPage);
