@@ -1,7 +1,11 @@
-// import App from 'next/app'
+//import App from 'next/app'
+import { Provider } from "react-redux";
+import configureStore from '../store/configureStore';
 
 function AvatarBoxApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (<Provider store={configureStore()} >
+            <Component {...pageProps} />
+          </Provider>);
 }
 
 // Only uncomment this method if you have blocking data requirements for
