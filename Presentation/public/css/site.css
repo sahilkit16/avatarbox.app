@@ -6,6 +6,10 @@ html, body {
   border: 1px solid red;
 }
 
+.cloak {
+  display: none;
+}
+
 .navbar.is-centered .navbar-brand {
   text-align: center;
   display: block;
