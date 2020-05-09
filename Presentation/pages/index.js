@@ -11,9 +11,9 @@ class Index extends React.Component {
 
   static getInitialProps = async (ctx) => {
     const userid = ctx.query.next && ctx.req.session.userid;
-    const action = `/home/${userid ? "sign-in" : "get-started"}`;
+    const formAction = `/home/${userid ? "sign-in" : "get-started"}`;
     const model = new HomeView();
-    model.action = action;
+    model.formAction = formAction;
     model.user = ctx.req.session.user;
     model.validationMessage = ctx.req.session.validationMessage;
     ctx.req.session.validationMessage = null;
@@ -47,7 +47,7 @@ class Index extends React.Component {
               <form
                 className={`${this.props.user ? "is-hidden" : "box"}`}
                 method="post"
-                action={this.props.action}
+                action={this.props.formAction}
               >
                 <div className="field is-grouped">
                   <p id="email-input" className="control is-expanded step-1">
