@@ -29,17 +29,17 @@ router.post("/get-started", async (req, res) => {
 });
 
 router.post("/sign-in", async (req, res) => {
-  const { ciphertext } = req.body;
-  const { userid, email } = req.session;
-  if (userid && email && ciphertext) {
-    const rsaService = container.resolve("rsaService");
-    rsaService.decrypt(ciphertext).then(password => {
-      return new GravatarClient(email, password);
-    })
-    .then(async client => {
-      const { response } = await client.test();
+  const { password } = req.body;
+  const email = req.session.email || req.body.email;
+  const rsaService = container.resolve("rsaService");
+  const user = { email };
+  if (email && password) {
+    const client = new GravatarClient(email, password);
+    client.test()
+    .then(async response => {
       if(!!response){
-        req.session.user = { email, password: ciphertext };
+        user.password = await rsaService.encrypt(password);
+        req.session.user = user;
         req.scope.register({
           gravatarClient: asValue(client),
         });
@@ -50,10 +50,14 @@ router.post("/sign-in", async (req, res) => {
     .then(() => {
       const userService = container.resolve("userService");
       userService
-      .findOrCreate(email, ciphertext)
-      .then((user) => {
-        req.session.isNewUser = user.isNew;
-        res.redirect("/calendar");
+      .findOrCreate(user.email, user.password)
+      .then(usr => {
+        req.session.isNewUser = usr.isNew;
+        if(req.is("application/json")){
+          res.end();
+        } else {
+          res.redirect("/calendar");
+        }
       })
       .catch(req.unauthorized);
     })

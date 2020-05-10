@@ -8,7 +8,6 @@ const cookieSession = require("cookie-session");
 
 const dummyRoute = require("./routes/_dummy");
 const calendarRoute = require("./routes/calendar");
-const encryptRoute = require("./routes/encrypt");
 const homeRoute = require("./routes/home");
 const mongoose = require("mongoose");
 
@@ -58,8 +57,6 @@ nx.prepare().then(() => {
   }
 
   app.use("/calendar", calendarRoute);
-
-  app.use("/encrypt", encryptRoute);
 
   app.use("/home", homeRoute);
 

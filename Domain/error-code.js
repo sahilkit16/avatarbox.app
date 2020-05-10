@@ -3,8 +3,7 @@
 const ErrorCode = {
   MissingEmail: 1000,
   MissingPassword: 1001,
-  InvalidCiphertext: 1002,
-  InvalidCreds: 1003,
+  InvalidCreds: 1002,
   NoImages: 2000,
   SingleImage: 2001,
 };

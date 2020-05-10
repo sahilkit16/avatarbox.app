@@ -5,13 +5,16 @@ import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import HomeView from "../view-models/home";
 import * as actions from "../actions/app.actions";
+import classNames from 'classnames';
 
 class IndexPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { step: 1 };
     this.renderValidationMessage = this.renderValidationMessage.bind(this);
-    this.getStarted = this.getStarted.bind(this);
+    this.goToNextStep = this.goToNextStep.bind(this);
     this.updateEmailAddress = this.updateEmailAddress.bind(this);
+    this.updatePassword = this.updatePassword.bind(this);
   }
 
   static getInitialProps = async (ctx) => {
@@ -32,14 +35,39 @@ class IndexPage extends React.Component {
             : null);
   }
 
-  getStarted() {
-    this.props.updateUser({
-      email: this.state.email,
-    });
+  goToNextStep() {
+    const { step } = this.state;
+    if(step == 1){
+      this.setState({ 
+        email: this.state.email,
+        step: 2 
+      });
+    } else if(step == 2) {
+      const { email, password } = this.state;
+      const user = { email, password };
+      fetch("/home/sign-in", { 
+        method: "POST",
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+       }).then(res => {
+            if(res.ok){
+              window.location = "/calendar";
+            } else {
+              throw new Error(res.statusText);
+            }
+          })
+          .catch(console.log);
+    }
   }
 
   updateEmailAddress(event){
     this.setState({ email: event.target.value });
+  }
+
+  updatePassword(event){
+    this.setState({ password: event.target.value });
   }
 
   render() {
@@ -60,31 +88,44 @@ class IndexPage extends React.Component {
                 </a>
               </div>
               <form
+                id="signin-form"
                 className={`${this.props.user ? "is-hidden" : "box"}`}
                 method="post"
                 action={this.props.formAction}
               >
                 <div className="field is-grouped">
-                  <p id="email-input" className="control is-expanded step-1">
+                  <p className={"control is-expanded"}>
                     <input
-                      className="input email"
+                      className={classNames("input", "email", "step-1", {
+                        "is-hidden": this.state.step == 2
+                      })}
                       name="email"
                       type="email"
                       placeholder="&#xf003; Email Address"
                       onChange={this.updateEmailAddress}
                     />
-                  </p>
-                  <p className="control is-expanded step-2">
                     <input
-                      className="input text"
-                      name="ciphertext"
+                      className={classNames("input", "text", {
+                        "is-hidden": this.state.step == 1
+                      })}
                       type="password"
-                      placeholder="&#xf084; Encrypted Password"
+                      placeholder="&#xf084; Password"
+                      onChange={this.updatePassword}
                     />
+                    <noscript>
+                      <input
+                        className="input text step-2"
+                        name="password"
+                        type="password"
+                        placeholder="&#xf084; Password"
+                      />
+                    </noscript>
                   </p>
                   <p className="control">
-                    <button type="button" className="button is-info script-enabled cloak" onClick={this.getStarted}>
-                      Get Started
+                    <button type="button" 
+                      className="button is-info script-enabled cloak" 
+                      onClick={this.goToNextStep}>
+                      {this.state.step == 1 ? "Get Started" : "Sign In" }
                     </button>
                     <noscript>
                       <button type="submit" className="button is-info">
@@ -97,12 +138,6 @@ class IndexPage extends React.Component {
                 {this.renderValidationMessage()}
               </form>
             </div>
-            <a
-              href="/encrypt"
-              className="step-2 has-text-white has-text-centered is-size-6"
-            >
-              Encrypt My Password
-            </a>
           </div>
         </div>
       </HeroSection>

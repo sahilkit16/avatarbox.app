@@ -21,15 +21,13 @@ block content
               |&nbsp; Calendar
           form(class=(user ? "is-hidden" : "box") method='post' action=('' + action))
             div(class='field is-grouped')
-              p#email-input(class='control is-expanded step-1')
+              p(class='control is-expanded step-1')
                 input(class='input email' name='email' type='email' placeholder=' Email Address')
               p(class='control is-expanded step-2')
-                input(class='input text' name='ciphertext' type='password' placeholder=' Encrypted Password')
+                input(class='input text' name='password' type='password' placeholder=' Password')
               p(class='control')
                 button(type='submit' class='button is-info')
                   span(class='step-1') Get Started
                   span(class='step-2') Sign In
             if validationMessage
               span.has-text-danger #{validationMessage}
-        a(href='/encrypt' class='step-2 has-text-white has-text-centered is-size-6')
-          | Encrypt My Password
