@@ -5,8 +5,12 @@ nav(class=(`navbar ${isCentered} ${isTransparent}`))
     div(class='navbar-brand')
       a(class='navbar-item is-transparent' href='/')
         img(src='/images/avatarbox.png' alt='Logo')
+      span(data-target="navbar-menu" class=(navbar.isCosmetic ? "is-hidden" : "navbar-burger burger script-enabled cloak"))
+          span
+          span
+          span
       noscript
-        a(href="#menu" class=(navbar.isCosmetic ? "is-hidden" : "")).navbar-burger.burger.noscript
+        a(href="#menu" class=(navbar.isCosmetic ? "is-hidden" : "script-enabled")).navbar-burger.burger
           span
           span
           span
@@ -27,7 +31,7 @@ nav(class=(`navbar ${isCentered} ${isTransparent}`))
             | Sign Out
         noscript
           a(href="#" class=(`button is-transparent`))    
-            span(class=(navbar.isCosmetic ? "is-hidden" : "")).navbar-burger.burger.noscript.is-active
+            span(class=(navbar.isCosmetic ? "is-hidden" : "")).navbar-burger.burger.is-active
               span
               span
               span

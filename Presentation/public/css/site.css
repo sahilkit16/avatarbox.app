@@ -63,12 +63,12 @@ div.navbar-menu.is-transparent {
     display: block;
 }
 
-a.navbar-burger.burger.noscript {
+noscript a.navbar-burger.burger {
     position: absolute;
     right: 0px;
 }
 
-span.navbar-burger.burger.noscript {
+noscript span.navbar-burger.burger {
     color: #ffffff;
 }
 
