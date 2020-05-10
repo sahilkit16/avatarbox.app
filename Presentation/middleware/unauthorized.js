@@ -1,6 +1,6 @@
-function _handleUnauthorized(req, res){
+function _handleUnauthorized(req, res) {
   const message = "Invalid email or password";
-  if(req.is("application/json")){
+  if (req.is("application/json")) {
     res.status(401);
     return res.send(message);
   }
@@ -15,5 +15,5 @@ function unauthorized(req, res, next) {
 
 module.exports = {
   unauthorized,
-  _handleUnauthorized
+  _handleUnauthorized,
 };

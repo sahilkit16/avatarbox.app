@@ -35,33 +35,34 @@ router.post("/sign-in", async (req, res) => {
   const user = { email };
   if (email && password) {
     const client = new GravatarClient(email, password);
-    client.test()
-    .then(async response => {
-      if(!!response){
-        user.password = await rsaService.encrypt(password);
-        req.session.user = user;
-        req.scope.register({
-          gravatarClient: asValue(client),
-        });
-      } else {
-        console.log('Gravatar ping failed');
-      }
-    })
-    .then(() => {
-      const userService = container.resolve("userService");
-      userService
-      .findOrCreate(user.email, user.password)
-      .then(usr => {
-        req.session.isNewUser = usr.isNew;
-        if(req.is("application/json")){
-          res.end();
+    client
+      .test()
+      .then(async (response) => {
+        if (!!response) {
+          user.password = await rsaService.encrypt(password);
+          req.session.user = user;
+          req.scope.register({
+            gravatarClient: asValue(client),
+          });
         } else {
-          res.redirect("/calendar");
+          console.log("Gravatar ping failed");
         }
       })
+      .then(() => {
+        const userService = container.resolve("userService");
+        userService
+          .findOrCreate(user.email, user.password)
+          .then((usr) => {
+            req.session.isNewUser = usr.isNew;
+            if (req.is("application/json")) {
+              res.end();
+            } else {
+              res.redirect("/calendar");
+            }
+          })
+          .catch(req.unauthorized);
+      })
       .catch(req.unauthorized);
-    })
-    .catch(req.unauthorized);
   } else {
     req.unauthorized();
   }

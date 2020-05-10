@@ -6,4 +6,4 @@ class PromptView {
   }
 }
 
-module.exports = PromptView
+module.exports = PromptView;

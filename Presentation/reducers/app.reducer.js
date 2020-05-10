@@ -1,5 +1,5 @@
-import ACTION_TYPES from '../actions/action-types';
-import appState from './app.state';
+import ACTION_TYPES from "../actions/action-types";
+import appState from "./app.state";
 
 export default (state = appState, action) => {
   switch (action.type) {
@@ -9,4 +9,4 @@ export default (state = appState, action) => {
     default:
       return state;
   }
-}
+};

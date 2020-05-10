@@ -7,7 +7,7 @@ async function gravatarClientScope(req, res, next) {
   const _unauthorized = (err) => {
     console.log(err);
     _handleUnauthorized(req, res);
-  } 
+  };
   req.scope = createContainer().createScope();
   if (req.method == "POST") {
     const { email } = req.body || {};
@@ -18,12 +18,15 @@ async function gravatarClientScope(req, res, next) {
   } else if (req.method == "GET") {
     const { user } = req.session;
     const rsaService = container.resolve("rsaService");
-    rsaService.decrypt(user.password).then(password => {
-      req.scope.register({
-        gravatarClient: asValue(new GravatarClient(user.email, password)),
-      });
-      next();
-    }).catch(_unauthorized)
+    rsaService
+      .decrypt(user.password)
+      .then((password) => {
+        req.scope.register({
+          gravatarClient: asValue(new GravatarClient(user.email, password)),
+        });
+        next();
+      })
+      .catch(_unauthorized);
   }
 }
 

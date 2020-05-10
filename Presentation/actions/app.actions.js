@@ -1,8 +1,8 @@
-import ACTION_TYPES from './action-types';
+import ACTION_TYPES from "./action-types";
 
-export const updateUser = user => {
+export const updateUser = (user) => {
   return {
     type: ACTION_TYPES.UPDATE_USER,
-    user
+    user,
   };
 };

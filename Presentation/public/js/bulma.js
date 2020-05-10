@@ -7,7 +7,7 @@ window.onload = function () {
     burger.classList.toggle("is-active");
     menu.classList.toggle("is-active");
   });
-  document.querySelectorAll(".script-enabled").forEach(element => {
+  document.querySelectorAll(".script-enabled").forEach((element) => {
     element.classList.remove("cloak");
-  })
+  });
 };

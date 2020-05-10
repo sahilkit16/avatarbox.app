@@ -12,7 +12,7 @@ const homeRoute = require("./routes/home");
 const mongoose = require("mongoose");
 
 // https://mongoosejs.com/docs/deprecations.html#findandmodify
-mongoose.set('useFindAndModify', false);
+mongoose.set("useFindAndModify", false);
 
 mongoose.connect(
   `mongodb://avatarbox:27017/avbx`,

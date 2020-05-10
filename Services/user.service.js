@@ -11,18 +11,23 @@ class UserService {
   }
   findOrCreate(email, ciphertext) {
     return new Promise((resolve, reject) => {
-      UserRepo.findOneAndUpdate({ email }, { ciphertext }, { new: true }, (err, user) => {
-        if (err) return reject(err);
-        if (user) {
-          resolve(user);
-        } else {
-          UserRepo.create({ email, ciphertext }, (_err, _user) => {
-            if (_err) return reject(_err);
-            _user.isNew = true;
-            resolve(_user);
-          });
+      UserRepo.findOneAndUpdate(
+        { email },
+        { ciphertext },
+        { new: true },
+        (err, user) => {
+          if (err) return reject(err);
+          if (user) {
+            resolve(user);
+          } else {
+            UserRepo.create({ email, ciphertext }, (_err, _user) => {
+              if (_err) return reject(_err);
+              _user.isNew = true;
+              resolve(_user);
+            });
+          }
         }
-      });
+      );
     });
   }
   toggleCalendar(email, isEnabled) {

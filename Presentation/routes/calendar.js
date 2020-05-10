@@ -36,11 +36,11 @@ router.get("/", async (req, res) => {
       renderCalendar(newCalendar);
     })
     .catch((err) => {
-      if(err instanceof ImageShortageError){
+      if (err instanceof ImageShortageError) {
         const model = new HomeView();
         model.user = model.navbar.user = user;
         model.prompt = new ImageShortagePrompt(err);
-        res.render('home', model);
+        res.render("home", model);
       } else {
         console.log(err);
         res.end();
@@ -50,7 +50,7 @@ router.get("/", async (req, res) => {
 
 router.post("/submit", async (req, res) => {
   const { user, isNewUser, calendar } = req.session;
-  if(calendar){
+  if (calendar) {
     const userService = container.resolve("userService");
     await userService.toggleCalendar(user.email, calendar.isEnabled);
     delete req.session.calendar;

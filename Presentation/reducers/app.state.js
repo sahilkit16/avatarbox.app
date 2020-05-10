@@ -1,4 +1,4 @@
 export default {
   user: null,
-  calendar: null
-}
+  calendar: null,
+};

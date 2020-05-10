@@ -1,11 +1,11 @@
 import React from "react";
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import HomeView from "../view-models/home";
 import * as actions from "../actions/app.actions";
-import classNames from 'classnames';
+import classNames from "classnames";
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -30,43 +30,44 @@ class IndexPage extends React.Component {
 
   renderValidationMessage() {
     const { validationMessage } = this.props;
-    return (validationMessage
-            ? <span className="has-text-danger">{validationMessage}</span>
-            : null);
+    return validationMessage ? (
+      <span className="has-text-danger">{validationMessage}</span>
+    ) : null;
   }
 
   goToNextStep() {
     const { step } = this.state;
-    if(step == 1){
-      this.setState({ 
+    if (step == 1) {
+      this.setState({
         email: this.state.email,
-        step: 2 
+        step: 2,
       });
-    } else if(step == 2) {
+    } else if (step == 2) {
       const { email, password } = this.state;
       const user = { email, password };
-      fetch("/home/sign-in", { 
+      fetch("/home/sign-in", {
         method: "POST",
         headers: {
-          'content-type': 'application/json'
+          "content-type": "application/json",
         },
-        body: JSON.stringify(user)
-       }).then(res => {
-            if(res.ok){
-              window.location = "/calendar";
-            } else {
-              throw new Error(res.statusText);
-            }
-          })
-          .catch(console.log);
+        body: JSON.stringify(user),
+      })
+        .then((res) => {
+          if (res.ok) {
+            window.location = "/calendar";
+          } else {
+            throw new Error(res.statusText);
+          }
+        })
+        .catch(console.log);
     }
   }
 
-  updateEmailAddress(event){
+  updateEmailAddress(event) {
     this.setState({ email: event.target.value });
   }
 
-  updatePassword(event){
+  updatePassword(event) {
     this.setState({ password: event.target.value });
   }
 
@@ -97,7 +98,7 @@ class IndexPage extends React.Component {
                   <p className={"control is-expanded"}>
                     <input
                       className={classNames("input", "email", "step-1", {
-                        "is-hidden": this.state.step == 2
+                        "is-hidden": this.state.step == 2,
                       })}
                       name="email"
                       type="email"
@@ -106,7 +107,7 @@ class IndexPage extends React.Component {
                     />
                     <input
                       className={classNames("input", "text", {
-                        "is-hidden": this.state.step == 1
+                        "is-hidden": this.state.step == 1,
                       })}
                       type="password"
                       placeholder="&#xf084; Password"
@@ -122,10 +123,12 @@ class IndexPage extends React.Component {
                     </noscript>
                   </p>
                   <p className="control">
-                    <button type="button" 
-                      className="button is-info script-enabled cloak" 
-                      onClick={this.goToNextStep}>
-                      {this.state.step == 1 ? "Get Started" : "Sign In" }
+                    <button
+                      type="button"
+                      className="button is-info script-enabled cloak"
+                      onClick={this.goToNextStep}
+                    >
+                      {this.state.step == 1 ? "Get Started" : "Sign In"}
                     </button>
                     <noscript>
                       <button type="submit" className="button is-info">
@@ -147,6 +150,6 @@ class IndexPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actions, dispatch);
-}
+};
 
 export default connect(null, mapDispatchToProps)(IndexPage);
