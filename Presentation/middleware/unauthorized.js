@@ -1,15 +1,18 @@
-function _handleUnauthorized(req, res) {
-  const message = "Invalid email or password";
+function _handleUnauthorized(req, res, message = "Invalid email or password", path = "/") {
   if (req.is("application/json")) {
     res.status(401);
     return res.send(message);
   }
   req.session.validationMessage = message;
-  return res.redirect("/");
+  return res.redirect(path);
+}
+
+const scopeUnauthorizedHandler = (req, res) => (message, path) => {
+  return _handleUnauthorized(req, res, message, path);
 }
 
 function unauthorized(req, res, next) {
-  req.unauthorized = _handleUnauthorized.bind(null, req, res);
+  req.unauthorized = scopeUnauthorizedHandler(req, res);
   next();
 }
 

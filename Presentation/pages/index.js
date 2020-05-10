@@ -76,8 +76,10 @@ class IndexPage extends React.Component {
   }
 
   clearInputFields() {
-    this.emailRef.current.value = "";
-    this.passwordRef.current.value = "";
+    if(this.emailRef.current && this.passwordRef.current){
+      this.emailRef.current.value = "";
+      this.passwordRef.current.value = "";
+    }
   }
 
   goToNextStep() {

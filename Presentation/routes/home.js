@@ -5,6 +5,7 @@ const router = Router();
 const gravatarClientScope = require("../middleware/gravatar-client-scope");
 const { unauthorized } = require("../middleware/unauthorized");
 const { GravatarClient } = require("grav.client");
+const EmailValidator = require('email-validator');
 
 router.use(unauthorized);
 router.use(gravatarClientScope);
@@ -13,6 +14,11 @@ router.post("/get-started", async (req, res) => {
   req.session = {};
   const client = req.scope.resolve("gravatarClient");
   const { email } = req.body;
+  if(!email){
+    return req.unauthorized("Missing Email");
+  } else if(!EmailValidator.validate(email)){
+    return req.unauthorized("Invalid Email");
+  }
   let redirectUrl = "/";
   if (client) {
     const userid = client.emailHash;
@@ -30,6 +36,9 @@ router.post("/get-started", async (req, res) => {
 
 router.post("/sign-in", async (req, res) => {
   let { password } = req.body;
+  if(!password){
+    return req.unauthorized("Missing Password", "/?next=1#here");
+  }
   const email = req.session.email || req.body.email;
   const rsaService = container.resolve("rsaService");
   const isAjax = req.is("application/json");
@@ -66,9 +75,9 @@ router.post("/sign-in", async (req, res) => {
               res.redirect("/calendar");
             }
           })
-          .catch(req.unauthorized);
+          .catch(err => req.unauthorized());
       })
-      .catch(req.unauthorized);
+      .catch(err => req.unauthorized());
   } else {
     req.unauthorized();
   }
