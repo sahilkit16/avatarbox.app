@@ -7,6 +7,7 @@ import HomeView from "../view-models/home";
 import * as actions from "../actions/app.actions";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
+import * as EmailValidator from 'email-validator';
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -16,7 +17,12 @@ class IndexPage extends React.Component {
     this.updateEmailAddress = this.updateEmailAddress.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
+    this.showValidationMessage = this.showValidationMessage.bind(this);
+    this.clearValidationMessage = this.clearValidationMessage.bind(this);
+    this.clearInputFields = this.clearInputFields.bind(this);
     this.encrypt = typeof rsaEncrypt != "undefined" && rsaEncrypt;
+    this.emailRef = React.createRef();
+    this.passwordRef = React.createRef();
   }
 
   static getInitialProps = async (ctx) => {
@@ -29,15 +35,68 @@ class IndexPage extends React.Component {
     return model;
   };
 
+  componentDidMount() {
+    this.emailRef.current.focus();
+    if (this.props.validationMessage) {
+      this.setState({ email: null, password: null });
+      this.clearInputFields();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.state.step == 1) {
+      this.emailRef.current.focus();
+    } else if (this.state.step == 2) {
+      this.passwordRef.current.focus();
+    }
+  }
+
+  showValidationMessage(validationMessage, step = 1) {
+    this.setState({ validationMessage, step });
+    this.clearInputFields();
+    if (step == 1) {
+      this.emailRef.current.focus();
+      
+    } else if (step == 2) {
+      this.passwordRef.current.focus();
+      this.setState({ password: null });
+    }
+  }
+
+  clearValidationMessage() {
+    if (this.state.validationMessage) {
+      this.setState({ 
+        validationMessage: null,
+        password: null
+      });
+      if (this.state.step == 1) {
+        this.setState({ email: null });
+      }
+    }
+  }
+
+  clearInputFields() {
+    this.emailRef.current.value = "";
+    this.passwordRef.current.value = "";
+  }
+
   goToNextStep() {
     const { step } = this.state;
     this.setState({ validationMessage: null });
     if (step == 1) {
+      if (!this.state.email) {
+        return this.showValidationMessage("Missing Email");
+      } else if(!EmailValidator.validate(this.state.email)){
+        return this.showValidationMessage("Invalid Email");
+      }
       this.setState({
         email: this.state.email,
         step: 2,
       });
     } else if (step == 2) {
+      if (!this.state.password) {
+        return this.showValidationMessage("Missing Password", 2);
+      }
       const { email, password } = this.state;
       signIn({ email, password: this.encrypt(password) })
         .then(() => {
@@ -50,25 +109,32 @@ class IndexPage extends React.Component {
   }
 
   onKeyPress(event) {
+    this.clearValidationMessage();
     if (event.key == "Enter" || event.charCode == 13 || event.which == 13) {
       this.goToNextStep();
     }
   }
 
   updateEmailAddress(event) {
+    this.clearValidationMessage();
     this.setState({ email: event.target.value });
   }
 
   updatePassword(event) {
+    this.clearValidationMessage();
     this.setState({ password: event.target.value });
   }
 
   render() {
     const validationMessage =
       this.state.validationMessage || this.props.validationMessage;
-    const validationSummary = validationMessage ? (
-      <span className="has-text-danger">{validationMessage}</span>
-    ) : null;
+    let validationSummary = null;
+    if (validationMessage) {
+      this.clearInputFields();
+      validationSummary = (
+        <span className="has-text-danger">{validationMessage}</span>
+      );
+    }
     return (
       <HeroSection>
         <HeroHead title="Home | Avatar Box" user={this.props.user} />
@@ -102,6 +168,7 @@ class IndexPage extends React.Component {
                       placeholder="&#xf003; Email Address"
                       onChange={this.updateEmailAddress}
                       onKeyPress={this.onKeyPress}
+                      ref={this.emailRef}
                     />
                     <input
                       className={classNames("input", "text", {
@@ -111,6 +178,7 @@ class IndexPage extends React.Component {
                       placeholder="&#xf084; Password"
                       onChange={this.updatePassword}
                       onKeyPress={this.onKeyPress}
+                      ref={this.passwordRef}
                     />
                     <noscript>
                       <input
