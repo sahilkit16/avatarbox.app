@@ -7,7 +7,7 @@ import HomeView from "../view-models/home";
 import * as actions from "../actions/app.actions";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
-import * as EmailValidator from 'email-validator';
+import * as EmailValidator from "email-validator";
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -56,7 +56,6 @@ class IndexPage extends React.Component {
     this.clearInputFields();
     if (step == 1) {
       this.emailRef.current.focus();
-      
     } else if (step == 2) {
       this.passwordRef.current.focus();
       this.setState({ password: null });
@@ -65,9 +64,9 @@ class IndexPage extends React.Component {
 
   clearValidationMessage() {
     if (this.state.validationMessage) {
-      this.setState({ 
+      this.setState({
         validationMessage: null,
-        password: null
+        password: null,
       });
       if (this.state.step == 1) {
         this.setState({ email: null });
@@ -76,7 +75,7 @@ class IndexPage extends React.Component {
   }
 
   clearInputFields() {
-    if(this.emailRef.current && this.passwordRef.current){
+    if (this.emailRef.current && this.passwordRef.current) {
       this.emailRef.current.value = "";
       this.passwordRef.current.value = "";
     }
@@ -88,7 +87,7 @@ class IndexPage extends React.Component {
     if (step == 1) {
       if (!this.state.email) {
         return this.showValidationMessage("Missing Email");
-      } else if(!EmailValidator.validate(this.state.email)){
+      } else if (!EmailValidator.validate(this.state.email)) {
         return this.showValidationMessage("Invalid Email");
       }
       this.setState({
