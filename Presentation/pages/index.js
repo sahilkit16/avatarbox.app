@@ -6,12 +6,12 @@ import HeroSection from "../components/hero-section";
 import HomeView from "../view-models/home";
 import * as actions from "../actions/app.actions";
 import classNames from "classnames";
+import { signIn } from "../../Infrastructure/fetch.client";
 
 class IndexPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { step: 1 };
-    this.renderValidationMessage = this.renderValidationMessage.bind(this);
     this.goToNextStep = this.goToNextStep.bind(this);
     this.updateEmailAddress = this.updateEmailAddress.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -28,15 +28,9 @@ class IndexPage extends React.Component {
     return model;
   };
 
-  renderValidationMessage() {
-    const { validationMessage } = this.props;
-    return validationMessage ? (
-      <span className="has-text-danger">{validationMessage}</span>
-    ) : null;
-  }
-
   goToNextStep() {
     const { step } = this.state;
+    this.setState({ validationMessage: null });
     if (step == 1) {
       this.setState({
         email: this.state.email,
@@ -44,22 +38,11 @@ class IndexPage extends React.Component {
       });
     } else if (step == 2) {
       const { email, password } = this.state;
-      const user = { email, password };
-      fetch("/home/sign-in", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-        .then((res) => {
-          if (res.ok) {
-            window.location = "/calendar";
-          } else {
-            throw new Error(res.statusText);
-          }
-        })
-        .catch(console.log);
+      signIn({ email, password }).then(() => { 
+        window.location = "/calendar"; 
+      }).catch(validationMessage => {
+        this.setState({ step: 1, validationMessage });
+      });
     }
   }
 
@@ -72,6 +55,10 @@ class IndexPage extends React.Component {
   }
 
   render() {
+    const validationMessage = this.state.validationMessage || this.props.validationMessage;
+    const validationSummary = validationMessage ? (
+      <span className="has-text-danger">{validationMessage}</span>
+    ) : null;
     return (
       <HeroSection>
         <HeroHead title="Home | Avatar Box" user={this.props.user} />
@@ -138,7 +125,7 @@ class IndexPage extends React.Component {
                     </noscript>
                   </p>
                 </div>
-                {this.renderValidationMessage()}
+                {validationSummary}
               </form>
             </div>
           </div>
