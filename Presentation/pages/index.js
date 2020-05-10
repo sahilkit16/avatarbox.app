@@ -19,9 +19,8 @@ class IndexPage extends React.Component {
 
   static getInitialProps = async (ctx) => {
     const userid = ctx.query.next && ctx.req.session.userid;
-    const formAction = `/home/${userid ? "sign-in" : "get-started"}`;
     const model = new HomeView();
-    model.formAction = formAction;
+    model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
     model.user = ctx.req.session.user;
     model.validationMessage = ctx.req.session.validationMessage;
     ctx.req.session.validationMessage = null;

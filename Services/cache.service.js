@@ -9,10 +9,10 @@ class CacheService {
     return JSON.parse(_value);
   }
   async set(key, value) {
-    await this._cache.set(key, JSON.stringify(value));
+    return await this._cache.set(key, JSON.stringify(value));
   }
   async delete(key) {
-    await this._cache.delete(key);
+    return await this._cache.delete(key);
   }
 }
 
