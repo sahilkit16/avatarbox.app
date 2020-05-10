@@ -29,9 +29,13 @@ router.post("/get-started", async (req, res) => {
 });
 
 router.post("/sign-in", async (req, res) => {
-  const { password } = req.body;
+  let { password } = req.body;
   const email = req.session.email || req.body.email;
   const rsaService = container.resolve("rsaService");
+  const isAjax = req.is("application/json");
+  if (isAjax) {
+    password = await rsaService.decrypt(password);
+  }
   const user = { email };
   if (email && password) {
     const client = new GravatarClient(email, password);
@@ -39,7 +43,9 @@ router.post("/sign-in", async (req, res) => {
       .test()
       .then(async (response) => {
         if (!!response) {
-          user.password = await rsaService.encrypt(password);
+          user.password = isAjax
+            ? req.body.password
+            : await rsaService.encrypt(password);
           req.session.user = user;
           req.scope.register({
             gravatarClient: asValue(client),
@@ -54,7 +60,7 @@ router.post("/sign-in", async (req, res) => {
           .findOrCreate(user.email, user.password)
           .then((usr) => {
             req.session.isNewUser = usr.isNew;
-            if (req.is("application/json")) {
+            if (isAjax) {
               res.end();
             } else {
               res.redirect("/calendar");

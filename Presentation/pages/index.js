@@ -15,6 +15,8 @@ class IndexPage extends React.Component {
     this.goToNextStep = this.goToNextStep.bind(this);
     this.updateEmailAddress = this.updateEmailAddress.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
+    this.onKeyPress = this.onKeyPress.bind(this);
+    this.encrypt = typeof rsaEncrypt != "undefined" && rsaEncrypt;
   }
 
   static getInitialProps = async (ctx) => {
@@ -37,11 +39,19 @@ class IndexPage extends React.Component {
       });
     } else if (step == 2) {
       const { email, password } = this.state;
-      signIn({ email, password }).then(() => { 
-        window.location = "/calendar"; 
-      }).catch(validationMessage => {
-        this.setState({ step: 1, validationMessage });
-      });
+      signIn({ email, password: this.encrypt(password) })
+        .then(() => {
+          window.location = "/calendar";
+        })
+        .catch((validationMessage) => {
+          this.setState({ step: 1, validationMessage });
+        });
+    }
+  }
+
+  onKeyPress(event) {
+    if (event.key == "Enter" || event.charCode == 13 || event.which == 13) {
+      this.goToNextStep();
     }
   }
 
@@ -54,7 +64,8 @@ class IndexPage extends React.Component {
   }
 
   render() {
-    const validationMessage = this.state.validationMessage || this.props.validationMessage;
+    const validationMessage =
+      this.state.validationMessage || this.props.validationMessage;
     const validationSummary = validationMessage ? (
       <span className="has-text-danger">{validationMessage}</span>
     ) : null;
@@ -90,6 +101,7 @@ class IndexPage extends React.Component {
                       type="email"
                       placeholder="&#xf003; Email Address"
                       onChange={this.updateEmailAddress}
+                      onKeyPress={this.onKeyPress}
                     />
                     <input
                       className={classNames("input", "text", {
@@ -98,6 +110,7 @@ class IndexPage extends React.Component {
                       type="password"
                       placeholder="&#xf084; Password"
                       onChange={this.updatePassword}
+                      onKeyPress={this.onKeyPress}
                     />
                     <noscript>
                       <input

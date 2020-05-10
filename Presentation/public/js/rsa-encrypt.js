@@ -1,4 +1,4 @@
-function encryptUserPassword() {
+function rsaEncrypt(value) {
   const encrypt = new JSEncrypt();
   encrypt.setPublicKey(`-----BEGIN PUBLIC KEY-----
   MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAst9ojzFYsTH9pxqJJbz1
@@ -9,6 +9,5 @@ function encryptUserPassword() {
   aE5RBtqf3hzgtazeSXW6G+v9WWC1bZVb7ukUXQUPB6f9VuqzJMmXDvwFfylduRcx
   oQIDAQAB
   -----END PUBLIC KEY-----`);
-  const result = encrypt.encrypt(document.querySelector("#password").value);
-  console.log(result);
+  return encrypt.encrypt(value);
 }

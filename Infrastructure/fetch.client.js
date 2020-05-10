@@ -1,4 +1,4 @@
-export const signIn = user => {
+export const signIn = (user) => {
   return new Promise((resolve, reject) => {
     fetch("/home/sign-in", {
       method: "POST",
@@ -6,14 +6,13 @@ export const signIn = user => {
         "content-type": "application/json",
       },
       body: JSON.stringify(user),
-    })
-    .then(async (res) => {
+    }).then(async (res) => {
       if (res.ok) {
-        resolve(true)
+        resolve(true);
       } else {
         const message = await res.text();
         reject(message || res.statusText);
       }
-    })
+    });
   });
-}
+};
