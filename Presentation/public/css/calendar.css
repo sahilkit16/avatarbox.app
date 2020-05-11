@@ -44,6 +44,30 @@
   font-weight: bold;
 }
 
+.card-content {
+  position: relative;
+}
+
+.slide-btn {
+  color: #d8d8d8;
+  cursor: pointer;
+  padding: 20px;
+  position: absolute;
+}
+
+.slide-btn:hover {
+  transition: 500ms color;
+  color: #a1a1a1;
+}
+
+.slide-btn.prev {
+  left: 50px;
+}
+
+.slide-btn.next {
+  right: 50px;
+}
+
 .btn-submit,
 #back,
 #disclaimer,
@@ -90,4 +114,10 @@
   justify-content: center;
   align-items: center;
   margin-bottom:10px;
+}
+
+@media screen and (max-width:768px){
+  .slide-btn{
+    display: none;
+  }
 }

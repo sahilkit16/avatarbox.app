@@ -17,11 +17,15 @@ block content
                   span#calendar-heading Calendar
                   span#confirm Are You Sure?
               .card-content.card-block.is-paddingless
+                .slide-btn.prev.script-enabled.cloak
+                  .fa.fa-chevron-left.is-size-4
                 .slides.is-block-centered
-                  each image in images
-                    figure 
+                  each image,index in images
+                    figure(id=('avatar-'+ index)) 
                       img.is-block-centered(src=image.url)
                       p.has-text-grey.is-size-7 #{image.day}
+                .slide-btn.next.script-enabled.cloak
+                  .fa.fa-chevron-right.is-size-4
                 #disclaimer.is-block-centered
                   h2(class=(isEnabled ? "is-hidden" : "")).has-text-centered 
                     | Your Gravatar icon will be updated once a day, every day.
@@ -46,3 +50,5 @@ block content
                 button(type="submit" class=(!isEnabled ? "is-hidden" : "")).card-footer-item.btn-submit
                   | Okay &nbsp; 
                   i.fa.fa-check(aria-hidden='true')
+block scripts
+  script(type="text/javascript" src="../js/calendar.js")
