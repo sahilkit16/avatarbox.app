@@ -53,6 +53,7 @@ class AvatarBoxSite extends Document {
         <body id="menu">
           <Main />
           <NextScript />
+          <script async type="text/javascript" src="../js/site.js"></script>
           <script async type="text/javascript" src="../js/bulma.js"></script>
           <script
             async
