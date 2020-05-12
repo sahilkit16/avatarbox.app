@@ -20,7 +20,6 @@ class IndexPage extends React.Component {
     this.showValidationMessage = this.showValidationMessage.bind(this);
     this.clearValidationMessage = this.clearValidationMessage.bind(this);
     this.clearInputFields = this.clearInputFields.bind(this);
-    this.encrypt = typeof rsaEncrypt != "undefined" && rsaEncrypt;
     this.emailRef = React.createRef();
     this.passwordRef = React.createRef();
   }
@@ -98,10 +97,11 @@ class IndexPage extends React.Component {
       if (!this.state.password) {
         return this.showValidationMessage("Missing Password", 2);
       }
+      const encrypt = typeof rsaEncrypt != "undefined" && rsaEncrypt;
       const { email, password } = this.state;
-      signIn({ email, password: this.encrypt(password) })
+      signIn({ email, password: encrypt(password) })
         .then(() => {
-          window.location = "/calendar";
+          setTimeout(() => window.location = "/calendar", 500);
         })
         .catch((validationMessage) => {
           this.setState({ step: 1, validationMessage });

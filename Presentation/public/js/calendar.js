@@ -3,24 +3,30 @@ window.addEventListener('load', function () {
     constructor(){
       this.slides = document.querySelector('.slides');
       this.length = document.querySelector('.slides').children.length;
-      this.index = 0;
       this.prev = this.prev.bind(this);
       this.next = this.next.bind(this);
     }
-    _slide(index){
-      const current = document.getElementById(`avatar-${index}`);
-      this.slides.scrollLeft = current.offsetLeft;
+    jump(index){
+      const id = `avatar-${index}`;
+      const current = document.getElementById(id);
+      this.slides.scrollLeft = current.offsetLeft - 200;
+      this.index = index;
     }
     prev(){
       if(this.index == 0) return;
-        this._slide(this.index -= 1);
+      const slideNumber = this.index -= 1;
+      this.jump(slideNumber);
     }
     next(){
       if(this.index == (this.length - 1)) return;
-        this._slide(this.index += 1);
+      const slideNumber = this.index += 1;
+      this.jump(slideNumber);
+    }
+    load(){
+      document.querySelector('.slide-btn.prev').addEventListener('click', this.prev);
+      document.querySelector('.slide-btn.next').addEventListener('click', this.next);
+      this.jump(0);
     }
   }
-  const slides = new Slides();
-  document.querySelector('.slide-btn.prev').addEventListener('click', slides.prev);
-  document.querySelector('.slide-btn.next').addEventListener('click', slides.next);
+  (new Slides()).load();
 })
