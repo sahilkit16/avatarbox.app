@@ -87,3 +87,6 @@ next.config.js
 
 # DynamoDB Local files
 .dynamodb/
+
+.rsa.public
+.rsa.private
