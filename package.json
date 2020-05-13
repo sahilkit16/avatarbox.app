@@ -27,6 +27,7 @@
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "grav.client": "^2.4.14",
+    "moment": "^2.25.3",
     "next": "^9.3.5",
     "prettier": "^2.0.5",
     "pug": "^2.0.4",
