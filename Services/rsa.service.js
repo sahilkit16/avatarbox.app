@@ -7,7 +7,9 @@ class RsaService {
   async encrypt(value) {
     return new Promise((resolve, reject) => {
       exec(
-        `echo ${value} | openssl rsautl -encrypt -inkey rsa.public -pubin | base64 -w 0`,
+        `echo ${value} | openssl rsautl -encrypt -inkey ${
+          process.env.PUBLIC_KEY_PATH
+        } -pubin | base64 -w 0`,
         (err, stdout) => {
           if (err) return reject(err);
           resolve(stdout.trim());
