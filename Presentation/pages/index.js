@@ -12,7 +12,7 @@ import * as EmailValidator from "email-validator";
 class IndexPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { step: 1 };
+    this.state = { step: 1, isLoading: false, cloak: true };
     this.goToNextStep = this.goToNextStep.bind(this);
     this.updateEmailAddress = this.updateEmailAddress.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -40,6 +40,7 @@ class IndexPage extends React.Component {
       this.setState({ email: null, password: null });
       this.clearInputFields();
     }
+    this.setState({ cloak: false })
   }
 
   componentDidUpdate() {
@@ -81,6 +82,7 @@ class IndexPage extends React.Component {
   }
 
   goToNextStep() {
+    if(this.state.isLoading) return;
     const { step } = this.state;
     this.setState({ validationMessage: null });
     if (step == 1) {
@@ -97,6 +99,7 @@ class IndexPage extends React.Component {
       if (!this.state.password) {
         return this.showValidationMessage("Missing Password", 2);
       }
+      this.setState({ isLoading: true});
       const encrypt = typeof rsaEncrypt != "undefined" && rsaEncrypt;
       const { email, password } = this.state;
       signIn({ email, password: encrypt(password) })
@@ -104,7 +107,11 @@ class IndexPage extends React.Component {
           setTimeout(() => window.location = "/calendar", 500);
         })
         .catch((validationMessage) => {
-          this.setState({ step: 1, validationMessage });
+          this.setState({ 
+            step: 1, 
+            isLoading: false,
+            validationMessage
+          });
         });
     }
   }
@@ -193,7 +200,10 @@ class IndexPage extends React.Component {
                   <p className="control">
                     <button
                       type="button"
-                      className="button is-info script-enabled cloak"
+                      className={classNames("button is-info script-enabled", {
+                        "is-loading": this.state.isLoading,
+                        "cloak": this.state.cloak
+                      })}
                       onClick={this.goToNextStep}
                     >
                       {this.state.step == 1 ? "Get Started" : "Sign In"}
