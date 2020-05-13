@@ -5,6 +5,11 @@ window.addEventListener('load', function () {
       this.length = document.querySelector('.slides').children.length;
       this.prev = this.prev.bind(this);
       this.next = this.next.bind(this);
+      this.onScroll = this.onScroll.bind(this);
+      document.querySelector('.slides').addEventListener('scroll', this.onScroll);
+    }
+    onScroll(){
+      this.index = Number((this.slides.scrollLeft / 350).toFixed(0));
     }
     jump(index){
       const id = `avatar-${index}`;
