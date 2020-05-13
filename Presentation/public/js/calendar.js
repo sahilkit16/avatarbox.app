@@ -31,7 +31,6 @@ window.addEventListener('load', function () {
   (new Slides()).load();
   function wait(e) {
     e.target.className += " is-loading";
-    console.log(e.target.className);
   }
   document.getElementById('enable').addEventListener('click', wait);
   document.getElementById('disable').addEventListener('click', wait);
