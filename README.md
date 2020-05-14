@@ -6,16 +6,34 @@ web server for [avatarbox.io](https://avatarbox.io)
 
 ## Getting Started
 
+## Prerequisites
+
+
 ## Installation
 
-## Environment Variables
+## Launching the app
+
+```bash
+$ npm run start
+```
 
 ## Tests
 
-## Launching the Server
+```bash
+# unit tests
+$ npm run test
+
+# end-to-end tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+
+# acceptance tests
+$ npm run test:spec
+```
 
 ## Usage
-
 
 Open http://avatarbox:8801 to view it in the browser.
 
