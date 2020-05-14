@@ -6,7 +6,11 @@
   "scripts": {
     "format": "prettier --write \"Application/**/*.js\" \"Common/**/*.js\" \"Domain/**/*.js\" \"Infrastructure/**/*.js\" \"Presentation/**/*.js\" \"Services/**/*.js\" \"Specification/**/*.js\" \"Tests/**/*.js\"",
     "start": "node ./Presentation/server.js",
-    "build": "next build ./Presentation"
+    "build": "next build ./Presentation",
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --config ./Tests/jest-e2e.json",
+    "test:spec": "cucumber-js Specification/**/*.feature"
   },
   "repository": {
     "type": "git",
@@ -23,8 +27,10 @@
     "body-parser": "^1.19.0",
     "classnames": "^2.2.6",
     "cookie-session": "^1.4.0",
+    "cucumber": "^6.0.5",
     "dotenv": "^8.2.0",
     "email-validator": "^2.0.4",
+    "expect": "^26.0.1",
     "express": "^4.17.1",
     "grav.client": "^2.4.14",
     "moment": "^2.25.3",
@@ -38,5 +44,13 @@
     "redis": "^3.0.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^26.0.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "regenerator-runtime": "^0.13.5"
   }
 }
