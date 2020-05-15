@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { asValue } = require("awilix");
-const { container } = require("../../Common/di-container");
+const container = require("../../Common/di-container");
 const router = Router();
 const gravatarClientScope = require("../middleware/gravatar-client-scope");
 const { unauthorized } = require("../middleware/unauthorized");

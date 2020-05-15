@@ -7,15 +7,13 @@ const BuildCalendarUseCase = require("../Application/build-calendar.use-case");
 const RsaService = require("../Services/rsa.service");
 const UserService = require("../Services/user.service");
 
-exports.configureServices = function () {
-  container.register({
-    crashReporter: awilix.asClass(CrashReporter),
-    logger: awilix.asClass(Logger),
-    // cacheService: awilix.asClass(CacheService),
-    buildCalendar: awilix.asClass(BuildCalendarUseCase),
-    rsaService: awilix.asClass(RsaService),
-    userService: awilix.asClass(UserService),
-  });
-};
+container.register({
+  crashReporter: awilix.asClass(CrashReporter),
+  logger: awilix.asClass(Logger),
+  // cacheService: awilix.asClass(CacheService),
+  buildCalendar: awilix.asClass(BuildCalendarUseCase),
+  rsaService: awilix.asClass(RsaService),
+  userService: awilix.asClass(UserService),
+});
 
-exports.container = container;
+module.exports = container;

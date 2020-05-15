@@ -3,7 +3,6 @@ const { GravatarClient, GetPrimaryImageUseCase } = require("grav.client");
 const ImageShortageError = require("../Domain/image-shortage.error");
 const ErrorCode = require("../Domain/error-code");
 const moment = require("moment");
-const UserService = require("../Services/user.service");
 
 function rotateLeft(collection, _targetIndex) {
   const targetIndex = _targetIndex % collection.length;
@@ -23,9 +22,9 @@ function rotateLeft(collection, _targetIndex) {
 }
 
 class BuildCalendarUseCase {
-  constructor() {
+  constructor({ userService }) {
     this.client = new GravatarClient();
-    this.userService = new UserService();
+    this.userService = userService;
     this.isEnabled = false;
     this.getPrimaryImage = new GetPrimaryImageUseCase();
   }

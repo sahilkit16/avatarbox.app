@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { container } = require("../../Common/di-container");
+const container = require("../../Common/di-container");
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
 const HomeView = require("../view-models/home");

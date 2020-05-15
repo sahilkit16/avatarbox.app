@@ -4,8 +4,8 @@ const { createLogger, transports } = require('winston');
 // https://tools.ietf.org/html/rfc5424
 
 class Logger {
-  constructor(logger = null){
-    this.logger = logger || createLogger({
+  constructor(){
+    this.self = createLogger({
       levels: {
         emerg: 0, 
         alert: 1, 
@@ -22,25 +22,25 @@ class Logger {
   }
 
   alert(message) {
-    this.logger.alert(message);
+    this.self.alert(message);
   }
   crit(message) {
-    this.logger.crit(message);
+    this.self.crit(message);
   }
   error(message) {
-    this.logger.error(message);
+    this.self.error(message);
   }
   warn(message) {
-    this.logger.warn(message);
+    this.self.warn(message);
   }
   notice(message) {
-    this.logger.notice(message);
+    this.self.notice(message);
   }
   info(message) {
-    this.logger.info(message);
+    this.self.info(message);
   }
   debug(message) {
-    this.logger.debug(message);
+    this.self.debug(message);
   }
 }
 

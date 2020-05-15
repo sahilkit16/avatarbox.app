@@ -1,6 +1,6 @@
 const { createContainer, asValue } = require("awilix");
 const { GravatarClient } = require("grav.client");
-const { container } = require("../../Common/di-container");
+const container = require("../../Common/di-container");
 const { _handleUnauthorized } = require("./unauthorized");
 
 async function gravatarClientScope(req, res, next) {
