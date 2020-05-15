@@ -10,6 +10,7 @@ const dummyRoute = require("./routes/_dummy");
 const calendarRoute = require("./routes/calendar");
 const homeRoute = require("./routes/home");
 const mongoose = require("mongoose");
+const morgan = require('morgan');
 
 // https://mongoosejs.com/docs/deprecations.html#findandmodify
 mongoose.set("useFindAndModify", false);
@@ -39,6 +40,8 @@ app.use(
     httpOnly: !dev,
   })
 );
+
+app.use(morgan('tiny'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
