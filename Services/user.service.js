@@ -35,10 +35,10 @@ class UserService {
       UserRepo.updateOne(
         { email, calendars: { $elemMatch: { name: "Daily" } } },
         { $set: { "calendars.$.isEnabled": !isEnabled } },
-        (err, user) => {
+        (err, status) => {
           if (err) return reject(err);
-          if (user) {
-            resolve(user);
+          if (status.ok == status.nModified == 1) {
+            resolve(status);
           } else {
             reject(`calendar not found for ${email}`);
           }
