@@ -1,10 +1,26 @@
 const days = require("../Domain/days");
-const { rotateLeft } = require("../Common/utilities");
 const { GravatarClient, GetPrimaryImageUseCase } = require("grav.client");
 const ImageShortageError = require("../Domain/image-shortage.error");
 const ErrorCode = require("../Domain/error-code");
 const moment = require("moment");
 const UserService = require("../Services/user.service");
+
+function rotateLeft(collection, _targetIndex) {
+  const targetIndex = _targetIndex % collection.length;
+  if (targetIndex == 0) {
+    return collection;
+  }
+  const begin = [];
+  const end = [];
+  collection.map((item, index) => {
+    if (index >= targetIndex) {
+      begin.push(item);
+    } else {
+      end.push(item);
+    }
+  });
+  return [...begin, ...end];
+}
 
 class BuildCalendarUseCase {
   constructor() {
