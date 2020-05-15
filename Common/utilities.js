@@ -1,3 +1,7 @@
+require('dotenv').config();
+const Sentry = require('@sentry/node');
+Sentry.init({ dsn: process.env.SENTRY_SOURCE });
+
 function rotateLeft(collection, _targetIndex) {
   const targetIndex = _targetIndex % collection.length;
   if (targetIndex == 0) {
@@ -17,4 +21,5 @@ function rotateLeft(collection, _targetIndex) {
 
 module.exports = {
   rotateLeft,
+  Sentry
 };
