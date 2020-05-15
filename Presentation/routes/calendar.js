@@ -5,7 +5,6 @@ const CalendarView = require("../view-models/calendar");
 const HomeView = require("../view-models/home");
 const ImageShortagePrompt = require("../view-models/image-shortage");
 const ImageShortageError = require("../../Domain/image-shortage.error");
-const { Sentry } = require('../../Common/utilities');
 
 const isAuthenticated = require("../middleware/is-authenticated");
 const gravatarClientScope = require("../middleware/gravatar-client-scope");
@@ -14,6 +13,8 @@ const router = Router();
 
 router.use(isAuthenticated);
 router.use(gravatarClientScope);
+
+const crashReporter = container.resolve("crashReporter");
 
 router.get("/", async (req, res) => {
   const { user, calendar } = req.session;
@@ -54,19 +55,18 @@ router.post("/submit", async (req, res) => {
   if (calendar) {
     const userService = container.resolve("userService");
     userService.toggleCalendar(user.email, calendar.isEnabled)
-      .then(() => {
+      .then(didToggleCalendar => {
         delete req.session.calendar;
-        if (isNewUser) {
+        if (didToggleCalendar && isNewUser) {
           delete req.session.isNewUser;
           return res.render("thanks", new ThanksView());
         }
         res.redirect("/calendar");
       })
-      .catch(reason => {
-        // TODO: use custom exception type
-        Sentry.captureException(new Error(reason));
+      .catch(err => {
+        crashReporter.submit(err);
 
-        //TODO: handle 400 gracefully
+        //TODO: handle 400 gracefully; use custom error page
         res.status(400).end();
       });
   }
