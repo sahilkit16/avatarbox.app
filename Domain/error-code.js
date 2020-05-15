@@ -6,6 +6,7 @@ const ErrorCode = {
   InvalidCreds: 1002,
   NoImages: 2000,
   SingleImage: 2001,
+  MissingCalendar: 2003,
 };
 
 module.exports = ErrorCode;
