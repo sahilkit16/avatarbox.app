@@ -8,6 +8,7 @@ import * as actions from "../actions/app.actions";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
 import * as EmailValidator from "email-validator";
+import NavBarView from "../view-models/_navbar";
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -26,9 +27,12 @@ class IndexPage extends React.Component {
 
   static getInitialProps = async (ctx) => {
     const userid = ctx.query.next && ctx.req.session.userid;
+    const user = ctx.req.session.user;
     const model = new HomeView();
+    model.navbar = new NavBarView();
     model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
-    model.user = ctx.req.session.user;
+    model.user = user;
+    model.navbar.user = user;
     model.validationMessage = ctx.req.session.validationMessage;
     ctx.req.session.validationMessage = null;
     return model;
@@ -145,7 +149,7 @@ class IndexPage extends React.Component {
     }
     return (
       <HeroSection>
-        <HeroHead title="Home | Avatar Box" user={this.props.user} />
+        <HeroHead title="Home | Avatar Box" navbar={this.props.navbar} />
         <div className="hero-body">
           <div className="container has-text-centered">
             <div className="column is-6 is-offset-3">
