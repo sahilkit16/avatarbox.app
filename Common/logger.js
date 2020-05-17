@@ -16,7 +16,6 @@ class Logger {
         info: 6, 
         debug: 7
       },
-      // TODO: use file transport in dev, http transport (timber.io) in prod
       transports: new transports.Console() 
     });
   }

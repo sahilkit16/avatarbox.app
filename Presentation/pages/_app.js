@@ -1,4 +1,3 @@
-//import App from 'next/app'
 import { Provider } from "react-redux";
 import configureStore from "../store/configureStore";
 
