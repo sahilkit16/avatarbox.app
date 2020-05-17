@@ -10,6 +10,7 @@ const calendarRoute = require("./routes/calendar");
 const homeRoute = require("./routes/home");
 const mongoose = require("mongoose");
 const morgan = require('morgan');
+const errorHandler = require('./middleware/error-handler');
 
 // https://mongoosejs.com/docs/deprecations.html#findandmodify
 mongoose.set("useFindAndModify", false);
@@ -25,8 +26,7 @@ mongoose.connect(
 
 // workaround for dev container
 // see https://github.com/zeit/next.js/issues/4022
-const dev = Boolean(process.env.DEV_ENV);
-
+const dev = !!process.env.DEV_ENV;
 const nx = next({ dev, dir: "Presentation" });
 
 const handle = nx.getRequestHandler();
@@ -61,6 +61,8 @@ nx.prepare().then(() => {
   app.use("/calendar", calendarRoute);
 
   app.use("/home", homeRoute);
+  
+  app.use(errorHandler);
 
   app.get("/*", (req, res) => {
     return handle(req, res);
