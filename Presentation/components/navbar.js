@@ -1,5 +1,5 @@
 import React from 'react';
-var classNames = require("classnames");
+const classNames = require("classnames");
 
 function NavBar({ model }) {
   return (
