@@ -1,28 +1,19 @@
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
-import NavBarView from "../view-models/_navbar";
+import Oops from "../components/oops";
+import ErrorView from "../view-models/error";
 
 export default function Custom404() {
-  const navbar = new NavBarView();
-  navbar.isCosmetic = true;
-  navbar.isTransparent = false;
+  const model = new ErrorView();
+  model.title = "Page Not Found | Avatar Box";
+  model.subtitle = "404 Page Not Found";
+  model.message = "The page you are looking for could not be found.";
   return (
     <HeroSection hideCoverImage="true">
-        <HeroHead title="Page Not Found | Avatar Box" navbar={navbar} />
-        <div className="hero-body">
-          <div className="container">
-            <section>
-              <h1 className="title has-text-centered is-size-1">
-                404 Page Not Found
-              </h1>
-              <div className="level">
-                <h1 className="level-item subtitle has-text-centered">
-                  The page you are looking for could not be found.
-                </h1>
-              </div>
-            </section>
-          </div>
-        </div>
+        <HeroHead title={model.title} navbar={model.navbar} />
+        <Oops 
+          title={model.subtitle} 
+          message={model.message} />
     </HeroSection>
   );
 }
