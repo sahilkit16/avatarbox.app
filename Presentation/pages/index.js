@@ -25,16 +25,14 @@ class IndexPage extends React.Component {
     this.passwordRef = React.createRef();
   }
 
-  static getInitialProps = async (ctx) => {
-    const userid = ctx.query.next && ctx.req.session.userid;
-    const user = ctx.req.session.user;
+  static getInitialProps = async (context) => {
+    const userid = context.query.next && context.req.session.userid;
+    const user = context.req.session.user;
     const model = new HomeView();
-    model.navbar = new NavBarView();
     model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
     model.user = user;
-    model.navbar.user = user;
-    model.validationMessage = ctx.req.session.validationMessage;
-    ctx.req.session.validationMessage = null;
+    model.validationMessage = context.req.session.validationMessage;
+    context.req.session.validationMessage = null;
     return model;
   };
 
