@@ -14,8 +14,6 @@ const router = Router();
 router.use(isAuthenticated);
 router.use(gravatarClientScope);
 
-const crashReporter = container.resolve("crashReporter");
-
 router.get("/", async (req, res) => {
   const { user, calendar } = req.session;
   const renderCalendar = ({ images, isEnabled }) => {
@@ -50,25 +48,20 @@ router.get("/", async (req, res) => {
     });
 });
 
-router.post("/submit", async (req, res) => {
+router.post("/submit", async (req, res, next) => {
   const { user, isNewUser, calendar } = req.session;
   if (calendar) {
     const userService = container.resolve("userService");
     userService.toggleCalendar(user.email, calendar.isEnabled)
       .then(didToggleCalendar => {
-        delete req.session.calendar;
         if (didToggleCalendar && isNewUser) {
+          delete req.session.calendar;
           delete req.session.isNewUser;
           return res.render("thanks", new ThanksView());
         }
         res.redirect("/calendar");
       })
-      .catch(err => {
-        crashReporter.submit(err);
-
-        //TODO: handle 400 gracefully; use custom error page
-        res.status(400).end();
-      });
+      .catch(next);
   }
 });
 
