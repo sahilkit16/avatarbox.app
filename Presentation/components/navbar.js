@@ -1,3 +1,4 @@
+import React from 'react';
 var classNames = require("classnames");
 
 function NavBar({ model }) {
