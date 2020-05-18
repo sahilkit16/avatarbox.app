@@ -6,6 +6,7 @@ const cookieSession = require("cookie-session");
 
 const dummyRoute = require("./routes/_dummy");
 const calendarRoute = require("./routes/calendar");
+const feedbackRoute = require("./routes/feedback");
 const homeRoute = require("./routes/home");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/error-handler");
@@ -38,6 +39,8 @@ if (dev) {
 }
 
 app.use("/calendar", calendarRoute);
+
+app.use("/feedback", feedbackRoute);
 
 app.use("/home", homeRoute);
 
