@@ -9,9 +9,9 @@ function errorHandler(err, req, res, next) {
   const { message } = err;
   model.message = message;
   model.title = `500 Error | Avatar Box`;
-  crashReporter.submit(err);
+  model.eventId = crashReporter.submit(err);
   logger.error(message);
-  if(!process.env.DEV_ENV) {
+  if(process.env.DEV_ENV) {
     res.render("error", model);
   } else {
     next(err);

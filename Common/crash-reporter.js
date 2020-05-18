@@ -13,7 +13,7 @@ class CrashReporter {
     }
   }
   submit(err) {
-    this.reporter.captureException(err);
+    return this.reporter.captureException(err);
   }
 }
 
