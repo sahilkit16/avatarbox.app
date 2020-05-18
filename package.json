@@ -57,6 +57,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "jsdom": "16.2.2",
     "jsdom-global": "3.0.2",
-    "regenerator-runtime": "^0.13.5"
+    "regenerator-runtime": "^0.13.5",
+    "supertest": "^4.0.2"
   }
 }
