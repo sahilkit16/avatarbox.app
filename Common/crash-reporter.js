@@ -5,7 +5,10 @@ class CrashReporter {
   constructor() {
     if (!!process.env.DEV_ENV) {
       this.reporter = {
-        captureException: console.error,
+        captureException: (error) => {
+          console.error(error);
+          return -1;
+        },
       };
     } else {
       Sentry.init({ dsn: process.env.SENTRY_SOURCE });
