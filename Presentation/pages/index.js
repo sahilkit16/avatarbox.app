@@ -8,7 +8,19 @@ import * as actions from "../actions/app.actions";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
 import * as EmailValidator from "email-validator";
-import NavBarView from "../view-models/_navbar";
+
+export async function getServerSideProps(context) {
+  const userid = context.query.next && context.req.session.userid;
+  const user = context.req.session.user;
+  const model = new HomeView();
+  model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
+  model.User = user;
+  model.validationMessage = context.req.session.validationMessage;
+  context.req.session.validationMessage = null;
+  return {
+    props: model.asPOJO()
+  };
+};
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -24,17 +36,6 @@ class IndexPage extends React.Component {
     this.emailRef = React.createRef();
     this.passwordRef = React.createRef();
   }
-
-  static getInitialProps = async (context) => {
-    const userid = context.query.next && context.req.session.userid;
-    const user = context.req.session.user;
-    const model = new HomeView();
-    model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
-    model.user = user;
-    model.validationMessage = context.req.session.validationMessage;
-    context.req.session.validationMessage = null;
-    return model;
-  };
 
   componentDidMount() {
     this.emailRef.current.focus();

@@ -6,14 +6,17 @@ class HomeView {
     this.formAction = "/home/sign-in";
     this.validationMessage = null;
     this.prompt = null;
-    this._user = null;
+    this.user = null;
   }
-  get user(){
-    return this._user;
+  get User(){
+    return this.user;
   }
-  set user(value){
-    this._user = value;
+  set User(value){
+    this.user = value;
     this.navbar.user = value;
+  }
+  asPOJO(){
+    return JSON.parse(JSON.stringify(this));
   }
 }
 
