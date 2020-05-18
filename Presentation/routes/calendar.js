@@ -54,8 +54,10 @@ router.post("/submit", async (req, res, next) => {
     const userService = container.resolve("userService");
     userService.toggleCalendar(user.email, calendar.isEnabled)
       .then(didToggleCalendar => {
-        if (didToggleCalendar && isNewUser) {
+        if(didToggleCalendar){
           delete req.session.calendar;
+        }
+        if (didToggleCalendar && isNewUser) {
           delete req.session.isNewUser;
           return res.render("thanks", new ThanksView());
         }
