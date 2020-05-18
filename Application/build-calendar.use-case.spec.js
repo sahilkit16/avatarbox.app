@@ -1,13 +1,13 @@
-const BuildCalendarUseCase = require('./build-calendar.use-case');
+const BuildCalendarUseCase = require("./build-calendar.use-case");
 
-describe('BuildCalendarUseCase', () => {
+describe("BuildCalendarUseCase", () => {
   let useCase;
   beforeEach(() => {
     useCase = new BuildCalendarUseCase({
-      userService: {}
+      userService: {},
     });
-  })
-  it('should work', () => {
+  });
+  it("should work", () => {
     expect(useCase.execute).toBeDefined();
-  })
-})
+  });
+});

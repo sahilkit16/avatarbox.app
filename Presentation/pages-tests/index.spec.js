@@ -1,16 +1,16 @@
-require('jsdom-global')();
-import React from 'react';
+require("jsdom-global")();
+import React from "react";
 import IndexPage from "../pages/index";
 import configureStore from "../store/configureStore";
 import { Provider } from "react-redux";
 import { mount } from "enzyme";
-import HomeView from '../view-models/home';
+import HomeView from "../view-models/home";
 
-describe('IndexPage', () => {
-  it('should render', async () => {
+describe("IndexPage", () => {
+  it("should render", async () => {
     const store = configureStore({
       user: null,
-      calendar: null
+      calendar: null,
     });
     const model = new HomeView();
     const component = (
@@ -21,5 +21,5 @@ describe('IndexPage', () => {
     const wrapper = mount(component);
     expect(wrapper).toBeDefined();
     wrapper.unmount();
-  })
-})
+  });
+});

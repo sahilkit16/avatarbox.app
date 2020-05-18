@@ -1,8 +1,8 @@
-const CustomError = require('./custom.error');
-const ErrorCode = require('./error-code');
+const CustomError = require("./custom.error");
+const ErrorCode = require("./error-code");
 
 class MissingCalendarError extends CustomError {
-  constructor(){
+  constructor() {
     super(ErrorCode.MissingCalendar, "calendar not found");
   }
 }

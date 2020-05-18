@@ -8,14 +8,14 @@ class HomeView {
     this.prompt = null;
     this.user = null;
   }
-  get User(){
+  get User() {
     return this.user;
   }
-  set User(value){
+  set User(value) {
     this.user = value;
     this.navbar.user = value;
   }
-  asPOJO(){
+  asPOJO() {
     return JSON.parse(JSON.stringify(this));
   }
 }

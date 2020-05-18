@@ -1,22 +1,22 @@
-const { createLogger, transports } = require('winston');
+const { createLogger, transports } = require("winston");
 
 // https://www.npmjs.com/package/winston#logging-levels
 // https://tools.ietf.org/html/rfc5424
 
 class Logger {
-  constructor(){
+  constructor() {
     this.self = createLogger({
       levels: {
-        emerg: 0, 
-        alert: 1, 
-        crit: 2, 
-        error: 3, 
-        warn: 4, 
-        notice: 5, 
-        info: 6, 
-        debug: 7
+        emerg: 0,
+        alert: 1,
+        crit: 2,
+        error: 3,
+        warn: 4,
+        notice: 5,
+        info: 6,
+        debug: 7,
       },
-      transports: new transports.Console() 
+      transports: new transports.Console(),
     });
   }
 

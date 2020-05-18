@@ -42,8 +42,8 @@ router.get("/image-shortage", (req, res) => {
   res.render("home", model);
 });
 
-router.get('/err', (req, res, next) => {
+router.get("/err", (req, res, next) => {
   next(new Error("This is a test."));
-})
+});
 
 module.exports = router;

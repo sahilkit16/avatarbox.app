@@ -1,8 +1,8 @@
 const UserRepo = require("../Infrastructure/user.repo");
-const MissingCalendarError = require('../Domain/missing-calendar.error');
+const MissingCalendarError = require("../Domain/missing-calendar.error");
 
 class UserService {
-  constructor({ logger }){
+  constructor({ logger }) {
     this.logger = logger;
   }
   get(email) {
@@ -44,19 +44,22 @@ class UserService {
             this.logger.error(err.message);
             return reject(err);
           }
-          
+
           //TODO: use logic to create helper function
-          const didToggleCalendar = (status.ok == 1 && status.n == 1 && status.nModified == 1);
-          const didNotModify = (status.ok == 1 && status.n == 1 && status.nModified == 0);
-          const didNotFind = (status.ok == 1 && status.n == 0 && status.nModified == 0);
+          const didToggleCalendar =
+            status.ok == 1 && status.n == 1 && status.nModified == 1;
+          const didNotModify =
+            status.ok == 1 && status.n == 1 && status.nModified == 0;
+          const didNotFind =
+            status.ok == 1 && status.n == 0 && status.nModified == 0;
 
           if (didToggleCalendar) {
             resolve(didToggleCalendar);
             this.logger.info("calendar updated successfully");
-          } else if(didNotModify) {
+          } else if (didNotModify) {
             this.logger.warn("calendar was not modified");
             resolve(didNotModify);
-          } else if(didNotFind) {
+          } else if (didNotFind) {
             this.logger.crit("calendar not found");
             reject(new MissingCalendarError());
           } else {

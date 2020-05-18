@@ -10,10 +10,8 @@ export default function Custom404() {
   model.message = "The page you are looking for could not be found.";
   return (
     <HeroSection hideCoverImage="true">
-        <HeroHead title={model.title} navbar={model.navbar} />
-        <Oops 
-          title={model.subtitle} 
-          message={model.message} />
+      <HeroHead title={model.title} navbar={model.navbar} />
+      <Oops title={model.subtitle} message={model.message} />
     </HeroSection>
   );
 }

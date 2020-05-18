@@ -1,5 +1,5 @@
 module.exports = class World {
-  constructor(){
+  constructor() {
     this.dummy = 1;
   }
-}
+};

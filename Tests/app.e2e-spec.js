@@ -1,22 +1,22 @@
-const request = require('supertest');
-const { app } = require('../Presentation/app');
-const DataStore = require('../Infrastructure/data-store');
+const request = require("supertest");
+const { app } = require("../Presentation/app");
+const DataStore = require("../Infrastructure/data-store");
 
 const dataStore = new DataStore();
 
-describe('app', () => {
+describe("app", () => {
   beforeAll(async () => {
     await dataStore.connect();
-  })
-  it('should work', () => {
+  });
+  it("should work", () => {
     request(app)
-      .get('/')
+      .get("/")
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         if (err) throw err;
       });
-  })
-  afterAll(done => {
+  });
+  afterAll((done) => {
     dataStore.disconnect(done);
-  })
-})
+  });
+});

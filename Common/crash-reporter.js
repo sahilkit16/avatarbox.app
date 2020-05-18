@@ -1,18 +1,18 @@
-require('dotenv').config();
-const Sentry = require('@sentry/node');
+require("dotenv").config();
+const Sentry = require("@sentry/node");
 
 class CrashReporter {
-  constructor(){
-    if(!!process.env.DEV_ENV){
+  constructor() {
+    if (!!process.env.DEV_ENV) {
       this.reporter = {
-        captureException: console.error
-      }
+        captureException: console.error,
+      };
     } else {
       Sentry.init({ dsn: process.env.SENTRY_SOURCE });
-      this.reporter = Sentry;   
+      this.reporter = Sentry;
     }
   }
-  submit(err){
+  submit(err) {
     this.reporter.captureException(err);
   }
 }

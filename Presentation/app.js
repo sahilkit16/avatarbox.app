@@ -7,8 +7,8 @@ const cookieSession = require("cookie-session");
 const dummyRoute = require("./routes/_dummy");
 const calendarRoute = require("./routes/calendar");
 const homeRoute = require("./routes/home");
-const morgan = require('morgan');
-const errorHandler = require('./middleware/error-handler');
+const morgan = require("morgan");
+const errorHandler = require("./middleware/error-handler");
 
 // workaround for dev container
 // see https://github.com/zeit/next.js/issues/4022
@@ -22,7 +22,7 @@ app.use(
   })
 );
 
-app.use(morgan('tiny'));
+app.use(morgan("tiny"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -45,16 +45,17 @@ app.use(errorHandler);
 
 let _handler = (req, res) => {
   return res.status(200).end();
-}
+};
 
 const setHandler = (handler) => {
   _handler = handler;
-}
+};
 
 app.get("/*", (req, res) => {
   return _handler(req, res);
 });
 
 module.exports = {
-  app, setHandler
+  app,
+  setHandler,
 };

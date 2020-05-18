@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Logger = require("../Common/logger");
 
 class DataStore {
-  constructor(logger = new Logger()){
+  constructor(logger = new Logger()) {
     this.logger = logger;
   }
   async connect() {
@@ -18,11 +18,11 @@ class DataStore {
           resolve(true);
         }
       );
-    })
+    });
   }
   async disconnect(done) {
     mongoose.disconnect();
-    if(done) done();
+    if (done) done();
     this.logger.warn("db disconnected");
   }
 }
