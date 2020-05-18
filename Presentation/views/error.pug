@@ -16,11 +16,12 @@ html#here
     link(rel='stylesheet' type='text/css' href='https://unpkg.com/bulma@0.8.0/css/bulma.min.css')
     link(rel='stylesheet' type='text/css' href='../css/site.css')
     link(rel='stylesheet' type='text/css' href='../css/landing.css')
+    script(type="text/javascript" src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js" integrity="sha384-wF7Jc4ZlWVxe/L8Ji3hOIBeTgo/HwFuaeEfjGmS3EXAG7Y+7Kjjr91gJpJtr+PAT" crossorigin="anonymous")
     meta(name='viewport' content='width=device-width')
     meta(charset='utf-8')
     title #{title}
     block styles
-
+    
     body#menu
       section.hero.is-light.is-fullheight
         .hero-head
@@ -31,3 +32,10 @@ html#here
               h1.title.has-text-centered.is-size-1 #{subtitle}
               .level
                 h1.level-item.subtitle.has-text-centered #{message}
+              .level-item.script-enabled.cloak
+                button#btn-feedback.button.is-info Report Feedback
+    // TODO: submit feedback form when script is disabled
+    script(type='text/javascript' src='../js/site.js')
+    script(type='text/javascript' src='../js/error.js')
+    script(type="text/javascript")
+      | window.eventId = '#{eventId}';
