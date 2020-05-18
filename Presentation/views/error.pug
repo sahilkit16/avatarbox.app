@@ -15,7 +15,7 @@ html#here
     link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet')
     link(rel='stylesheet' type='text/css' href='https://unpkg.com/bulma@0.8.0/css/bulma.min.css')
     link(rel='stylesheet' type='text/css' href='../css/site.css')
-    link(rel='stylesheet' type='text/css' href='../css/landing.css')
+    link(rel='stylesheet' type='text/css' href='../css/error.css')
     script(type="text/javascript" src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js" integrity="sha384-wF7Jc4ZlWVxe/L8Ji3hOIBeTgo/HwFuaeEfjGmS3EXAG7Y+7Kjjr91gJpJtr+PAT" crossorigin="anonymous")
     meta(name='viewport' content='width=device-width')
     meta(charset='utf-8')
@@ -28,13 +28,36 @@ html#here
           include ../components/navbar.pug
         .hero-body
           .container
-            section
+            section#error-message
               h1.title.has-text-centered.is-size-1 #{subtitle}
               .level
                 h1.level-item.subtitle.has-text-centered #{message}
               .level-item.script-enabled.cloak
                 button#btn-feedback.button.is-info Report Feedback
-    // TODO: submit feedback form when script is disabled
+            noscript
+              .level
+                .level-item
+                  div#feedback-form.box
+                    div
+                      p.is-size-4.has-text-gray.has-text-centered It looks like we're having some internal issues.
+                      p.is-size-6.has-text-grey-light.has-text-centered Our team has been notified. If you'd like to help, tell us what happened below.
+                    form.form(action="/feedback" method="POST")
+                      input(type="hidden" name="event_id" value=(eventId))
+                      .field
+                        label.label Name
+                          .control
+                            input.input.is-medium(name="name" type="text" placeholder="Mary Mack")
+                      .field
+                        label.label Email
+                          .control
+                            input.input.is-medium(name="email" type="email" placeholder="mary@example.com")
+                      .field
+                        label.label What Happened?
+                          textarea.textarea.is-medium(name="comments" placeholder="I clicked on 'X' and then hit 'Confirm'")
+                      button.button.is-info.is-pulled-right(type="submit") Submit
+              .level
+                .level-item
+                    a(href="#here")#btn-feedback.button.is-info Report Feedback
     script(type='text/javascript' src='../js/site.js')
     script(type='text/javascript' src='../js/error.js')
     script(type="text/javascript")
