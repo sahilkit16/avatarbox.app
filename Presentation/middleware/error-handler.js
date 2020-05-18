@@ -1,3 +1,4 @@
+require('dotenv').config();
 const container = require("../../Common/di-container");
 const crashReporter = container.resolve("crashReporter");
 const logger = container.resolve("logger");
@@ -10,7 +11,11 @@ function errorHandler(err, req, res, next) {
   model.title = `500 Error | Avatar Box`;
   crashReporter.submit(err);
   logger.error(message);
-  res.render("error", model);
+  if(!process.env.DEV_ENV) {
+    res.render("error", model);
+  } else {
+    next(err);
+  }
 }
 
 module.exports = errorHandler;
