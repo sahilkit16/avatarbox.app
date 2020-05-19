@@ -10,6 +10,8 @@ const EmailValidator = require("email-validator");
 router.use(unauthorized);
 router.use(gravatarClientScope);
 
+// TODO: isolate validation logic
+
 router.post("/get-started", async (req, res) => {
   req.session = {};
   const client = req.scope.resolve("gravatarClient");
