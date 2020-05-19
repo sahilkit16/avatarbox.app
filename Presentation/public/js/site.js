@@ -1,7 +1,7 @@
 const site = (function () {
   return {
-    reportFeedback: () => {
-      Sentry.showReportDialog({ eventId });
+    reportFeedback: (onLoad) => {
+      Sentry.showReportDialog({ eventId, onLoad });
     },
     uncloak: () => {
       document.querySelectorAll(".script-enabled").forEach((element) => {
