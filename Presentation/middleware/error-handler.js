@@ -14,9 +14,9 @@ function errorHandler(err, req, res, next) {
   req.session.eventId = eventId;
   logger.error(message);
   if(process.env.DEV_ENV) {
-    res.render("error", model);
-  } else {
     next(err);
+  } else {
+    res.render("error", model);
   }
 }
 
