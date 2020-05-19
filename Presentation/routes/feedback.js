@@ -51,8 +51,8 @@ router.post("/", async (req, res) => {
     body: JSON.stringify(feedbackModel)
   }).then(async (_res) => {
     if (_res.ok) {
-      res.render('thanks', thanksModel);
       req.session.eventId = null;
+      res.render('thanks', thanksModel);
     } else {
       req.session.eventId = null;
       const message = await _res.text();
