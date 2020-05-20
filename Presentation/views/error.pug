@@ -15,6 +15,7 @@ html#here
     link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet')
     link(rel='stylesheet' type='text/css' href='https://unpkg.com/bulma@0.8.0/css/bulma.min.css')
     link(rel='stylesheet' type='text/css' href='../css/site.css')
+    link(rel='stylesheet' type='text/css' href='../css/landing.css')
     link(rel='stylesheet' type='text/css' href='../css/error.css')
     script(type="text/javascript" src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js" integrity="sha384-wF7Jc4ZlWVxe/L8Ji3hOIBeTgo/HwFuaeEfjGmS3EXAG7Y+7Kjjr91gJpJtr+PAT" crossorigin="anonymous")
     meta(name='viewport' content='width=device-width')
@@ -32,8 +33,9 @@ html#here
               h1.title.has-text-centered.is-size-1 #{subtitle}
               .level
                 h1.level-item.subtitle.has-text-centered #{message}
-              .level-item.script-enabled.cloak
-                button#btn-feedback.button.is-info Report Feedback
+              .level.script-enabled.cloak.is-hidden
+                .level-item
+                  button#btn-feedback.button.is-info Report Feedback
             noscript
               .level
                 .level-item
@@ -54,9 +56,10 @@ html#here
                         label.label What Happened?
                           textarea.textarea.is-medium(name="comments" placeholder="I clicked on 'X' and then hit 'Confirm'")
                       button.button.is-info.is-pulled-right(type="submit") Submit
-              .level
-                .level-item
-                    a(href="#here")#btn-feedback.button.is-info Report Feedback
+              if eventId
+                .level
+                  .level-item
+                      a(href="#here")#btn-feedback.button.is-info Report Feedback
     script(type='text/javascript' src='../js/site.js')
     script(type='text/javascript' src='../js/error.js')
     script(type="text/javascript")

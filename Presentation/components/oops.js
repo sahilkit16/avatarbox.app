@@ -1,4 +1,5 @@
 import Head from "next/head";
+import classNames from 'classnames';
 
 export default function Oops({ title, message, eventId }) {
   return (
@@ -23,7 +24,9 @@ export default function Oops({ title, message, eventId }) {
               {message || "An error has occurred"}
             </h1>
           </div>
-          <div className="level script-enabled cloak">
+          <div className={classNames("level script-enabled cloak", {
+            "is-hidden": !eventId
+          })}>
             <div className="level-item">
               <button id="btn-feedback" className="button is-info">
                 Report Feedback
@@ -91,7 +94,9 @@ export default function Oops({ title, message, eventId }) {
               </div>
             </div>
           </div>
-          <div className="level">
+          <div className={classNames("level", {
+            "is-hidden": !eventId
+          })}>
             <div className="level-item">
               <a className="button is-info" href="#here" id="btn-feedback">
                 Report Feedback

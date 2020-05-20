@@ -6,7 +6,7 @@ class ErrorView extends ThanksView {
     this.title = `Error | Avatar Box`;
     this.subtitle = "Oops!";
     this.message = "An error has occurred.";
-    this.eventId = 0;
+    this.eventId = null;
   }
 }
 
