@@ -5,10 +5,10 @@ block styles
 
 block content
   if prompt && prompt.name == "image-shortage"
-    include ../components/prompt.image-shortage.pug  
+    include ./includes/prompt.image-shortage.pug  
   section#hero.hero.is-info.is-fullheight
     .hero-head
-      include ../components/navbar.pug
+      include ./includes/navbar.pug
     div(class='hero-body')
       div(class='container has-text-centered')
         div(class='column is-6 is-offset-3')
