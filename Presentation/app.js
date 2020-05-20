@@ -4,10 +4,12 @@ const app = express();
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 
-const dummyRoute = require("./routes/_dummy");
+const sanityRoute = require("./routes/sanity");
 const calendarRoute = require("./routes/calendar");
 const feedbackRoute = require("./routes/feedback");
 const homeRoute = require("./routes/home");
+const notFoundRoute = require("./routes/notfound");
+
 const morgan = require("morgan");
 const errorHandler = require("./middleware/error-handler");
 
@@ -34,8 +36,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", "./Presentation/views");
 app.set("view engine", "pug");
 
-if (dev) {
-  app.use("/dummy", dummyRoute);
+if (process.env.SANITY) {
+  app.use("/sanity", sanityRoute);
+} else {
+  app.use("/sanity", notFoundRoute);
+  app.use("/server-error", notFoundRoute);
 }
 
 app.use("/calendar", calendarRoute);

@@ -42,7 +42,7 @@ router.get("/image-shortage", (req, res) => {
   res.render("home", model);
 });
 
-router.get("/err", (req, res, next) => {
+router.get("/server-error", (req, res, next) => {
   next(new Error("This is a test."));
 });
 

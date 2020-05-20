@@ -1,5 +1,5 @@
 import React from "react";
-import Error from "../pages/_error";
+import Error from "./_error";
 
 function BrokenComponent({ breakit }) {
   if (breakit) {
@@ -45,7 +45,10 @@ class BrokenPage extends React.Component {
     return (
       <div>
         <p>
-          <a href="/server-error">Trigger 500 Server Error</a>
+          <a href="/sanity/server-error">Trigger ExpressJS Server Error</a>
+        </p>
+        <p>
+          <a href="/server-error">Trigger NextJS Server Error</a>
         </p>
         <p>
           <button onClick={this.jsError}>Trigger Javascript Error</button>
