@@ -1,7 +1,7 @@
 import Head from "next/head";
 import classNames from 'classnames';
 
-export default function Oops({ title, message, eventId }) {
+export default function ErrorBody({ title, message, eventId }) {
   return (
     <div className="hero-body">
       <Head>

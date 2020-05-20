@@ -1,6 +1,6 @@
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
-import Oops from "../components/oops";
+import ErrorBody from "../components/error-body";
 import ErrorView from "../view-models/error";
 
 export default function Custom404() {
@@ -11,7 +11,7 @@ export default function Custom404() {
   return (
     <HeroSection hideCoverImage="true">
       <HeroHead title={model.title} navbar={model.navbar} />
-      <Oops title={model.subtitle} message={model.message} />
+      <ErrorBody title={model.subtitle} message={model.message} />
     </HeroSection>
   );
 }

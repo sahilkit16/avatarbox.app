@@ -1,6 +1,6 @@
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
-import Oops from "../components/oops";
+import ErrorBody from "../components/error-body";
 import ErrorView from "../view-models/error";
 import { useEffect } from "react";
 
@@ -21,7 +21,7 @@ function Error({ statusCode }) {
   return (
     <HeroSection hideCoverImage="true">
       <HeroHead title={model.title} navbar={model.navbar} />
-      <Oops message={model.message} />
+      <ErrorBody message={model.message} />
     </HeroSection>
   );
 }
