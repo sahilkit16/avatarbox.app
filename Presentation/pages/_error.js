@@ -2,6 +2,7 @@ import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import Oops from "../components/oops";
 import ErrorView from "../view-models/error";
+import { useEffect } from "react";
 
 function Error({ statusCode }) {
   const model = new ErrorView();
@@ -12,6 +13,10 @@ function Error({ statusCode }) {
   } else {
     model.message = "A client error has occurred.";
   }
+
+  useEffect(() => {
+    site.uncloak();
+  })
 
   return (
     <HeroSection hideCoverImage="true">
