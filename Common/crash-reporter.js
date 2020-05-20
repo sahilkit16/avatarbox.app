@@ -11,7 +11,7 @@ class CrashReporter {
         },
       };
     } else {
-      Sentry.init({ dsn: process.env.SENTRY_SOURCE });
+      Sentry.init({ dsn: process.env.SENTRY_DSN });
       this.reporter = Sentry;
     }
   }

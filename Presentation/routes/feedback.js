@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
     {
       method: "POST",
       headers: {
-        authorization: `DSN ${process.env.SENTRY_SOURCE}`,
+        authorization: `DSN ${process.env.SENTRY_DSN}`,
         "content-type": "application/json",
       },
       body: JSON.stringify(feedbackModel),
