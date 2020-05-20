@@ -16,7 +16,7 @@ function Error({ statusCode }) {
 
   useEffect(() => {
     site.uncloak();
-  })
+  });
 
   return (
     <HeroSection hideCoverImage="true">

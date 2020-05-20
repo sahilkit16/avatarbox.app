@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const container = require("../../Common/di-container");
 const crashReporter = container.resolve("crashReporter");
 const logger = container.resolve("logger");
@@ -13,7 +13,7 @@ function errorHandler(err, req, res, next) {
   model.eventId = eventId;
   req.session.eventId = eventId;
   logger.error(message);
-  if(process.env.DEV_ENV) {
+  if (process.env.DEV_ENV) {
     next(err);
   } else {
     res.render("error", model);

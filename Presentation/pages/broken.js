@@ -1,27 +1,27 @@
 import React from "react";
 import Error from "../pages/_error";
 
-function BrokenComponent({ breakit }){
-  if(breakit){
+function BrokenComponent({ breakit }) {
+  if (breakit) {
     throw new Error("broken child component");
   }
   return <div />;
 }
 
 class BrokenPage extends React.Component {
-  constructor(){
+  constructor() {
     super();
-    this.state = { breakit: false }
+    this.state = { breakit: false };
     this.jsError = this.jsError.bind(this);
     this.reactError = this.reactError.bind(this);
   }
-  
-  jsError(){
+
+  jsError() {
     try {
       _notDefined();
     } catch (error) {
       // TODO: log error to Sentry
-     this.setState({ hasError: true });
+      this.setState({ hasError: true });
     }
   }
 
@@ -30,17 +30,17 @@ class BrokenPage extends React.Component {
     return { hasError: true };
   }
 
-  componentDidCatch(err, errInfo){
+  componentDidCatch(err, errInfo) {
     console.log(err, errInfo);
   }
 
-  reactError(){
+  reactError() {
     this.setState({ breakit: true });
   }
-  
-  render(){
-    if(this.state.hasError){
-      return <Error />
+
+  render() {
+    if (this.state.hasError) {
+      return <Error />;
     }
     return (
       <div>
@@ -55,7 +55,7 @@ class BrokenPage extends React.Component {
         </p>
         <BrokenComponent breakit={this.state.breakit} />
       </div>
-    )
+    );
   }
 }
 

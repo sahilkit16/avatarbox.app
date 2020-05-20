@@ -10,7 +10,7 @@ class FeedbackView extends ThanksView {
     this.validationSummary = {
       name: null,
       email: null,
-      comments: null
+      comments: null,
     };
   }
 }

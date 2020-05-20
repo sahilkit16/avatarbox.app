@@ -1,17 +1,17 @@
 import React from "react";
 
 class ServerErrorPage extends React.Component {
-  constructor(){
+  constructor() {
     super();
   }
 
-  render(){
+  render() {
     return null;
   }
 }
 
 ServerErrorPage.getInitialProps = async () => {
   notDefined();
-}
+};
 
 export default ServerErrorPage;
