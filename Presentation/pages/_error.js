@@ -1,14 +1,15 @@
+import Head from "next/head";
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import ErrorBody from "../components/error-body";
 import ErrorView from "../view-models/error";
 import { useEffect } from "react";
-import * as Sentry from "@sentry/browser";
 
 function Error({ statusCode, eventId }) {
   const model = new ErrorView();
   model.title = "Error | Avatar Box";
   model.eventId = eventId;
+
   if (statusCode) {
     model.title = `${statusCode} ${model.title}`;
     model.message = `A ${statusCode} server error has occurred.`;
@@ -25,15 +26,20 @@ function Error({ statusCode, eventId }) {
 
   return (
     <HeroSection hideCoverImage="true">
+      <Head>
+        <link rel="stylesheet" type="text/css" href="../css/error.css" />
+      </Head>
       <HeroHead title={model.title} navbar={model.navbar} />
       <ErrorBody message={model.message} eventId={eventId}/>
     </HeroSection>
   );
 }
 
-Error.getInitialProps = ({ res, err }) => {
+Error.getInitialProps = ({ req, res, err }) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  const eventId = Sentry.captureException(err);
+  const crashReporter = req.scope.resolve("crashReporter");
+  const eventId = crashReporter.submit(err);
+  req.session.eventId = eventId;
   return { statusCode, eventId };
 };
 
