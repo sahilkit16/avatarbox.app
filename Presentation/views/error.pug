@@ -33,9 +33,10 @@ html#here
               h1.title.has-text-centered.is-size-1 #{subtitle}
               .level
                 h1.level-item.subtitle.has-text-centered #{message}
-              .level.script-enabled.cloak.is-hidden
-                .level-item
-                  button#btn-feedback.button.is-info Report Feedback
+              if eventId
+                .level.script-enabled.cloak
+                  .level-item
+                    button#btn-feedback.button.is-info Report Feedback
             noscript
               .level
                 .level-item
