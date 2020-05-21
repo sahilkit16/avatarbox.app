@@ -1,11 +1,6 @@
 const Sentry = require("@sentry/browser");
 
-Sentry.init({ 
-  ignoreErrors: [
-    'Non-Error exception captured'
-  ],
-  dsn: process.env.SENTRY_DSN 
-})
+Sentry.init({ dsn: process.env.SENTRY_DSN })
 
 class CrashReporter {
   constructor() {
