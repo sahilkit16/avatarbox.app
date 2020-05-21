@@ -1,5 +1,11 @@
 import React from "react";
 import Error from "./_error";
+import * as Sentry from "@sentry/browser";
+
+Sentry.init({
+  dsn:
+    "https://83125bd9f55946968482f22cfc78d236@o391492.ingest.sentry.io/5241503",
+});
 
 function BrokenComponent({ breakit }) {
   if (breakit) {
@@ -8,7 +14,7 @@ function BrokenComponent({ breakit }) {
   return <div />;
 }
 
-class BrokenPage extends React.Component {
+class SanityPage extends React.Component {
   constructor() {
     super();
     this.state = { breakit: false };
@@ -20,14 +26,14 @@ class BrokenPage extends React.Component {
     try {
       _notDefined();
     } catch (error) {
-      // TODO: log error to Sentry
-      this.setState({ hasError: true });
+      const eventId = Sentry.captureException(error);
+      this.setState({ eventId, hasError: true });
     }
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
+    const eventId = Sentry.captureException(error);
+    return { eventId, hasError: true };
   }
 
   componentDidCatch(err, errInfo) {
@@ -40,7 +46,7 @@ class BrokenPage extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <Error />;
+      return <Error eventId={this.state.eventId} />;
     }
     return (
       <div>
@@ -62,4 +68,4 @@ class BrokenPage extends React.Component {
   }
 }
 
-export default BrokenPage;
+export default SanityPage;

@@ -1,7 +1,17 @@
 import Head from "next/head";
 import classNames from 'classnames';
+import { useEffect } from "react";
 
 export default function ErrorBody({ title, message, eventId }) {
+  
+  useEffect(() => {
+    setTimeout(() => {
+      if(window.enableFeedbackbutton){
+        window.enableFeedbackbutton();
+      }
+    },1000);
+  })
+
   return (
     <div className="hero-body">
       <Head>
