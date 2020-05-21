@@ -3,7 +3,7 @@ const next = require("next");
 const { app, setHandler } = require("./app");
 const DataStore = require("../Infrastructure/data-store");
 const Logger = require("../Common/logger");
-const CrashReporter = require("../Common/crash-reporter");
+const CrashReporter = require("../Common/crash-reporter.server");
 
 // workaround for dev container
 // see https://github.com/zeit/next.js/issues/4022
