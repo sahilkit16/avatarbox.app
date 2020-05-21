@@ -1,21 +1,32 @@
 const Sentry = require("@sentry/browser");
 
+Sentry.init({ 
+  ignoreErrors: [
+    'Non-Error exception captured'
+  ],
+  dsn: process.env.SENTRY_DSN 
+})
+
 class CrashReporter {
   constructor() {
-    if (!!process.env.DEV_ENV) {
+    if (process.env.DEV_ENV) {
       this.reporter = {
         captureException: (error) => {
           console.error(error);
-          return -1;
+          return "event-id";
         },
+        showReportDialog: (options) => {
+          const userFeedback = prompt("what happened?");
+          console.log(userFeedback);
+          options.onLoad();
+        }
       };
     } else {
-      Sentry.init({ 
-        dsn:
-          "https://83125bd9f55946968482f22cfc78d236@o391492.ingest.sentry.io/5241503",
-      });
       this.reporter = Sentry;
     }
+  }
+  getUserFeedback(options){
+    this.reporter.showReportDialog(options);
   }
   submit(err) {
     return this.reporter.captureException(err);

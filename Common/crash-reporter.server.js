@@ -3,15 +3,20 @@ const Sentry = require("@sentry/node");
 
 class CrashReporter {
   constructor() {
-    if (!!process.env.DEV_ENV) {
+    if (process.env.DEV_ENV) {
       this.reporter = {
         captureException: (error) => {
           console.error(error);
-          return -1;
+          return "event-id";
         },
       };
     } else {
-      Sentry.init({ dsn: process.env.SENTRY_DSN });
+      Sentry.init({ 
+        ignoreErrors: [
+          'Non-Error exception captured'
+        ],
+        dsn: process.env.SENTRY_DSN 
+      });
       this.reporter = Sentry;
     }
   }
