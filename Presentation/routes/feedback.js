@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
   // TODO: isolate validation logic
 
   const feedbackModel = new FeedbackView();
-  feedbackModel.event_id = req.session.eventId;
+  feedbackModel.eventId = (req.body.eventId || req.session.eventId);
   feedbackModel.name = req.body.name;
   feedbackModel.email = req.body.email;
   feedbackModel.comments = req.body.comments;
@@ -44,6 +44,11 @@ router.post("/", async (req, res) => {
     req.session.eventId = null;
     return res.render("thanks", thanksModel);
   }
+  
+  // rename event id field for Sentry
+  // see https://docs.sentry.io/api/projects/post-project-user-reports/
+  feedbackModel.event_id = feedbackModel.eventId;
+  delete feedbackModel.eventId;
 
   fetch(
     "https://sentry.io/api/0/projects/avatar-box/avatarboxweb/user-feedback/",
