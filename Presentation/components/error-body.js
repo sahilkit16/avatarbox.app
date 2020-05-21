@@ -1,29 +1,23 @@
-import Head from "next/head";
 import classNames from 'classnames';
-import { useEffect } from "react";
+import { useState } from "react";
+import CrashReporter from '../../Common/crash-reporter.client';
 
 export default function ErrorBody({ title, message, eventId }) {
   
-  useEffect(() => {
-    setTimeout(() => {
-      if(window.enableFeedbackbutton){
-        window.enableFeedbackbutton();
-      }
-    },1000);
+  const [state, setState] = useState({
+    didSubmitFeedback: false, eventId
   })
+
+  function reportFeedback(){
+    const crashReporter = new CrashReporter();
+    crashReporter.getUserFeedback({
+      eventId,
+      onLoad: () => setState({ didSubmitFeedback: true })
+    });
+  }
 
   return (
     <div className="hero-body">
-      <Head>
-        <link rel="stylesheet" type="text/css" href="../css/error.css" />
-        <script
-          type="text/javascript"
-          src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js"
-          integrity="sha384-wF7Jc4ZlWVxe/L8Ji3hOIBeTgo/HwFuaeEfjGmS3EXAG7Y+7Kjjr91gJpJtr+PAT"
-          crossorigin="anonymous"
-        ></script>
-        <script type="text/javascript" src="../js/error.js"></script>
-      </Head>
       <div className="container">
         <section id="error-message">
           <h1 className="title has-text-centered is-size-1">
@@ -35,10 +29,13 @@ export default function ErrorBody({ title, message, eventId }) {
             </h1>
           </div>
           <div className={classNames("level script-enabled cloak", {
-            "is-hidden": !eventId
+            "is-hidden": (!state.eventId || state.didSubmitFeedback)
           })}>
             <div className="level-item">
-              <button id="btn-feedback" className="button is-info">
+              <button 
+                onClick={reportFeedback}
+                id="btn-feedback"
+                className="button is-info">
                 Report Feedback
               </button>
             </div>
@@ -58,6 +55,13 @@ export default function ErrorBody({ title, message, eventId }) {
                   </p>
                 </div>
                 <form className="form" action="/feedback" method="POST">
+                  <input
+                    className="is-hidden"
+                    readonly={true}
+                    name="eventId"
+                    type="hidden"
+                    value={`${state.eventId}`}
+                  />
                   <div className="field">
                     <label className="label">
                       Name
@@ -105,7 +109,7 @@ export default function ErrorBody({ title, message, eventId }) {
             </div>
           </div>
           <div className={classNames("level", {
-            "is-hidden": !eventId
+            "is-hidden": !state.eventId
           })}>
             <div className="level-item">
               <a className="button is-info" href="#here" id="btn-feedback">

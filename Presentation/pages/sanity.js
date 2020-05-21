@@ -1,11 +1,6 @@
 import React from "react";
 import Error from "./_error";
-import * as Sentry from "@sentry/browser";
-
-Sentry.init({
-  dsn:
-    "https://83125bd9f55946968482f22cfc78d236@o391492.ingest.sentry.io/5241503",
-});
+import CrashReporter from "../../Common/crash-reporter.client";
 
 function BrokenComponent({ breakit }) {
   if (breakit) {
@@ -26,18 +21,18 @@ class SanityPage extends React.Component {
     try {
       _notDefined();
     } catch (error) {
-      const eventId = Sentry.captureException(error);
-      this.setState({ eventId, hasError: true });
+      const crashReporter = new CrashReporter();
+      this.setState({ 
+        eventId: crashReporter.submit(error), 
+        hasError: true
+      });
     }
   }
 
   static getDerivedStateFromError(error) {
-    const eventId = Sentry.captureException(error);
+    const crashReporter = new CrashReporter();
+    const eventId = crashReporter.submit(error);
     return { eventId, hasError: true };
-  }
-
-  componentDidCatch(err, errInfo) {
-    console.log(err, errInfo);
   }
 
   reactError() {
@@ -54,7 +49,7 @@ class SanityPage extends React.Component {
           <a href="/sanity/server-error">Trigger ExpressJS Server Error</a>
         </p>
         <p>
-          <a href="/server-error">Trigger NextJS Server Error</a>
+          <a href="/sanity?server-error=1">Trigger NextJS Server Error</a>
         </p>
         <p>
           <button onClick={this.jsError}>Trigger Javascript Error</button>
@@ -67,5 +62,12 @@ class SanityPage extends React.Component {
     );
   }
 }
+
+SanityPage.getInitialProps = async ({ req }) => {
+  if(req.query["server-error"]){
+    throw new Error("this is a test");
+  }
+  return {};
+};
 
 export default SanityPage;
