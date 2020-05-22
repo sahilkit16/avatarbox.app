@@ -5,27 +5,27 @@ const router = Router();
 const gravatarClientScope = require("../middleware/gravatar-client-scope");
 const { unauthorized } = require("../middleware/unauthorized");
 const { GravatarClient } = require("grav.client");
-const EmailValidator = require("email-validator");
+const LoginVM = require("../view-models/login.vm");
 
 router.use(unauthorized);
 router.use(gravatarClientScope);
 
-// TODO: isolate validation logic
-
 router.post("/get-started", async (req, res) => {
   req.session = {};
-  const client = req.scope.resolve("gravatarClient");
-  const { email } = req.body;
-  if (!email) {
-    return req.unauthorized("Missing Email");
-  } else if (!EmailValidator.validate(email)) {
-    return req.unauthorized("Invalid Email");
+  
+  const loginVm = new LoginVM();
+  loginVm.email = req.body.email;
+
+  if (loginVm.errors.email) {
+    return req.unauthorized(loginVm.errors.email);
   }
+
   let redirectUrl = "/";
+  const client = req.scope.resolve("gravatarClient");
   if (client) {
     const userid = client.emailHash;
     req.session.userid = userid;
-    req.session.email = email;
+    req.session.email = loginVm.email;
     redirectUrl += `?next=1`;
   }
   if (req.is("application/x-www-form-urlencoded")) {
@@ -36,20 +36,33 @@ router.post("/get-started", async (req, res) => {
   }
 });
 
+
+// TODO: cleanup + refactor
 router.post("/sign-in", async (req, res) => {
+  
   let { password } = req.body;
-  if (!password) {
-    return req.unauthorized("Missing Password", "/?next=1#here");
-  }
-  const email = req.session.email || req.body.email;
-  const rsaService = container.resolve("rsaService");
+  const loginVm = new LoginVM();
   const isAjax = req.is("application/json");
+  
+  loginVm.email = req.session.email || req.body.email;
+  loginVm.password = password;
+
+  if (loginVm.errors.email) {
+    return req.unauthorized(loginVm.errors.email, "/");
+  } else if (!isAjax && loginVm.errors.password) {
+    return req.unauthorized(loginVm.errors.password, "/?next=1#here");
+  }
+  
+  const rsaService = container.resolve("rsaService");
+  
   if (isAjax) {
     password = await rsaService.decrypt(password);
   }
-  const user = { email };
-  if (email && password) {
-    const client = new GravatarClient(email, password);
+  
+  const user = { email: loginVm.email };
+
+  if (user.email && password) {
+    const client = new GravatarClient(user.email, password);
     client
       .test()
       .then(async (response) => {

@@ -7,7 +7,7 @@ import HomeVM from "../view-models/home.vm";
 import * as actions from "../actions/app.actions";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
-import validator from "validator";
+import LoginVM from "../view-models/login.vm";
 
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
@@ -88,19 +88,20 @@ class IndexPage extends React.Component {
     if (this.state.isLoading) return;
     const { step } = this.state;
     this.setState({ validationMessage: null });
+    const loginVm = new LoginVM();
     if (step == 1) {
-      if (!this.state.email) {
-        return this.showValidationMessage("Missing Email");
-      } else if (!validator.isEmail(this.state.email)) {
-        return this.showValidationMessage("Invalid Email");
+      loginVm.email = this.state.email;
+      if (loginVm.errors.email) {
+        return this.showValidationMessage(loginVm.errors.email);
       }
       this.setState({
-        email: this.state.email,
+        email: loginVm.email,
         step: 2,
       });
     } else if (step == 2) {
-      if (!this.state.password) {
-        return this.showValidationMessage("Missing Password", 2);
+      loginVm.password = this.state.password;
+      if (loginVm.errors.password) {
+        return this.showValidationMessage(loginVm.errors.password, 2);
       }
       this.setState({ isLoading: true });
       const encrypt = typeof rsaEncrypt != "undefined" && rsaEncrypt;
