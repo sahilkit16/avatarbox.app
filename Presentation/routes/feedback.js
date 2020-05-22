@@ -3,7 +3,7 @@ const { Router } = require("express");
 const fetch = require("node-fetch");
 const EmailValidator = require("email-validator");
 const ThanksView = require("../view-models/thanks");
-const FeedbackView = require("../view-models/feedback");
+const FeedbackVM = require("../view-models/feedback.vm");
 const router = Router();
 const Logger = require("../../Common/logger");
 
@@ -13,7 +13,7 @@ const thanksModel = new ThanksView();
 router.post("/", async (req, res) => {
   // TODO: isolate validation logic
 
-  const feedbackModel = new FeedbackView();
+  const feedbackModel = new FeedbackVM();
   feedbackModel.eventId = (req.body.eventId || req.session.eventId);
   feedbackModel.name = req.body.name;
   feedbackModel.email = req.body.email;

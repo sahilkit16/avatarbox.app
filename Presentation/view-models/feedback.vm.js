@@ -1,6 +1,6 @@
 const ThanksView = require("./thanks");
 
-class FeedbackView extends ThanksView {
+class FeedbackVM extends ThanksView {
   constructor() {
     super();
     this.eventId = null;
@@ -15,4 +15,4 @@ class FeedbackView extends ThanksView {
   }
 }
 
-module.exports = FeedbackView;
+module.exports = FeedbackVM;
