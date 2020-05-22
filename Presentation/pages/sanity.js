@@ -22,9 +22,9 @@ class SanityPage extends React.Component {
       _notDefined();
     } catch (error) {
       const crashReporter = new CrashReporter();
-      this.setState({ 
-        eventId: crashReporter.submit(error), 
-        hasError: true
+      this.setState({
+        eventId: crashReporter.submit(error),
+        hasError: true,
       });
     }
   }
@@ -64,7 +64,7 @@ class SanityPage extends React.Component {
 }
 
 SanityPage.getInitialProps = async ({ req }) => {
-  if(req.query["server-error"]){
+  if (req.query["server-error"]) {
     throw new Error("this is a test");
   }
   return {};

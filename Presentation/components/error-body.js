@@ -1,18 +1,18 @@
-import classNames from 'classnames';
+import classNames from "classnames";
 import { useState } from "react";
-import CrashReporter from '../../Common/crash-reporter.client';
+import CrashReporter from "../../Common/crash-reporter.client";
 
 export default function ErrorBody({ title, message, eventId }) {
-  
   const [state, setState] = useState({
-    didSubmitFeedback: false, eventId
-  })
+    didSubmitFeedback: false,
+    eventId,
+  });
 
-  function reportFeedback(){
+  function reportFeedback() {
     const crashReporter = new CrashReporter();
     crashReporter.getUserFeedback({
       eventId,
-      onLoad: () => setState({ didSubmitFeedback: true })
+      onLoad: () => setState({ didSubmitFeedback: true }),
     });
   }
 
@@ -28,14 +28,17 @@ export default function ErrorBody({ title, message, eventId }) {
               {message || "An error has occurred"}
             </h1>
           </div>
-          <div className={classNames("level script-enabled cloak", {
-            "is-hidden": (!state.eventId || state.didSubmitFeedback)
-          })}>
+          <div
+            className={classNames("level script-enabled cloak", {
+              "is-hidden": !state.eventId || state.didSubmitFeedback,
+            })}
+          >
             <div className="level-item">
-              <button 
+              <button
                 onClick={reportFeedback}
                 id="btn-feedback"
-                className="button is-info">
+                className="button is-info"
+              >
                 Report Feedback
               </button>
             </div>
@@ -108,9 +111,11 @@ export default function ErrorBody({ title, message, eventId }) {
               </div>
             </div>
           </div>
-          <div className={classNames("level", {
-            "is-hidden": !state.eventId
-          })}>
+          <div
+            className={classNames("level", {
+              "is-hidden": !state.eventId,
+            })}
+          >
             <div className="level-item">
               <a className="button is-info" href="#here" id="btn-feedback">
                 Report Feedback

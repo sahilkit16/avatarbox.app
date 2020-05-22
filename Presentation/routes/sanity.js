@@ -38,8 +38,7 @@ router.get("/image-shortage", (req, res) => {
   const model = new HomeVM();
   model.user = model.navbar.user = true;
   const error = new ImageShortageError(ErrorCode.NoImages);
-  model.prompt = new ImageShortageVM
-(error);
+  model.prompt = new ImageShortageVM(error);
   res.render("home", model);
 });
 

@@ -1,6 +1,6 @@
 const Sentry = require("@sentry/browser");
 
-Sentry.init({ dsn: process.env.SENTRY_DSN })
+Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 class CrashReporter {
   constructor() {
@@ -14,13 +14,13 @@ class CrashReporter {
           const userFeedback = prompt("what happened?");
           console.log(userFeedback);
           options.onLoad();
-        }
+        },
       };
     } else {
       this.reporter = Sentry;
     }
   }
-  getUserFeedback(options){
+  getUserFeedback(options) {
     this.reporter.showReportDialog(options);
   }
   submit(err) {

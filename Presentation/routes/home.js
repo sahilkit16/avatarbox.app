@@ -12,7 +12,7 @@ router.use(gravatarClientScope);
 
 router.post("/get-started", async (req, res) => {
   req.session = {};
-  
+
   const loginVm = new LoginVM();
   loginVm.email = req.body.email;
 
@@ -36,14 +36,12 @@ router.post("/get-started", async (req, res) => {
   }
 });
 
-
 // TODO: cleanup + refactor
 router.post("/sign-in", async (req, res) => {
-  
   let { password } = req.body;
   const loginVm = new LoginVM();
   const isAjax = req.is("application/json");
-  
+
   loginVm.email = req.session.email || req.body.email;
   loginVm.password = password;
 
@@ -52,13 +50,13 @@ router.post("/sign-in", async (req, res) => {
   } else if (!isAjax && loginVm.errors.password) {
     return req.unauthorized(loginVm.errors.password, "/?next=1#here");
   }
-  
+
   const rsaService = container.resolve("rsaService");
-  
+
   if (isAjax) {
     password = await rsaService.decrypt(password);
   }
-  
+
   const user = { email: loginVm.email };
 
   if (user.email && password) {

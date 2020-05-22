@@ -10,9 +10,8 @@ const logger = new Logger();
 const thanksModel = new ThanksVM();
 
 router.post("/", async (req, res) => {
-
   const feedbackVm = new FeedbackVM();
-  feedbackVm.eventId = (req.body.eventId || req.session.eventId);
+  feedbackVm.eventId = req.body.eventId || req.session.eventId;
   feedbackVm.name = req.body.name;
   feedbackVm.email = req.body.email;
   feedbackVm.comments = req.body.comments;

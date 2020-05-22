@@ -6,7 +6,7 @@ window.addEventListener("load", function () {
   });
   const btnId = "btn-feedback";
   const btnFeedback = document.getElementById(btnId);
-  if(btnFeedback){
+  if (btnFeedback) {
     btnFeedback.addEventListener("click", () => {
       site.reportFeedback(() => {
         document.getElementById(btnId).remove();

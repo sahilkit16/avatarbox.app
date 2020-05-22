@@ -19,7 +19,7 @@ function Error({ statusCode, eventId }) {
 
   useEffect(() => {
     site.uncloak();
-    if(typeof window != "undefined"){
+    if (typeof window != "undefined") {
       window.eventId = eventId;
     }
   });
@@ -30,7 +30,7 @@ function Error({ statusCode, eventId }) {
         <link rel="stylesheet" type="text/css" href="../css/error.css" />
       </Head>
       <HeroHead title={model.title} navbar={model.navbar} />
-      <ErrorBody message={model.message} eventId={eventId}/>
+      <ErrorBody message={model.message} eventId={eventId} />
     </HeroSection>
   );
 }
