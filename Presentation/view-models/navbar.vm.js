@@ -1,4 +1,4 @@
-class NavBarView {
+class NavBarVM {
   constructor() {
     this.isCosmetic = false;
     this.isTransparent = true;
@@ -6,4 +6,4 @@ class NavBarView {
   }
 }
 
-module.exports = NavBarView;
+module.exports = NavBarVM;

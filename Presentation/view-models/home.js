@@ -1,4 +1,4 @@
-const NavBarView = require("./_navbar");
+const NavBarView = require("./navbar.vm");
 
 class HomeView {
   constructor() {
