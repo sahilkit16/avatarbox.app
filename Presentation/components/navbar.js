@@ -86,6 +86,14 @@ function NavBar({ model }) {
                 Sign Out
               </a>
             </span>
+            <div className={model.user ? "avatar-icon" : "is-hidden"}>
+                <figure className="image is-32x32">
+                  <img className="is-rounded" 
+                    width="32"
+                    height="32"
+                    src={`https://www.gravatar.com/avatar/${model.user ? model.user.hash : null}`} />
+                </figure>
+            </div>
             <noscript>
               <a href="#" className="button is-transparent">
                 <span className="navbar-burger burger is-active noscript">

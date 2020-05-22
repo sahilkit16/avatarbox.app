@@ -12,6 +12,7 @@ import LoginVM from "../view-models/login.vm";
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
   const user = context.req.session.user;
+  //user.hash = userid;
   const model = new HomeVM();
   model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
   model.User = user;

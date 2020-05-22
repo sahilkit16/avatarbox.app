@@ -13,9 +13,12 @@ class DataStore {
         `mongodb://avatarbox:27017/avbx`,
         { useNewUrlParser: true, useUnifiedTopology: true },
         (error) => {
-          if (error) reject(new Error("db connection failed"));
-          this.logger.notice("db connected");
-          resolve(true);
+          if (error) {
+            reject(new Error("db connection failed"))
+          } else {
+            this.logger.notice("db connected");
+            resolve(true);
+          }
         }
       );
     });

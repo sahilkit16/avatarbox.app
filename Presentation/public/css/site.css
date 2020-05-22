@@ -97,6 +97,11 @@ noscript span.navbar-burger.burger {
   color: black;
 }
 
+.avatar-icon {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 @media screen and (max-width:768px){
   .hero-body {
       padding-left: 0px;
@@ -106,3 +111,10 @@ noscript span.navbar-burger.burger {
     margin: 40px 0%;
   }
 }
+
+@media screen and (max-width:1024px) {
+  .avatar-icon {
+    display: none;
+  }
+}
+

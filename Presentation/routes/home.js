@@ -41,7 +41,6 @@ router.post("/sign-in", async (req, res) => {
   let { password } = req.body;
   const loginVm = new LoginVM();
   const isAjax = req.is("application/json");
-
   loginVm.email = req.session.email || req.body.email;
   loginVm.password = password;
 
@@ -68,6 +67,7 @@ router.post("/sign-in", async (req, res) => {
           user.password = isAjax
             ? req.body.password
             : await rsaService.encrypt(password);
+          user.hash = client.emailHash;
           req.session.user = user;
           req.scope.register({
             gravatarClient: asValue(client),
