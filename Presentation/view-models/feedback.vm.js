@@ -1,6 +1,6 @@
-const ThanksView = require("./thanks");
+const ThanksVM = require("./thanks.vm");
 
-class FeedbackVM extends ThanksView {
+class FeedbackVM extends ThanksVM {
   constructor() {
     super();
     this.eventId = null;

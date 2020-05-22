@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const container = require("../../Common/di-container");
-const ThanksView = require("../view-models/thanks");
+const ThanksVM = require("../view-models/thanks.vm");
 const CalendarVM = require("../view-models/calendar.vm");
 const HomeView = require("../view-models/home");
 const ImageShortageVM = require("../view-models/image-shortage.vm");
@@ -60,7 +60,7 @@ router.post("/submit", async (req, res, next) => {
         }
         if (didToggleCalendar && isNewUser) {
           delete req.session.isNewUser;
-          return res.render("thanks", new ThanksView());
+          return res.render("thanks", new ThanksVM());
         }
         res.redirect("/calendar");
       })

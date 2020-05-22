@@ -1,6 +1,6 @@
-const ThanksView = require("./thanks");
+const ThanksVM = require("./thanks.vm");
 
-class ErrorVM extends ThanksView {
+class ErrorVM extends ThanksVM {
   constructor() {
     super();
     this.title = `Error | Avatar Box`;

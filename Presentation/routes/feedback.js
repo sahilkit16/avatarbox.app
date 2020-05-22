@@ -2,13 +2,13 @@ require("dotenv").config();
 const { Router } = require("express");
 const fetch = require("node-fetch");
 const EmailValidator = require("email-validator");
-const ThanksView = require("../view-models/thanks");
+const ThanksVM = require("../view-models/thanks.vm");
 const FeedbackVM = require("../view-models/feedback.vm");
 const router = Router();
 const Logger = require("../../Common/logger");
 
 const logger = new Logger();
-const thanksModel = new ThanksView();
+const thanksModel = new ThanksVM();
 
 router.post("/", async (req, res) => {
   // TODO: isolate validation logic

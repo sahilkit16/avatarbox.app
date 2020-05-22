@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const ThanksView = require("../view-models/thanks");
+const ThanksVM = require("../view-models/thanks.vm");
 const CalendarVM = require("../view-models/calendar.vm");
 const HomeView = require("../view-models/home");
 const ImageShortageVM = require("../view-models/image-shortage.vm");
@@ -21,7 +21,7 @@ router.get("/calendar", (req, res) => {
 });
 
 router.get("/thanks", (req, res) => {
-  res.render("thanks", new ThanksView());
+  res.render("thanks", new ThanksVM());
 });
 
 router.get("/home", (req, res) => {

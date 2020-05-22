@@ -1,6 +1,6 @@
 const NavBarView = require("./navbar.vm");
 
-class ThanksView {
+class ThanksVM {
   constructor() {
     this.navbar = new NavBarView();
     this.navbar.isCosmetic = true;
@@ -8,4 +8,4 @@ class ThanksView {
   }
 }
 
-module.exports = ThanksView;
+module.exports = ThanksVM;
