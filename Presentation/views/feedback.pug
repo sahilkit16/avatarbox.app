@@ -53,7 +53,8 @@ html#here
                         label.label What Happened?
                           if errors.comments 
                             p.has-text-danger #{errors.comments}
-                          textarea.textarea.is-medium(maxlength="500" name="comments" value=comments placeholder="I clicked on 'X' and then hit 'Confirm'")
+                          textarea.textarea.is-medium(maxlength="500" name="comments" placeholder="I clicked on 'X' and then hit 'Confirm'")
+                            | #{comments}
                       button.button.is-info.is-pulled-right(type="submit") Submit
     script(type='text/javascript' src='../js/site.js')
     script(type='text/javascript' src='../js/error.js')
