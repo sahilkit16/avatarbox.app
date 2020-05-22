@@ -2,9 +2,10 @@ class LoginVM {
   constructor(){
     this.email = null;
     this.password = null;
+    this.isValid = false;
     this.errors = {
-      email: null,
-      password: null
+      email: "Missing email",
+      password: "Missing password"
     }
   }
 }
