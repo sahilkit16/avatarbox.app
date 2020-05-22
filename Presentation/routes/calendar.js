@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
     .catch((err) => {
       if (err instanceof ImageShortageError) {
         const model = new HomeVM();
-        model.user = model.navbar.user = user;
+        model.User = user;
         model.prompt = new ImageShortageVM(err);
         res.render("home", model);
       } else {
