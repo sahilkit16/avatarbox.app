@@ -1,6 +1,6 @@
 const NavBarView = require("./navbar.vm");
 
-class CalendarView {
+class CalendarVM {
   constructor() {
     this.images = [];
     this.navbar = new NavBarView();
@@ -10,4 +10,4 @@ class CalendarView {
   }
 }
 
-module.exports = CalendarView;
+module.exports = CalendarVM;

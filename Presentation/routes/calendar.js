@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const container = require("../../Common/di-container");
 const ThanksView = require("../view-models/thanks");
-const CalendarView = require("../view-models/calendar");
+const CalendarVM = require("../view-models/calendar.vm");
 const HomeView = require("../view-models/home");
 const ImageShortageVM = require("../view-models/image-shortage.vm");
 const ImageShortageError = require("../../Domain/image-shortage.error");
@@ -17,7 +17,7 @@ router.use(gravatarClientScope);
 router.get("/", async (req, res) => {
   const { user, calendar } = req.session;
   const renderCalendar = ({ images, isEnabled }) => {
-    const model = new CalendarView();
+    const model = new CalendarVM();
     model.title = "Calendar | Avatar Box";
     model.images = images;
     model.isEnabled = isEnabled;

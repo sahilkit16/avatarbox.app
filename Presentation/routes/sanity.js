@@ -1,14 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 const ThanksView = require("../view-models/thanks");
-const CalendarView = require("../view-models/calendar");
+const CalendarVM = require("../view-models/calendar.vm");
 const HomeView = require("../view-models/home");
 const ImageShortageVM = require("../view-models/image-shortage.vm");
 const ImageShortageError = require("../../Domain/image-shortage.error");
 const ErrorCode = require("../../Domain/error-code");
 
 router.get("/calendar", (req, res) => {
-  const model = new CalendarView();
+  const model = new CalendarVM();
   model.title = "Calendar | Avatar Box";
   model.images = [
     { day: "Now", url: "https://via.placeholder.com/200" },
