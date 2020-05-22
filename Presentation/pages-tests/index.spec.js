@@ -4,7 +4,7 @@ import IndexPage from "../pages/index";
 import configureStore from "../store/configureStore";
 import { Provider } from "react-redux";
 import { mount } from "enzyme";
-import HomeView from "../view-models/home";
+import HomeVM from "../view-models/home.vm";
 
 describe("IndexPage", () => {
   it("should render", async () => {
@@ -12,7 +12,7 @@ describe("IndexPage", () => {
       user: null,
       calendar: null,
     });
-    const model = new HomeView();
+    const model = new HomeVM();
     const component = (
       <Provider store={store}>
         <IndexPage {...model} />

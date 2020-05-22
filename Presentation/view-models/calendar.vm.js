@@ -1,9 +1,9 @@
-const NavBarView = require("./navbar.vm");
+const NavBarVM = require("./navbar.vm");
 
 class CalendarVM {
   constructor() {
     this.images = [];
-    this.navbar = new NavBarView();
+    this.navbar = new NavBarVM();
     this.navbar.isCosmetic = false;
     this.navbar.isTransparent = false;
     this.isEnabled = false;

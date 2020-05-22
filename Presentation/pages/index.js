@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
-import HomeView from "../view-models/home";
+import HomeVM from "../view-models/home.vm";
 import * as actions from "../actions/app.actions";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
@@ -12,7 +12,7 @@ import * as EmailValidator from "email-validator";
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
   const user = context.req.session.user;
-  const model = new HomeView();
+  const model = new HomeVM();
   model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
   model.User = user;
   model.validationMessage = context.req.session.validationMessage;

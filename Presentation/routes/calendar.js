@@ -2,7 +2,7 @@ const { Router } = require("express");
 const container = require("../../Common/di-container");
 const ThanksVM = require("../view-models/thanks.vm");
 const CalendarVM = require("../view-models/calendar.vm");
-const HomeView = require("../view-models/home");
+const HomeVM = require("../view-models/home.vm");
 const ImageShortageVM = require("../view-models/image-shortage.vm");
 const ImageShortageError = require("../../Domain/image-shortage.error");
 
@@ -37,7 +37,7 @@ router.get("/", async (req, res) => {
     })
     .catch((err) => {
       if (err instanceof ImageShortageError) {
-        const model = new HomeView();
+        const model = new HomeVM();
         model.user = model.navbar.user = user;
         model.prompt = new ImageShortageVM(err);
         res.render("home", model);

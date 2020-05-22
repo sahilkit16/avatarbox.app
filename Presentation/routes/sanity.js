@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const ThanksVM = require("../view-models/thanks.vm");
 const CalendarVM = require("../view-models/calendar.vm");
-const HomeView = require("../view-models/home");
+const HomeVM = require("../view-models/home.vm");
 const ImageShortageVM = require("../view-models/image-shortage.vm");
 const ImageShortageError = require("../../Domain/image-shortage.error");
 const ErrorCode = require("../../Domain/error-code");
@@ -25,17 +25,17 @@ router.get("/thanks", (req, res) => {
 });
 
 router.get("/home", (req, res) => {
-  res.render("home", new HomeView());
+  res.render("home", new HomeVM());
 });
 
 router.get("/invalid-creds", (req, res) => {
-  const model = new HomeView();
+  const model = new HomeVM();
   model.validationMessage = "Invalid email or password";
   res.render("home", model);
 });
 
 router.get("/image-shortage", (req, res) => {
-  const model = new HomeView();
+  const model = new HomeVM();
   model.user = model.navbar.user = true;
   const error = new ImageShortageError(ErrorCode.NoImages);
   model.prompt = new ImageShortageVM

@@ -1,8 +1,8 @@
-const NavBarView = require("./navbar.vm");
+const NavBarVM = require("./navbar.vm");
 
 class ThanksVM {
   constructor() {
-    this.navbar = new NavBarView();
+    this.navbar = new NavBarVM();
     this.navbar.isCosmetic = true;
     this.navbar.isTransparent = false;
   }

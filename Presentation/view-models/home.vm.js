@@ -1,8 +1,8 @@
-const NavBarView = require("./navbar.vm");
+const NavBarVM = require("./navbar.vm");
 
-class HomeView {
+class HomeVM {
   constructor() {
-    this.navbar = new NavBarView();
+    this.navbar = new NavBarVM();
     this.formAction = "/home/sign-in";
     this.validationMessage = null;
     this.prompt = null;
@@ -20,4 +20,4 @@ class HomeView {
   }
 }
 
-module.exports = HomeView;
+module.exports = HomeVM;
