@@ -174,7 +174,7 @@ class IndexPage extends React.Component {
                       className={classNames("input", "email", "step-1", {
                         "is-hidden": this.state.step == 2,
                       })}
-                      maxLength={50}
+                      maxLength={100}
                       name="email"
                       type="email"
                       placeholder="&#xf003; Email Address"
@@ -186,7 +186,7 @@ class IndexPage extends React.Component {
                       className={classNames("input", "text", {
                         "is-hidden": this.state.step == 1,
                       })}
-                      maxLength={50}
+                      maxLength={100}
                       type="password"
                       placeholder="&#xf084; Password"
                       onChange={this.updatePassword}
@@ -195,7 +195,7 @@ class IndexPage extends React.Component {
                     />
                     <noscript>
                       <input
-                        maxLength={50}
+                        maxLength={100}
                         className="input text step-2"
                         name="password"
                         type="password"

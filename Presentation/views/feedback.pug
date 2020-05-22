@@ -42,18 +42,18 @@ html#here
                           if errors.name 
                             p.has-text-danger #{errors.name}
                           .control
-                            input.input.is-medium(name="name" value=(name) type="text" placeholder="Mary Mack")
+                            input.input.is-medium(maxlength="100" name="name" value=(name) type="text" placeholder="Mary Mack")
                       .field
                         label.label Email
                           if errors.email 
                             p.has-text-danger #{errors.email}
                           .control
-                            input.input.is-medium(name="email" value=(email) type="email" placeholder="mary@example.com")
+                            input.input.is-medium(maxlength="100" name="email" value=(email) type="email" placeholder="mary@example.com")
                       .field
                         label.label What Happened?
                           if errors.comments 
                             p.has-text-danger #{errors.comments}
-                          textarea.textarea.is-medium(name="comments" value=comments placeholder="I clicked on 'X' and then hit 'Confirm'")
+                          textarea.textarea.is-medium(maxlength="500" name="comments" value=comments placeholder="I clicked on 'X' and then hit 'Confirm'")
                       button.button.is-info.is-pulled-right(type="submit") Submit
     script(type='text/javascript' src='../js/site.js')
     script(type='text/javascript' src='../js/error.js')

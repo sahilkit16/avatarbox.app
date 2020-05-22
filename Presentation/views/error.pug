@@ -49,14 +49,14 @@ html#here
                       .field
                         label.label Name
                           .control
-                            input.input.is-medium(name="name" type="text" placeholder="Mary Mack")
+                            input.input.is-medium(maxlength="100" name="name" type="text" placeholder="Mary Mack")
                       .field
                         label.label Email
                           .control
-                            input.input.is-medium(name="email" type="email" placeholder="mary@example.com")
+                            input.input.is-medium(maxlength="100" name="email" type="email" placeholder="mary@example.com")
                       .field
                         label.label What Happened?
-                          textarea.textarea.is-medium(name="comments" placeholder="I clicked on 'X' and then hit 'Confirm'")
+                          textarea.textarea.is-medium(maxlength="500" name="comments" placeholder="I clicked on 'X' and then hit 'Confirm'")
                       button.button.is-info.is-pulled-right(type="submit") Submit
               if eventId
                 .level
