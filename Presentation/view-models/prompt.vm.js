@@ -1,4 +1,4 @@
-class PromptView {
+class PromptVM {
   constructor(name, title, message) {
     this.name = name;
     this.title = title;
@@ -6,4 +6,4 @@ class PromptView {
   }
 }
 
-module.exports = PromptView;
+module.exports = PromptVM;

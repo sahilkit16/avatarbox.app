@@ -3,7 +3,7 @@ const router = Router();
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
 const HomeView = require("../view-models/home");
-const ImageShortagePrompt = require("../view-models/image-shortage-prompt");
+const ImageShortageVM = require("../view-models/image-shortage.vm");
 const ImageShortageError = require("../../Domain/image-shortage.error");
 const ErrorCode = require("../../Domain/error-code");
 
@@ -38,7 +38,8 @@ router.get("/image-shortage", (req, res) => {
   const model = new HomeView();
   model.user = model.navbar.user = true;
   const error = new ImageShortageError(ErrorCode.NoImages);
-  model.prompt = new ImageShortagePrompt(error);
+  model.prompt = new ImageShortageVM
+(error);
   res.render("home", model);
 });
 
