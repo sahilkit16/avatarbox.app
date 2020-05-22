@@ -7,7 +7,7 @@ import HomeVM from "../view-models/home.vm";
 import * as actions from "../actions/app.actions";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
-import * as EmailValidator from "email-validator";
+import validator from "validator";
 
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
@@ -91,7 +91,7 @@ class IndexPage extends React.Component {
     if (step == 1) {
       if (!this.state.email) {
         return this.showValidationMessage("Missing Email");
-      } else if (!EmailValidator.validate(this.state.email)) {
+      } else if (!validator.isEmail(this.state.email)) {
         return this.showValidationMessage("Invalid Email");
       }
       this.setState({
@@ -174,6 +174,7 @@ class IndexPage extends React.Component {
                       className={classNames("input", "email", "step-1", {
                         "is-hidden": this.state.step == 2,
                       })}
+                      maxLength={50}
                       name="email"
                       type="email"
                       placeholder="&#xf003; Email Address"
@@ -185,6 +186,7 @@ class IndexPage extends React.Component {
                       className={classNames("input", "text", {
                         "is-hidden": this.state.step == 1,
                       })}
+                      maxLength={50}
                       type="password"
                       placeholder="&#xf084; Password"
                       onChange={this.updatePassword}
@@ -193,6 +195,7 @@ class IndexPage extends React.Component {
                     />
                     <noscript>
                       <input
+                        maxLength={50}
                         className="input text step-2"
                         name="password"
                         type="password"

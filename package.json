@@ -30,7 +30,6 @@
     "cookie-session": "^1.4.0",
     "cucumber": "^6.0.5",
     "dotenv": "^8.2.0",
-    "email-validator": "^2.0.4",
     "expect": "^26.0.1",
     "express": "^4.17.1",
     "grav.client": "^2.4.14",
@@ -46,6 +45,7 @@
     "redis": "^3.0.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "validator": "^13.0.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
