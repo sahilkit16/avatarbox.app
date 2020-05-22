@@ -3,7 +3,7 @@ const router = Router();
 const ThanksView = require("../view-models/thanks");
 const CalendarView = require("../view-models/calendar");
 const HomeView = require("../view-models/home");
-const ImageShortagePrompt = require("../view-models/image-shortage");
+const ImageShortagePrompt = require("../view-models/image-shortage-prompt");
 const ImageShortageError = require("../../Domain/image-shortage.error");
 const ErrorCode = require("../../Domain/error-code");
 
