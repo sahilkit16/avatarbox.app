@@ -2,7 +2,7 @@
   "name": "avatarbox.web",
   "version": "1.0.0-alpha",
   "description": "web server for avatarbox.io",
-  "main": "index.js",
+  "main": "./Presentation/server.js",
   "scripts": {
     "format": "prettier --write \"Application/**/*.js\" \"Common/**/*.js\" \"Domain/**/*.js\" \"Infrastructure/**/*.js\" \"Presentation/**/*.js\" \"Services/**/*.js\" \"Specification/**/*.js\" \"Tests/**/*.js\"",
     "start": "node ./Presentation/server.js",
