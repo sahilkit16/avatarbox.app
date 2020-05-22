@@ -19,24 +19,24 @@ router.post("/", async (req, res) => {
   feedbackModel.email = req.body.email;
   feedbackModel.comments = req.body.comments;
 
-  const validationSummary = {};
+  const errors = {};
   const requiredFieldMessage = "This field is required";
-  validationSummary.name = feedbackModel.name ? null : requiredFieldMessage;
-  validationSummary.email = feedbackModel.email ? null : requiredFieldMessage;
-  validationSummary.comments = feedbackModel.comments
+  errors.name = feedbackModel.name ? null : requiredFieldMessage;
+  errors.email = feedbackModel.email ? null : requiredFieldMessage;
+  errors.comments = feedbackModel.comments
     ? null
     : requiredFieldMessage;
 
   if (feedbackModel.email && !EmailValidator.validate(feedbackModel.email)) {
-    validationSummary.email = "Invalid Email";
+    errors.email = "Invalid Email";
   }
 
   if (
-    validationSummary.name ||
-    validationSummary.email ||
-    validationSummary.comments
+    errors.name ||
+    errors.email ||
+    errors.comments
   ) {
-    feedbackModel.validationSummary = validationSummary;
+    feedbackModel.errors = errors;
     return res.render("feedback", feedbackModel);
   }
 

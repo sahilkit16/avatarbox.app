@@ -7,7 +7,7 @@ class FeedbackVM extends ThanksVM {
     this.name = null;
     this.email = null;
     this.comments = null;
-    this.validationSummary = {
+    this.errors = {
       name: null,
       email: null,
       comments: null,
