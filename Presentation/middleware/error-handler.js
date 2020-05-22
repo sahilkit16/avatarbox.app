@@ -2,11 +2,11 @@ require("dotenv").config();
 const container = require("../../Common/di-container");
 const crashReporter = container.resolve("crashReporter");
 const logger = container.resolve("logger");
-const ErrorView = require("../view-models/error");
+const ErrorVM = require("../view-models/error.vm");
 
 function errorHandler(err, req, res, next) {
   const eventId = crashReporter.submit(err);
-  const model = new ErrorView();
+  const model = new ErrorVM();
   const { message } = err;
   model.message = message;
   model.title = `500 Error | Avatar Box`;

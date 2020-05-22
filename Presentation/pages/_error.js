@@ -2,11 +2,11 @@ import Head from "next/head";
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import ErrorBody from "../components/error-body";
-import ErrorView from "../view-models/error";
+import ErrorVM from "../view-models/error.vm";
 import { useEffect } from "react";
 
 function Error({ statusCode, eventId }) {
-  const model = new ErrorView();
+  const model = new ErrorVM();
   model.title = "Error | Avatar Box";
   model.eventId = eventId;
 

@@ -1,6 +1,6 @@
 const ThanksView = require("./thanks");
 
-class ErrorView extends ThanksView {
+class ErrorVM extends ThanksView {
   constructor() {
     super();
     this.title = `Error | Avatar Box`;
@@ -10,4 +10,4 @@ class ErrorView extends ThanksView {
   }
 }
 
-module.exports = ErrorView;
+module.exports = ErrorVM;

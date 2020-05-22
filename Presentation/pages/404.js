@@ -1,10 +1,10 @@
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import ErrorBody from "../components/error-body";
-import ErrorView from "../view-models/error";
+import ErrorVM from "../view-models/error.vm";
 
 export default function Custom404() {
-  const model = new ErrorView();
+  const model = new ErrorVM();
   model.title = "Page Not Found | Avatar Box";
   model.subtitle = "404 Page Not Found";
   model.message = "The page you are looking for could not be found.";
