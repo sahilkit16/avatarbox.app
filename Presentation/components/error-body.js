@@ -57,7 +57,7 @@ export default function ErrorBody({ title, message, eventId }) {
                 <form className="form" action="/feedback" method="POST">
                   <input
                     className="is-hidden"
-                    readonly={true}
+                    readOnly={true}
                     name="eventId"
                     type="hidden"
                     value={`${state.eventId}`}
