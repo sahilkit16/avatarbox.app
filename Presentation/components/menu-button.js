@@ -1,11 +1,14 @@
-export default function MenuButton({ user }){
+import React from "react";
 
+export default function MenuButton({ user }) {
   const avatar = (
     <figure className="avatar-icon image is-32x32">
-      <img className="is-rounded" 
+      <img
+        className="is-rounded"
         width="32"
         height="32"
-        src={`https://www.gravatar.com/avatar/${user && user.hash}`} />
+        src={`https://www.gravatar.com/avatar/${user && user.hash}`}
+      />
     </figure>
   );
 
@@ -17,5 +20,5 @@ export default function MenuButton({ user }){
     </>
   );
 
-  return (user && user.hash) ? avatar : burger;
-};
+  return user && user.hash ? avatar : burger;
+}

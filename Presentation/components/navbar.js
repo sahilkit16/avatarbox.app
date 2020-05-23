@@ -84,7 +84,7 @@ function NavBar({ model }) {
               </a>
             </span>
             <div className={model.user ? "avatar-icon" : "is-hidden"}>
-                <MenuButton user={model.user} />
+              <MenuButton user={model.user} />
             </div>
             <noscript>
               <a href="#" className="button is-transparent">

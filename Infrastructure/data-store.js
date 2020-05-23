@@ -14,7 +14,7 @@ class DataStore {
         { useNewUrlParser: true, useUnifiedTopology: true },
         (error) => {
           if (error) {
-            reject(new Error("db connection failed"))
+            reject(new Error("db connection failed"));
           } else {
             this.logger.notice("db connected");
             resolve(true);
