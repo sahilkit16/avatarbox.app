@@ -1,9 +1,7 @@
 const http = require("http");
 const next = require("next");
 const { app, setHandler } = require("./app");
-const DataStore = require("../Infrastructure/data-store");
-const Logger = require("../Common/logger");
-const CrashReporter = require("../Common/crash-reporter.server");
+const container = require("../Common/di-container");
 
 // workaround for dev container
 // see https://github.com/zeit/next.js/issues/4022
@@ -16,21 +14,29 @@ setHandler((req, res) => {
   return handle(req, res);
 });
 
-nx.prepare().then(() => {
-  const dataStore = new DataStore();
-  const logger = new Logger();
-  dataStore.connect().then(() => {
-    const crashReporter = new CrashReporter();
-    const port = process.env.PORT || 8801;
+const crashReporter = container.resolve("crashReporter");
+const dataStore = container.resolve("dataStore");
+const logger = container.resolve("logger");
+const messageBroker = container.resolve("messageBroker");
+
+nx.prepare()
+.then(() => dataStore.connect())
+.then(() => messageBroker.connect("hello"))
+.then(() => {
+  const port = process.env.PORT || 8801;
+  return new Promise((resolve, reject) => {
     http
-      .createServer(app)
-      .listen(port, function () {
-        logger.info(`magic is happening on port ${port}`);
-      })
-      .on("error", (err) => {
-        crashReporter.submit(err);
-        logger.error("could not start the http server");
-        dataStore.disconnect();
-      });
-  });
-});
+    .createServer(app)
+    .listen(port, function () {
+      logger.notice(`magic is happening on port ${port}`);
+      resolve(true);
+    }).on("error", reject)
+  })
+})
+.catch(err => {
+  crashReporter.submit(err);
+  logger.error(err.message);
+  dataStore.disconnect();
+  messageBroker.disconnect();
+  process.exit(0);
+})
