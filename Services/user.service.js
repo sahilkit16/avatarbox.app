@@ -45,7 +45,6 @@ class UserService {
             return reject(err);
           }
 
-          //TODO: use logic to create helper function
           const didToggleCalendar =
             status.ok == 1 && status.n == 1 && status.nModified == 1;
           const didNotModify =
