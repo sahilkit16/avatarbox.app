@@ -55,8 +55,12 @@ router.post("/submit", async (req, res, next) => {
     userService
       .toggleCalendar(user.email, calendar.isEnabled)
       .then((didToggleCalendar) => {
+        const messageBroker = container.resolve("messageBroker");
         if (didToggleCalendar) {
           delete req.session.calendar;
+          if (!calendar.isEnabled) {
+            messageBroker.send(`update gravatar for ${user.email}`);
+          }
         }
         if (didToggleCalendar && isNewUser) {
           delete req.session.isNewUser;
