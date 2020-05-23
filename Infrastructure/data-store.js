@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-const Logger = require("../Common/logger");
 
 class DataStore {
-  constructor(logger = new Logger()) {
+  constructor({ logger }) {
     this.logger = logger;
   }
   async connect() {
@@ -14,10 +13,10 @@ class DataStore {
         { useNewUrlParser: true, useUnifiedTopology: true },
         (error) => {
           if (error) {
-            reject(new Error("db connection failed"));
+            reject(error);
           } else {
             this.logger.notice("db connected");
-            resolve(true);
+            resolve(this);
           }
         }
       );
