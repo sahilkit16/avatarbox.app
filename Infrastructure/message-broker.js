@@ -1,4 +1,4 @@
-var amqp = require('amqplib/callback_api');
+var amqp = require("amqplib/callback_api");
 
 class MessageBroker {
   constructor({ logger }) {
@@ -10,7 +10,7 @@ class MessageBroker {
   async connect(queue) {
     this.queue = queue;
     return new Promise((resolve, reject) => {
-      amqp.connect('amqp://avatarbox:5672', (connectionError, connection) => {
+      amqp.connect("amqp://avatarbox:5672", (connectionError, connection) => {
         if (connectionError) {
           reject(connectionError);
         } else {
@@ -20,7 +20,7 @@ class MessageBroker {
               reject(channelError);
             } else {
               channel.assertQueue(queue, {
-                durable: false
+                durable: false,
               });
               this.channel = channel;
               this.logger.notice("broker connected");
@@ -28,22 +28,22 @@ class MessageBroker {
             }
           });
         }
-      })
-    })
+      });
+    });
   }
-  send(message, queue = this.queue){
-    if(this.channel && queue){
+  send(message, queue = this.queue) {
+    if (this.channel && queue) {
       this.channel.sendToQueue(queue, Buffer.from(message));
       this.logger.notice(`message sent: ${message}`);
-    } else if(!this.channel) {
+    } else if (!this.channel) {
       this.logger.warn("missing channel - could not send message");
-    } else if(!queue) {
+    } else if (!queue) {
       this.logger.warn("missing queue name - could not send message");
     }
   }
 
-  disconnect(){
-    if(this.connection){
+  disconnect() {
+    if (this.connection) {
       this.connection.close();
       this.logger.warn("message broker disconnected");
     }

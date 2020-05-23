@@ -20,23 +20,24 @@ const logger = container.resolve("logger");
 const messageBroker = container.resolve("messageBroker");
 
 nx.prepare()
-.then(() => dataStore.connect())
-.then(() => messageBroker.connect("hello"))
-.then(() => {
-  const port = process.env.PORT || 8801;
-  return new Promise((resolve, reject) => {
-    http
-    .createServer(app)
-    .listen(port, function () {
-      logger.notice(`magic is happening on port ${port}`);
-      resolve(true);
-    }).on("error", reject)
+  .then(() => dataStore.connect())
+  .then(() => messageBroker.connect("hello"))
+  .then(() => {
+    const port = process.env.PORT || 8801;
+    return new Promise((resolve, reject) => {
+      http
+        .createServer(app)
+        .listen(port, function () {
+          logger.notice(`magic is happening on port ${port}`);
+          resolve(true);
+        })
+        .on("error", reject);
+    });
   })
-})
-.catch(err => {
-  crashReporter.submit(err);
-  logger.error(err.message);
-  dataStore.disconnect();
-  messageBroker.disconnect();
-  process.exit(0);
-})
+  .catch((err) => {
+    crashReporter.submit(err);
+    logger.error(err.message);
+    dataStore.disconnect();
+    messageBroker.disconnect();
+    process.exit(0);
+  });
