@@ -97,9 +97,16 @@ noscript span.navbar-burger.burger {
   color: black;
 }
 
-.avatar-icon {
+.navbar-end .avatar-icon {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+[data-target="navbar-menu"] .avatar-icon,
+noscript .avatar-icon {
+  margin: auto;
+  height: 100%;
+  padding: 10px 0;
 }
 
 @media screen and (max-width:768px){
@@ -113,7 +120,7 @@ noscript span.navbar-burger.burger {
 }
 
 @media screen and (max-width:1024px) {
-  .avatar-icon {
+  .navbar-end .avatar-icon {
     display: none;
   }
 }

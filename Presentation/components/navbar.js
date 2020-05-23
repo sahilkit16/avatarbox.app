@@ -1,4 +1,5 @@
 import React from "react";
+import MenuButton from "./menu-button";
 const classNames = require("classnames");
 
 function NavBar({ model }) {
@@ -27,9 +28,7 @@ function NavBar({ model }) {
               }
             )}
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            <MenuButton user={model.user} />
           </span>
           <noscript>
             <a
@@ -40,9 +39,7 @@ function NavBar({ model }) {
                 "has-background-grey-darker": !model.isTransparent,
               })}
             >
-              <span></span>
-              <span></span>
-              <span></span>
+              <MenuButton user={model.user} />
             </a>
           </noscript>
         </div>
@@ -87,12 +84,7 @@ function NavBar({ model }) {
               </a>
             </span>
             <div className={model.user ? "avatar-icon" : "is-hidden"}>
-                <figure className="image is-32x32">
-                  <img className="is-rounded" 
-                    width="32"
-                    height="32"
-                    src={`https://www.gravatar.com/avatar/${model.user ? model.user.hash : null}`} />
-                </figure>
+                <MenuButton user={model.user} />
             </div>
             <noscript>
               <a href="#" className="button is-transparent">

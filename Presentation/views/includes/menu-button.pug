@@ -1,0 +1,7 @@
+if navbar.user
+  figure.avatar-icon(class=(navbar.user ? "image is-32x32" : "is-hidden"))
+            img(class=("is-rounded") width="32" height="32" src=(`https://www.gravatar.com/avatar/${navbar.user.hash}`))
+else
+  span
+  span
+  span

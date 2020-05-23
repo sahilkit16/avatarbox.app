@@ -6,14 +6,10 @@ nav(class=(`navbar ${isCentered} ${isTransparent}`))
       a(class='navbar-item is-transparent' href='/')
         img(src='/images/avatarbox.png' alt='Logo')
       span(data-target="navbar-menu" class=(navbar.isCosmetic ? "is-hidden" : "navbar-burger burger script-enabled cloak"))
-          span
-          span
-          span
+        include ./menu-button.pug
       noscript
         a(href="#menu" class=(navbar.isCosmetic ? "is-hidden" : "script-enabled")).navbar-burger.burger
-          span
-          span
-          span
+          include ./menu-button.pug
     div(class=(`${isTransparent} ${navbar.isCosmetic ? "is-hidden" : ""}`))#navbar-menu.navbar-menu.has-text-centered
       .navbar-end
         span(class=(!navbar.isCosmetic ? "navbar-item" : "is-hidden"))
@@ -29,10 +25,8 @@ nav(class=(`navbar ${isCentered} ${isTransparent}`))
         span(class=(navbar.user ? "navbar-item" : "is-hidden"))
           a(class='has-text-white' href='/home/sign-out')
             | Sign Out
-        if navbar.user 
-          div.avatar-icon
-            figure(class=(navbar.user ? "image is-32x32" : "is-hidden"))
-              img(class=("is-rounded") width="32" height="32" src=(`https://www.gravatar.com/avatar/${navbar.user.hash}`))
+        if navbar.user
+          include ./menu-button.pug
         noscript
           a(href="#" class=(`button is-transparent`))    
             span(class=(navbar.isCosmetic ? "is-hidden" : "")).navbar-burger.burger.is-active
