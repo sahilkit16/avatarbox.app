@@ -1,8 +1,9 @@
 const request = require("supertest");
 const { app } = require("../Presentation/app");
 const DataStore = require("../Infrastructure/data-store");
+const Logger = require("../Common/logger");
 
-const dataStore = new DataStore();
+const dataStore = new DataStore({ logger: new Logger() });
 
 describe("app", () => {
   beforeAll(async () => {
