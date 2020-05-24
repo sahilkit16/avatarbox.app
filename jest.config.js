@@ -20,4 +20,6 @@ module.exports = {
 
   // https://mongoosejs.com/docs/jest.html
   testEnvironment: 'node',
+  
+  setupFilesAfterEnv: ['mock-local-storage']
 };
