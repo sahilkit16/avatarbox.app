@@ -34,7 +34,7 @@ class MessageBroker {
   send(message, queue = this.queue) {
     if (this.channel && queue) {
       this.channel.sendToQueue(queue, Buffer.from(message));
-      this.logger.notice(`message sent: ${message}`);
+      this.logger.notice(`broker message sent`);
     } else if (!this.channel) {
       this.logger.warn("missing channel - could not send message");
     } else if (!queue) {
