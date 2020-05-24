@@ -21,7 +21,7 @@ const messageBroker = container.resolve("messageBroker");
 
 nx.prepare()
   .then(() => dataStore.connect())
-  .then(() => messageBroker.connect("update-gravatar"))
+  .then(() => messageBroker.connect("update-gravatar-icon"))
   .then(() => {
     const port = process.env.PORT || 8801;
     return new Promise((resolve, reject) => {
