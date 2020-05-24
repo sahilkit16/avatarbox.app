@@ -59,7 +59,7 @@ router.post("/submit", async (req, res, next) => {
         if (didToggleCalendar) {
           delete req.session.calendar;
           if (!calendar.isEnabled) {
-            messageBroker.send(`update gravatar for ${user.email}`);
+            messageBroker.send(user.email);
           }
         }
         if (didToggleCalendar && isNewUser) {
