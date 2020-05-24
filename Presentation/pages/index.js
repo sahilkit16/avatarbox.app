@@ -8,11 +8,11 @@ import * as actions from "../actions/app.actions";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
 import LoginVM from "../view-models/login.vm";
+import CacheSeed from "../components/cache-seed.renderless";
 
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
   const user = context.req.session.user;
-  //user.hash = userid;
   const model = new HomeVM();
   model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
   model.User = user;
@@ -229,6 +229,7 @@ class IndexPage extends React.Component {
             </div>
           </div>
         </div>
+        <CacheSeed />
       </HeroSection>
     );
   }
