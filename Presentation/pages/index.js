@@ -9,6 +9,7 @@ import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
 import LoginVM from "../view-models/login.vm";
 import CacheSeed from "../components/cache-seed.renderless";
+import BrowserCache from "../../Infrastructure/browser-cache";
 
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
@@ -45,8 +46,13 @@ class IndexPage extends React.Component {
       this.clearInputFields();
     }
     this.setState({ cloak: false });
-    if(typeof site != "undefined"){
-      site.subscribe();
+    const { user } = this.props.navbar;
+    if(user && typeof site != "undefined"){
+      const browserCache = new BrowserCache();
+      const channelId = browserCache.session.getItem("channel-id");
+      if(channelId){
+        site.subscribe(channelId);
+      }
     }
   }
 

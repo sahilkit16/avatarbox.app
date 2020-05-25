@@ -8,11 +8,12 @@ const site = (function () {
         element.classList.remove("cloak");
       });
     },
-    subscribe(){
-      var pusher = new Pusher('4b3d3754ce062c9899c6', {
+    subscribe(channelId){
+      if(!channelId) throw new Error("missing channel id - could not subscribe to Pusher");
+      const pusher = new Pusher('4b3d3754ce062c9899c6', {
         cluster: 'mt1'
       });
-      var channel = pusher.subscribe('gravatar-channel');
+      const channel = pusher.subscribe(channelId);
       channel.bind('update-event', function({message}) {
         alert(message);
       });
