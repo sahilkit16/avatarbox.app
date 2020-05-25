@@ -13,6 +13,7 @@ const notFoundRoute = require("./routes/notfound");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/error-handler");
 const crashReporterScope = require("./middleware/crash-reporter-scope");
+const sessionWatcher = require("./middleware/session-watcher");
 
 // workaround for dev container
 // see https://github.com/zeit/next.js/issues/4022
@@ -42,6 +43,8 @@ if (process.env.SANITY) {
 } else {
   app.use("/sanity", notFoundRoute);
 }
+
+app.use(sessionWatcher);
 
 app.use("/calendar", calendarRoute);
 
