@@ -47,10 +47,11 @@ class IndexPage extends React.Component {
     }
     this.setState({ cloak: false });
     const { user } = this.props.navbar;
-    if(user && typeof site != "undefined"){
+
+    if (user && typeof site != "undefined") {
       const browserCache = new BrowserCache();
       const channelId = browserCache.session.getItem("channel-id");
-      if(channelId){
+      if (channelId) {
         site.subscribe(channelId);
       }
     }

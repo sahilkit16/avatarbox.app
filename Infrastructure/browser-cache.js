@@ -1,9 +1,9 @@
 class BrowserCache {
-  constructor(){
-    if(typeof sessionStorage != "undefined"){
+  constructor() {
+    if (typeof sessionStorage != "undefined") {
       this.session = sessionStorage;
     }
-    if(typeof localStorage != "undefined"){
+    if (typeof localStorage != "undefined") {
       this.local = localStorage;
     }
   }

@@ -17,7 +17,7 @@ async function gravatarClientScope(req, res, next) {
     next();
   } else if (req.method == "GET") {
     const { user } = req.session;
-    if(!user) return next();
+    if (!user) return next();
     const rsaService = container.resolve("rsaService");
     rsaService
       .decrypt(user.password)

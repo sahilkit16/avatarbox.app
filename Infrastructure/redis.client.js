@@ -60,13 +60,11 @@ class RedisClient {
         resolve(reply);
       });
     });
-    
   }
 
-  expire(key, seconds){
+  expire(key, seconds) {
     this._client.expire(key, seconds);
   }
-
 }
 
 module.exports = RedisClient;

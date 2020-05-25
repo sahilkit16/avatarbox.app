@@ -23,10 +23,11 @@ class CacheService {
   async hdel(key, field) {
     return await this._cache.hdel(key, field);
   }
-  async touchSession(emailHash){
+  async touchSession(emailHash) {
     const activeSessionKeyName = "hasActiveSession";
     const activeSessionTTLSeconds = 120;
-    const hasActiveSession = await this.hget(emailHash, activeSessionKeyName) || true;
+    const hasActiveSession =
+      (await this.hget(emailHash, activeSessionKeyName)) || true;
     this.hset(emailHash, activeSessionKeyName, hasActiveSession);
     this._cache.expire(emailHash, activeSessionTTLSeconds);
     return hasActiveSession;
