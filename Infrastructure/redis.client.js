@@ -60,6 +60,11 @@ class RedisClient {
         resolve(reply);
       });
     });
+    
+  }
+
+  expire(key, seconds){
+    this._client.expire(key, seconds);
   }
 
 }
