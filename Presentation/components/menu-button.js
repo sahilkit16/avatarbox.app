@@ -2,7 +2,7 @@ import React from "react";
 
 export default function MenuButton({ user }) {
   const avatar = (
-    <figure className="avatar-icon image is-32x32">
+    <figure className="avatar-icon image is-32x32" title={user && user.email} alt={user && user.email}>
       <img
         className="is-rounded"
         width="32"
