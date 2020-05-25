@@ -88,7 +88,7 @@ router.post("/sign-in", async (req, res) => {
             if (isAjax) {
               res.end();
             } else {
-              res.redirect("/calendar");
+              res.redirect("/calendar#");
             }
           })
           .catch((err) => req.unauthorized());

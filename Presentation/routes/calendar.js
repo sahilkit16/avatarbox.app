@@ -66,7 +66,7 @@ router.post("/submit", async (req, res, next) => {
           delete req.session.isNewUser;
           return res.render("thanks", new ThanksVM());
         }
-        res.redirect("/calendar");
+        res.redirect("/calendar#");
       })
       .catch(next);
   }

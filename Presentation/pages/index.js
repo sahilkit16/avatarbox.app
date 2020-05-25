@@ -119,7 +119,7 @@ class IndexPage extends React.Component {
       const { email, password } = this.state;
       signIn({ email, password: encrypt(password) })
         .then(() => {
-          setTimeout(() => (window.location = "/calendar"), 500);
+          setTimeout(() => (window.location = "/calendar#"), 500);
         })
         .catch((validationMessage) => {
           this.setState({
@@ -169,7 +169,7 @@ class IndexPage extends React.Component {
                 A handy resource to auto update your Gravatar icon
               </h2>
               <div className={`${!this.props.user && "is-hidden"}`}>
-                <a className="button is-white" href="/calendar">
+                <a className="button is-white" href="/calendar#">
                   <i className="fa fa-calendar"></i>
                   &nbsp; Calendar
                 </a>
