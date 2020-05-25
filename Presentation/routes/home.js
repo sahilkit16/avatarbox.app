@@ -7,6 +7,8 @@ const { unauthorized } = require("../middleware/unauthorized");
 const { GravatarClient } = require("grav.client");
 const LoginVM = require("../view-models/login.vm");
 
+const cacheService = container.resolve("cacheService");
+
 router.use(unauthorized);
 router.use(gravatarClientScope);
 
@@ -68,6 +70,7 @@ router.post("/sign-in", async (req, res) => {
             ? req.body.password
             : await rsaService.encrypt(password);
           user.hash = client.emailHash;
+          cacheService.touchSession(user.hash);
           req.session.user = user;
           req.scope.register({
             gravatarClient: asValue(client),
