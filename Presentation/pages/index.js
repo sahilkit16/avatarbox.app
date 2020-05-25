@@ -45,6 +45,9 @@ class IndexPage extends React.Component {
       this.clearInputFields();
     }
     this.setState({ cloak: false });
+    if(typeof site != "undefined"){
+      site.subscribe();
+    }
   }
 
   componentDidUpdate() {
