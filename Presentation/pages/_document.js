@@ -53,13 +53,14 @@ class AvatarBoxSite extends Document {
         <body id="menu">
           <Main />
           <NextScript />
-          <script async type="text/javascript" src="../js/site.js"></script>
-          <script async type="text/javascript" src="../js/bulma.js"></script>
           <script
             async
             type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"
           ></script>
+          <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+          <script async type="text/javascript" src="../js/site.js"></script>
+          <script async type="text/javascript" src="../js/bulma.js"></script>
           <script
             async
             type="text/javascript"
