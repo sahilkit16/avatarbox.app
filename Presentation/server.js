@@ -39,5 +39,5 @@ nx.prepare()
     logger.error(err.message);
     dataStore.disconnect();
     messageBroker.disconnect();
-    process.exit(0);
+    process.exit(1);
   });

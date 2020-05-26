@@ -42,6 +42,7 @@ class MessageBroker {
                   reject(exchangeError);
                 } else {
                   this.channel = channel;
+                  this.logger.notice("message broker connected");
                   resolve(this);
                 }
               })
