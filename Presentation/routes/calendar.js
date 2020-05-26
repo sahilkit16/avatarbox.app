@@ -59,7 +59,7 @@ router.post("/submit", async (req, res, next) => {
         if (didToggleCalendar) {
           delete req.session.calendar;
           if (!calendar.isEnabled) {
-            messageBroker.publish("update.single", user.email);
+            messageBroker.publish("update.now", user.email, { priority: 2 });
           }
         }
         if (didToggleCalendar && isNewUser) {
