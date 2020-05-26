@@ -45,4 +45,5 @@ window.addEventListener("load", function () {
   }
   document.getElementById("enable").addEventListener("click", wait);
   document.getElementById("disable").addEventListener("click", wait);
+  window.notyf = new Notyf();
 });

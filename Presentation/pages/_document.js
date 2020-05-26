@@ -48,12 +48,15 @@ class AvatarBoxSite extends Document {
             type="text/css"
             href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css"
           />
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css" />
           <link rel="stylesheet" type="text/css" href="../css/site.css" />
         </Head>
         <body id="menu">
           <Main />
           <NextScript />
-          <script
+        </body>
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        <script
             async
             type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"
@@ -66,7 +69,6 @@ class AvatarBoxSite extends Document {
             type="text/javascript"
             src="../js/rsa-encrypt.js"
           ></script>
-        </body>
       </Html>
     );
   }
