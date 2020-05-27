@@ -76,7 +76,12 @@ class MessageBroker {
 
   publish(routingKey, message, priority = 1) {
     if (this.channel) {
-      this.channel.publish(exchange, routingKey, Buffer.from(message), priority);
+      this.channel.publish(
+        exchange,
+        routingKey,
+        Buffer.from(message),
+        priority
+      );
     } else {
       this.logger.warn("no channel - message not published");
     }
