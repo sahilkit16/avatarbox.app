@@ -16,7 +16,7 @@ const site = (function () {
       });
       const channel = pusher.subscribe(channelId);
       channel.bind("update-event", function ({ message }) {
-        alert(message);
+        window.notyf.success(message);
       });
     },
   };

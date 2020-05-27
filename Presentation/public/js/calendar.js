@@ -1,3 +1,4 @@
+// TODO: clean up (use redux to separate view from state)
 window.addEventListener("load", function () {
   class Slides {
     constructor() {
@@ -55,8 +56,30 @@ window.addEventListener("load", function () {
         throw new Error(res.textStatus);
       }
     })
-    // TODO: update UI (calendar images + button states)
-    .then(console.log);
+    .then(calendar => {
+      const slides = document.querySelector(".slides");
+      slides.innerHTML = calendar.images.reduce((prev, img, index) => {
+        return `${prev}<figure id="avatar-${index}">
+                  <img src="${img.url}"/>
+                  <p class="has-text-grey is-size-7">${img.day}</p>
+                </figure>`;
+      }, "");
+      window.location.hash = "#";
+      function toggleIsHidden(el){
+        if(el.className.indexOf("is-hidden") > -1){
+          el.className = el.className.replace("is-hidden", "");
+        } else {
+          el.className += " is-hidden";
+        }
+      }
+      const btnNext = document.querySelectorAll(".btn-next");
+      const btnSubmit = document.querySelectorAll(".btn-submit");
+      const disclaimer = document.querySelectorAll("#disclaimer h2");
+      btnNext.forEach(toggleIsHidden);
+      btnSubmit.forEach(toggleIsHidden);
+      disclaimer.forEach(toggleIsHidden);
+      e.target.className = e.target.className.replace(" is-loading", "");
+    });
   }
   document.getElementById("enable").setAttribute("type", "button");
   document.getElementById("disable").setAttribute("type", "button");
