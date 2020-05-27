@@ -9,15 +9,10 @@ async function gravatarClientScope(req, res, next) {
     _handleUnauthorized(req, res);
   };
   req.scope = createContainer().createScope();
-  if (req.method == "POST") {
-    const { email } = req.body || {};
-    req.scope.register({
-      gravatarClient: asValue(new GravatarClient(email, null)),
-    });
-    next();
-  } else if (req.method == "GET") {
-    const { user } = req.session;
-    if (!user) return next();
+
+  const { user } = req.session;
+  const { email } = req.body;
+  if (user) {
     const rsaService = container.resolve("rsaService");
     rsaService
       .decrypt(user.password)
@@ -28,6 +23,13 @@ async function gravatarClientScope(req, res, next) {
         next();
       })
       .catch(_unauthorized);
+  } else if (email && req.method == "POST") {
+    req.scope.register({
+      gravatarClient: asValue(new GravatarClient(email, null)),
+    });
+    next();
+  } else {
+    return next();
   }
 }
 
