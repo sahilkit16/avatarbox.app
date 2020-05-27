@@ -6,34 +6,45 @@ const HomeVM = require("../view-models/home.vm");
 const ImageShortageVM = require("../view-models/image-shortage.vm");
 const ImageShortageError = require("../../Domain/image-shortage.error");
 
+const isAjax = require("../middleware/is-ajax");
 const isAuthenticated = require("../middleware/is-authenticated");
 const gravatarClientScope = require("../middleware/gravatar-client-scope");
 
 const router = Router();
 
+router.use(isAjax);
 router.use(isAuthenticated);
 router.use(gravatarClientScope);
 
+router.use((req, res, next) => {
+  req.renderCalendar = function (calendar) {
+    req.session.calendar = calendar;
+    const { images, isEnabled } = calendar;
+    if (req.isAjax) {
+      return res.json(calendar);
+    } else {
+      const model = new CalendarVM();
+      model.title = "Calendar | Avatar Box";
+      model.images = images;
+      model.isEnabled = isEnabled;
+      model.navbar.user = req.session.user;
+      return res.render("calendar", model);
+    }
+  };
+  next();
+});
+
 router.get("/", async (req, res) => {
   const { user, calendar } = req.session;
-  const renderCalendar = ({ images, isEnabled }) => {
-    const model = new CalendarVM();
-    model.title = "Calendar | Avatar Box";
-    model.images = images;
-    model.isEnabled = isEnabled;
-    model.navbar.user = user;
-    res.render("calendar", model);
-  };
   if (calendar) {
-    return renderCalendar(calendar);
+    return req.renderCalendar(calendar);
   }
   const buildCalendar = container.resolve("buildCalendar");
   buildCalendar.client = req.scope.resolve("gravatarClient");
   buildCalendar
     .execute()
-    .then(async (newCalendar) => {
-      req.session.calendar = newCalendar;
-      renderCalendar(newCalendar);
+    .then((newCalendar) => {
+      req.renderCalendar(newCalendar);
     })
     .catch((err) => {
       if (err instanceof ImageShortageError) {
@@ -62,11 +73,16 @@ router.post("/submit", async (req, res, next) => {
             messageBroker.publish("update.now", user.email, { priority: 2 });
           }
         }
+        // TODO: compensate for ajax
+        // (perhaps put a guid in session
+        //  and then redirect to /thanks)
         if (didToggleCalendar && isNewUser) {
           delete req.session.isNewUser;
           return res.render("thanks", new ThanksVM());
         }
-        res.redirect("/calendar#");
+        const buildCalendar = container.resolve("buildCalendar");
+        buildCalendar.client = req.scope.resolve("gravatarClient");
+        buildCalendar.execute().then(req.renderCalendar);
       })
       .catch(next);
   }

@@ -40,10 +40,27 @@ window.addEventListener("load", function () {
     }
   }
   new Slides().load();
-  function wait(e) {
+  function toggleCalendar(e) {
     e.target.className += " is-loading";
+    fetch("/calendar/submit", {
+      method: "POST",
+      headers: {
+        accept: 'application/json'
+      }
+    }).then(async res => {
+      if(res.ok){
+        const calendar = res.json();
+        return calendar;
+      } else {
+        throw new Error(res.textStatus);
+      }
+    })
+    // TODO: update UI (calendar images + button states)
+    .then(console.log);
   }
-  document.getElementById("enable").addEventListener("click", wait);
-  document.getElementById("disable").addEventListener("click", wait);
+  document.getElementById("enable").setAttribute("type", "button");
+  document.getElementById("disable").setAttribute("type", "button");
+  document.getElementById("enable").addEventListener("click", toggleCalendar);
+  document.getElementById("disable").addEventListener("click", toggleCalendar);
   window.notyf = new Notyf();
 });
