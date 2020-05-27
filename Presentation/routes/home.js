@@ -42,19 +42,18 @@ router.post("/get-started", async (req, res) => {
 router.post("/sign-in", async (req, res) => {
   let { password } = req.body;
   const loginVm = new LoginVM();
-  const isAjax = req.is("application/json");
   loginVm.email = req.session.email || req.body.email;
   loginVm.password = password;
 
   if (loginVm.errors.email) {
     return req.unauthorized(loginVm.errors.email, "/");
-  } else if (!isAjax && loginVm.errors.password) {
+  } else if (!req.isAjax && loginVm.errors.password) {
     return req.unauthorized(loginVm.errors.password, "/?next=1#here");
   }
 
   const rsaService = container.resolve("rsaService");
 
-  if (isAjax) {
+  if (req.isAjax) {
     password = await rsaService.decrypt(password);
   }
 
@@ -66,7 +65,7 @@ router.post("/sign-in", async (req, res) => {
       .test()
       .then(async (response) => {
         if (!!response) {
-          user.password = isAjax
+          user.password = req.isAjax
             ? req.body.password
             : await rsaService.encrypt(password);
           user.hash = client.emailHash;
@@ -85,7 +84,7 @@ router.post("/sign-in", async (req, res) => {
           .findOrCreate(user.email, user.password)
           .then((usr) => {
             req.session.isNewUser = usr.isNew;
-            if (isAjax) {
+            if (req.isAjax) {
               res.end();
             } else {
               res.redirect("/calendar#");
