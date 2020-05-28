@@ -16,7 +16,7 @@ class HomeVM {
     this.user = value;
     this.navbar.user = value;
   }
-  asPOJO() {
+  toObject() {
     return JSON.parse(JSON.stringify(this));
   }
 }

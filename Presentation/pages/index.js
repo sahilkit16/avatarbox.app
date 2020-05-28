@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
   model.validationMessage = context.req.session.validationMessage;
   context.req.session.validationMessage = null;
   return {
-    props: model.asPOJO(),
+    props: model.toObject(),
   };
 }
 

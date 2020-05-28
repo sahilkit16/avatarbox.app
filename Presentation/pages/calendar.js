@@ -12,7 +12,7 @@ export async function getServerSideProps(context) {
   model.isEnabled = calendar.isEnabled;
   model.navbar.user = user;
   return {
-    props: model.asPOJO(),
+    props: model.toObject(),
   };
 }
 

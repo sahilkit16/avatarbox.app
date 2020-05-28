@@ -67,7 +67,7 @@ class FeedbackVM extends ThanksVM {
     return getProxy(this);
   }
 
-  asPOJO() {
+  toObject() {
     return {
       name: this.name,
       email: this.email,

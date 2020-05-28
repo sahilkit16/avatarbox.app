@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
         authorization: `DSN ${process.env.SENTRY_DSN}`,
         "content-type": "application/json",
       },
-      body: JSON.stringify(feedbackVm.asPOJO()),
+      body: JSON.stringify(feedbackVm.toObject()),
     }
   ).then(async (_res) => {
     if (_res.ok) {
