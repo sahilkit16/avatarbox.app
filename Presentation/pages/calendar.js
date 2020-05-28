@@ -27,7 +27,7 @@ class CalendarPage extends React.Component {
   renderImages(){
     return this.props.images.map((image, index) => (
       <figure id={`avatar-${index}`} key={`avatar-${index}`}>
-        <img className="is-block-centered" src={image.url} />
+        <img width="200" height="200" className="calendar-img is-block-centered" src={image.url} />
         <p className="has-text-grey is-size-7">{image.day}</p>
       </figure>
     ))
