@@ -9,10 +9,12 @@ export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
   const user = context.req.session.user;
   const model = new HomeVM();
+  model.prompt = context.req.session.prompt || null;
   model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
   model.User = user;
   model.validationMessage = context.req.session.validationMessage;
   context.req.session.validationMessage = null;
+  context.req.session.prompt = null;
   return {
     props: model.toObject(),
   };

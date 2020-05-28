@@ -3,8 +3,8 @@ const container = require("../../Common/di-container");
 // const ThanksVM = require("../view-models/thanks.vm");
 // const CalendarVM = require("../view-models/calendar.vm");
 // const HomeVM = require("../view-models/home.vm");
-// const ImageShortageVM = require("../view-models/image-shortage.vm");
-// const ImageShortageError = require("../../Domain/image-shortage.error");
+const ImageShortageVM = require("../view-models/image-shortage.vm");
+const ImageShortageError = require("../../Domain/image-shortage.error");
 
 const isAjax = require("../middleware/is-ajax");
 const isAuthenticated = require("../middleware/is-authenticated");
@@ -45,7 +45,14 @@ router.use((req, res, next) => {
       .then((calendar) => {
         req.session.calendar = calendar;
         next();
-      }).catch(next)
+      }).catch((err) => {
+        if (err instanceof ImageShortageError) {
+          req.session.prompt = new ImageShortageVM(err);
+          res.redirect("/");
+        } else {
+          next(err);
+        }
+      })
   }
 })
 

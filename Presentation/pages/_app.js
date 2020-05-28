@@ -3,14 +3,21 @@ import configureStore from "../store/configureStore";
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import CacheSeed from "../components/cache-seed.renderless";
+import ImageShortage from "../components/image-shortage";
 
 function AvatarBoxApp({ Component, pageProps, router }) {
   if(router.route == "/404"){
     return <Component />;
   }
   const { user, calendar } = pageProps;
+
+  const imageShortagePrompt = (pageProps.prompt && pageProps.prompt.name == "image-shortage" 
+                            ? <ImageShortage {...pageProps.prompt}/> 
+                            : null);
+
   return (
     <Provider store={configureStore({ user, calendar })}>
+      {imageShortagePrompt}
       <HeroSection hideCoverImage={pageProps.hideCoverImage}>
         <HeroHead title={pageProps.title} navbar={pageProps.navbar} />
         <Component {...pageProps} />
