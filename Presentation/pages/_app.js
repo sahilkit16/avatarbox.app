@@ -6,17 +6,22 @@ import CacheSeed from "../components/cache-seed.renderless";
 import ImageShortage from "../components/image-shortage";
 
 function AvatarBoxApp({ Component, pageProps, router }) {
-  if(router.route == "/404"){
+  if (router.route == "/404") {
     return <Component />;
   }
   const { user, calendar } = pageProps;
 
-  const imageShortagePrompt = (pageProps.prompt && pageProps.prompt.name == "image-shortage" 
-                            ? <ImageShortage {...pageProps.prompt}/> 
-                            : null);
-  const appziScript = (pageProps.appziScript
-                    ? <script async="async" type="text/javascript" src={pageProps.appziScript}></script>
-                    : null);
+  const imageShortagePrompt =
+    pageProps.prompt && pageProps.prompt.name == "image-shortage" ? (
+      <ImageShortage {...pageProps.prompt} />
+    ) : null;
+  const appziScript = pageProps.appziScript ? (
+    <script
+      async="async"
+      type="text/javascript"
+      src={pageProps.appziScript}
+    ></script>
+  ) : null;
   return (
     <Provider store={configureStore({ user, calendar })}>
       {imageShortagePrompt}

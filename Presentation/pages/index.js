@@ -155,84 +155,84 @@ class IndexPage extends React.Component {
       );
     }
     return (
-        <div className="hero-body">
-          <div className="container has-text-centered">
-            <div className="column is-6 is-offset-3">
-              <h1 className="title">New Avatar, Daily</h1>
-              <h2 className="subtitle">
-                A handy resource to auto update your Gravatar icon
-              </h2>
-              <div className={`${!this.props.user && "is-hidden"}`}>
-                <a className="button is-white" href="/calendar#">
-                  <i className="fa fa-calendar"></i>
-                  &nbsp; Calendar
-                </a>
-              </div>
-              <form
-                id="signin-form"
-                className={`${this.props.user ? "is-hidden" : "box"}`}
-                method="post"
-                action={this.props.formAction}
-              >
-                <div className="field is-grouped">
-                  <p className={"control is-expanded"}>
+      <div className="hero-body">
+        <div className="container has-text-centered">
+          <div className="column is-6 is-offset-3">
+            <h1 className="title">New Avatar, Daily</h1>
+            <h2 className="subtitle">
+              A handy resource to auto update your Gravatar icon
+            </h2>
+            <div className={`${!this.props.user && "is-hidden"}`}>
+              <a className="button is-white" href="/calendar#">
+                <i className="fa fa-calendar"></i>
+                &nbsp; Calendar
+              </a>
+            </div>
+            <form
+              id="signin-form"
+              className={`${this.props.user ? "is-hidden" : "box"}`}
+              method="post"
+              action={this.props.formAction}
+            >
+              <div className="field is-grouped">
+                <p className={"control is-expanded"}>
+                  <input
+                    className={classNames("input", "email", "step-1", {
+                      "is-hidden": this.state.step == 2,
+                    })}
+                    maxLength={100}
+                    name="email"
+                    type="email"
+                    placeholder="&#xf003; Email Address"
+                    onChange={this.updateEmailAddress}
+                    onKeyPress={this.onKeyPress}
+                    ref={this.emailRef}
+                  />
+                  <input
+                    className={classNames("input", "text", {
+                      "is-hidden": this.state.step == 1,
+                    })}
+                    maxLength={100}
+                    type="password"
+                    placeholder="&#xf084; Password"
+                    onChange={this.updatePassword}
+                    onKeyPress={this.onKeyPress}
+                    ref={this.passwordRef}
+                  />
+                  <noscript>
                     <input
-                      className={classNames("input", "email", "step-1", {
-                        "is-hidden": this.state.step == 2,
-                      })}
                       maxLength={100}
-                      name="email"
-                      type="email"
-                      placeholder="&#xf003; Email Address"
-                      onChange={this.updateEmailAddress}
-                      onKeyPress={this.onKeyPress}
-                      ref={this.emailRef}
-                    />
-                    <input
-                      className={classNames("input", "text", {
-                        "is-hidden": this.state.step == 1,
-                      })}
-                      maxLength={100}
+                      className="input text step-2"
+                      name="password"
                       type="password"
                       placeholder="&#xf084; Password"
-                      onChange={this.updatePassword}
-                      onKeyPress={this.onKeyPress}
-                      ref={this.passwordRef}
                     />
-                    <noscript>
-                      <input
-                        maxLength={100}
-                        className="input text step-2"
-                        name="password"
-                        type="password"
-                        placeholder="&#xf084; Password"
-                      />
-                    </noscript>
-                  </p>
-                  <p className="control">
-                    <button
-                      type="button"
-                      className={classNames("button is-info script-enabled", {
-                        "is-loading": this.state.isLoading,
-                        cloak: this.state.cloak,
-                      })}
-                      onClick={this.goToNextStep}
-                    >
-                      {this.state.step == 1 ? "Get Started" : "Sign In"}
+                  </noscript>
+                </p>
+                <p className="control">
+                  <button
+                    type="button"
+                    className={classNames("button is-info script-enabled", {
+                      "is-loading": this.state.isLoading,
+                      cloak: this.state.cloak,
+                    })}
+                    onClick={this.goToNextStep}
+                  >
+                    {this.state.step == 1 ? "Get Started" : "Sign In"}
+                  </button>
+                  <noscript>
+                    <button type="submit" className="button is-info">
+                      <span className="step-1">Get Started</span>
+                      <span className="step-2">Sign In</span>
                     </button>
-                    <noscript>
-                      <button type="submit" className="button is-info">
-                        <span className="step-1">Get Started</span>
-                        <span className="step-2">Sign In</span>
-                      </button>
-                    </noscript>
-                  </p>
-                </div>
-                {validationSummary}
-              </form>
-            </div>
+                  </noscript>
+                </p>
+              </div>
+              {validationSummary}
+            </form>
           </div>
         </div>
+      </div>
     );
   }
 }

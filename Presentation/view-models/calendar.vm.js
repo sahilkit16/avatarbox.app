@@ -10,7 +10,7 @@ class CalendarVM {
     this.isEnabled = false;
     this.hideCoverImage = true;
   }
-  toObject(){
+  toObject() {
     return JSON.parse(JSON.stringify(this));
   }
 }

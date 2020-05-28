@@ -45,16 +45,17 @@ router.use((req, res, next) => {
       .then((calendar) => {
         req.session.calendar = calendar;
         next();
-      }).catch((err) => {
+      })
+      .catch((err) => {
         if (err instanceof ImageShortageError) {
           req.session.prompt = new ImageShortageVM(err);
           res.redirect("/");
         } else {
           next(err);
         }
-      })
+      });
   }
-})
+});
 
 /*
 router.get("/", async (req, res) => {
