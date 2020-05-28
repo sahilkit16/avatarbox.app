@@ -25,7 +25,7 @@ class CalendarPage extends React.Component {
     this.renderImages = this.renderImages.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.slideShow.load();
   }
 

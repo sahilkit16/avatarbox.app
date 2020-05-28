@@ -28,9 +28,7 @@ class SlideShowVM {
   load() {
     this.slides = document.querySelector(".slides");
     this.length = document.querySelector(".slides").children.length;
-    document
-      .querySelector(".slides")
-      .addEventListener("scroll", this.onScroll);
+    document.querySelector(".slides").addEventListener("scroll", this.onScroll);
     document
       .querySelector(".slide-btn.prev")
       .addEventListener("click", this.prev);

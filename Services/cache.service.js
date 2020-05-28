@@ -23,7 +23,7 @@ class CacheService {
   async hdel(key, field) {
     return await this._cache.hdel(key, field);
   }
-  saveThanksPage(emailHash){
+  saveThanksPage(emailHash) {
     const key = `thanks-${emailHash}`;
     this.set(key, true);
     this._cache.expire(key, 60);
