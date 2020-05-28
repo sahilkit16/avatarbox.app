@@ -5,6 +5,7 @@ import Head from "next/head";
 import ClassNames from "classnames";
 import CalendarVM from "../view-models/calendar.vm";
 import * as actions from "../actions/app.actions";
+import SlideShowVM from "../view-models/slideshow.vm";
 
 export async function getServerSideProps(context) {
   const { user, calendar } = context.req.session;
@@ -20,7 +21,12 @@ export async function getServerSideProps(context) {
 class CalendarPage extends React.Component {
   constructor(props) {
     super(props);
+    this.slideShow = new SlideShowVM();
     this.renderImages = this.renderImages.bind(this);
+  }
+
+  componentDidMount(){
+    this.slideShow.load();
   }
 
   renderImages() {
