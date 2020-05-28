@@ -2,6 +2,7 @@ const NavBarVM = require("./navbar.vm");
 
 class HomeVM {
   constructor() {
+    this.title = "Home | Avatar Box";
     this.navbar = new NavBarVM();
     this.formAction = "/home/sign-in";
     this.validationMessage = null;

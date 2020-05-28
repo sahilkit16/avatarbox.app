@@ -1,14 +1,8 @@
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import HeroHead from "../components/hero-head";
-import HeroSection from "../components/hero-section";
 import HomeVM from "../view-models/home.vm";
-import * as actions from "../actions/app.actions";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
 import LoginVM from "../view-models/login.vm";
-import CacheSeed from "../components/cache-seed.renderless";
 import BrowserCache from "../../Infrastructure/browser-cache";
 
 export async function getServerSideProps(context) {
@@ -159,8 +153,6 @@ class IndexPage extends React.Component {
       );
     }
     return (
-      <HeroSection>
-        <HeroHead title="Home | Avatar Box" navbar={this.props.navbar} />
         <div className="hero-body">
           <div className="container has-text-centered">
             <div className="column is-6 is-offset-3">
@@ -239,14 +231,8 @@ class IndexPage extends React.Component {
             </div>
           </div>
         </div>
-        <CacheSeed />
-      </HeroSection>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(actions, dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(IndexPage);
+export default IndexPage;

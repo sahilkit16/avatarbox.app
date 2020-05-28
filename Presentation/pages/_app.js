@@ -1,10 +1,22 @@
 import { Provider } from "react-redux";
 import configureStore from "../store/configureStore";
+import HeroHead from "../components/hero-head";
+import HeroSection from "../components/hero-section";
+import CacheSeed from "../components/cache-seed.renderless";
 
-function AvatarBoxApp({ Component, pageProps }) {
+function AvatarBoxApp({ Component, pageProps, router }) {
+  if(router.route == "/404"){
+    return <Component />;
+  }
+  const { user, calendar } = pageProps;
   return (
-    <Provider store={configureStore()}>
-      <Component {...pageProps} />
+    <Provider store={configureStore({ user, calendar })}>
+      <HeroSection hideCoverImage={pageProps.hideCoverImage}>
+        <HeroHead title={pageProps.title} navbar={pageProps.navbar} />
+        <Component {...pageProps} />
+        <CacheSeed />
+      </HeroSection>
+      <CacheSeed />
     </Provider>
   );
 }
