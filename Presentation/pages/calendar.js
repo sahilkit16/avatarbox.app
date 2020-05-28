@@ -6,6 +6,10 @@ import ClassNames from "classnames";
 import CalendarVM from "../view-models/calendar.vm";
 import * as actions from "../actions/app.actions";
 import SlideShowVM from "../view-models/slideshow.vm";
+import CrashReporter from "../../Common/crash-reporter.client";
+const ImageShortageError = require("../../Domain/image-shortage.error");
+
+const crashReporter = new CrashReporter();
 
 export async function getServerSideProps(context) {
   const { user, calendar } = context.req.session;
@@ -35,7 +39,18 @@ class CalendarPage extends React.Component {
     this.setState({ isLoading: true });
     this.props.updateCalendar().then(() => {
       this.setState({ isLoading: false });
-      window.location.hash = "#";
+      if(this.props.user.isNew){
+        window.location = "/thanks";
+      } else {
+        window.location.hash = "#";
+      }
+    }).catch(err => {
+      if(err instanceof ImageShortageError){
+        this.setState({ isLoading: false });
+        window.location = "/";
+      } else {
+        crashReporter.submit(err);
+      }
     });
   }
 

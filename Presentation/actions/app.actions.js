@@ -1,7 +1,7 @@
 import ACTION_TYPES from "./action-types";
-import CrashReporter from "../../Common/crash-reporter.client";
-
-const crashReporter = new CrashReporter();
+import { isJson } from "../../Common/helpers";
+const ImageShortageError = require("../../Domain/image-shortage.error");
+const { NoImages, SingleImage } = require("../../Domain/error-code");
 
 export const updateCalendar = () => (dispatch) => {
   return fetch("/calendar/submit", {
@@ -12,9 +12,17 @@ export const updateCalendar = () => (dispatch) => {
   })
   .then(async (res) => {
     if (res.ok) {
-      return res.json();
+      return await res.json();
     } else {
-      throw new Error(res.textStatus);
+      const text = await res.text();
+      if(isJson(text)){
+        const err = JSON.parse(text);
+        if(err.code == NoImages|| err.code == SingleImage){
+          throw new ImageShortageError(err.code);
+        }
+      } else {
+        throw new Error(text || res.statusText);
+      }
     }
   })
   .then(calendar => {
@@ -23,9 +31,6 @@ export const updateCalendar = () => (dispatch) => {
       calendar,
     })
   })
-  .catch(err => {
-    crashReporter.submit(err);
-  });
 };
 
 export const updateUser = (user) => {
