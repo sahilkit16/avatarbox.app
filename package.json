@@ -7,7 +7,6 @@
     "format": "prettier --write \"Application/**/*.js\" \"Common/**/*.js\" \"Domain/**/*.js\" \"Infrastructure/**/*.js\" \"Presentation/**/*.js\" \"Services/**/*.js\" \"Specification/**/*.js\" \"Tests/**/*.js\"",
     "start": "node ./Presentation/server.js",
     "build": "next build ./Presentation",
-    "build:client": "browserify -t [ babelify ] Presentation/scripts/calendar.js -o Presentation/public/js/calendar.bundle.js",
     "test": "jest",
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./Tests/jest-e2e.json",

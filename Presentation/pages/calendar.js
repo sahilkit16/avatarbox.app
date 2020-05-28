@@ -127,7 +127,7 @@ class CalendarPage extends React.Component {
                     id="enable"
                     type="submit"
                   >
-                    Let it rip &nbsp;{" "}
+                    Let it rip &nbsp;
                     <i className="fa fa-send" aria-hidden="true"></i>
                   </button>
                   <button
@@ -137,7 +137,7 @@ class CalendarPage extends React.Component {
                     id="disable"
                     type="submit"
                   >
-                    Okay &nbsp;{" "}
+                    Okay &nbsp;
                     <i className="fa fa-check" aria-hidden="true"></i>
                   </button>
                 </form>
