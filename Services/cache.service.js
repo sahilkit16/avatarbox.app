@@ -24,9 +24,10 @@ class CacheService {
     return await this._cache.hdel(key, field);
   }
   saveThanksPage(emailHash) {
-    const key = `thanks-${emailHash}`;
-    this.set(key, true);
-    this._cache.expire(key, 60);
+    const thanksPageKeyName = `thanks-${emailHash}`;
+    const thanksPageTTLSeconds = 60;
+    this.set(thanksPageKeyName, true);
+    this._cache.expire(thanksPageKeyName, thanksPageTTLSeconds);
   }
   async touchSession(emailHash) {
     const activeSessionKeyName = "hasActiveSession";
