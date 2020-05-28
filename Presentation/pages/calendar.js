@@ -23,6 +23,7 @@ class CalendarPage extends React.Component {
     this.slideShow = new SlideShowVM();
     this.renderImages = this.renderImages.bind(this);
     this.toggleCalendar = this.toggleCalendar.bind(this);
+    this.state = { isLoading: false };
   }
 
   componentDidMount() {
@@ -31,24 +32,11 @@ class CalendarPage extends React.Component {
 
   toggleCalendar(e){
     e.preventDefault();
-    fetch("/calendar/submit", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-      },
-    })
-    .then(async (res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        throw new Error(res.textStatus);
-      }
-    })
-    .then(calendar => {
-      this.props.updateCalendar(calendar);
+    this.setState({ isLoading: true });
+    this.props.updateCalendar().then(() => {
+      this.setState({ isLoading: false });
       window.location.hash = "#";
-    })
-    .catch(console.log);
+    });
   }
 
   renderImages() {
@@ -145,6 +133,7 @@ class CalendarPage extends React.Component {
                   <button
                     className={ClassNames("card-footer-item btn-submit", {
                       "is-hidden": this.props.calendar.isEnabled,
+                      "button is-loading": this.state.isLoading
                     })}
                     id="enable"
                     onClick={this.toggleCalendar}
@@ -156,6 +145,7 @@ class CalendarPage extends React.Component {
                   <button
                     className={ClassNames("card-footer-item btn-submit", {
                       "is-hidden": !this.props.calendar.isEnabled,
+                      "button is-loading": this.state.isLoading
                     })}
                     id="disable"
                     onClick={this.toggleCalendar}
