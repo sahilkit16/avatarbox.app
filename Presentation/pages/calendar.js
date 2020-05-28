@@ -10,9 +10,8 @@ import SlideShowVM from "../view-models/slideshow.vm";
 export async function getServerSideProps(context) {
   const { user, calendar } = context.req.session;
   const model = new CalendarVM();
-  model.images = calendar.images;
-  model.isEnabled = calendar.isEnabled;
-  model.navbar.user = user;
+  model.User = user;
+  model.calendar = calendar;
   return {
     props: model.toObject(),
   };
@@ -23,14 +22,34 @@ class CalendarPage extends React.Component {
     super(props);
     this.slideShow = new SlideShowVM();
     this.renderImages = this.renderImages.bind(this);
+    this.toggleCalendar = this.toggleCalendar.bind(this);
   }
 
   componentDidMount() {
     this.slideShow.load();
   }
 
+  toggleCalendar(e){
+    e.preventDefault();
+    fetch("/calendar/submit", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+      },
+    })
+    .then(async (res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error(res.textStatus);
+      }
+    })
+    .then(console.log)
+    .catch(console.log);
+  }
+
   renderImages() {
-    return this.props.images.map((image, index) => (
+    return this.props.calendar.images.map((image, index) => (
       <figure id={`avatar-${index}`} key={`avatar-${index}`}>
         <img
           width="200"
@@ -76,14 +95,14 @@ class CalendarPage extends React.Component {
                   <div className="is-block-centered" id="disclaimer">
                     <h2
                       className={ClassNames("has-text-centered", {
-                        "is-hidden": this.props.isEnabled,
+                        "is-hidden": this.props.calendar.isEnabled,
                       })}
                     >
                       Your Gravatar icon will be updated once a day.
                     </h2>
                     <h2
                       className={ClassNames("has-text-centered", {
-                        "is-hidden": !this.props.isEnabled,
+                        "is-hidden": !this.props.calendar.isEnabled,
                       })}
                     >
                       Your Gravatar icon will no longer be updated.
@@ -104,7 +123,7 @@ class CalendarPage extends React.Component {
                   </a>
                   <a
                     className={ClassNames("card-footer-item btn-next", {
-                      "is-hidden": this.props.isEnabled,
+                      "is-hidden": this.props.calendar.isEnabled,
                     })}
                     href="#here"
                   >
@@ -113,7 +132,7 @@ class CalendarPage extends React.Component {
                   </a>
                   <a
                     className={ClassNames("card-footer-item btn-next", {
-                      "is-hidden": !this.props.isEnabled,
+                      "is-hidden": !this.props.calendar.isEnabled,
                     })}
                     href="#here"
                   >
@@ -122,9 +141,10 @@ class CalendarPage extends React.Component {
                   </a>
                   <button
                     className={ClassNames("card-footer-item btn-submit", {
-                      "is-hidden": this.props.isEnabled,
+                      "is-hidden": this.props.calendar.isEnabled,
                     })}
                     id="enable"
+                    onClick={this.toggleCalendar}
                     type="submit"
                   >
                     Let it rip &nbsp;
@@ -132,9 +152,10 @@ class CalendarPage extends React.Component {
                   </button>
                   <button
                     className={ClassNames("card-footer-item btn-submit", {
-                      "is-hidden": !this.props.isEnabled,
+                      "is-hidden": !this.props.calendar.isEnabled,
                     })}
                     id="disable"
+                    onClick={this.toggleCalendar}
                     type="submit"
                   >
                     Okay &nbsp;
