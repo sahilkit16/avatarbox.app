@@ -97,13 +97,10 @@ router.post("/submit", async (req, res, next) => {
             messageBroker.publish("update.now", user.email, { priority: 2 });
           }
         }
-        // TODO: compensate for ajax
-        // (perhaps put a guid in session
-        //  and then redirect to /thanks)
         if (didToggleCalendar && isNewUser) {
           delete req.session.isNewUser;
-          const guid = "asdf";
-          return res.redirect(`/${guid}/thanks`)//res.render("thanks", new ThanksVM());
+          // TODO: expire page access after 1 min; use express route
+          return res.redirect(`/thanks`);
         }
         const buildCalendar = container.resolve("buildCalendar");
         buildCalendar.client = req.scope.resolve("gravatarClient");
