@@ -9,6 +9,7 @@ const calendarRoute = require("./routes/calendar");
 const feedbackRoute = require("./routes/feedback");
 const homeRoute = require("./routes/home");
 const notFoundRoute = require("./routes/notfound");
+const thanksRoute = require("./routes/thanks");
 
 const morgan = require("morgan");
 const errorHandler = require("./middleware/error-handler");
@@ -43,6 +44,8 @@ app.use(sessionWatcher);
 app.use(errorHandler);
 app.use(crashReporterScope);
 app.use(isAjax);
+
+app.use("/thanks", thanksRoute);
 
 if (process.env.SANITY) {
   app.use("/sanity", sanityRoute);

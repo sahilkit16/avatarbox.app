@@ -100,7 +100,8 @@ router.post("/submit", async (req, res, next) => {
         }
         if (didToggleCalendar && isNewUser) {
           delete req.session.isNewUser;
-          // TODO: expire page access after 1 min; use express route
+          const cacheService = container.resolve("cacheService");
+          cacheService.saveThanksPage(user.hash);
           return res.redirect(`/thanks`);
         }
         const buildCalendar = container.resolve("buildCalendar");
