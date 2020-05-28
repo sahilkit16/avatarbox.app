@@ -106,8 +106,13 @@ router.post("/submit", async (req, res, next) => {
         }
         const buildCalendar = container.resolve("buildCalendar");
         buildCalendar.client = req.scope.resolve("gravatarClient");
-        buildCalendar.execute().then(() => {
-          res.redirect("/calendar#");
+        buildCalendar.execute().then((calendar) => {
+          if(req.isAjax){
+            req.session.calendar = calendar;
+            res.json(calendar);
+          } else {
+            res.redirect("/calendar#");
+          }
         });
       })
       .catch(next);
