@@ -44,7 +44,10 @@ class CalendarPage extends React.Component {
         throw new Error(res.textStatus);
       }
     })
-    .then(console.log)
+    .then(calendar => {
+      this.props.updateCalendar(calendar);
+      window.location.hash = "#";
+    })
     .catch(console.log);
   }
 
@@ -171,8 +174,12 @@ class CalendarPage extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return state;
+}
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actions, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(CalendarPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarPage);
