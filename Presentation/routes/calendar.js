@@ -9,14 +9,12 @@ const ImageShortageError = require("../../Domain/image-shortage.error");
 const isAjax = require("../middleware/is-ajax");
 const isAuthenticated = require("../middleware/is-authenticated");
 const gravatarClientScope = require("../middleware/gravatar-client-scope");
-const crashReporterScope = require("../middleware/crash-reporter-scope");
 
 const router = Router();
 
 router.use(isAjax);
 router.use(isAuthenticated);
 router.use(gravatarClientScope);
-router.use(crashReporterScope);
 
 // router.use((req, res, next) => {
 //   req.renderCalendar = function (calendar) {
