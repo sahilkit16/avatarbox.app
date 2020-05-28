@@ -17,6 +17,21 @@ export async function getServerSideProps(context) {
 }
 
 class CalendarPage extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.renderImages = this.renderImages.bind(this);
+  }
+  
+  renderImages(){
+    return this.props.images.map((image, index) => (
+      <figure id={`avatar-${index}`}>
+        <img className="is-block-centered" src={image.url} />
+        <p className="has-text-grey is-size-7">{image.day}</p>
+      </figure>
+    ))
+  }
+
   render() {
     return (
       <div className="hero-body">
@@ -33,14 +48,7 @@ class CalendarPage extends React.Component {
                 <div className="card-content card-block is-paddingless">
                   <div className="slide-btn prev script-enabled cloak"><div className="fa fa-chevron-left is-size-4"></div></div>
                   <div className="slides is-block-centered">
-                    <figure id="avatar-0">
-                      <img className="is-block-centered" src="http://en.gravatar.com/userimage/102303045/f631f987bc31023f1cf5de3e3228a7cb.jpg?size=200" />
-                      <p className="has-text-grey is-size-7">Now</p>
-                    </figure>
-                    <figure id="avatar-1">
-                      <img className="is-block-centered" src="http://en.gravatar.com/userimage/102303045/3796dd4fcb8ce1695abe26c8091adc4e.jpg?size=200" />
-                      <p className="has-text-grey is-size-7">Tomorrow</p>
-                    </figure>
+                    {this.renderImages()}
                   </div>
                   <div className="slide-btn next script-enabled cloak"><div className="fa fa-chevron-right is-size-4"></div></div>
                   <div className="is-block-centered" id="disclaimer">
