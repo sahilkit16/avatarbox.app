@@ -2,6 +2,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Head from "next/head";
+import ClassNames from "classnames";
 import CalendarVM from "../view-models/calendar.vm";
 import * as actions from "../actions/app.actions";
 
@@ -52,17 +53,29 @@ class CalendarPage extends React.Component {
                   </div>
                   <div className="slide-btn next script-enabled cloak"><div className="fa fa-chevron-right is-size-4"></div></div>
                   <div className="is-block-centered" id="disclaimer">
-                    <h2 className="is-hidden has-text-centered">Your Gravatar icon will be updated once a day.</h2>
-                    <h2 className="has-text-centered">Your Gravatar icon will no longer be updated.</h2>
+                    <h2 className={ClassNames("has-text-centered", {
+                      "is-hidden": this.props.isEnabled
+                    })}>Your Gravatar icon will be updated once a day.</h2>
+                    <h2 className={ClassNames("has-text-centered", {
+                      "is-hidden": !this.props.isEnabled
+                    })}>Your Gravatar icon will no longer be updated.</h2>
                   </div>
                 </div>
                 <form className="card-footer" action="/calendar/submit" method="post">
                   <a className="card-footer-item" id="home" href="/"><i className="fa fa-home" aria-hidden="true"></i>&nbsp; Home</a>
                   <a className="card-footer-item" id="back" href="#"><i className="fa fa-chevron-left" aria-hidden="true"></i>&nbsp; Back</a>
-                  <a className="is-hidden card-footer-item btn-next" href="#here">Start &nbsp;<i className="fa fa-chevron-right" aria-hidden="true"></i></a>
-                  <a className="card-footer-item btn-next" href="#here">Disable &nbsp;<i className="fa fa-close" aria-hidden="true"></i></a>
-                  <button className="is-hidden card-footer-item btn-submit" id="enable" type="submit">Let it rip &nbsp; <i className="fa fa-send" aria-hidden="true"></i></button>
-                  <button className="button card-footer-item btn-submit" id="disable" type="submit">Okay &nbsp; <i className="fa fa-check" aria-hidden="true"></i></button>
+                  <a className={ClassNames("card-footer-item btn-next", {
+                    "is-hidden": this.props.isEnabled
+                  })} href="#here">Start &nbsp;<i className="fa fa-chevron-right" aria-hidden="true"></i></a>
+                  <a className={ClassNames("card-footer-item btn-next", {
+                    "is-hidden": !this.props.isEnabled
+                  })} href="#here">Disable &nbsp;<i className="fa fa-close" aria-hidden="true"></i></a>
+                  <button className={ClassNames("card-footer-item btn-submit", {
+                    "is-hidden": this.props.isEnabled
+                  })} id="enable" type="submit">Let it rip &nbsp; <i className="fa fa-send" aria-hidden="true"></i></button>
+                  <button className={ClassNames("card-footer-item btn-submit", {
+                    "is-hidden": !this.props.isEnabled
+                  })} id="disable" type="submit">Okay &nbsp; <i className="fa fa-check" aria-hidden="true"></i></button>
                 </form>
               </div>
             </div>
