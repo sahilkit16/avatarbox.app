@@ -1,7 +1,13 @@
 import ACTION_TYPES from "./action-types";
 import { isJson } from "../../Common/helpers";
+import ShortId from "shortid";
 const ImageShortageError = require("../../Domain/image-shortage.error");
 const { NoImages, SingleImage } = require("../../Domain/error-code");
+
+export const bustCache = () => ({
+  type: ACTION_TYPES.BUST_CACHE,
+  cacheBuster: ShortId()
+});
 
 export const updateCalendar = () => (dispatch) => {
   return fetch("/calendar/submit", {
@@ -33,9 +39,7 @@ export const updateCalendar = () => (dispatch) => {
     });
 };
 
-export const updateUser = (user) => {
-  return {
+export const updateUser = (user) => ({
     type: ACTION_TYPES.UPDATE_USER,
     user,
-  };
-};
+});

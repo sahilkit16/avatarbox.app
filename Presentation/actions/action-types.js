@@ -1,4 +1,5 @@
 export default Object.freeze({
+  BUST_CACHE: "BUST_CACHE",
   UPDATE_CALENDAR: "UPDATE_CALENDAR",
   UPDATE_USER: "UPDATE_USER",
 });
