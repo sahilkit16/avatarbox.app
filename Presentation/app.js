@@ -41,7 +41,6 @@ app.set("views", "./Presentation/views");
 app.set("view engine", "pug");
 
 app.use(sessionWatcher);
-app.use(errorHandler);
 app.use(crashReporterScope);
 app.use(isAjax);
 
@@ -70,6 +69,8 @@ const setHandler = (handler) => {
 app.get("/*", (req, res) => {
   return _handler(req, res);
 });
+
+app.use(errorHandler);
 
 module.exports = {
   app,
