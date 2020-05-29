@@ -38,6 +38,9 @@ class CacheService {
     this._cache.expire(emailHash, activeSessionTTLSeconds);
     return hasActiveSession;
   }
+  disconnect(){
+    this._cache.end();
+  }
 }
 
 module.exports = CacheService;

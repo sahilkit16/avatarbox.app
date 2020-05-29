@@ -18,7 +18,9 @@ container.register({
   }),
   crashReporter: awilix.asClass(CrashReporter),
   logger: awilix.asClass(Logger),
-  cacheService: awilix.asClass(CacheService),
+  cacheService: awilix.asClass(CacheService, {
+    lifetime: awilix.Lifetime.SINGLETON,
+  }),
   buildCalendar: awilix.asClass(BuildCalendarUseCase),
   rsaService: awilix.asClass(RsaService),
   userService: awilix.asClass(UserService),

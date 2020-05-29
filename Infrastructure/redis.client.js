@@ -65,6 +65,9 @@ class RedisClient {
   expire(key, seconds) {
     this._client.expire(key, seconds);
   }
+  end(){
+    this._client.end(true);
+  }
 }
 
 module.exports = RedisClient;
