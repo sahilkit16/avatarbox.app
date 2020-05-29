@@ -33,7 +33,11 @@ class AvatarBoxSite extends Document {
             href={`../images/fav_icon.png?ver=${cacheBuster}`}
             type="image/x-icon"
           />
-          <link rel="stylesheet" type="text/css" href={`../css/reset.css?ver=${cacheBuster}`}/>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href={`../css/reset.css?ver=${cacheBuster}`}
+          />
           <link
             rel="stylesheet"
             type="text/css"
@@ -53,7 +57,11 @@ class AvatarBoxSite extends Document {
             type="text/css"
             href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
           />
-          <link rel="stylesheet" type="text/css" href={`../css/site.css?ver=${cacheBuster}`} />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href={`../css/site.css?ver=${cacheBuster}`}
+          />
         </Head>
         <body id="menu">
           <Main />

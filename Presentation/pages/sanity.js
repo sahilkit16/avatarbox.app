@@ -4,9 +4,9 @@ import CrashReporter from "../../Common/crash-reporter.client";
 import ThanksVM from "../view-models/thanks.vm";
 
 class SanityVM extends ThanksVM {
-  constructor(){
+  constructor() {
     super();
-    this.title = "Santity Page"
+    this.title = "Santity Page";
     this.appziScript = null;
   }
 }
@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
     throw new Error("this is a test");
   }
   return {
-    props: model.toObject()
+    props: model.toObject(),
   };
 }
 

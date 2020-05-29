@@ -6,7 +6,7 @@ const { NoImages, SingleImage } = require("../../Domain/error-code");
 
 export const bustCache = () => ({
   type: ACTION_TYPES.BUST_CACHE,
-  cacheBuster: ShortId()
+  cacheBuster: ShortId(),
 });
 
 export const updateCalendar = () => (dispatch) => {
@@ -40,6 +40,6 @@ export const updateCalendar = () => (dispatch) => {
 };
 
 export const updateUser = (user) => ({
-    type: ACTION_TYPES.UPDATE_USER,
-    user,
+  type: ACTION_TYPES.UPDATE_USER,
+  user,
 });

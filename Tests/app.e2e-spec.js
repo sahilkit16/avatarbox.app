@@ -13,8 +13,8 @@ describe("app", () => {
     // https://github.com/visionmedia/supertest/issues/520
     server = app.listen(4000, (err) => {
       if (err) return done(err);
-       request.agent(server);
-       done();
+      request.agent(server);
+      done();
     });
   });
   it("should work", async () => {

@@ -7,7 +7,9 @@ export default (state = appState, action) => {
       return Object.assign({}, state, { calendar: action.calendar });
     }
     case ACTION_TYPES.BUST_CACHE: {
-      const user = Object.assign({}, state.user, { cacheBuster: action.cacheBuster });
+      const user = Object.assign({}, state.user, {
+        cacheBuster: action.cacheBuster,
+      });
       return Object.assign({}, state, { user });
     }
     case ACTION_TYPES.UPDATE_USER: {

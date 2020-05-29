@@ -65,7 +65,7 @@ class RedisClient {
   expire(key, seconds) {
     this._client.expire(key, seconds);
   }
-  end(){
+  end() {
     this._client.end(true);
   }
 }

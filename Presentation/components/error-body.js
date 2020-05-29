@@ -17,10 +17,10 @@ export default function ErrorBody({ title, message, eventId }) {
   }
 
   useEffect(() => {
-    if(typeof site != "undefined"){
+    if (typeof site != "undefined") {
       site.uncloak();
     }
-  })
+  });
 
   return (
     <div className="hero-body">

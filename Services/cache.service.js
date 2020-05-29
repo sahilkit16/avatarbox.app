@@ -38,7 +38,7 @@ class CacheService {
     this._cache.expire(emailHash, activeSessionTTLSeconds);
     return hasActiveSession;
   }
-  disconnect(){
+  disconnect() {
     this._cache.end();
   }
 }

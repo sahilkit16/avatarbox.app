@@ -9,11 +9,11 @@ function AvatarBoxApp({ Component, pageProps, router }) {
   if (router.route == "/404") {
     return <Component {...pageProps} />;
   }
-  if (router.route == "/_error"){
+  if (router.route == "/_error") {
     <HeroSection hideCoverImage={true}>
       <HeroHead title={pageProps.title} navbar={pageProps.navbar} />
       <Component {...pageProps} />
-    </HeroSection>
+    </HeroSection>;
   }
   const { user, calendar } = pageProps;
 

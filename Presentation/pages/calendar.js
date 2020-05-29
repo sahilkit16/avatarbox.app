@@ -52,7 +52,7 @@ class CalendarPage extends React.Component {
       .updateCalendar()
       .then(() => {
         this.setState({ isLoading: false });
-        if(this.props.calendar.isEnabled){
+        if (this.props.calendar.isEnabled) {
           this.props.bustCache();
         }
         window.location.hash = "#";
