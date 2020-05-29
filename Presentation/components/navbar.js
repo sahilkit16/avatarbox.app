@@ -18,11 +18,7 @@ function NavBar({ model }) {
           </a>
           <span
             data-target="navbar-menu"
-            className={classNames(
-              "navbar-burger",
-              "burger",
-              "script-enabled",
-              "cloak",
+            className={classNames("navbar-burger burger script-enabled cloak",
               {
                 "is-hidden": model.isCosmetic,
               }
