@@ -1,9 +1,12 @@
 import React from "react";
+import { Notyf } from "notyf";
 import HomeVM from "../view-models/home.vm";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
 import LoginVM from "../view-models/login.vm";
 import BrowserCache from "../../Infrastructure/browser-cache";
+
+const PusherClient = require("../../Infrastructure/pusher.client");
 
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
@@ -30,9 +33,16 @@ class IndexPage extends React.Component {
     this.onKeyPress = this.onKeyPress.bind(this);
     this.showValidationMessage = this.showValidationMessage.bind(this);
     this.clearValidationMessage = this.clearValidationMessage.bind(this);
+    this.receiveNotification = this.receiveNotification.bind(this);
     this.clearInputFields = this.clearInputFields.bind(this);
     this.emailRef = React.createRef();
     this.passwordRef = React.createRef();
+  }
+
+  receiveNotification({ message }){
+    const notyf = new Notyf();
+    notyf.success(message);
+    // TODO: cache bust gravatar icon
   }
 
   componentDidMount() {
@@ -45,11 +55,8 @@ class IndexPage extends React.Component {
     const { user } = this.props.navbar;
 
     if (user && typeof site != "undefined") {
-      const browserCache = new BrowserCache();
-      const channelId = browserCache.session.getItem("channel-id");
-      if (channelId) {
-        site.subscribe(channelId);
-      }
+      const pusherClient = new PusherClient();
+      pusherClient.subscribe(this.props.user.hash, this.receiveNotification);
     }
   }
 

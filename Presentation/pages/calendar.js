@@ -1,15 +1,16 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Notyf } from "notyf";
 import Head from "next/head";
 import ClassNames from "classnames";
 import CalendarVM from "../view-models/calendar.vm";
 import * as actions from "../actions/app.actions";
 import SlideShowVM from "../view-models/slideshow.vm";
 import CrashReporter from "../../Common/crash-reporter.client";
-const ImageShortageError = require("../../Domain/image-shortage.error");
 
-const crashReporter = new CrashReporter();
+const PusherClient = require("../../Infrastructure/pusher.client");
+const ImageShortageError = require("../../Domain/image-shortage.error");
 
 export async function getServerSideProps(context) {
   const { user, calendar } = context.req.session;
@@ -27,11 +28,21 @@ class CalendarPage extends React.Component {
     this.slideShow = new SlideShowVM();
     this.renderImages = this.renderImages.bind(this);
     this.toggleCalendar = this.toggleCalendar.bind(this);
+    this.receiveNotification = this.receiveNotification.bind(this);
     this.state = { isLoading: false };
+    this.crashReporter = new CrashReporter();
+  }
+
+  receiveNotification({ message }){
+    const notyf = new Notyf();
+    notyf.success(message);
+    // TODO: cache bust gravatar icon
   }
 
   componentDidMount() {
     this.slideShow.load();
+    const pusherClient = new PusherClient();
+    pusherClient.subscribe(this.props.user.hash, this.receiveNotification);
   }
 
   toggleCalendar(e){
@@ -48,7 +59,7 @@ class CalendarPage extends React.Component {
         this.setState({ isLoading: false });
         window.location = "/";
       } else {
-        crashReporter.submit(err);
+        this.crashReporter.submit(err);
       }
     });
   }
