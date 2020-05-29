@@ -2,6 +2,7 @@ const { Router } = require("express");
 const container = require("../../Common/di-container");
 const ImageShortageVM = require("../view-models/image-shortage.vm");
 const ImageShortageError = require("../../Domain/image-shortage.error");
+const ShortId = require("shortid");
 
 const isAjax = require("../middleware/is-ajax");
 const isAuthenticated = require("../middleware/is-authenticated");
@@ -23,6 +24,7 @@ router.use((req, res, next) => {
       .execute()
       .then((calendar) => {
         req.session.calendar = calendar;
+        req.session.user.cacheBuster = ShortId();
         return calendar;
       })
       .catch((err) => {

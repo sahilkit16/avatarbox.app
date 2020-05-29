@@ -36,7 +36,7 @@ class CalendarPage extends React.Component {
   receiveNotification({ message }) {
     const notyf = new Notyf();
     notyf.success(message);
-    // TODO: cache bust gravatar icon
+    this.props.bustCache();
   }
 
   componentDidMount() {
@@ -52,6 +52,9 @@ class CalendarPage extends React.Component {
       .updateCalendar()
       .then(() => {
         this.setState({ isLoading: false });
+        if(this.props.calendar.isEnabled){
+          this.props.bustCache();
+        }
         window.location.hash = "#";
         if (this.props.user.isNew) {
           window.location = "/thanks";
