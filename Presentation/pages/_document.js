@@ -48,10 +48,11 @@ class AvatarBoxSite extends Document {
             type="text/css"
             href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css"
           />
-          <link 
-            rel="stylesheet" 
-            type="text/css" 
-            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css" />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+          />
           <link rel="stylesheet" type="text/css" href="../css/site.css" />
         </Head>
         <body id="menu">

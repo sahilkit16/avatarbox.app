@@ -8,5 +8,5 @@ const isJson = (stringValue) => {
 };
 
 module.exports = {
-  isJson
+  isJson,
 };

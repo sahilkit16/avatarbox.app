@@ -33,7 +33,7 @@ class CalendarPage extends React.Component {
     this.crashReporter = new CrashReporter();
   }
 
-  receiveNotification({ message }){
+  receiveNotification({ message }) {
     const notyf = new Notyf();
     notyf.success(message);
     // TODO: cache bust gravatar icon
@@ -45,23 +45,26 @@ class CalendarPage extends React.Component {
     pusherClient.subscribe(this.props.user.hash, this.receiveNotification);
   }
 
-  toggleCalendar(e){
+  toggleCalendar(e) {
     e.preventDefault();
     this.setState({ isLoading: true });
-    this.props.updateCalendar().then(() => {
-      this.setState({ isLoading: false });
-      window.location.hash = "#";
-      if(this.props.user.isNew){
-        window.location = "/thanks";
-      }
-    }).catch(err => {
-      if(err instanceof ImageShortageError){
+    this.props
+      .updateCalendar()
+      .then(() => {
         this.setState({ isLoading: false });
-        window.location = "/";
-      } else {
-        this.crashReporter.submit(err);
-      }
-    });
+        window.location.hash = "#";
+        if (this.props.user.isNew) {
+          window.location = "/thanks";
+        }
+      })
+      .catch((err) => {
+        if (err instanceof ImageShortageError) {
+          this.setState({ isLoading: false });
+          window.location = "/";
+        } else {
+          this.crashReporter.submit(err);
+        }
+      });
   }
 
   renderImages() {
@@ -158,7 +161,7 @@ class CalendarPage extends React.Component {
                   <button
                     className={ClassNames("card-footer-item btn-submit", {
                       "is-hidden": this.props.calendar.isEnabled,
-                      "button is-loading": this.state.isLoading
+                      "button is-loading": this.state.isLoading,
                     })}
                     id="enable"
                     onClick={this.toggleCalendar}
@@ -170,7 +173,7 @@ class CalendarPage extends React.Component {
                   <button
                     className={ClassNames("card-footer-item btn-submit", {
                       "is-hidden": !this.props.calendar.isEnabled,
-                      "button is-loading": this.state.isLoading
+                      "button is-loading": this.state.isLoading,
                     })}
                     id="disable"
                     onClick={this.toggleCalendar}
@@ -191,7 +194,7 @@ class CalendarPage extends React.Component {
 
 const mapStateToProps = (state) => {
   return state;
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actions, dispatch);

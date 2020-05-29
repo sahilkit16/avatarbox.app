@@ -29,7 +29,7 @@ router.use((req, res, next) => {
         logger.error(err.message);
         if (err instanceof ImageShortageError) {
           req.session.prompt = new ImageShortageVM(err);
-          if(req.isAjax){
+          if (req.isAjax) {
             res.status(400).json({ code: err.code, message: err.message });
           } else {
             res.redirect("/");
@@ -38,9 +38,9 @@ router.use((req, res, next) => {
           next(err);
         }
       });
-  }
+  };
   next();
-})
+});
 
 router.use(async (req, res, next) => {
   if (req.session.calendar) {
@@ -66,12 +66,12 @@ router.post("/submit", async (req, res, next) => {
             messageBroker.publish("update.now", user.email, { priority: 2 });
           }
         }
-        if(isNewUser){
+        if (isNewUser) {
           const cacheService = container.resolve("cacheService");
           cacheService.retainThanksPage(user.hash);
           delete req.session.user.isNew;
         }
-        if(req.isAjax){
+        if (req.isAjax) {
           return res.json(await req.buildCalendar());
         } else if (isNewUser && didToggleCalendar) {
           return res.redirect(`/thanks`);
@@ -79,7 +79,7 @@ router.post("/submit", async (req, res, next) => {
           return res.redirect(`/calendar`);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         logger.error(err.message);
         next(err);
       });

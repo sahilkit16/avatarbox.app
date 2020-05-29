@@ -3,11 +3,11 @@ const NavBarVM = require("./navbar.vm");
 class CalendarVM {
   constructor() {
     this.title = "Calendar | Avatar Box";
-    this.calendar = {
+    (this.calendar = {
       images: [],
-      isEnabled: false
-    },
-    this.navbar = new NavBarVM();
+      isEnabled: false,
+    }),
+      (this.navbar = new NavBarVM());
     this.navbar.isCosmetic = false;
     this.navbar.isTransparent = false;
     this.hideCoverImage = true;

@@ -39,7 +39,7 @@ class IndexPage extends React.Component {
     this.passwordRef = React.createRef();
   }
 
-  receiveNotification({ message }){
+  receiveNotification({ message }) {
     const notyf = new Notyf();
     notyf.success(message);
     // TODO: cache bust gravatar icon

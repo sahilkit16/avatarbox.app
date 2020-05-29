@@ -10,27 +10,27 @@ export const updateCalendar = () => (dispatch) => {
       accept: "application/json",
     },
   })
-  .then(async (res) => {
-    if (res.ok) {
-      return await res.json();
-    } else {
-      const text = await res.text();
-      if(isJson(text)){
-        const err = JSON.parse(text);
-        if(err.code == NoImages|| err.code == SingleImage){
-          throw new ImageShortageError(err.code);
-        }
+    .then(async (res) => {
+      if (res.ok) {
+        return await res.json();
       } else {
-        throw new Error(text || res.statusText);
+        const text = await res.text();
+        if (isJson(text)) {
+          const err = JSON.parse(text);
+          if (err.code == NoImages || err.code == SingleImage) {
+            throw new ImageShortageError(err.code);
+          }
+        } else {
+          throw new Error(text || res.statusText);
+        }
       }
-    }
-  })
-  .then(calendar => {
-    dispatch({
-      type: ACTION_TYPES.UPDATE_CALENDAR,
-      calendar,
     })
-  })
+    .then((calendar) => {
+      dispatch({
+        type: ACTION_TYPES.UPDATE_CALENDAR,
+        calendar,
+      });
+    });
 };
 
 export const updateUser = (user) => {
