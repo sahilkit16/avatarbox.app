@@ -4,6 +4,7 @@ import HeroSection from "../components/hero-section";
 import ErrorBody from "../components/error-body";
 import ErrorVM from "../view-models/error.vm";
 import { useEffect } from "react";
+import CrashReporter from "../../Common/crash-reporter.client";
 
 function Error({ statusCode, eventId }) {
   const model = new ErrorVM();
@@ -37,7 +38,7 @@ function Error({ statusCode, eventId }) {
 
 Error.getInitialProps = ({ req, res, err }) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  const crashReporter = req.scope.resolve("crashReporter");
+  const crashReporter = new CrashReporter();
   const eventId = crashReporter.submit(err);
   req.session.eventId = eventId;
   return { statusCode, eventId };
