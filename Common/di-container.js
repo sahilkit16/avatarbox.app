@@ -9,6 +9,7 @@ const CacheService = require("../Services/cache.service");
 const BuildCalendarUseCase = require("../Application/build-calendar.use-case");
 const RsaService = require("../Services/rsa.service");
 const UserService = require("../Services/user.service");
+const PusherClient = require("../Infrastructure/pusher.client");
 
 container.register({
   dataStore: awilix.asClass(DataStore),
@@ -21,6 +22,7 @@ container.register({
   buildCalendar: awilix.asClass(BuildCalendarUseCase),
   rsaService: awilix.asClass(RsaService),
   userService: awilix.asClass(UserService),
+  pusherClient: awilix.asClass(PusherClient),
 });
 
 module.exports = container;
