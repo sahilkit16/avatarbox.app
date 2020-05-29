@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CrashReporter from "../../Common/crash-reporter.client";
 
 export default function ErrorBody({ title, message, eventId }) {
@@ -15,6 +15,12 @@ export default function ErrorBody({ title, message, eventId }) {
       onLoad: () => setState({ didSubmitFeedback: true }),
     });
   }
+
+  useEffect(() => {
+    if(typeof site != "undefined"){
+      site.uncloak();
+    }
+  })
 
   return (
     <div className="hero-body">
