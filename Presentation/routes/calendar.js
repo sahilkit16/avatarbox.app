@@ -53,6 +53,7 @@ router.use(async (req, res, next) => {
 
 router.post("/submit", async (req, res, next) => {
   const { user, calendar } = req.session;
+  const isNewUser = user.isNew;
   if (calendar) {
     const userService = container.resolve("userService");
     userService
@@ -65,14 +66,14 @@ router.post("/submit", async (req, res, next) => {
             messageBroker.publish("update.now", user.email, { priority: 2 });
           }
         }
-        if(user.isNew){
+        if(isNewUser){
           const cacheService = container.resolve("cacheService");
-          cacheService.saveThanksPage(user.hash);
+          cacheService.retainThanksPage(user.hash);
           delete req.session.user.isNew;
         }
         if(req.isAjax){
           return res.json(await req.buildCalendar());
-        } else if (user.isNew && didToggleCalendar) {
+        } else if (isNewUser && didToggleCalendar) {
           return res.redirect(`/thanks`);
         } else {
           return res.redirect(`/calendar`);

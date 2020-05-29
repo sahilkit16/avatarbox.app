@@ -39,10 +39,9 @@ class CalendarPage extends React.Component {
     this.setState({ isLoading: true });
     this.props.updateCalendar().then(() => {
       this.setState({ isLoading: false });
+      window.location.hash = "#";
       if(this.props.user.isNew){
         window.location = "/thanks";
-      } else {
-        window.location.hash = "#";
       }
     }).catch(err => {
       if(err instanceof ImageShortageError){
