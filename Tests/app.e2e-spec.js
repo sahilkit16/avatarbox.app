@@ -1,15 +1,23 @@
 const request = require("supertest");
 const { app } = require("../Presentation/app");
-const DataStore = require("../Infrastructure/data-store");
-const Logger = require("../Common/logger");
+const container = require("../Common/di-container");
 
-const dataStore = new DataStore({ logger: new Logger() });
+const cacheService = container.resolve("cacheService");
+const dataStore = container.resolve("dataStore");
+
+let server;
 
 describe("app", () => {
-  beforeAll(async () => {
-    await dataStore.connect();
+  beforeAll((done) => {
+    // bind to port manually so we can disconnect explicitly
+    // https://github.com/visionmedia/supertest/issues/520
+    server = app.listen(4000, (err) => {
+      if (err) return done(err);
+       request.agent(server);
+       done();
+    });
   });
-  it("should work", () => {
+  it("should work", async () => {
     request(app)
       .get("/")
       .expect(200)
@@ -18,6 +26,8 @@ describe("app", () => {
       });
   });
   afterAll((done) => {
-    dataStore.disconnect(done);
+    dataStore.disconnect();
+    cacheService.disconnect();
+    return server && server.close(done);
   });
 });
