@@ -1,10 +1,12 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import { Notyf } from "notyf";
 import HomeVM from "../view-models/home.vm";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
 import LoginVM from "../view-models/login.vm";
-import BrowserCache from "../../Infrastructure/browser-cache";
+import * as actions from "../actions/app.actions";
 
 const PusherClient = require("../../Infrastructure/pusher.client");
 
@@ -42,7 +44,7 @@ class IndexPage extends React.Component {
   receiveNotification({ message }) {
     const notyf = new Notyf();
     notyf.success(message);
-    // TODO: cache bust gravatar icon
+    this.props.bustCache();
   }
 
   componentDidMount() {
@@ -54,7 +56,7 @@ class IndexPage extends React.Component {
     this.setState({ cloak: false });
     const { user } = this.props.navbar;
 
-    if (user && typeof site != "undefined") {
+    if (user) {
       const pusherClient = new PusherClient();
       pusherClient.subscribe(this.props.user.hash, this.receiveNotification);
     }
@@ -244,4 +246,12 @@ class IndexPage extends React.Component {
   }
 }
 
-export default IndexPage;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actions, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);
