@@ -4,10 +4,11 @@ web server for [avatarbox.io](https://avatarbox.io)
 
 ---
 
+![avatarbox architecture](http://avatarbox.surge.sh/architecture.png)
+
 ## Getting Started
 
 ## Prerequisites
-
 
 ## Installation
 
