@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const helmet = require("helmet");
 const app = express();
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
@@ -20,6 +21,8 @@ const isAjax = require("./middleware/is-ajax");
 // workaround for dev container
 // see https://github.com/zeit/next.js/issues/4022
 const dev = !!process.env.DEV_ENV;
+
+app.use(helmet());
 
 app.use(
   cookieSession({
