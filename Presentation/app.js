@@ -11,6 +11,7 @@ const feedbackRoute = require("./routes/feedback");
 const homeRoute = require("./routes/home");
 const notFoundRoute = require("./routes/notfound");
 const thanksRoute = require("./routes/thanks");
+const cspConfig = require("./public/csp-config.json");
 
 const morgan = require("morgan");
 const errorHandler = require("./middleware/error-handler");
@@ -22,7 +23,7 @@ const isAjax = require("./middleware/is-ajax");
 // see https://github.com/zeit/next.js/issues/4022
 const dev = !!process.env.DEV_ENV;
 
-app.use(helmet());
+app.use(helmet(cspConfig));
 
 app.use(
   cookieSession({
