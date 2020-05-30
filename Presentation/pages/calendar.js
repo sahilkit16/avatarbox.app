@@ -55,9 +55,11 @@ class CalendarPage extends React.Component {
         if (this.props.calendar.isEnabled) {
           this.props.bustCache();
         }
-        window.location.hash = "#";
         if (this.props.user.isNew) {
+          this.props.bustCache();
           window.location = "/thanks";
+        } else {
+          window.location.hash = "#";
         }
       })
       .catch((err) => {
