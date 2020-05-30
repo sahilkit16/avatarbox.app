@@ -62,6 +62,11 @@ class AvatarBoxSite extends Document {
             type="text/css"
             href={`../css/site.css?ver=${cacheBuster}`}
           />
+          <meta property="og:title" content="Avatar Box" />
+          <meta property="og:description" content="A Gravatar Auto Updater" />
+          <meta property="og:url" content="https://avatarbox.io" />
+          <meta property="og:image" content="http://avatarbox.surge.sh/architecture.png" />
+          <meta property="og:type" content="website" />
         </Head>
         <body id="menu">
           <Main />
