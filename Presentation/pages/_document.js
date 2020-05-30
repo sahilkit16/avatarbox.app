@@ -62,6 +62,8 @@ class AvatarBoxSite extends Document {
             type="text/css"
             href={`../css/site.css?ver=${cacheBuster}`}
           />
+          <meta name="twitter:card" content="summary_large_image"></meta>
+          <meta name="twitter:creator" content="@mrtills"></meta>
           <meta property="og:title" content="Avatar Box" />
           <meta property="og:description" content="A Gravatar Auto Updater" />
           <meta property="og:url" content="https://avatarbox.io" />
