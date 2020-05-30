@@ -6,6 +6,20 @@ class AvatarBoxSite extends Document {
     return (
       <Html lang="en" id="here">
         <Head>
+          <meta charSet="utf-8" />
+          <link rel="manifest" href={`/manifest.json?ver=${cacheBuster}`} />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000"></meta>
+          <meta name="description" content="A Gravatar auto updater" />
+          <meta name="robots" content="all" />
+          <meta name="twitter:card" content="summary_large_image"></meta>
+          <meta name="twitter:creator" content="@mrtills"></meta>
+          <meta property="og:title" content="Avatar Box" />
+          <meta property="og:description" content="A Gravatar Auto Updater" />
+          <meta property="og:url" content="https://avatarbox.io" />
+          <meta property="og:image" content="http://avatarbox.surge.sh/architecture.png" />
+          <meta property="og:type" content="website" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -23,11 +37,7 @@ class AvatarBoxSite extends Document {
             sizes="16x16"
             href={`/images/favicon-16x16.png?ver=${cacheBuster}`}
           />
-          <meta charSet="utf-8" />
-          <link rel="manifest" href={`/manifest.json?ver=${cacheBuster}`} />
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="theme-color" content="#000000"></meta>
+          
           <link
             rel="shortcut icon"
             href={`../images/fav_icon.png?ver=${cacheBuster}`}
@@ -62,13 +72,6 @@ class AvatarBoxSite extends Document {
             type="text/css"
             href={`../css/site.css?ver=${cacheBuster}`}
           />
-          <meta name="twitter:card" content="summary_large_image"></meta>
-          <meta name="twitter:creator" content="@mrtills"></meta>
-          <meta property="og:title" content="Avatar Box" />
-          <meta property="og:description" content="A Gravatar Auto Updater" />
-          <meta property="og:url" content="https://avatarbox.io" />
-          <meta property="og:image" content="http://avatarbox.surge.sh/architecture.png" />
-          <meta property="og:type" content="website" />
         </Head>
         <body id="menu">
           <Main />
