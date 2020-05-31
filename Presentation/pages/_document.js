@@ -18,7 +18,10 @@ class AvatarBoxSite extends Document {
           <meta property="og:title" content="Avatar Box" />
           <meta property="og:description" content="A Gravatar Auto Updater" />
           <meta property="og:url" content="https://avatarbox.io" />
-          <meta property="og:image" content="http://avatarbox.surge.sh/architecture.png" />
+          <meta
+            property="og:image"
+            content="http://avatarbox.surge.sh/architecture.png"
+          />
           <meta property="og:type" content="website" />
           <base href="/" />
           <link
@@ -38,7 +41,7 @@ class AvatarBoxSite extends Document {
             sizes="16x16"
             href={`/images/favicon-16x16.png?ver=${cacheBuster}`}
           />
-          
+
           <link
             rel="shortcut icon"
             href={`../images/fav_icon.png?ver=${cacheBuster}`}

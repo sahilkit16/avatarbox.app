@@ -43,9 +43,9 @@ export const toggleCalendar = () => {
           reject(new Error(text || res.statusText));
         }
       }
-    })
-  })
-}
+    });
+  });
+};
 
 export const getCalendarImages = () => {
   return new Promise((resolve, reject) => {
@@ -57,5 +57,5 @@ export const getCalendarImages = () => {
         reject(message || res.statusText);
       }
     });
-  })
-}
+  });
+};

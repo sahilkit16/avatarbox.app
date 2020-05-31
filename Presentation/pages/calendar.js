@@ -41,7 +41,7 @@ class CalendarPage extends React.Component {
       if (this.props.user.isNew) {
         window.location = "/thanks";
       }
-    })
+    });
   }
 
   componentDidMount() {
@@ -62,7 +62,7 @@ class CalendarPage extends React.Component {
           this.props.bustCache();
           window.location.hash = "#";
           this.setState({ isLoading: false });
-        })
+        });
       })
       .catch((err) => {
         if (err instanceof ImageShortageError) {

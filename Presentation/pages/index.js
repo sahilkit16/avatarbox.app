@@ -14,7 +14,7 @@ const PusherClient = require("../../Infrastructure/pusher.client");
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
   const user = context.req.session.user;
-  if(user){
+  if (user) {
     user.cacheBuster = ShortId();
   }
   const model = new HomeVM();
@@ -50,7 +50,7 @@ class IndexPage extends React.Component {
     notyf.success(message);
     setTimeout(() => {
       this.props.bustCache();
-    },500)
+    }, 500);
   }
 
   componentDidMount() {

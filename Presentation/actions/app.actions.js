@@ -8,24 +8,22 @@ export const bustCache = () => ({
 });
 
 export const toggleCalendar = () => (dispatch) => {
-  return fetch.toggleCalendar()
-    .then((calendar) => {
-      dispatch({
-        type: ACTION_TYPES.TOGGLE_CALENDAR,
-        calendar,
-      });
+  return fetch.toggleCalendar().then((calendar) => {
+    dispatch({
+      type: ACTION_TYPES.TOGGLE_CALENDAR,
+      calendar,
     });
+  });
 };
 
 export const reloadCalendar = () => (dispatch) => {
-  return fetch.getCalendarImages()
-    .then((calendarImages) => {
-      dispatch({
-        type: ACTION_TYPES.RELOAD_CALENDAR,
-        calendarImages,
-      });
+  return fetch.getCalendarImages().then((calendarImages) => {
+    dispatch({
+      type: ACTION_TYPES.RELOAD_CALENDAR,
+      calendarImages,
     });
-}
+  });
+};
 
 export const updateUser = (user) => ({
   type: ACTION_TYPES.UPDATE_USER,

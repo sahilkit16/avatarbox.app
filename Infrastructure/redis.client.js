@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const redis = require("redis");
 
 class RedisClient {

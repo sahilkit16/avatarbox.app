@@ -43,17 +43,17 @@ router.use((req, res, next) => {
 router.get("/images", async (req, res) => {
   const calendar = await req.buildCalendar();
   res.json(calendar.images);
-})
+});
 
 router.use((req, res, next) => {
   req.session.user.cacheBuster = ShortId();
-  if(req.method == "GET") {
-    req.buildCalendar().then(calendar => {
+  if (req.method == "GET") {
+    req.buildCalendar().then((calendar) => {
       req.session.calendar = calendar;
       return next();
-    })
+    });
   } else {
-    next(); 
+    next();
   }
 });
 
@@ -67,7 +67,7 @@ router.post("/submit", async (req, res, next) => {
   userService
     .toggleCalendar(user.email, isCalendarEnabled)
     .then(async (didToggleCalendar) => {
-      if(!didToggleCalendar){
+      if (!didToggleCalendar) {
         return res.redirect("/calendar");
       }
       if (!isCalendarEnabled) {

@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 var amqp = require("amqplib/callback_api");
 
 const exchange = "gravatar-events";

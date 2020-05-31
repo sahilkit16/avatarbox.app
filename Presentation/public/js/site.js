@@ -7,6 +7,6 @@ const site = (function () {
       document.querySelectorAll(".script-enabled").forEach((element) => {
         element.classList.remove("cloak");
       });
-    }
+    },
   };
 })();
