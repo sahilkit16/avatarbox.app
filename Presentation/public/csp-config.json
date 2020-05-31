@@ -4,7 +4,9 @@
      "directives":{
         "connectSrc":[
           "'self'",
-           "wss://ws-mt1.pusher.com"
+           "wss://ws-mt1.pusher.com",
+           "https://api.appzi.io/api/probe/h2U0P",
+           "https://*.sentry.io"
         ],
         "defaultSrc":[
            "'self'"
@@ -13,6 +15,9 @@
            "'self'",
            "https://maxcdn.bootstrapcdn.com",
            "https://fonts.gstatic.com"
+        ],
+        "frameSrc":[
+          "https://w.appzi.io"
         ],
         "imgSrc":[
            "'self'",
@@ -26,7 +31,10 @@
            "'self'",
            "'unsafe-eval'",
            "https://www.google-analytics.com",
-           "https://cdnjs.cloudflare.com"
+           "https://cdnjs.cloudflare.com",
+           "https://js.pusher.com",
+           "https://cdn.jsdelivr.net",
+           "https://w.appzi.io"
         ],
         "styleSrc":[
            "'self'",
