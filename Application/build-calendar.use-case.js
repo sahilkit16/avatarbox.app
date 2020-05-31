@@ -38,13 +38,15 @@ class BuildCalendarUseCase {
       throw new ImageShortageError(ErrorCode.NoImages);
     if (userImages && userImages.length == 1)
       throw new ImageShortageError(ErrorCode.SingleImage);
-    const primaryImageIndex = userImages.reduce(
-      (targetIndex, image, currentIndex) =>
-        targetIndex < 0 && image.name == primaryImage.name
-          ? currentIndex
-          : targetIndex,
-      -1
-    );
+    const primaryImageIndex = userImages
+      .map((img) => img.replace("http://", "https://"))
+      .reduce(
+        (targetIndex, image, currentIndex) =>
+          targetIndex < 0 && image.name == primaryImage.name
+            ? currentIndex
+            : targetIndex,
+        -1
+      );
     const targetIndex = this.isEnabled
       ? primaryImageIndex
       : primaryImageIndex + 1;
