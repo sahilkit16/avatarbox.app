@@ -38,9 +38,6 @@ class CalendarPage extends React.Component {
     notyf.success(message);
     this.props.reloadCalendar().then(() => {
       this.props.bustCache();
-      if (this.props.user.isNew) {
-        window.location = "/thanks";
-      }
     });
   }
 

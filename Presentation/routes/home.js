@@ -85,7 +85,6 @@ router.post("/sign-in", async (req, res) => {
         userService
           .findOrCreate(user.email, user.password)
           .then((_user) => {
-            req.session.user.isNew = _user.isNew;
             if (req.isAjax) {
               res.end();
             } else {

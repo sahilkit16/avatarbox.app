@@ -60,9 +60,7 @@ router.use((req, res, next) => {
 router.post("/submit", async (req, res, next) => {
   const { user } = req.session;
   const isCalendarEnabled = req.session.calendar.isEnabled;
-  const isNewUser = req.session.user.isNew;
   delete req.session.calendar;
-  delete req.session.user.isNew;
   const userService = container.resolve("userService");
   userService
     .toggleCalendar(user.email, isCalendarEnabled)
@@ -74,16 +72,10 @@ router.post("/submit", async (req, res, next) => {
         const messageBroker = container.resolve("messageBroker");
         messageBroker.publish("update.now", user.email, { priority: 2 });
       }
-      if (isNewUser) {
-        const cacheService = container.resolve("cacheService");
-        cacheService.retainThanksPage(user.hash);
-      }
       if (req.isAjax) {
         const calendar = await req.buildCalendar();
         req.session.calendar = calendar;
         return res.json(calendar);
-      } else if (isNewUser) {
-        return res.redirect(`/thanks`);
       } else {
         return res.redirect(`/calendar`);
       }

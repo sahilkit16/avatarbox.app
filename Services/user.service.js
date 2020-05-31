@@ -26,7 +26,6 @@ class UserService {
           } else {
             UserRepo.create({ email, ciphertext }, (_err, _user) => {
               if (_err) return reject(_err);
-              _user.isNew = true;
               resolve(_user);
             });
           }
