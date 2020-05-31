@@ -39,7 +39,10 @@ class BuildCalendarUseCase {
     if (userImages && userImages.length == 1)
       throw new ImageShortageError(ErrorCode.SingleImage);
     const primaryImageIndex = userImages
-      .map((img) => img.replace("http://", "https://"))
+      .map((img) => {
+        img.url = img.url.replace("http://", "https://");
+        return img;
+      })
       .reduce(
         (targetIndex, image, currentIndex) =>
           targetIndex < 0 && image.name == primaryImage.name
