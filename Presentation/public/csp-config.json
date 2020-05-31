@@ -27,6 +27,7 @@
            "https://picsum.photos",
            "https://www.facebook.com",
            "https://www.google-analytics.com",
+           "https://*.addthis.com",
            "data:"
         ],
         "scriptSrc":[
@@ -42,7 +43,9 @@
            "https://*.addthis.com",
            "http://*.addthis.com",
            "https://v1.addthisedge.com",
-           "https://z.moatads.com"
+           "https://z.moatads.com",
+           "https://weheartit.com",
+           "https://assets.pinterest.com"
         ],
         "styleSrc":[
            "'self'",
