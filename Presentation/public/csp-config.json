@@ -1,6 +1,6 @@
 {
   "contentSecurityPolicy":{
-     "reportOnly":"dev",
+    "reportOnly": "true",
      "directives":{
         "connectSrc":[
           "'self'",
@@ -25,7 +25,8 @@
            "http://en.gravatar.com",
            "https://unsplash.it",
            "https://i.picsum.photos",
-           "https://picsum.photos"
+           "https://picsum.photos",
+           "https://www.facebook.com"
         ],
         "scriptSrc":[
            "'self'",
@@ -34,7 +35,8 @@
            "https://cdnjs.cloudflare.com",
            "https://js.pusher.com",
            "https://cdn.jsdelivr.net",
-           "https://w.appzi.io"
+           "https://w.appzi.io",
+           "https://connect.facebook.net"
         ],
         "styleSrc":[
            "'self'",
