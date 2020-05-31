@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const CalendarSchema = require("./calendar.schema");
 const moment = require("moment");
 
-const twoDaysAgo = moment().subtract('days', 2);
+const twoDaysAgo = moment().subtract(2, 'days');
 
 const UserSchema = new Schema({
   email: { type: String, required: true },
