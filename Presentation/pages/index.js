@@ -7,12 +7,16 @@ import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
 import LoginVM from "../view-models/login.vm";
 import * as actions from "../actions/app.actions";
+import ShortId from "shortid";
 
 const PusherClient = require("../../Infrastructure/pusher.client");
 
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
   const user = context.req.session.user;
+  if(user){
+    user.cacheBuster = ShortId();
+  }
   const model = new HomeVM();
   model.prompt = context.req.session.prompt || null;
   model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
