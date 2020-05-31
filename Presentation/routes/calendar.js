@@ -22,11 +22,7 @@ router.use((req, res, next) => {
     buildCalendar.client = req.scope.resolve("gravatarClient");
     return buildCalendar
       .execute()
-      .then((calendar) => {
-        req.session.calendar = calendar;
-        req.session.user.cacheBuster = ShortId();
-        return calendar;
-      })
+      .then((calendar) => calendar)
       .catch((err) => {
         logger.error(err.message);
         if (err instanceof ImageShortageError) {
@@ -44,48 +40,51 @@ router.use((req, res, next) => {
   next();
 });
 
-router.use(async (req, res, next) => {
-  if (req.session.calendar) {
-    next();
+router.use((req, res, next) => {
+  req.session.user.cacheBuster = ShortId();
+  if(req.method == "GET") {
+    req.buildCalendar().then(calendar => {
+      req.session.calendar = calendar;
+      return next();
+    })
   } else {
-    await req.buildCalendar();
-    next();
+    next(); 
   }
 });
 
 router.post("/submit", async (req, res, next) => {
-  const { user, calendar } = req.session;
-  const isNewUser = user.isNew;
-  if (calendar) {
-    const userService = container.resolve("userService");
-    userService
-      .toggleCalendar(user.email, calendar.isEnabled)
-      .then(async (didToggleCalendar) => {
-        if (didToggleCalendar) {
-          delete req.session.calendar;
-          if (!calendar.isEnabled) {
-            const messageBroker = container.resolve("messageBroker");
-            messageBroker.publish("update.now", user.email, { priority: 2 });
-          }
-        }
-        if (isNewUser) {
-          const cacheService = container.resolve("cacheService");
-          cacheService.retainThanksPage(user.hash);
-          delete req.session.user.isNew;
-        }
-        if (req.isAjax) {
-          return res.json(await req.buildCalendar());
-        } else if (isNewUser && didToggleCalendar) {
-          return res.redirect(`/thanks`);
-        } else {
-          return res.redirect(`/calendar`);
-        }
-      })
-      .catch((err) => {
-        logger.error(err.message);
-        next(err);
-      });
-  }
+  const { user } = req.session;
+  const isCalendarEnabled = req.session.calendar.isEnabled;
+  const isNewUser = req.session.user.isNew;
+  delete req.session.calendar;
+  delete req.session.user.isNew;
+  const userService = container.resolve("userService");
+  userService
+    .toggleCalendar(user.email, isCalendarEnabled)
+    .then(async (didToggleCalendar) => {
+      if(!didToggleCalendar){
+        return res.redirect("/calendar");
+      }
+      if (!isCalendarEnabled) {
+        const messageBroker = container.resolve("messageBroker");
+        messageBroker.publish("update.now", user.email, { priority: 2 });
+      }
+      if (isNewUser) {
+        const cacheService = container.resolve("cacheService");
+        cacheService.retainThanksPage(user.hash);
+      }
+      if (req.isAjax) {
+        return res.json(await req.buildCalendar());
+      } else if (isNewUser) {
+        return res.redirect(`/thanks`);
+      } else {
+        return res.redirect(`/calendar`);
+      }
+    })
+    .catch((err) => {
+      logger.error(err.message);
+      next(err);
+    });
 });
 
 module.exports = router;
