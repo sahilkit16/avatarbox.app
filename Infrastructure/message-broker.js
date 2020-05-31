@@ -1,3 +1,4 @@
+require('dotenv').config();
 var amqp = require("amqplib/callback_api");
 
 const exchange = "gravatar-events";
@@ -28,7 +29,7 @@ class MessageBroker {
 
   async connect() {
     return new Promise((resolve, reject) => {
-      amqp.connect("amqp://avatarbox:5672", (connectionError, connection) => {
+      amqp.connect(process.env.AMQP_URI, (connectionError, connection) => {
         if (connectionError) {
           reject(connectionError);
         } else {

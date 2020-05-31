@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require("mongoose");
 
 class DataStore {
@@ -9,7 +10,7 @@ class DataStore {
     mongoose.set("useFindAndModify", false);
     return new Promise((resolve, reject) => {
       mongoose.connect(
-        `mongodb://avatarbox:27017/avbx`,
+        process.env.MONGO_URI,
         { useNewUrlParser: true, useUnifiedTopology: true },
         (error) => {
           if (error) {

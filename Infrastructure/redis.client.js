@@ -1,8 +1,9 @@
+require('dotenv').config();
 const redis = require("redis");
 
 class RedisClient {
   constructor() {
-    this._client = redis.createClient({ host: "avatarbox" });
+    this._client = redis.createClient(process.env.REDIS_URL);
     this._client.on("error", (error) => {
       console.log(error);
     });
