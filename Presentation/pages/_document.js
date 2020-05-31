@@ -20,7 +20,7 @@ class AvatarBoxSite extends Document {
           <meta property="og:url" content="https://avatarbox.io" />
           <meta
             property="og:image"
-            content="http://avatarbox.surge.sh/architecture.png"
+            content="https://avatarbox.io/images/architecture.png"
           />
           <meta property="og:type" content="website" />
           <link
