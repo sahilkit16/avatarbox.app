@@ -6,7 +6,6 @@ class ThanksVM {
     this.navbar = new NavBarVM();
     this.navbar.isCosmetic = true;
     this.navbar.isTransparent = false;
-    this.appziScript = "https://w.appzi.io/bootstrap/bundle.js?token=h2U0P";
     this.hideCoverImage = true;
   }
   toObject() {

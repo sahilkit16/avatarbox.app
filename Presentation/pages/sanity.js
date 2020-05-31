@@ -7,7 +7,6 @@ class SanityVM extends ThanksVM {
   constructor() {
     super();
     this.title = "Santity Page";
-    this.appziScript = null;
   }
 }
 

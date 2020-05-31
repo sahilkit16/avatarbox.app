@@ -5,7 +5,6 @@
         "connectSrc":[
           "'self'",
            "wss://ws-mt1.pusher.com",
-           "https://api.appzi.io/api/probe/h2U0P",
            "https://*.sentry.io"
         ],
         "defaultSrc":[
@@ -17,7 +16,6 @@
            "https://fonts.gstatic.com"
         ],
         "frameSrc":[
-          "https://w.appzi.io",
           "https://s7.addthis.com"
         ],
         "imgSrc":[
@@ -38,7 +36,6 @@
            "https://cdnjs.cloudflare.com",
            "https://js.pusher.com",
            "https://cdn.jsdelivr.net",
-           "https://w.appzi.io",
            "https://connect.facebook.net",
            "https://graph.facebook.com",
            "http://graph.facebook.com",
