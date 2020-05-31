@@ -1,3 +1,5 @@
+import React from "react";
+
 function AddThis() {
   return <script 
     type="text/javascript" 
