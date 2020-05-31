@@ -38,6 +38,9 @@ class CalendarPage extends React.Component {
     notyf.success(message);
     this.props.reloadCalendar().then(() => {
       this.props.bustCache();
+      if (this.props.user.isNew) {
+        window.location = "/thanks";
+      }
     })
   }
 
@@ -55,14 +58,10 @@ class CalendarPage extends React.Component {
     this.props
       .toggleCalendar()
       .then(() => {
-        this.setState({ isLoading: false });
         this.props.reloadCalendar().then(() => {
           this.props.bustCache();
-          if (this.props.user.isNew) {
-            window.location = "/thanks";
-          } else {
-            window.location.hash = "#";
-          }
+          window.location.hash = "#";
+          this.setState({ isLoading: false });
         })
       })
       .catch((err) => {
@@ -123,6 +122,7 @@ class CalendarPage extends React.Component {
                     <h2
                       className={ClassNames("has-text-centered", {
                         "is-hidden": this.props.calendar.isEnabled,
+                        "is-invisible": this.state.isLoading,
                       })}
                     >
                       Your Gravatar icon will be updated once a day.
@@ -130,6 +130,7 @@ class CalendarPage extends React.Component {
                     <h2
                       className={ClassNames("has-text-centered", {
                         "is-hidden": !this.props.calendar.isEnabled,
+                        "is-invisible": this.state.isLoading,
                       })}
                     >
                       Your Gravatar icon will no longer be updated.
