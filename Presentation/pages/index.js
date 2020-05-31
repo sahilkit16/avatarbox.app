@@ -48,7 +48,13 @@ class IndexPage extends React.Component {
 
   receiveNotification(message) {
     const notyf = new Notyf();
-    notyf.success(message);
+    notyf.success({
+      message,
+      position: {
+        x: 'center',
+        y: 'center',
+      }
+    });
     setTimeout(() => {
       this.props.bustCache();
     }, 500);
