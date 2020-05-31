@@ -31,7 +31,7 @@ class CacheService {
   }
   async touchSession(emailHash) {
     const activeSessionKeyName = "hasActiveSession";
-    const activeSessionTTLSeconds = 120;
+    const activeSessionTTLSeconds = 300;
     const hasActiveSession =
       (await this.hget(emailHash, activeSessionKeyName)) || true;
     this.hset(emailHash, activeSessionKeyName, hasActiveSession);
