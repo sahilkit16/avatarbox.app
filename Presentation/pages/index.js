@@ -57,7 +57,7 @@ class IndexPage extends React.Component {
     });
     setTimeout(() => {
       this.props.bustCache();
-    }, 500);
+    }, 600);
   }
 
   componentDidMount() {

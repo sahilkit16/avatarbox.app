@@ -37,7 +37,9 @@ class CalendarPage extends React.Component {
     const notyf = new Notyf();
     notyf.success(message);
     this.props.reloadCalendar().then(() => {
-      this.props.bustCache();
+      setTimeout(() => {
+        this.props.bustCache();
+      }, 600)
     });
   }
 
