@@ -17,7 +17,8 @@
            "https://fonts.gstatic.com"
         ],
         "frameSrc":[
-          "https://w.appzi.io"
+          "https://w.appzi.io",
+          "https://s7.addthis.com"
         ],
         "imgSrc":[
            "'self'",
@@ -26,7 +27,9 @@
            "https://unsplash.it",
            "https://i.picsum.photos",
            "https://picsum.photos",
-           "https://www.facebook.com"
+           "https://www.facebook.com",
+           "https://www.google-analytics.com",
+           "data:"
         ],
         "scriptSrc":[
            "'self'",
@@ -36,7 +39,13 @@
            "https://js.pusher.com",
            "https://cdn.jsdelivr.net",
            "https://w.appzi.io",
-           "https://connect.facebook.net"
+           "https://connect.facebook.net",
+           "https://graph.facebook.com",
+           "http://graph.facebook.com",
+           "https://*.addthis.com",
+           "http://*.addthis.com",
+           "https://v1.addthisedge.com",
+           "https://z.moatads.com"
         ],
         "styleSrc":[
            "'self'",

@@ -8,6 +8,7 @@ import { signIn } from "../../Infrastructure/fetch.client";
 import LoginVM from "../view-models/login.vm";
 import * as actions from "../actions/app.actions";
 import ShortId from "shortid";
+import AddThis from "../components/add-this";
 
 const PusherClient = require("../../Infrastructure/pusher.client");
 
@@ -249,6 +250,7 @@ class IndexPage extends React.Component {
             </form>
           </div>
         </div>
+        <AddThis />
       </div>
     );
   }
