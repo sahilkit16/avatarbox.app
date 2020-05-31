@@ -23,7 +23,6 @@ class AvatarBoxSite extends Document {
             content="http://avatarbox.surge.sh/architecture.png"
           />
           <meta property="og:type" content="website" />
-          <base href="/" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
