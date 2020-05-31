@@ -74,7 +74,9 @@ router.post("/submit", async (req, res, next) => {
         cacheService.retainThanksPage(user.hash);
       }
       if (req.isAjax) {
-        return res.json(await req.buildCalendar());
+        const calendar = await req.buildCalendar();
+        req.session.calendar = calendar;
+        return res.json(calendar);
       } else if (isNewUser) {
         return res.redirect(`/thanks`);
       } else {
