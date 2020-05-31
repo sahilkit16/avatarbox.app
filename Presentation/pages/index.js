@@ -51,9 +51,9 @@ class IndexPage extends React.Component {
     notyf.success({
       message,
       position: {
-        x: 'center',
-        y: 'center',
-      }
+        x: "center",
+        y: "center",
+      },
     });
     setTimeout(() => {
       this.props.bustCache();
