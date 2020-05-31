@@ -1,3 +1,7 @@
+import ImageShortageError from "../Domain/image-shortage.error";
+import { NoImages, SingleImage } from "../Domain/error-code";
+import { isJson } from "../Common/helpers";
+
 export const signIn = (user) => {
   return new Promise((resolve, reject) => {
     fetch("/home/sign-in", {
@@ -16,3 +20,42 @@ export const signIn = (user) => {
     });
   });
 };
+
+export const toggleCalendar = () => {
+  return new Promise((resolve, reject) => {
+    fetch("/calendar/submit", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+      },
+    }).then(async (res) => {
+      if (res.ok) {
+        const calendar = await res.json();
+        resolve(calendar);
+      } else {
+        const text = await res.text();
+        if (isJson(text)) {
+          const err = JSON.parse(text);
+          if (err.code == NoImages || err.code == SingleImage) {
+            reject(new ImageShortageError(err.code));
+          }
+        } else {
+          reject(new Error(text || res.statusText));
+        }
+      }
+    })
+  })
+}
+
+export const getCalendarImages = () => {
+  return new Promise((resolve, reject) => {
+    fetch("/calendar/images").then(async (res) => {
+      if (res.ok) {
+        resolve(res.json());
+      } else {
+        const message = await res.text();
+        reject(message || res.statusText);
+      }
+    });
+  })
+}

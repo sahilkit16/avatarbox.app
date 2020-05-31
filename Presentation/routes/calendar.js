@@ -40,6 +40,11 @@ router.use((req, res, next) => {
   next();
 });
 
+router.get("/images", async (req, res) => {
+  const calendar = await req.buildCalendar();
+  res.json(calendar.images);
+})
+
 router.use((req, res, next) => {
   req.session.user.cacheBuster = ShortId();
   if(req.method == "GET") {
