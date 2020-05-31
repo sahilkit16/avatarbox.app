@@ -45,10 +45,12 @@ class IndexPage extends React.Component {
     this.passwordRef = React.createRef();
   }
 
-  receiveNotification({ message }) {
+  receiveNotification(message) {
     const notyf = new Notyf();
     notyf.success(message);
-    this.props.bustCache();
+    setTimeout(() => {
+      this.props.bustCache();
+    },500)
   }
 
   componentDidMount() {
@@ -62,7 +64,9 @@ class IndexPage extends React.Component {
 
     if (user) {
       const pusherClient = new PusherClient();
-      pusherClient.subscribe(this.props.user.hash, this.receiveNotification);
+      pusherClient.subscribe(this.props.user.hash, ({ message }) => {
+        this.receiveNotification(message);
+      });
     }
   }
 

@@ -33,34 +33,37 @@ class CalendarPage extends React.Component {
     this.crashReporter = new CrashReporter();
   }
 
-  receiveNotification({ message }) {
+  receiveNotification(message) {
     const notyf = new Notyf();
     notyf.success(message);
-    this.props.bustCache();
+    this.props.reloadCalendar().then(() => {
+      this.props.bustCache();
+    })
   }
 
   componentDidMount() {
     this.slideShow.load();
     const pusherClient = new PusherClient();
-    pusherClient.subscribe(this.props.user.hash, this.receiveNotification);
+    pusherClient.subscribe(this.props.user.hash, ({ message }) => {
+      this.receiveNotification(message);
+    });
   }
 
   toggleCalendar(e) {
     e.preventDefault();
     this.setState({ isLoading: true });
     this.props
-      .updateCalendar()
+      .toggleCalendar()
       .then(() => {
         this.setState({ isLoading: false });
-        if (this.props.calendar.isEnabled) {
+        this.props.reloadCalendar().then(() => {
           this.props.bustCache();
-        }
-        if (this.props.user.isNew) {
-          this.props.bustCache();
-          window.location = "/thanks";
-        } else {
-          window.location.hash = "#";
-        }
+          if (this.props.user.isNew) {
+            window.location = "/thanks";
+          } else {
+            window.location.hash = "#";
+          }
+        })
       })
       .catch((err) => {
         if (err instanceof ImageShortageError) {
