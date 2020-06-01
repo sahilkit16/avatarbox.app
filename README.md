@@ -8,7 +8,7 @@ web server for [avatarbox.io](https://avatarbox.io)
 
 ## Getting Started
 
-**`avatarbox.web`** is a user-facing [Next.js](https://nextjs.org) application that allows visitors to set up *Automated Updates* for their [Gravatar](https://www.gravatar.com) icon.
+**`avatarbox.web`** is a user-facing [Next.js](https://nextjs.org) application that allows visitors to set up *Automated Updates* for their Gravatar icons.
 
 ### Prerequisites
 
@@ -24,15 +24,15 @@ web server for [avatarbox.io](https://avatarbox.io)
 
 ## Automated Updates
 
-An automated update is an unattended, server-side background process that selects an image from the user's Gravatar account and sets that image as the new Gravatar icon. The process behaves similar to an image carousel.
+An automated update is an unattended, server-side background process that selects an image from the user's Gravatar account, and then sets that image as the user's current Gravatar icon. The concept is similar to an image carousel.
 
-It is important to note that **`avatarbox.web`** does not perform any automated updates. This application simply provides an interface through which users can manage automated updates; automated updates themselves are delegated to [the cron job](https://bitbucket.org/mrtillman/avatarbox.workers/src/master/cron-job.js) which collaborates with [avatarbox.workers](https://bitbucket.org/mrtillman/avatarbox.workers).
+It is important to note that **`avatarbox.web`** does not perform automated updates. This application simply provides an interface through which users can manage automated updates; automated updates themselves are delegated to [the cron job](https://bitbucket.org/mrtillman/avatarbox.workers/src/master/cron-job.js) which collaborates with [avatarbox.workers](https://bitbucket.org/mrtillman/avatarbox.workers).
 
 ## Authentication
 
-When a website (such as Avatar Box) wants to use the services of another (such as updating your Gravatar icon), instead of asking you to provide your password, the website (Avatar Box) should actually use a protocol called [OAuth](https://en.wikipedia.org/wiki/OAuth) to facilitate [social login](https://en.wikipedia.org/wiki/Social_login). However, Avatar Box leverages the *Gravatar XML-RPC API*, which does not support OAuth:
+When a website (such as Avatar Box) wants to use the services of another (such as updating your Gravatar icon), instead of asking you to provide your password, the website (Avatar Box) should actually use a protocol called [OAuth](https://en.wikipedia.org/wiki/OAuth) to facilitate [social login](https://en.wikipedia.org/wiki/Social_login). However, Avatar Box leverages the [Gravatar XML-RPC API](https://en.gravatar.com/site/implement/xmlrpc), which does not support OAuth:
 
-> User authentication happens at the api method level. You will pass to the method call a password parameter. <br/> ~ [Gravatar XML-RPC API](https://en.gravatar.com/site/implement/xmlrpc)
+> User authentication happens at the api method level. You will pass to the method call a password parameter. 
 
 So, in the absence of OAuth support, you will need to provide your Gravatar password, which Avatar Box will then [RSA Encrypt](https://simple.wikipedia.org/wiki/RSA_algorithm).
 
