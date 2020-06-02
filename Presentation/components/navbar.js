@@ -53,7 +53,7 @@ function NavBar({ model }) {
             <span className="navbar-item">
               <a
                 className="button is-white is-outlined"
-                href="https://bitbucket.org/mrtillman/avatarbox.web/wiki/Home"
+                href="https://docs.avatarbox.io/"
               >
                 <span className="icon">
                   <i className="fa fa-book"></i>
