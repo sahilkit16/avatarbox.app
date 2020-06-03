@@ -16,7 +16,7 @@ const cspConfig = require("./public/csp-config.json");
 const morgan = require("morgan");
 const errorHandler = require("./middleware/error-handler");
 const crashReporterScope = require("./middleware/crash-reporter-scope");
-const sessionWatcher = require("./middleware/session-watcher");
+const isOnline = require("./middleware/is-online");
 const isAjax = require("./middleware/is-ajax");
 
 // workaround for dev container
@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", "./Presentation/views");
 app.set("view engine", "pug");
 
-app.use(sessionWatcher);
+app.use(isOnline);
 app.use(crashReporterScope);
 app.use(isAjax);
 

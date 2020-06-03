@@ -23,20 +23,14 @@ class CacheService {
   async hdel(key, field) {
     return await this._cache.hdel(key, field);
   }
-  retainThanksPage(emailHash) {
-    const thanksPageKeyName = `thanks-${emailHash}`;
-    const thanksPageTTLSeconds = 60;
-    this.set(thanksPageKeyName, true);
-    this._cache.expire(thanksPageKeyName, thanksPageTTLSeconds);
-  }
-  async touchSession(emailHash) {
-    const activeSessionKeyName = "hasActiveSession";
-    const activeSessionTTLSeconds = 300;
-    const hasActiveSession =
-      (await this.hget(emailHash, activeSessionKeyName)) || true;
-    this.hset(emailHash, activeSessionKeyName, hasActiveSession);
-    this._cache.expire(emailHash, activeSessionTTLSeconds);
-    return hasActiveSession;
+  async isOnline(emailHash) {
+    const isOnlineKeyName = "isOnline";
+    const isOnlineTTLSeconds = 30;
+    const isOnline = await this.hget(emailHash, isOnlineKeyName);
+    if(!isOnline){
+      this.hset(emailHash, isOnlineKeyName, true);
+      this._cache.expire(emailHash, isOnlineTTLSeconds);
+    }
   }
   disconnect() {
     this._cache.end();

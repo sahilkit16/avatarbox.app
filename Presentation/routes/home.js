@@ -71,7 +71,7 @@ router.post("/sign-in", async (req, res) => {
             : await rsaService.encrypt(password);
           user.hash = client.emailHash;
           user.cacheBuster = ShortId();
-          cacheService.touchSession(user.hash);
+          cacheService.isOnline(user.hash);
           req.session.user = user;
           req.scope.register({
             gravatarClient: asValue(client),
