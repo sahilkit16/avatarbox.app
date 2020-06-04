@@ -25,7 +25,7 @@ class CacheService {
   }
   async isOnline(emailHash) {
     const isOnlineKeyName = "isOnline";
-    const isOnlineTTLSeconds = 30;
+    const isOnlineTTLSeconds = 300;
     const isOnline = await this.hget(emailHash, isOnlineKeyName);
     if(!isOnline){
       this.hset(emailHash, isOnlineKeyName, true);
