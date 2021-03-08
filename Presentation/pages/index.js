@@ -9,7 +9,8 @@ import LoginVM from "../view-models/login.vm";
 import * as actions from "../actions/app.actions";
 import ShortId from "shortid";
 
-const PusherClient = require("../../Infrastructure/pusher.client");
+// TODO: subscribe to pusher notification from worker
+//const PusherClient = require("../../Infrastructure/pusher.client");
 
 export async function getServerSideProps(context) {
   const userid = context.query.next && context.req.session.userid;
@@ -69,10 +70,10 @@ class IndexPage extends React.Component {
     const { user } = this.props.navbar;
 
     if (user) {
-      const pusherClient = new PusherClient();
-      pusherClient.subscribe(this.props.user.hash, ({ message }) => {
-        this.receiveNotification(message);
-      });
+      // const pusherClient = new PusherClient();
+      // pusherClient.subscribe(this.props.user.hash, ({ message }) => {
+      //   this.receiveNotification(message);
+      // });
     }
   }
 
