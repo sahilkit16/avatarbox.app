@@ -3,7 +3,6 @@ const { app } = require("../Presentation/app");
 const container = require("../Common/di-container");
 
 const cacheService = container.resolve("cacheService");
-const dataStore = container.resolve("dataStore");
 
 let server;
 
@@ -26,7 +25,6 @@ describe("app", () => {
       });
   });
   afterAll((done) => {
-    dataStore.disconnect();
     cacheService.disconnect();
     return server && server.close(done);
   });

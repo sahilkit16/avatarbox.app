@@ -15,9 +15,6 @@
            "https://maxcdn.bootstrapcdn.com",
            "https://fonts.gstatic.com"
         ],
-        "frameSrc":[
-          "https://s7.addthis.com"
-        ],
         "imgSrc":[
            "'self'",
            "https://www.gravatar.com",
@@ -27,7 +24,6 @@
            "https://picsum.photos",
            "https://www.facebook.com",
            "https://www.google-analytics.com",
-           "https://*.addthis.com",
            "data:"
         ],
         "scriptSrc":[
@@ -40,9 +36,6 @@
            "https://connect.facebook.net",
            "https://graph.facebook.com",
            "http://graph.facebook.com",
-           "https://*.addthis.com",
-           "http://*.addthis.com",
-           "https://v1.addthisedge.com",
            "https://z.moatads.com",
            "https://weheartit.com",
            "https://assets.pinterest.com"

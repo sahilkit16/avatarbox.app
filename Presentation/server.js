@@ -15,15 +15,11 @@ setHandler((req, res) => {
 });
 
 const crashReporter = container.resolve("crashReporter");
-const dataStore = container.resolve("dataStore");
 const logger = container.resolve("logger");
-const messageBroker = container.resolve("messageBroker");
 
 nx.prepare()
-  .then(() => dataStore.connect())
-  .then(() => messageBroker.connect())
   .then(() => {
-    const port = process.env.PORT || 8801;
+    const port = process.env.PORT || 8080;
     return new Promise((resolve, reject) => {
       http
         .createServer(app)
@@ -37,7 +33,5 @@ nx.prepare()
   .catch((err) => {
     crashReporter.submit(err);
     logger.error(err.message);
-    dataStore.disconnect();
-    messageBroker.disconnect();
     process.exit(1);
   });

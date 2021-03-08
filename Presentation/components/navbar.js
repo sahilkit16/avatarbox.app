@@ -50,28 +50,6 @@ function NavBar({ model }) {
           )}
         >
           <div className="navbar-end">
-            <span className="navbar-item">
-              <a
-                className="button is-white is-outlined"
-                href="https://docs.avatarbox.io"
-              >
-                <span className="icon">
-                  <i className="fa fa-book"></i>
-                </span>
-                <span>Documentation</span>
-              </a>
-            </span>
-            <span className="navbar-item">
-              <a
-                className="button is-white is-outlined"
-                href="https://bitbucket.org/mrtillman/avatarbox.web"
-              >
-                <span className="icon">
-                  <i className="fa fa-bitbucket"></i>
-                </span>
-                <span>View Source</span>
-              </a>
-            </span>
             <span className={model.user ? "navbar-item" : "is-hidden"}>
               <a className="has-text-white" href="/home/sign-out">
                 Sign Out

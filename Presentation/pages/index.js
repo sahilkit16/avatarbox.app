@@ -8,7 +8,6 @@ import { signIn } from "../../Infrastructure/fetch.client";
 import LoginVM from "../view-models/login.vm";
 import * as actions from "../actions/app.actions";
 import ShortId from "shortid";
-import AddThis from "../components/add-this";
 
 const PusherClient = require("../../Infrastructure/pusher.client");
 
@@ -135,9 +134,8 @@ class IndexPage extends React.Component {
         return this.showValidationMessage(loginVm.errors.password, 2);
       }
       this.setState({ isLoading: true });
-      const encrypt = typeof rsaEncrypt != "undefined" && rsaEncrypt;
       const { email, password } = this.state;
-      signIn({ email, password: encrypt(password) })
+      signIn({ email, password })
         .then(() => {
           setTimeout(() => (window.location = "/calendar#"), 500);
         })
@@ -182,10 +180,6 @@ class IndexPage extends React.Component {
       <div className="hero-body">
         <div className="container has-text-centered">
           <div className="column is-6 is-offset-3">
-            <h1 className="title">New Avatar, Daily</h1>
-            <h2 className="subtitle">
-              A handy resource to auto update your Gravatar icon
-            </h2>
             <div className={`${!this.props.user && "is-hidden"}`}>
               <a className="button is-white" href="/calendar#">
                 <i className="fa fa-calendar"></i>
@@ -256,7 +250,6 @@ class IndexPage extends React.Component {
             </form>
           </div>
         </div>
-        <AddThis />
       </div>
     );
   }
