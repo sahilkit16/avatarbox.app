@@ -13,12 +13,12 @@ async function gravatarClientScope(req, res, next) {
   const { user } = req.session;
   const { email } = req.body;
   if (user) {
-    const rsaService = container.resolve("rsaService");
-    rsaService
-      .decrypt(user.password)
-      .then((password) => {
+    const avbx = container.resolve("avbx");
+    avbx
+      .fetch(user.email)
+      .then((client) => {
         req.scope.register({
-          gravatarClient: asValue(new GravatarClient(user.email, password)),
+          gravatarClient: asValue(client),
         });
         next();
       })

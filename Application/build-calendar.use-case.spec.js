@@ -4,7 +4,7 @@ describe("BuildCalendarUseCase", () => {
   let useCase;
   beforeEach(() => {
     useCase = new BuildCalendarUseCase({
-      userService: {},
+      avbx: {},
     });
   });
   it("should work", () => {

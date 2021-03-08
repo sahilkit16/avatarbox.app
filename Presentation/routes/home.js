@@ -4,7 +4,6 @@ const container = require("../../Common/di-container");
 const router = Router();
 const gravatarClientScope = require("../middleware/gravatar-client-scope");
 const { unauthorized } = require("../middleware/unauthorized");
-const { GravatarClient } = require("grav.client");
 const LoginVM = require("../view-models/login.vm");
 const ShortId = require("shortid");
 
@@ -39,7 +38,6 @@ router.post("/get-started", async (req, res) => {
   }
 });
 
-// TODO: cleanup + refactor
 router.post("/sign-in", async (req, res) => {
   let { password } = req.body;
   const loginVm = new LoginVM();
@@ -52,46 +50,26 @@ router.post("/sign-in", async (req, res) => {
     return req.unauthorized(loginVm.errors.password, "/?next=1#here");
   }
 
-  const rsaService = container.resolve("rsaService");
-
-  if (req.isAjax) {
-    password = await rsaService.decrypt(password);
-  }
-
   const user = { email: loginVm.email };
 
   if (user.email && password) {
-    const client = new GravatarClient(user.email, password);
-    client
-      .test()
-      .then(async (response) => {
-        if (!!response) {
-          user.password = req.isAjax
-            ? req.body.password
-            : await rsaService.encrypt(password);
-          user.hash = client.emailHash;
-          user.cacheBuster = ShortId();
-          cacheService.isOnline(user.hash);
-          req.session.user = user;
-          req.scope.register({
-            gravatarClient: asValue(client),
-          });
-        } else {
-          console.log("Gravatar ping failed");
-        }
+    const avbx = container.resolve("avbx");
+    avbx.login(user.email, password)
+      .then(client => {
+        user.hash = client.emailHash;
+        user.cacheBuster = ShortId();
+        cacheService.isOnline(user.hash);
+        req.session.user = user;
+        req.scope.register({
+          gravatarClient: asValue(client),
+        });
       })
       .then(() => {
-        const userService = container.resolve("userService");
-        userService
-          .findOrCreate(user.email, user.password)
-          .then((_user) => {
-            if (req.isAjax) {
-              res.end();
-            } else {
-              res.redirect("/calendar#");
-            }
-          })
-          .catch((err) => req.unauthorized());
+        if (req.isAjax) {
+          res.end();
+        } else {
+          res.redirect("/calendar#");
+        }
       })
       .catch((err) => req.unauthorized());
   } else {

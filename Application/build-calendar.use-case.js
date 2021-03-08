@@ -22,15 +22,15 @@ function rotateLeft(collection, _targetIndex) {
 }
 
 class BuildCalendarUseCase {
-  constructor({ userService }) {
+  constructor({ avbx }) {
     this.client = new GravatarClient();
-    this.userService = userService;
+    this.avbx = avbx;
     this.isEnabled = false;
     this.getPrimaryImage = new GetPrimaryImageUseCase();
   }
   async execute() {
-    const user = await this.userService.get(this.client.email);
-    this.isEnabled = user.calendars[0].isEnabled;
+    this.client = await this.avbx.fetch(this.client.email);
+    this.isEnabled = await this.avbx.isActive(this.client.email);
     this.getPrimaryImage.client = this.client;
     const primaryImage = await this.getPrimaryImage.execute();
     const { userImages } = await this.client.userImages();
@@ -40,7 +40,7 @@ class BuildCalendarUseCase {
       throw new ImageShortageError(ErrorCode.SingleImage);
     const primaryImageIndex = userImages
       .map((img) => {
-        img.url = img.url.replace("http://", "https://");
+        img.url = img.url.replace("http:", "https:");
         return img;
       })
       .reduce(

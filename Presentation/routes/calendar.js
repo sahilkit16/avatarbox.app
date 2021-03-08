@@ -61,29 +61,21 @@ router.post("/submit", async (req, res, next) => {
   const { user } = req.session;
   const isCalendarEnabled = req.session.calendar.isEnabled;
   delete req.session.calendar;
-  const userService = container.resolve("userService");
-  userService
-    .toggleCalendar(user.email, isCalendarEnabled)
-    .then(async (didToggleCalendar) => {
-      if (!didToggleCalendar) {
-        return res.redirect("/calendar");
-      }
-      if (!isCalendarEnabled) {
-        const messageBroker = container.resolve("messageBroker");
-        messageBroker.publish("update.now", user.email, { priority: 2 });
-      }
-      if (req.isAjax) {
-        const calendar = await req.buildCalendar();
-        req.session.calendar = calendar;
-        return res.json(calendar);
-      } else {
-        return res.redirect(`/calendar`);
-      }
-    })
-    .catch((err) => {
-      logger.error(err.message);
-      next(err);
-    });
+  const avbx = container.resolve("avbx");
+
+  if (!isCalendarEnabled) {
+    avbx.on(user.email);
+  } else {
+    avbx.off(user.email);
+  }
+
+  if (req.isAjax) {
+    const calendar = await req.buildCalendar();
+    req.session.calendar = calendar;
+    return res.json(calendar);
+  } else {
+    return res.redirect(`/calendar`);
+  }
 });
 
 module.exports = router;
