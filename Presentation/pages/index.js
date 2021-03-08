@@ -241,7 +241,7 @@ class IndexPage extends React.Component {
                   </button>
                   <noscript>
                     <button type="submit" className="button is-info">
-                      <span className="step-1">Get Started</span>
+                      <span className="step-1">Next</span>
                       <span className="step-2">Sign In</span>
                     </button>
                   </noscript>
