@@ -237,7 +237,7 @@ class IndexPage extends React.Component {
                     })}
                     onClick={this.goToNextStep}
                   >
-                    {this.state.step == 1 ? "Get Started" : "Sign In"}
+                    {this.state.step == 1 ? "Next" : "Sign In"}
                   </button>
                   <noscript>
                     <button type="submit" className="button is-info">
