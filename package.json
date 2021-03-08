@@ -1,7 +1,7 @@
 {
-  "name": "avatarbox.web",
+  "name": "avatarbox.app",
   "version": "1.0.0-alpha",
-  "description": "web server for avatarbox.io",
+  "description": "app server for avatarbox.io",
   "main": "./Presentation/server.js",
   "scripts": {
     "format": "prettier --write \"Application/**/*.js\" \"Common/**/*.js\" \"Domain/**/*.js\" \"Infrastructure/**/*.js\" \"Presentation/**/*.js\" \"Services/**/*.js\" \"Specification/**/*.js\" \"Tests/**/*.js\"",
@@ -14,17 +14,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://mrtillman@bitbucket.org/mrtillman/avatarbox.web.git"
+    "url": "git+https://mrtillman@github.com/mrtillman/avatarbox.app.git"
   },
   "author": "mrtillman",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
-    "url": "https://bitbucket.org/mrtillman/avatarbox.web/issues"
+    "url": "https://github.com/mrtillman/avatarbox.app/issues"
   },
-  "homepage": "https://bitbucket.org/mrtillman/avatarbox.web/src/master/README.md",
+  "homepage": "https://github.com/mrtillman/avatarbox.app/src/master/README.md",
   "dependencies": {
+    "@sentry/browser": "^6.2.1",
     "@sentry/node": "^5.15.5",
-    "amqplib": "^0.5.6",
+    "@types/node": "^13.1.7",
+    "avatarbox.sdk": "file:../sdk",
     "awilix": "^4.2.6",
     "babel-jest": "^26.0.1",
     "babelify": "^10.0.0",
@@ -35,11 +37,10 @@
     "dotenv": "^8.2.0",
     "expect": "^26.0.1",
     "express": "^4.17.1",
-    "grav.client": "^2.4.14",
+    "grav.client": "^2.4.20",
     "helmet": "^3.22.0",
     "mock-local-storage": "^1.1.12",
     "moment": "^2.25.3",
-    "mongoose": "^5.9.13",
     "morgan": "^1.10.0",
     "next": "^9.3.5",
     "notyf": "^3.7.0",
@@ -48,8 +49,6 @@
     "pusher-js": "^6.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-facebook-pixel": "^0.1.3",
-    "react-ga": "^2.7.0",
     "react-redux": "^7.2.0",
     "redis": "^3.0.2",
     "redux": "^4.0.5",
@@ -62,6 +61,8 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.9.6",
+    "@types/bcrypt": "^3.0.0",
+    "@types/mysql": "^2.15.18",
     "babel-core": "^6.26.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
