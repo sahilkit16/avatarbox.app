@@ -1,6 +1,6 @@
 FROM node:latest
 
-WORKDIR /avatarbox.web
+WORKDIR /avatarbox.app
 
 # workaround for dev container
 # see https://github.com/zeit/next.js/issues/4022
