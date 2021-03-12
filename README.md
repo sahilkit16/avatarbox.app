@@ -8,11 +8,13 @@ app server for [avatarbox.io](https://avatarbox.io)
 
 **`avatarbox.app`** is a [Next.js](https://nextjs.org) application that allows users to set up automated Gravatar updates.
 
-## Installation
+## Checklist
 
-```sh
-$ npm install
-```
+- IAM Role: `AvbxAppServer`
+  - AmazonDynamoDBFullAccess
+  - AmazonS3FullAccess
+- KMS Symmetric Key
+  - add `AvbxAppServer` as a Key user
 
 ## Launching the app
 
