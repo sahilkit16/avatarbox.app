@@ -15,7 +15,7 @@ function NavBar({ model }) {
       <div className="container">
         <div className="navbar-brand">
           <a className="navbar-item is-transparent" href="/">
-            <img src="/images/avatarbox.png" alt="Logo" />
+            <img src="https://www.avatarbox.io/images/avatarbox.png" alt="Logo" />
           </a>
           <span
             data-target="navbar-menu"

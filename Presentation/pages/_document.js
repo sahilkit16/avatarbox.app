@@ -26,30 +26,30 @@ class AvatarBoxSite extends Document {
           <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href={`/images/apple-touch-icon.png?ver=${cacheBuster}`}
+            href={`https://avatarbox.io/images/apple-touch-icon.png?ver=${cacheBuster}`}
           />
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href={`/images/favicon-32x32.png?ver=${cacheBuster}`}
+            href={`https://avatarbox.io/images/favicon-32x32.png?ver=${cacheBuster}`}
           />
           <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href={`/images/favicon-16x16.png?ver=${cacheBuster}`}
+            href={`https://avatarbox.io/images/favicon-16x16.png?ver=${cacheBuster}`}
           />
 
           <link
             rel="shortcut icon"
-            href={`../images/fav_icon.png?ver=${cacheBuster}`}
+            href={`https://avatarbox.io/images/fav_icon.png?ver=${cacheBuster}`}
             type="image/x-icon"
           />
           <link
             rel="stylesheet"
             type="text/css"
-            href={`../css/reset.css?ver=${cacheBuster}`}
+            href={`https://www.avatarbox.io/css/reset.css?ver=${cacheBuster}`}
           />
           <link
             rel="stylesheet"
@@ -73,15 +73,15 @@ class AvatarBoxSite extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href={`../css/site.css?ver=${cacheBuster}`}
+            href={`https://www.avatarbox.io/css/site.css?ver=${cacheBuster}`}
           />
         </Head>
         <body id="menu">
           <Main />
           <NextScript />
         </body>
-        <script async type="text/javascript" src="../js/site.js"></script>
-        <script async type="text/javascript" src="../js/bulma.js"></script>
+        <script async type="text/javascript" src="https://www.avatarbox.io/js/site.js"></script>
+        <script async type="text/javascript" src="https://www.avatarbox.io/js/bulma.js"></script>
       </Html>
     );
   }

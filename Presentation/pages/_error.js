@@ -21,7 +21,7 @@ function Error({ statusCode, eventId }) {
   return (
     <>
       <Head>
-        <link rel="stylesheet" type="text/css" href="../css/error.css" />
+        <link rel="stylesheet" type="text/css" href="https://www.avatarbox.io/css/error.css" />
       </Head>
       <ErrorBody message={model.message} eventId={eventId} />
     </>

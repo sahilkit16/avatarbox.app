@@ -8,7 +8,9 @@
            "https://*.sentry.io"
         ],
         "defaultSrc":[
-           "'self'"
+           "'self'",
+           "https://avatarbox.io",
+           "https://*.avatarbox.io"
         ],
         "fontSrc":[
            "'self'",
@@ -17,6 +19,8 @@
         ],
         "imgSrc":[
            "'self'",
+           "https://avatarbox.io",
+           "https://*.avatarbox.io",
            "https://www.gravatar.com",
            "http://en.gravatar.com",
            "https://unsplash.it",
@@ -28,6 +32,8 @@
         ],
         "scriptSrc":[
            "'self'",
+           "https://avatarbox.io",
+           "https://*.avatarbox.io",
            "'unsafe-eval'",
            "https://www.google-analytics.com",
            "https://cdnjs.cloudflare.com",
@@ -42,6 +48,8 @@
         ],
         "styleSrc":[
            "'self'",
+           "https://avatarbox.io",
+           "https://*.avatarbox.io",
            "'unsafe-inline'",
            "https://maxcdn.bootstrapcdn.com",
            "fonts.googleapis.com",

@@ -101,7 +101,7 @@ class CalendarPage extends React.Component {
                   <link
                     rel="stylesheet"
                     type="text/css"
-                    href="../css/calendar.css"
+                    href="https://www.avatarbox.io/css/calendar.css"
                   />
                 </Head>
                 <header className="card-header">

@@ -15,7 +15,7 @@ export default function Custom404() {
     <Provider store={configureStore({})}>
       <HeroSection hideCoverImage="true">
         <Head>
-          <link rel="stylesheet" type="text/css" href="../css/error.css" />
+          <link rel="stylesheet" type="text/css" href="https://www.avatarbox.io/css/error.css" />
         </Head>
         <HeroHead title={model.title} navbar={model.navbar} />
         <ErrorBody title={model.subtitle} message={model.message} />

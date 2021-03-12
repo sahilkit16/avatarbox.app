@@ -7,7 +7,7 @@ function HeroHead({ title, navbar }) {
     <div className="hero-head">
       <Head>
         <title>{title}</title>
-        <link rel="stylesheet" type="text/css" href="../css/landing.css" />
+        <link rel="stylesheet" type="text/css" href="https://www.avatarbox.io/css/landing.css" />
       </Head>
       <NavBar model={navbar} />
     </div>
