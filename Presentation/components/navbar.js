@@ -20,7 +20,7 @@ function NavBar({ model }) {
           <span
             data-target="navbar-menu"
             className={classNames("navbar-burger burger script-enabled cloak", {
-              "is-hidden": model.isCosmetic,
+              "is-hidden": (model.isCosmetic || !model.user),
             })}
           >
           {menuButton}
@@ -30,11 +30,11 @@ function NavBar({ model }) {
               href="#menu"
               data-target="navbar-menu"
               className={classNames("navbar-burger", "burger", "noscript", {
-                "is-hidden": model.isCosmetic,
+                "is-hidden": (model.isCosmetic || !model.user),
                 "has-background-grey-darker": !model.isTransparent,
               })}
             >
-              <MenuButton user={model.user} />
+              {menuButton}
             </a>
           </noscript>
         </div>
@@ -45,7 +45,7 @@ function NavBar({ model }) {
             "has-text-centered",
             "is-transparent",
             {
-              "is-hidden": model.isCosmetic,
+              "is-hidden": (model.isCosmetic || !model.user),
               "has-background-grey-darker": !model.isTransparent,
             }
           )}
@@ -57,7 +57,7 @@ function NavBar({ model }) {
               </a>
             </span>
             <div className={model.user ? "avatar-icon" : "is-hidden"}>
-              <MenuButton user={model.user} />
+              {menuButton}
             </div>
             <noscript>
               <a href="#" className="button is-transparent">
