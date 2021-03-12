@@ -3,6 +3,7 @@ import MenuButton from "./menu-button";
 const classNames = require("classnames");
 
 function NavBar({ model }) {
+  const menuButton = model.user ? <MenuButton user={model.user} /> : null;
   return (
     <nav
       className={classNames("navbar", {
@@ -22,7 +23,7 @@ function NavBar({ model }) {
               "is-hidden": model.isCosmetic,
             })}
           >
-            <MenuButton user={model.user} />
+          {menuButton}
           </span>
           <noscript>
             <a

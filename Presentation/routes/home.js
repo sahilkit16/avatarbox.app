@@ -7,8 +7,6 @@ const { unauthorized } = require("../middleware/unauthorized");
 const LoginVM = require("../view-models/login.vm");
 const ShortId = require("shortid");
 
-const cacheService = container.resolve("cacheService");
-
 router.use(unauthorized);
 router.use(gravatarClientScope);
 
@@ -58,7 +56,6 @@ router.post("/sign-in", async (req, res) => {
       .then(client => {
         user.hash = client.emailHash;
         user.cacheBuster = ShortId();
-        cacheService.isOnline(user.hash);
         req.session.user = user;
         req.scope.register({
           gravatarClient: asValue(client),
