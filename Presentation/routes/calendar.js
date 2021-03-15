@@ -64,7 +64,8 @@ router.post("/submit", async (req, res, next) => {
   const avbx = container.resolve("avbx");
 
   if (!isCalendarEnabled) {
-    avbx.on(user.email);
+    const { email } = user;
+    avbx.on(email).then(() => avbx.touch(email));
   } else {
     avbx.off(user.email);
   }

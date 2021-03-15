@@ -9,8 +9,8 @@ import * as actions from "../actions/app.actions";
 import SlideShowVM from "../view-models/slideshow.vm";
 import CrashReporter from "../../Common/crash-reporter.client";
 
-// TODO: enable pusher
-//const PusherClient = require("../../Infrastructure/pusher.client");
+const PusherClient = require("../../Infrastructure/pusher.client");
+
 const ImageShortageError = require("../../Domain/image-shortage.error");
 
 export async function getServerSideProps(context) {
@@ -46,10 +46,10 @@ class CalendarPage extends React.Component {
 
   componentDidMount() {
     this.slideShow.load();
-    // const pusherClient = new PusherClient();
-    // pusherClient.subscribe(this.props.user.hash, ({ message }) => {
-    //   this.receiveNotification(message);
-    // });
+    const pusherClient = new PusherClient();
+    pusherClient.subscribe(this.props.user.hash, ({ message }) => {
+      this.receiveNotification(message);
+    });
   }
 
   toggleCalendar(e) {
