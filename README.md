@@ -13,6 +13,7 @@ app server for [avatarbox.io](https://avatarbox.io)
 - IAM Role: `AvbxAppServer`
   - AmazonDynamoDBFullAccess
   - AmazonS3FullAccess
+  - AmazonSQSFullAccess
 - KMS Symmetric Key
   - add `AvbxAppServer` as a Key user
 
