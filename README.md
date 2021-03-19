@@ -17,6 +17,46 @@ app server for [avatarbox.io](https://avatarbox.io)
 - KMS Symmetric Key
   - add `AvbxAppServer` as a Key user
 
+Next, find [demo.env](https://github.com/mrtillman/avatarbox.app/blob/master/demo.env), rename it to `.env` and modify:
+
+```sh
+DEV_ENV=1
+PUSHER_KEY=11111112222222333333
+PUSHER_CLUSTER=xx1
+REDIS_URI=redis://localhost:6379
+SANITY=1
+SENTRY_DSN=https://000@111.ingest.sentry.io/222
+SESSION_KEY=a rolling stone gathers no moss
+
+# for the avatarbox.sdk dependency
+KMS_KEY_ID={YOUR-KMS-KEY-ID}
+REGION=us-east-1
+QUEUE_URL={YOUR-SQS-QUEUE-URL}
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_USER=mrtillman
+MYSQL_PASSWORD=letmein
+MYSQL_DATABASE=gravatar
+SALT={BCRYPT-SALT}
+```
+
+Also find [demo.next.config.js](https://github.com/mrtillman/avatarbox.app/blob/master/demo.next.config.js), rename it to `next.config.js` and modify:
+
+
+```js
+module.exports = {
+  env: {
+    'DEV_ENV': true,
+    'PUSHER_KEY': '11111112222222333333',
+    'PUSHER_CLUSTER': 'xx1',
+    'REDIS_URI': 'redis://localhost:6379',
+    'SANITY': true,
+    'SENTRY_DSN': 'https://000@111.ingest.sentry.io/222',
+    'SESSION_KEY': 'a rolling stone gathers no moss',
+  }
+}
+```
+
 ## Launching the app
 
 ```bash
