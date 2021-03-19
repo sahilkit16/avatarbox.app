@@ -52,10 +52,12 @@ router.post("/sign-in", async (req, res) => {
 
   if (user.email && password) {
     const avbx = container.resolve("avbx");
-    avbx.login(user.email, password)
-      .then(client => {
+    avbx
+      .login(user.email, password)
+      .then(async (client) => {
         user.hash = client.emailHash;
         user.cacheBuster = ShortId();
+        user.lastUpdated = (await avbx.user.find(user.email)).lastUpdated;
         req.session.user = user;
         req.scope.register({
           gravatarClient: asValue(client),

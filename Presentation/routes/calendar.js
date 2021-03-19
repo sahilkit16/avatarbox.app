@@ -65,7 +65,17 @@ router.post("/submit", async (req, res, next) => {
 
   if (!isCalendarEnabled) {
     const { email } = user;
-    avbx.on(email).then(() => avbx.touch(email));
+    const lastUpdated = new Date(user.lastUpdated);
+    avbx
+      .on(email)
+      .then(() => lastUpdated <= avbx.dynamo.calendar.daysAgo(1))
+      .then((isDueForUpdate) => {
+        if (isDueForUpdate) {
+          avbx.touch(email).then(() => {
+            req.session.user.lastUpdated = avbx.dynamo.calendar.now();
+          });
+        }
+      });
   } else {
     avbx.off(user.email);
   }
