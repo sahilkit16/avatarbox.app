@@ -80,8 +80,16 @@ class AvatarBoxSite extends Document {
           <Main />
           <NextScript />
         </body>
-        <script async type="text/javascript" src="https://www.avatarbox.io/js/site.js"></script>
-        <script async type="text/javascript" src="https://www.avatarbox.io/js/bulma.js"></script>
+        <script
+          async
+          type="text/javascript"
+          src="https://www.avatarbox.io/js/site.js"
+        ></script>
+        <script
+          async
+          type="text/javascript"
+          src="https://www.avatarbox.io/js/bulma.js"
+        ></script>
       </Html>
     );
   }

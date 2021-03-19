@@ -40,7 +40,7 @@ class CalendarPage extends React.Component {
     this.props.reloadCalendar().then(() => {
       setTimeout(() => {
         this.props.bustCache();
-      }, 600)
+      }, 600);
     });
   }
 
@@ -63,7 +63,7 @@ class CalendarPage extends React.Component {
           this.setState({ isLoading: false });
           setTimeout(() => {
             this.props.bustCache();
-          }, 600)
+          }, 600);
         });
       })
       .catch((err) => {

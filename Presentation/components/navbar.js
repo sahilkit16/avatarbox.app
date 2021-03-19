@@ -15,22 +15,25 @@ function NavBar({ model }) {
       <div className="container">
         <div className="navbar-brand">
           <a className="navbar-item is-transparent" href="/">
-            <img src="https://www.avatarbox.io/images/avatarbox.png" alt="Logo" />
+            <img
+              src="https://www.avatarbox.io/images/avatarbox.png"
+              alt="Logo"
+            />
           </a>
           <span
             data-target="navbar-menu"
             className={classNames("navbar-burger burger script-enabled cloak", {
-              "is-hidden": (model.isCosmetic || !model.user),
+              "is-hidden": model.isCosmetic || !model.user,
             })}
           >
-          {menuButton}
+            {menuButton}
           </span>
           <noscript>
             <a
               href="#menu"
               data-target="navbar-menu"
               className={classNames("navbar-burger", "burger", "noscript", {
-                "is-hidden": (model.isCosmetic || !model.user),
+                "is-hidden": model.isCosmetic || !model.user,
                 "has-background-grey-darker": !model.isTransparent,
               })}
             >
@@ -45,7 +48,7 @@ function NavBar({ model }) {
             "has-text-centered",
             "is-transparent",
             {
-              "is-hidden": (model.isCosmetic || !model.user),
+              "is-hidden": model.isCosmetic || !model.user,
               "has-background-grey-darker": !model.isTransparent,
             }
           )}
