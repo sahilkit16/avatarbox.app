@@ -60,6 +60,10 @@ app.use("/feedback", feedbackRoute);
 
 app.use("/home", homeRoute);
 
+app.get("/health", (req, res) => {
+  return res.status(200).end();
+});
+
 let _handler = (req, res) => {
   return res.status(200).end();
 };
