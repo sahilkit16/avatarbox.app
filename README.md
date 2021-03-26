@@ -4,6 +4,13 @@ app server for [avatarbox.io](https://avatarbox.io)
 
 ---
 
+<!--
+[![Build Status](https://travis-ci.com/mrtillman/avatarbox.sdk.svg?branch=master)](https://travis-ci.com/mrtillman/avatarbox.sdk)
+[![Coverage Status](https://coveralls.io/repos/github/mrtillman/avatarbox.sdk/badge.svg?branch=master)](https://coveralls.io/github/mrtillman/avatarbox.sdk?branch=master)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/mrtillman/avatarbox.sdk?sort=semver)](https://github.com/mrtillman/avatarbox.sdk/releases/tag/1.0.0)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mrtillman/avatarbox.sdk/blob/master/LICENSE)
+-->
+
 ## Getting Started
 
 **`avatarbox.app`** is a [Next.js](https://nextjs.org) application that allows users to set up automated Gravatar updates.
