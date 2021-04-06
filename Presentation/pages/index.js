@@ -12,6 +12,7 @@ import ShortId from "shortid";
 const PusherClient = require("../../Infrastructure/pusher.client");
 
 export async function getServerSideProps(context) {
+  if(!context.req.session) context.req.session = {};
   const userid = context.query.next && context.req.session.userid;
   const user = context.req.session.user;
   if (user) {
