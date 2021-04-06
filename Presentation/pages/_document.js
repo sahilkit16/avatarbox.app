@@ -49,11 +49,6 @@ class AvatarBoxSite extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href={`https://www.avatarbox.io/css/reset.css?ver=${cacheBuster}`}
-          />
-          <link
-            rel="stylesheet"
-            type="text/css"
             href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           />
           <link
@@ -73,7 +68,7 @@ class AvatarBoxSite extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href={`https://www.avatarbox.io/css/site.css?ver=${cacheBuster}`}
+            href={`https://www.avatarbox.io/css/bundle.min.css?ver=${cacheBuster}`}
           />
         </Head>
         <body id="menu">
@@ -83,12 +78,7 @@ class AvatarBoxSite extends Document {
         <script
           async
           type="text/javascript"
-          src="https://www.avatarbox.io/js/site.js"
-        ></script>
-        <script
-          async
-          type="text/javascript"
-          src="https://www.avatarbox.io/js/bulma.js"
+          src="https://www.avatarbox.io/js/bundle.min.js"
         ></script>
       </Html>
     );
