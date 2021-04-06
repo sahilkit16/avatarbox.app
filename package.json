@@ -5,7 +5,8 @@
   "main": "./Presentation/server.js",
   "scripts": {
     "format": "prettier --write \"Application/**/*.js\" \"Common/**/*.js\" \"Domain/**/*.js\" \"Infrastructure/**/*.js\" \"Presentation/**/*.js\" \"Services/**/*.js\" \"Specification/**/*.js\" \"Tests/**/*.js\"",
-    "start": "node ./Presentation/server.js",
+    "start": "npx next start ./Presentation -p 8080",
+    "start:dev": "node ./Presentation/server.js",
     "build": "next build ./Presentation",
     "test": "jest",
     "test:cov": "jest --coverage",
