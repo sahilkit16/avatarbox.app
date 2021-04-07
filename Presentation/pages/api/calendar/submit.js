@@ -1,11 +1,10 @@
-const buildCalendar = require("../../../middleware/build-calendar");
+import { use, isAjax, buildCalendar } from "../../../middleware";
 const { withSession } = require("next-session");
 const container = require("../../../../Common/di-container");
-const { useMiddleware, runMiddleware } = require("../use-middleware");
 
 export default withSession(async (req, res) => {
-  await useMiddleware.call({ req, res });
-  await runMiddleware(req, res, buildCalendar);
+  debugger;
+  await use(req, res, [isAjax, buildCalendar]);
   const { user } = req.session;
   const isCalendarEnabled = req.session.calendar.isEnabled;
   delete req.session.calendar;

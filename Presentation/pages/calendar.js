@@ -9,16 +9,14 @@ import * as actions from "../actions/app.actions";
 import SlideShowVM from "../view-models/slideshow.vm";
 import CrashReporter from "../../Common/crash-reporter.client";
 import { applySession } from "next-session";
-const buildCalendar = require("../middleware/build-calendar");
-const { runMiddleware } = require("./api/use-middleware");
+import { use, buildCalendar } from "../middleware";
 
 const PusherClient = require("../../Infrastructure/pusher.client");
-
 const ImageShortageError = require("../../Domain/image-shortage.error");
 
 export async function getServerSideProps({ req, res }) {
   await applySession(req, res);
-  await runMiddleware(req, res, buildCalendar);
+  await use(req, res, [buildCalendar]);
   const { user, calendar } = req.session;
   const model = new CalendarVM();
   model.User = user;

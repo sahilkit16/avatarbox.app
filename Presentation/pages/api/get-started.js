@@ -1,9 +1,14 @@
 const LoginVM = require("../../view-models/login.vm");
-const { useMiddleware } = require("./use-middleware");
-import { withSession } from "next-session";
+import {
+  use,
+  unauthorized,
+  gravatarClientScope,
+  isAjax,
+} from "../../middleware";
+const { withSession } = require("next-session");
 
 export default withSession(async (req, res) => {
-  await useMiddleware.call({ req, res });
+  await use(req, res, [isAjax, unauthorized, gravatarClientScope]);
   const loginVm = new LoginVM();
   loginVm.email = req.body.email;
 

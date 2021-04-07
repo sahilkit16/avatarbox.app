@@ -1,12 +1,17 @@
 const ShortId = require("shortid");
 const LoginVM = require("../../view-models/login.vm");
-const { useMiddleware } = require("./use-middleware");
 const container = require("../../../Common/di-container");
-import { withSession } from "next-session";
+const { withSession } = require("next-session");
+import {
+  use,
+  isAjax,
+  unauthorized,
+  gravatarClientScope,
+} from "../../middleware";
 const { asValue } = require("awilix");
 
 export default withSession(async (req, res) => {
-  await useMiddleware.call({ req, res });
+  await use(req, res, [isAjax, unauthorized, gravatarClientScope]);
 
   let { password } = req.body;
   const loginVm = new LoginVM();

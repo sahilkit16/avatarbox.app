@@ -4,7 +4,9 @@ const container = awilix.createContainer();
 const CrashReporter = require("./crash-reporter.server");
 const Logger = require("./logger");
 const CacheService = require("../Services/cache.service");
-const BuildCalendarUseCase = require("../Application/build-calendar.use-case");
+const {
+  BuildCalendarUseCase,
+} = require("../Application/build-calendar.use-case");
 const PusherClient = require("../Infrastructure/pusher.client");
 const { AvbxGravatarClient } = require("avatarbox.sdk");
 
