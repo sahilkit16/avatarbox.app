@@ -6,7 +6,7 @@
   "scripts": {
     "format": "prettier --write \"Application/**/*.js\" \"Common/**/*.js\" \"Domain/**/*.js\" \"Infrastructure/**/*.js\" \"Presentation/**/*.js\" \"Services/**/*.js\" \"Specification/**/*.js\" \"Tests/**/*.js\"",
     "start": "npx next start ./Presentation -p 8080",
-    "start:dev": "node ./Presentation/server.js",
+    "dev": "npx next dev ./Presentation -p 8080",
     "build": "next build ./Presentation",
     "test": "jest",
     "test:cov": "jest --coverage",
@@ -44,6 +44,7 @@
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "next": "^9.3.5",
+    "next-session": "^3.4.0",
     "notyf": "^3.7.0",
     "prettier": "^2.0.5",
     "pug": "^2.0.4",
