@@ -4,7 +4,7 @@ import { isJson } from "../Common/helpers";
 
 export const signIn = (user) => {
   return new Promise((resolve, reject) => {
-    fetch("/home/sign-in", {
+    fetch("/api/sign-in", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -23,7 +23,7 @@ export const signIn = (user) => {
 
 export const toggleCalendar = () => {
   return new Promise((resolve, reject) => {
-    fetch("/calendar/submit", {
+    fetch("/api/calendar/submit", {
       method: "POST",
       headers: {
         accept: "application/json",
@@ -49,7 +49,7 @@ export const toggleCalendar = () => {
 
 export const getCalendarImages = () => {
   return new Promise((resolve, reject) => {
-    fetch("/calendar/images").then(async (res) => {
+    fetch("/api/calendar/images").then(async (res) => {
       if (res.ok) {
         resolve(res.json());
       } else {
