@@ -9,9 +9,8 @@ function Error({ statusCode, eventId }) {
   model.eventId = eventId;
   if (statusCode) {
     model.title = `${statusCode} ${model.title}`;
-    model.message = `A ${statusCode} server error has occurred.`;
   } else {
-    model.message = "A client error has occurred.";
+    model.message = "An error has occurred.";
   }
 
   if (typeof window != "undefined") {
