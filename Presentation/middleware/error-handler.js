@@ -4,7 +4,7 @@ const crashReporter = container.resolve("crashReporter");
 const logger = container.resolve("logger");
 const ErrorVM = require("../view-models/error.vm");
 
-function errorHandler(err, req, res, next) {
+export function errorHandler(err, req, res, next) {
   const eventId = crashReporter.submit(err);
   const model = new ErrorVM();
   const { message } = err;
@@ -19,5 +19,3 @@ function errorHandler(err, req, res, next) {
     res.render("error", model);
   }
 }
-
-module.exports = errorHandler;

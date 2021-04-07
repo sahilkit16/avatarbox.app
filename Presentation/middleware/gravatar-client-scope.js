@@ -3,7 +3,7 @@ const { GravatarClient } = require("grav.client");
 const container = require("../../Common/di-container");
 const { _handleUnauthorized } = require("./unauthorized");
 
-async function gravatarClientScope(req, res, next) {
+export async function gravatarClientScope(req, res, next) {
   const _unauthorized = (err) => {
     console.log(err);
     _handleUnauthorized(req, res);
@@ -32,5 +32,3 @@ async function gravatarClientScope(req, res, next) {
     return next();
   }
 }
-
-module.exports = gravatarClientScope;

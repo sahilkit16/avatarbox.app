@@ -21,7 +21,7 @@ function rotateLeft(collection, _targetIndex) {
   return [...begin, ...end];
 }
 
-class BuildCalendarUseCase {
+export class BuildCalendarUseCase {
   constructor({ avbx }) {
     this.client = new GravatarClient();
     this.avbx = avbx;
@@ -66,5 +66,3 @@ class BuildCalendarUseCase {
     return { images, isEnabled: this.isEnabled };
   }
 }
-
-module.exports = BuildCalendarUseCase;

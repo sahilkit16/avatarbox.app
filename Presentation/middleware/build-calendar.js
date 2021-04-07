@@ -2,11 +2,11 @@ const container = require("../../Common/di-container");
 const ImageShortageVM = require("../view-models/image-shortage.vm");
 const ImageShortageError = require("../../Domain/image-shortage.error");
 const ShortId = require("shortid");
-const { useMiddleware } = require("../pages/api/use-middleware");
+import { use, gravatarClientScope, isAjax } from "../middleware";
 const logger = container.resolve("logger");
 
-async function buildCalendar(req, res, next) {
-  await useMiddleware.call({ req, res });
+export async function buildCalendar(req, res, next) {
+  await use(req, res, [isAjax, gravatarClientScope]);
   req.session.user.cacheBuster = ShortId();
   req.buildCalendar = () => {
     const buildCalendar = container.resolve("buildCalendar");
@@ -31,5 +31,3 @@ async function buildCalendar(req, res, next) {
   req.session.calendar = await req.buildCalendar();
   next();
 }
-
-module.exports = buildCalendar;
