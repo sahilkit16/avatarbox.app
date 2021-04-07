@@ -4,7 +4,7 @@ function _handleUnauthorized(
   message = "Invalid email or password",
   path = "/"
 ) {
-  if (req.is("application/json")) {
+  if (req.isAjax) {
     res.status(401);
     return res.send(message);
   }

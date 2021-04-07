@@ -11,7 +11,7 @@ async function gravatarClientScope(req, res, next) {
   req.scope = createContainer().createScope();
 
   const { user } = req.session;
-  const { email } = req.body;
+  const email = req.body && req.body.email;
   if (user) {
     const avbx = container.resolve("avbx");
     avbx

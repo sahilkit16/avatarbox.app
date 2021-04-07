@@ -1,6 +1,5 @@
 function isAjax(req, res, next) {
-  req.isAjax =
-    req.xhr || /json/i.test(req.headers.accept) || req.is("application/json");
+  req.isAjax = req.xhr || /json/i.test(req.headers.accept);
   next();
 }
 
