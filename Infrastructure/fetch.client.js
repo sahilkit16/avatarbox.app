@@ -1,6 +1,8 @@
-import ImageShortageError from "../Domain/image-shortage.error";
-import { NoImages, SingleImage } from "../Domain/error-code";
+import { ImageShortageError } from "../Domain/image-shortage.error";
+import { ErrorCode } from "../Domain/error-code";
 import { isJson } from "../Common/helpers";
+
+const { NoImages, SingleImage } = ErrorCode;
 
 export const signIn = (user) => {
   return new Promise((resolve, reject) => {

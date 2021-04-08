@@ -1,7 +1,7 @@
 const { days } = require("../Domain/days");
 const { GravatarClient, GetPrimaryImageUseCase } = require("grav.client");
-const ImageShortageError = require("../Domain/image-shortage.error");
-const ErrorCode = require("../Domain/error-code");
+const { ImageShortageError } = require("../Domain/image-shortage.error");
+const { ErrorCode } = require("../Domain/error-code");
 const moment = require("moment");
 
 function rotateLeft(collection, _targetIndex) {

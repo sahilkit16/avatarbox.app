@@ -1,4 +1,4 @@
-class CustomError extends Error {
+export class CustomError extends Error {
   constructor(code, message) {
     const _message = `[${code}]: ${message}`;
     super(_message);
@@ -20,5 +20,3 @@ class CustomError extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-
-module.exports = CustomError;

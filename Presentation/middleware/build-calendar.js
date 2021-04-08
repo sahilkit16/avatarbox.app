@@ -1,6 +1,6 @@
 const { container } = require("../../Common/di-container");
-const ImageShortageVM = require("../view-models/image-shortage.vm");
-const ImageShortageError = require("../../Domain/image-shortage.error");
+const { ImageShortageVM } = require("../view-models/image-shortage.vm");
+const { ImageShortageError } = require("../../Domain/image-shortage.error");
 const ShortId = require("shortid");
 import { use, gravatarClientScope, isAjax } from "../middleware";
 const logger = container.resolve("logger");

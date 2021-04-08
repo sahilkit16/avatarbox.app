@@ -3,7 +3,7 @@ const awilix = require("awilix");
 export const container = awilix.createContainer();
 
 const { CrashReporter } = require("./crash-reporter.server");
-const Logger = require("./logger");
+const { Logger } = require("./logger");
 const CacheService = require("../Services/cache.service");
 const {
   BuildCalendarUseCase,
