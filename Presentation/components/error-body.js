@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useState, useEffect } from "react";
-import CrashReporter from "../../Common/crash-reporter.client";
+import { CrashReporter } from "../../Common/crash-reporter.client";
 
 export default function ErrorBody({ title, message, eventId }) {
   const [state, setState] = useState({

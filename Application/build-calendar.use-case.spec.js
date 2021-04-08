@@ -1,4 +1,4 @@
-const BuildCalendarUseCase = require("./build-calendar.use-case");
+import { BuildCalendarUseCase } from "./build-calendar.use-case";
 
 describe("BuildCalendarUseCase", () => {
   let useCase;

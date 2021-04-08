@@ -1,7 +1,7 @@
 require("dotenv").config();
 const Sentry = require("@sentry/node");
 
-class CrashReporter {
+export class CrashReporter {
   constructor() {
     if (process.env.DEV_ENV) {
       this.reporter = {
@@ -19,5 +19,3 @@ class CrashReporter {
     return this.reporter.captureException(err);
   }
 }
-
-module.exports = CrashReporter;

@@ -1,7 +1,7 @@
-const days = require("../Domain/days");
+const { days } = require("../Domain/days");
 const { GravatarClient, GetPrimaryImageUseCase } = require("grav.client");
-const ImageShortageError = require("../Domain/image-shortage.error");
-const ErrorCode = require("../Domain/error-code");
+const { ImageShortageError } = require("../Domain/image-shortage.error");
+const { ErrorCode } = require("../Domain/error-code");
 const moment = require("moment");
 
 function rotateLeft(collection, _targetIndex) {
@@ -21,7 +21,7 @@ function rotateLeft(collection, _targetIndex) {
   return [...begin, ...end];
 }
 
-class BuildCalendarUseCase {
+export class BuildCalendarUseCase {
   constructor({ avbx }) {
     this.client = new GravatarClient();
     this.avbx = avbx;
@@ -66,5 +66,3 @@ class BuildCalendarUseCase {
     return { images, isEnabled: this.isEnabled };
   }
 }
-
-module.exports = BuildCalendarUseCase;

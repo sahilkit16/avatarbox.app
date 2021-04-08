@@ -7,14 +7,17 @@ import ClassNames from "classnames";
 import CalendarVM from "../view-models/calendar.vm";
 import * as actions from "../actions/app.actions";
 import SlideShowVM from "../view-models/slideshow.vm";
-import CrashReporter from "../../Common/crash-reporter.client";
+import { CrashReporter } from "../../Common/crash-reporter.client";
+import { applySession } from "next-session";
+import { use, buildCalendar } from "../middleware";
 
-const PusherClient = require("../../Infrastructure/pusher.client");
+const { PusherClient } = require("../../Infrastructure/pusher.client");
+const { ImageShortageError } = require("../../Domain/image-shortage.error");
 
-const ImageShortageError = require("../../Domain/image-shortage.error");
-
-export async function getServerSideProps(context) {
-  const { user, calendar } = context.req.session;
+export async function getServerSideProps({ req, res }) {
+  await applySession(req, res);
+  await use(req, res, [buildCalendar]);
+  const { user, calendar } = req.session;
   const model = new CalendarVM();
   model.User = user;
   model.calendar = calendar;
@@ -141,8 +144,8 @@ class CalendarPage extends React.Component {
                 </div>
                 <form
                   className="card-footer"
-                  action="/calendar/submit"
-                  method="post"
+                  action="/api/calendar/submit"
+                  method="POST"
                 >
                   <a className="card-footer-item" id="home" href="/">
                     <i className="fa fa-home" aria-hidden="true"></i>&nbsp; Home

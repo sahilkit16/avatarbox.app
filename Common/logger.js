@@ -3,7 +3,7 @@ const { createLogger, transports } = require("winston");
 // https://www.npmjs.com/package/winston#logging-levels
 // https://tools.ietf.org/html/rfc5424
 
-class Logger {
+export class Logger {
   constructor() {
     this.self = createLogger({
       levels: {
@@ -42,5 +42,3 @@ class Logger {
     this.self.debug(message);
   }
 }
-
-module.exports = Logger;

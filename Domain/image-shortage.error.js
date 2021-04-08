@@ -1,7 +1,7 @@
-const CustomError = require("./custom.error");
-const ErrorCode = require("./error-code");
+const { CustomError } = require("./custom.error");
+const { ErrorCode } = require("./error-code");
 
-class ImageShortageError extends CustomError {
+export class ImageShortageError extends CustomError {
   constructor(code) {
     let message;
     if (code == ErrorCode.NoImages) {
@@ -12,5 +12,3 @@ class ImageShortageError extends CustomError {
     super(code, message);
   }
 }
-
-module.exports = ImageShortageError;

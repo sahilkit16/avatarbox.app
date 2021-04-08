@@ -6,6 +6,9 @@ import CacheSeed from "../components/cache-seed.renderless";
 import ImageShortage from "../components/image-shortage";
 
 function AvatarBoxApp({ Component, pageProps, router }) {
+  if (router.route == "/health") {
+    return null;
+  }
   if (router.route == "/404") {
     return <Component {...pageProps} />;
   }

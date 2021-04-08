@@ -8,22 +8,25 @@ import { signIn } from "../../Infrastructure/fetch.client";
 import LoginVM from "../view-models/login.vm";
 import * as actions from "../actions/app.actions";
 import ShortId from "shortid";
+const { applySession } = require("next-session");
+const { PusherClient } = require("../../Infrastructure/pusher.client");
 
-const PusherClient = require("../../Infrastructure/pusher.client");
-
-export async function getServerSideProps(context) {
-  const userid = context.query.next && context.req.session.userid;
-  const user = context.req.session.user;
+export async function getServerSideProps({ req, res, query }) {
+  await applySession(req, res);
+  if (!req.session) req.session = {};
+  const userid = query.next && req.session.userid;
+  const user = req.session.user;
   if (user) {
     user.cacheBuster = ShortId();
   }
   const model = new HomeVM();
-  model.prompt = context.req.session.prompt || null;
-  model.formAction = `/home/${userid ? "sign-in" : "get-started"}`;
+  model.prompt = req.session.prompt || null;
+  model.formAction = `/api/${userid ? "sign-in" : "get-started"}`;
   model.User = user;
-  model.validationMessage = context.req.session.validationMessage;
-  context.req.session.validationMessage = null;
-  context.req.session.prompt = null;
+  model.validationMessage = req.session.validationMessage;
+  req.session.validationMessage = null;
+  req.session.prompt = null;
+
   return {
     props: model.toObject(),
   };

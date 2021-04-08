@@ -1,8 +1,8 @@
-function isAuthenticated(req, res, next) {
+export function isAuthenticated(req, res, next) {
   if (!req.session.user) {
-    return res.redirect("/");
+    res.statusCode = 302
+    res.setHeader('location', `/`)
+    return res.end();
   }
   next();
 }
-
-module.exports = isAuthenticated;
