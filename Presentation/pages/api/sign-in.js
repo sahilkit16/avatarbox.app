@@ -27,29 +27,26 @@ export default withSession(async (req, res) => {
   const user = { email: loginVm.email };
 
   if (user.email && password) {
+
     const avbx = container.resolve("avbx");
-    avbx
-      .login(user.email, password)
-      .then(async (client) => {
-        user.hash = client.emailHash;
-        user.cacheBuster = ShortId();
-        user.lastUpdated = (await avbx.user.find(user.email)).lastUpdated;
-        req.session.user = user;
-        req.scope.register({
-          gravatarClient: asValue(client),
-        });
-      })
-      .then(() => {
-        if (req.isAjax) {
-          res.end();
-        } else {
-          res.redirect("/calendar#");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        req.unauthorized();
-      });
+    const client = await avbx.login(user.email, password);
+
+    if(!client) return req.unauthorized();
+
+    user.hash = client.emailHash;
+    user.cacheBuster = ShortId();
+    user.lastUpdated = (await avbx.user.find(user.email)).lastUpdated;
+    req.session.user = user;
+    req.scope.register({
+      gravatarClient: asValue(client),
+    });
+
+    if (req.isAjax) {
+      return res.end();
+    } else {
+      return res.redirect("/calendar#");
+    }
+
   } else {
     req.unauthorized();
   }
