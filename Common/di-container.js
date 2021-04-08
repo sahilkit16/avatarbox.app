@@ -15,9 +15,9 @@ container.register({
   avbx: awilix.asClass(AvbxGravatarClient),
   crashReporter: awilix.asClass(CrashReporter),
   logger: awilix.asClass(Logger),
-  cacheService: awilix.asClass(CacheService, {
-    lifetime: awilix.Lifetime.SINGLETON,
-  }),
+  // cacheService: awilix.asClass(CacheService, {
+  //   lifetime: awilix.Lifetime.SINGLETON,
+  // }),
   buildCalendar: awilix.asClass(BuildCalendarUseCase),
   pusherClient: awilix.asClass(PusherClient),
 });
