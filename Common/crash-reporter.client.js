@@ -2,7 +2,7 @@ const Sentry = require("@sentry/browser");
 
 Sentry.init({ dsn: process.env.SENTRY_DSN });
 
-class CrashReporter {
+export class CrashReporter {
   constructor() {
     if (process.env.DEV_ENV) {
       this.reporter = {
@@ -27,5 +27,3 @@ class CrashReporter {
     return this.reporter.captureException(err);
   }
 }
-
-module.exports = CrashReporter;
