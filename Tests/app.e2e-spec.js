@@ -1,31 +1,32 @@
 const request = require("supertest");
-const { app } = require("../Presentation/app");
-const { container } = require("../Common/di-container");
-
-const cacheService = container.resolve("cacheService");
-
-let server;
+const { createServer } = require('http')
+const next = require('next')
+const app = next({ dev: false, dir: "Presentation" })
+const handler = app.getRequestHandler()
 
 describe("app", () => {
+  let server = null;
   beforeAll((done) => {
-    // bind to port manually so we can disconnect explicitly
-    // https://github.com/visionmedia/supertest/issues/520
-    server = app.listen(4000, (err) => {
-      if (err) return done(err);
+    app.prepare().then(() => {
+      const port = 8080;
+      server = createServer(handler).listen(port, (err) => {
+        if (err) throw err
+        done();
+      })
       request.agent(server);
-      done();
-    });
+    }).catch(err => done(err))
   });
-  it("should work", async () => {
-    request(app)
+  it("should get root", async () => {
+    request(server)
       .get("/")
       .expect(200)
-      .end(function (err, res) {
-        if (err) throw err;
-      });
   });
-  afterAll((done) => {
-    cacheService.disconnect();
-    return server && server.close(done);
+  it("should get /health", async () => {
+    request(server)
+      .get("/health")
+      .expect(200)
+  });
+  afterAll(async () => {
+    await server.close()
   });
 });
