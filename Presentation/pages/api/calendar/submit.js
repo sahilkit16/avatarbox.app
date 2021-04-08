@@ -1,6 +1,6 @@
 import { use, isAjax, buildCalendar } from "../../../middleware";
 const { withSession } = require("next-session");
-const container = require("../../../../Common/di-container");
+const { container } = require("../../../../Common/di-container");
 
 export default withSession(async (req, res) => {
   debugger;

@@ -1,6 +1,6 @@
 const request = require("supertest");
 const { app } = require("../Presentation/app");
-const container = require("../Common/di-container");
+const { container } = require("../Common/di-container");
 
 const cacheService = container.resolve("cacheService");
 

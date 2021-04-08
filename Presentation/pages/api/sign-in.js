@@ -1,6 +1,6 @@
 const ShortId = require("shortid");
 const LoginVM = require("../../view-models/login.vm");
-const container = require("../../../Common/di-container");
+const { container } = require("../../../Common/di-container");
 const { withSession } = require("next-session");
 import {
   use,

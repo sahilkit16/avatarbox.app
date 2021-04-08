@@ -1,5 +1,6 @@
 const awilix = require("awilix");
-const container = awilix.createContainer();
+
+export const container = awilix.createContainer();
 
 const { CrashReporter } = require("./crash-reporter.server");
 const Logger = require("./logger");
@@ -21,4 +22,3 @@ container.register({
   pusherClient: awilix.asClass(PusherClient),
 });
 
-module.exports = container;

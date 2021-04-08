@@ -1,5 +1,5 @@
 require("dotenv").config();
-const container = require("../../Common/di-container");
+const { container } = require("../../Common/di-container");
 const crashReporter = container.resolve("crashReporter");
 const logger = container.resolve("logger");
 const ErrorVM = require("../view-models/error.vm");
