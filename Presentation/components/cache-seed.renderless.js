@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import BrowserCache from "../../Infrastructure/browser-cache";
+import { BrowserCache } from "../../Infrastructure/browser-cache";
 
 function CacheSeed() {
   useEffect(() => {

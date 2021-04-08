@@ -1,6 +1,6 @@
 const Pusher = require("pusher-js");
 
-class PusherClient {
+export class PusherClient {
   constructor() {
     this.channel = null;
     this.self = new Pusher(process.env.PUSHER_KEY, {
@@ -12,5 +12,3 @@ class PusherClient {
     this.channel.bind("update-event", handler);
   }
 }
-
-module.exports = PusherClient;

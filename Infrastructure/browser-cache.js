@@ -1,4 +1,4 @@
-class BrowserCache {
+export class BrowserCache {
   constructor() {
     if (typeof sessionStorage != "undefined") {
       this.session = sessionStorage;
@@ -8,5 +8,3 @@ class BrowserCache {
     }
   }
 }
-
-export default BrowserCache;

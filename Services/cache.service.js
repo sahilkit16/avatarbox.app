@@ -1,6 +1,6 @@
-const RedisClient = require("../Infrastructure/redis.client");
+const { RedisClient } = require("../Infrastructure/redis.client");
 
-class CacheService {
+export class CacheService {
   constructor() {
     this._cache = new RedisClient();
   }
@@ -27,5 +27,3 @@ class CacheService {
     this._cache.end();
   }
 }
-
-module.exports = CacheService;

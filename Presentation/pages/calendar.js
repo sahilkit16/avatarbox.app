@@ -11,7 +11,7 @@ import { CrashReporter } from "../../Common/crash-reporter.client";
 import { applySession } from "next-session";
 import { use, buildCalendar } from "../middleware";
 
-const PusherClient = require("../../Infrastructure/pusher.client");
+const { PusherClient } = require("../../Infrastructure/pusher.client");
 const { ImageShortageError } = require("../../Domain/image-shortage.error");
 
 export async function getServerSideProps({ req, res }) {

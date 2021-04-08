@@ -10,7 +10,7 @@ import * as actions from "../actions/app.actions";
 import ShortId from "shortid";
 const { applySession } = require("next-session");
 
-const PusherClient = require("../../Infrastructure/pusher.client");
+const { PusherClient } = require("../../Infrastructure/pusher.client");
 
 export async function getServerSideProps({ req, res, query }) {
   await applySession(req, res);
