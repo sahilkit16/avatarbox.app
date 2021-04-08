@@ -1,6 +1,5 @@
 export * from "./build-calendar";
 export * from "./crash-reporter-scope";
-export * from "./error-handler";
 export * from "./gravatar-client-scope";
 export * from "./is-ajax";
 export * from "./is-authenticated";
