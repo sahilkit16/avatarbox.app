@@ -1,4 +1,4 @@
-const days = require("../Domain/days");
+const { days } = require("../Domain/days");
 const { GravatarClient, GetPrimaryImageUseCase } = require("grav.client");
 const ImageShortageError = require("../Domain/image-shortage.error");
 const ErrorCode = require("../Domain/error-code");
