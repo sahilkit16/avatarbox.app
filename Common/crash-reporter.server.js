@@ -1,5 +1,6 @@
-require("dotenv").config();
-const Sentry = require("@sentry/node");
+import * as Sentry from "@sentry/browser";
+import { config } from "dotenv";
+config();
 
 export class CrashReporter {
   constructor() {

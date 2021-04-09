@@ -1,8 +1,8 @@
-const { days } = require("../Domain/days");
-const { GravatarClient, GetPrimaryImageUseCase } = require("grav.client");
-const { ImageShortageError } = require("../Domain/image-shortage.error");
-const { ErrorCode } = require("../Domain/error-code");
-const moment = require("moment");
+import { days } from "../Domain/days";
+import { GravatarClient, GetPrimaryImageUseCase } from "grav.client";
+import { ImageShortageError } from "../Domain/image-shortage.error";
+import { ErrorCode } from "../Domain/error-code";
+import moment from "moment";
 
 function rotateLeft(collection, _targetIndex) {
   const targetIndex = _targetIndex % collection.length;
