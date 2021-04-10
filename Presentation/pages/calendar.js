@@ -59,15 +59,15 @@ class CalendarPage extends React.Component {
     this.setState({ isLoading: true });
     this.props
       .toggleCalendar()
-      .then(() => {
+      .then(() =>
         this.props.reloadCalendar().then(() => {
           window.location.hash = "#";
           this.setState({ isLoading: false });
           setTimeout(() => {
             this.props.bustCache();
           }, 600);
-        });
-      })
+        })
+      )
       .catch((err) => {
         if (err instanceof ImageShortageError) {
           this.setState({ isLoading: false });

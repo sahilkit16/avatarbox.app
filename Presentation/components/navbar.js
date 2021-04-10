@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 function NavBar({ model }) {
   const menuButton = model.user ? <MenuButton user={model.user} /> : null;
-  const logoUrl = model.pathName == "/" ? "https://www.avatarbox.io" : "/" ;
+  const logoUrl = model.pathName == "/" ? "https://www.avatarbox.io" : "/";
   return (
     <nav
       className={classNames("navbar", {

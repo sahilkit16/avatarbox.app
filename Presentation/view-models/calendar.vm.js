@@ -3,10 +3,10 @@ import { NavBarVM } from "./navbar.vm";
 export class CalendarVM {
   constructor() {
     this.title = "Calendar | Avatar Box";
-    (this.calendar = {
+    this.calendar = {
       images: [],
       isEnabled: false,
-    });
+    };
     this.navbar = new NavBarVM();
     this.navbar.isCosmetic = false;
     this.navbar.isTransparent = false;

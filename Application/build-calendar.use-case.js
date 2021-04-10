@@ -50,15 +50,17 @@ export class BuildCalendarUseCase {
             : targetIndex,
         -1
       );
-    const images = rotateLeft(userImages, primaryImageIndex).map((img, index) => ({
-      url: `${img.url}?size=200`,
-      day:
-        index == 0
-          ? "Now"
-          : index == 1
-          ? "Tomorrow"
-          : days[(moment().day() + index) % 7],
-    }));
+    const images = rotateLeft(userImages, primaryImageIndex).map(
+      (img, index) => ({
+        url: `${img.url}?size=200`,
+        day:
+          index == 0
+            ? "Now"
+            : index == 1
+            ? "Tomorrow"
+            : days[(moment().day() + index) % 7],
+      })
+    );
     return { images, isEnabled: this.isEnabled };
   }
 }
