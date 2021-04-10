@@ -1,4 +1,4 @@
-const { createLogger, transports } = require("winston");
+import { createLogger, transports } from "winston";
 
 // https://www.npmjs.com/package/winston#logging-levels
 // https://tools.ietf.org/html/rfc5424

@@ -1,4 +1,4 @@
-const Pusher = require("pusher-js");
+import Pusher from "pusher-js";
 
 export class PusherClient {
   constructor() {

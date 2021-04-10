@@ -19,7 +19,7 @@ class AvatarBoxSite extends Document {
         <meta property="og:type" content="website" />
         <Head>
           <link rel="manifest" href={`/manifest.json?ver=${cacheBuster}`} />
-          
+
           <link
             rel="apple-touch-icon"
             sizes="180x180"

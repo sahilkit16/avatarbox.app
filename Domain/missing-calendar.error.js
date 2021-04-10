@@ -1,5 +1,5 @@
-const { CustomError } = require("./custom.error");
-const { ErrorCode } = require("./error-code");
+import { CustomError } from "./custom.error";
+import { ErrorCode } from "./error-code";
 
 export class MissingCalendarError extends CustomError {
   constructor() {

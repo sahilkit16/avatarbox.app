@@ -3,10 +3,8 @@ import * as awilix from "awilix";
 import { CrashReporter } from "./crash-reporter.server";
 import { Logger } from "./logger";
 import { CacheService } from "../Services/cache.service";
-import{
-  BuildCalendarUseCase,
-} from "../Application/build-calendar.use-case";
-import {  PusherClient } from "../Infrastructure/pusher.client";
+import { BuildCalendarUseCase } from "../Application/build-calendar.use-case";
+import { PusherClient } from "../Infrastructure/pusher.client";
 import { AvbxGravatarClient } from "avatarbox.sdk";
 
 export const container = awilix.createContainer();
@@ -21,4 +19,3 @@ container.register({
   buildCalendar: awilix.asClass(BuildCalendarUseCase),
   pusherClient: awilix.asClass(PusherClient),
 });
-

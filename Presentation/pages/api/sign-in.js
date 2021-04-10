@@ -27,11 +27,10 @@ export default withSession(async (req, res) => {
   const user = { email: loginVm.email };
 
   if (user.email && password) {
-
     const avbx = container.resolve("avbx");
     const client = await avbx.login(user.email, password);
 
-    if(!client) return req.unauthorized();
+    if (!client) return req.unauthorized();
 
     user.hash = client.emailHash;
     user.cacheBuster = ShortId();
@@ -46,7 +45,6 @@ export default withSession(async (req, res) => {
     } else {
       return res.redirect("/calendar#");
     }
-
   } else {
     req.unauthorized();
   }

@@ -1,5 +1,6 @@
-require("dotenv").config();
-const redis = require("redis");
+import redis from "redis";
+import { config } from "dotenv";
+config();
 
 export class RedisClient {
   constructor() {

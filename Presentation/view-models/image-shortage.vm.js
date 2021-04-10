@@ -18,4 +18,3 @@ export class ImageShortageVM extends PromptVM {
     this.linkText = "Add some by clicking here!";
   }
 }
-

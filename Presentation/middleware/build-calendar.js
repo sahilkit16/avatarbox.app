@@ -2,7 +2,12 @@ const { container } = require("../../Common/di-container");
 const { ImageShortageVM } = require("../view-models/image-shortage.vm");
 const { ImageShortageError } = require("../../Domain/image-shortage.error");
 const ShortId = require("shortid");
-import { use, isAuthenticated, isAjax, gravatarClientScope } from "../middleware";
+import {
+  use,
+  isAuthenticated,
+  isAjax,
+  gravatarClientScope,
+} from "../middleware";
 const logger = container.resolve("logger");
 
 export async function buildCalendar(req, res, next) {
