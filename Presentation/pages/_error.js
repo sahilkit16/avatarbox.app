@@ -1,6 +1,6 @@
 import Head from "next/head";
 import ErrorBody from "../components/error-body";
-import ErrorVM from "../view-models/error.vm";
+import { ErrorVM } from "../view-models/error.vm";
 import { CrashReporter } from "../../Common/crash-reporter.client";
 
 function Error({ statusCode, eventId }) {

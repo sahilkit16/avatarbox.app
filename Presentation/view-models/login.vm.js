@@ -1,4 +1,4 @@
-const validator = require("validator").default;
+import validator from "validator";
 
 const getProxy = (vm) => {
   return new Proxy(vm, {
@@ -47,7 +47,7 @@ const getProxy = (vm) => {
   });
 };
 
-class LoginVM {
+export class LoginVM {
   constructor() {
     this.email = null;
     this.password = null;
@@ -58,5 +58,3 @@ class LoginVM {
     return getProxy(this);
   }
 }
-
-module.exports = LoginVM;

@@ -1,9 +1,8 @@
-class NavBarVM {
+export class NavBarVM {
   constructor() {
     this.isCosmetic = false;
     this.isTransparent = true;
     this.user = null;
+    this.pathName = null;
   }
 }
-
-module.exports = NavBarVM;

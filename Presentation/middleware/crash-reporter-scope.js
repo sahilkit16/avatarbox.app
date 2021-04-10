@@ -1,5 +1,5 @@
-const { createContainer, asValue } = require("awilix");
-const { CrashReporter } = require("../../Common/crash-reporter.server");
+import { createContainer, asValue } from "awilix";
+import { CrashReporter } from "../../Common/crash-reporter.server";
 
 // workaround for https://github.com/zeit/next.js/issues/1852
 

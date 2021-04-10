@@ -1,6 +1,6 @@
-const NavBarVM = require("./navbar.vm");
+import { NavBarVM } from "./navbar.vm";
 
-class HomeVM {
+export class HomeVM {
   constructor() {
     this.title = "Home | Avatar Box";
     this.navbar = new NavBarVM();
@@ -20,5 +20,3 @@ class HomeVM {
     return JSON.parse(JSON.stringify(this));
   }
 }
-
-module.exports = HomeVM;

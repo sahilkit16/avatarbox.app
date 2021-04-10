@@ -4,15 +4,14 @@ import { connect } from "react-redux";
 import { Notyf } from "notyf";
 import Head from "next/head";
 import ClassNames from "classnames";
-import CalendarVM from "../view-models/calendar.vm";
+import { CalendarVM } from "../view-models/calendar.vm";
 import * as actions from "../actions/app.actions";
-import SlideShowVM from "../view-models/slideshow.vm";
+import { SlideShowVM } from "../view-models/slideshow.vm";
 import { CrashReporter } from "../../Common/crash-reporter.client";
 import { applySession } from "next-session";
 import { use, buildCalendar } from "../middleware";
-
-const { PusherClient } = require("../../Infrastructure/pusher.client");
-const { ImageShortageError } = require("../../Domain/image-shortage.error");
+import { PusherClient } from "../../Infrastructure/pusher.client";
+import { ImageShortageError } from "../../Domain/image-shortage.error";
 
 export async function getServerSideProps({ req, res }) {
   await applySession(req, res);

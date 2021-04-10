@@ -1,11 +1,12 @@
-const LoginVM = require("../../view-models/login.vm");
+import { LoginVM } from "../../view-models/login.vm";
+import { withSession } from "next-session";
 import {
   use,
   unauthorized,
   gravatarClientScope,
   isAjax,
 } from "../../middleware";
-const { withSession } = require("next-session");
+import { redirect } from "next/dist/next-server/server/api-utils";
 
 export default withSession(async (req, res) => {
   await use(req, res, [isAjax, unauthorized, gravatarClientScope]);
@@ -26,7 +27,7 @@ export default withSession(async (req, res) => {
   }
   if (!req.isAjax) {
     redirectUrl += "#here";
-    res.redirect(redirectUrl);
+    redirect(res, redirectUrl);
   } else {
     res.end();
   }

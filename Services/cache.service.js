@@ -1,4 +1,4 @@
-const { RedisClient } = require("../Infrastructure/redis.client");
+import { RedisClient } from "../Infrastructure/redis.client";
 
 export class CacheService {
   constructor() {

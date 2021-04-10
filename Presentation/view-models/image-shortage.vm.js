@@ -1,6 +1,6 @@
-const PromptVM = require("./prompt.vm");
-const { ImageShortageError } = require("../../Domain/image-shortage.error");
-const { ErrorCode } = require("../../Domain/error-code");
+import { PromptVM } from "./prompt.vm";
+import { ImageShortageError } from "../../Domain/image-shortage.error";
+import { ErrorCode } from "../../Domain/error-code";
 
 export class ImageShortageVM extends PromptVM {
   constructor(error = new ImageShortageError()) {

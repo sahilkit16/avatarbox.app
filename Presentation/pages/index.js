@@ -2,14 +2,14 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Notyf } from "notyf";
-import HomeVM from "../view-models/home.vm";
+import { HomeVM } from "../view-models/home.vm";
 import classNames from "classnames";
 import { signIn } from "../../Infrastructure/fetch.client";
-import LoginVM from "../view-models/login.vm";
+import { LoginVM } from "../view-models/login.vm";
 import * as actions from "../actions/app.actions";
 import ShortId from "shortid";
-const { applySession } = require("next-session");
-const { PusherClient } = require("../../Infrastructure/pusher.client");
+import { applySession } from "next-session";
+import { PusherClient } from "../../Infrastructure/pusher.client";
 
 export async function getServerSideProps({ req, res, query }) {
   await applySession(req, res);

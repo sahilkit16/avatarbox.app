@@ -1,5 +1,5 @@
-const validator = require("validator").default;
-const ThanksVM = require("./thanks.vm");
+import { validator } from "validator";
+import { ThanksVM } from "./thanks.vm";
 
 const getProxy = (vm) => {
   return new Proxy(vm, {
@@ -51,7 +51,7 @@ const getProxy = (vm) => {
   });
 };
 
-class FeedbackVM extends ThanksVM {
+export class FeedbackVM extends ThanksVM {
   constructor() {
     super();
     const requiredFieldMessage = "This field is required";
@@ -79,5 +79,3 @@ class FeedbackVM extends ThanksVM {
     };
   }
 }
-
-module.exports = FeedbackVM;

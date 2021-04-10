@@ -18,8 +18,11 @@ function AvatarBoxApp({ Component, pageProps, router }) {
       <Component {...pageProps} />
     </HeroSection>;
   }
+  if(pageProps.navbar){
+    pageProps.navbar.pathName = router.route;
+  }
   const { user, calendar } = pageProps;
-
+  
   const imageShortagePrompt =
     pageProps.prompt && pageProps.prompt.name == "image-shortage" ? (
       <ImageShortage {...pageProps.prompt} />

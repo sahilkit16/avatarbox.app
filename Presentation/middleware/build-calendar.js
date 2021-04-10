@@ -1,13 +1,15 @@
-const { container } = require("../../Common/di-container");
-const { ImageShortageVM } = require("../view-models/image-shortage.vm");
-const { ImageShortageError } = require("../../Domain/image-shortage.error");
-const ShortId = require("shortid");
+import { container } from "../../Common/di-container";
+import { ImageShortageVM } from "../view-models/image-shortage.vm";
+import { ImageShortageError } from "../../Domain/image-shortage.error";
+import ShortId from "shortid";
 import {
   use,
   isAuthenticated,
   isAjax,
   gravatarClientScope,
 } from "../middleware";
+import { redirect } from "next/dist/next-server/server/api-utils";
+
 const logger = container.resolve("logger");
 
 export async function buildCalendar(req, res, next) {
@@ -26,7 +28,7 @@ export async function buildCalendar(req, res, next) {
           if (req.isAjax) {
             res.status(400).json({ code: err.code, message: err.message });
           } else {
-            res.redirect("/");
+            redirect(res, "/");
           }
         } else {
           next(err);

@@ -1,13 +1,13 @@
-const NavBarVM = require("./navbar.vm");
+import { NavBarVM } from "./navbar.vm";
 
-class CalendarVM {
+export class CalendarVM {
   constructor() {
     this.title = "Calendar | Avatar Box";
     (this.calendar = {
       images: [],
       isEnabled: false,
-    }),
-      (this.navbar = new NavBarVM());
+    });
+    this.navbar = new NavBarVM();
     this.navbar.isCosmetic = false;
     this.navbar.isTransparent = false;
     this.hideCoverImage = true;
@@ -24,5 +24,3 @@ class CalendarVM {
     return JSON.parse(JSON.stringify(this));
   }
 }
-
-module.exports = CalendarVM;

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuButton from "./menu-button";
-const classNames = require("classnames");
+import classNames from "classnames";
 
 function NavBar({ model }) {
   const menuButton = model.user ? <MenuButton user={model.user} /> : null;
+  const logoUrl = model.pathName == "/" ? "https://www.avatarbox.io" : "/" ;
   return (
     <nav
       className={classNames("navbar", {
@@ -14,7 +15,7 @@ function NavBar({ model }) {
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item is-transparent" href="/">
+          <a className="navbar-item is-transparent" href={logoUrl}>
             <img
               src="https://www.avatarbox.io/images/avatarbox.png"
               alt="Logo"

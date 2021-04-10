@@ -1,6 +1,6 @@
-const ThanksVM = require("./thanks.vm");
+import { ThanksVM } from "./thanks.vm";
 
-class ErrorVM extends ThanksVM {
+export class ErrorVM extends ThanksVM {
   constructor() {
     super();
     this.title = `Error | Avatar Box`;
@@ -10,5 +10,3 @@ class ErrorVM extends ThanksVM {
     this.eventId = null;
   }
 }
-
-module.exports = ErrorVM;

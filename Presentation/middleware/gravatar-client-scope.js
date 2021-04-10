@@ -1,7 +1,7 @@
-const { createContainer, asValue } = require("awilix");
-const { GravatarClient } = require("grav.client");
-const { container } = require("../../Common/di-container");
-const { _handleUnauthorized } = require("./unauthorized");
+import { createContainer, asValue } from "awilix";
+import { GravatarClient } from "grav.client";
+import { container } from "../../Common/di-container";
+import { _handleUnauthorized } from "./unauthorized";
 
 export async function gravatarClientScope(req, res, next) {
   const _unauthorized = (err) => {

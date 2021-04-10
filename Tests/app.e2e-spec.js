@@ -1,6 +1,7 @@
-const request = require("supertest");
-const { createServer } = require("http");
-const next = require("next");
+import request from "supertest";
+import { createServer } from "http";
+import next from "next";
+
 const app = next({ dev: false, dir: "Presentation" });
 const handler = app.getRequestHandler();
 

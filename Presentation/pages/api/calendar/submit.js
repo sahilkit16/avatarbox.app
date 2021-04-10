@@ -1,9 +1,9 @@
 import { use, isAjax, buildCalendar } from "../../../middleware";
-const { withSession } = require("next-session");
-const { container } = require("../../../../Common/di-container");
+import { withSession } from "next-session";
+import { container } from "../../../../Common/di-container";
+import { redirect } from "next/dist/next-server/server/api-utils";
 
 export default withSession(async (req, res) => {
-  debugger;
   await use(req, res, [isAjax, buildCalendar]);
   const { user } = req.session;
   const isCalendarEnabled = req.session.calendar.isEnabled;
@@ -32,6 +32,6 @@ export default withSession(async (req, res) => {
     req.session.calendar = calendar;
     return res.json(calendar);
   } else {
-    return res.redirect(`/calendar`);
+    return redirect(res, `/calendar`);
   }
 });

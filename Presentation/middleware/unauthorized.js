@@ -1,3 +1,5 @@
+import { redirect } from "next/dist/next-server/server/api-utils";
+
 export function _handleUnauthorized(
   req,
   res,
@@ -9,7 +11,7 @@ export function _handleUnauthorized(
     return res.send(message);
   }
   req.session.validationMessage = message;
-  return res.redirect(path);
+  return redirect(res, path);
 }
 
 const scopeUnauthorizedHandler = (req, res) => (message, path) => {

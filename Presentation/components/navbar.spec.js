@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "./navbar";
 import { shallow } from "enzyme";
-import NavBarVM from "../view-models/navbar.vm";
+import { NavBarVM } from "../view-models/navbar.vm";
 
 describe("NavBar", () => {
   it("should render navbar", () => {

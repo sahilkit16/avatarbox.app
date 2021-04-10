@@ -1,10 +1,12 @@
-require("jsdom-global")();
+import jsdomGlobal from "jsdom-global";
 import React from "react";
 import IndexPage from "../pages/index";
 import configureStore from "../store/configureStore";
 import { Provider } from "react-redux";
 import { mount } from "enzyme";
-import HomeVM from "../view-models/home.vm";
+import { HomeVM } from "../view-models/home.vm";
+
+jsdomGlobal();
 
 describe("IndexPage", () => {
   it("should render", async () => {

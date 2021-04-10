@@ -1,4 +1,4 @@
-class SlideShowVM {
+export class SlideShowVM {
   constructor() {
     this.slides = null;
     this.length = null;
@@ -38,5 +38,3 @@ class SlideShowVM {
     this.jump(0);
   }
 }
-
-module.exports = SlideShowVM;

@@ -1,14 +1,15 @@
-const ShortId = require("shortid");
-const LoginVM = require("../../view-models/login.vm");
-const { container } = require("../../../Common/di-container");
-const { withSession } = require("next-session");
+import ShortId from "shortid";
+import { LoginVM } from "../../view-models/login.vm";
+import { container } from "../../../Common/di-container";
+import { withSession } from "next-session";
 import {
   use,
   isAjax,
   unauthorized,
   gravatarClientScope,
 } from "../../middleware";
-const { asValue } = require("awilix");
+import { asValue } from "awilix";
+import { redirect } from "next/dist/next-server/server/api-utils";
 
 export default withSession(async (req, res) => {
   await use(req, res, [isAjax, unauthorized, gravatarClientScope]);
@@ -43,7 +44,7 @@ export default withSession(async (req, res) => {
     if (req.isAjax) {
       return res.end();
     } else {
-      return res.redirect("/calendar#");
+      return redirect(res, "/calendar");
     }
   } else {
     req.unauthorized();

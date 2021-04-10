@@ -3,7 +3,7 @@ import configureStore from "../store/configureStore";
 import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import ErrorBody from "../components/error-body";
-import ErrorVM from "../view-models/error.vm";
+import { ErrorVM } from "../view-models/error.vm";
 import Head from "next/head";
 
 export default function Custom404() {
