@@ -9,7 +9,8 @@ export default withSession(async (req, res) => {
   const isCalendarEnabled = req.session.calendar.isEnabled;
   delete req.session.calendar;
   const avbx = container.resolve("avbx");
-
+  const cache = container.resolve("cacheService");
+  await cache.hdel(req.session.user.email, "calendar");
   if (!isCalendarEnabled) {
     const { email } = user;
     const lastUpdated = new Date(user.lastUpdated);
@@ -29,8 +30,9 @@ export default withSession(async (req, res) => {
 
   if (req.isAjax) {
     const calendar = await req.buildCalendar();
-    req.session.calendar = calendar;
-    return res.json(calendar);
+    if (calendar) {
+      return res.json(calendar);
+    }
   } else {
     return redirect(res, `/calendar`);
   }
