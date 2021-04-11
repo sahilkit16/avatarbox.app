@@ -16,6 +16,7 @@ import { ImageShortageError } from "../../Domain/image-shortage.error";
 export async function getServerSideProps({ req, res }) {
   await applySession(req, res);
   await use(req, res, [buildCalendar]);
+  await req.buildCalendar();
   const { user, calendar } = req.session;
   const model = new CalendarVM();
   model.User = user;
