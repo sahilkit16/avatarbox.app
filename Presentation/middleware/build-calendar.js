@@ -33,6 +33,7 @@ export async function buildCalendar(req, res, next) {
       })
       .then((calendar) => {
         req.session.calendar = calendar;
+        return calendar;
       })
       .catch((err) => {
         if (err instanceof ImageShortageError) {
@@ -49,6 +50,5 @@ export async function buildCalendar(req, res, next) {
         }
       });
   };
-  await req.buildCalendar();
   next();
 }
