@@ -27,12 +27,9 @@ export default withSession(async (req, res) => {
   } else {
     avbx.off(user.email);
   }
-
   if (req.isAjax) {
-    const calendar = await req.buildCalendar();
-    if (calendar) {
-      return res.json(calendar);
-    }
+    await req.buildCalendar();
+    return res.json(req.session.calendar);
   } else {
     return redirect(res, `/calendar`);
   }
