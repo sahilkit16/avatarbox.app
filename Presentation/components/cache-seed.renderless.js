@@ -4,6 +4,7 @@ import { BrowserCache } from "../../Infrastructure/browser-cache";
 function CacheSeed() {
   useEffect(() => {
     const cache = new BrowserCache();
+    if(!cache.session) return;
     const didSeedCache = !!cache.session.getItem("didSeedCache");
     if (!didSeedCache) {
       cache.session.setItem("SENTRY_DSN", process.env.SENTRY_DSN);
