@@ -30,6 +30,7 @@
     "awilix": "^4.2.6",
     "babelify": "^10.0.0",
     "classnames": "^2.2.6",
+    "connect-redis": "^5.1.0",
     "cucumber": "^6.0.5",
     "dotenv": "^8.2.0",
     "expect": "^26.0.1",
