@@ -1,10 +1,10 @@
-import { use, isAjax, buildCalendar } from "../../../middleware";
+import { use, isAjax, buildCalendar, runMiddleware } from "../../../middleware";
 import { withSession } from "next-session";
 import { container } from "../../../../Common/di-container";
 import { redirect } from "next/dist/next-server/server/api-utils";
 
 export default withSession(async (req, res) => {
-  await use(req, res, [isAjax, buildCalendar]);
+  await use(req, res, [isAjax]);
   const { user } = req.session;
   const isCalendarEnabled = req.session.calendar.isEnabled;
   delete req.session.calendar;
@@ -27,10 +27,12 @@ export default withSession(async (req, res) => {
   } else {
     avbx.off(user.email);
   }
-  const calendar = await req.buildCalendar();
-  if(!calendar) return;
-  if(req.isAjax){
-    return res.json(calendar);
-  }
-  return redirect(res, `/calendar`);
+
+  await runMiddleware(req, res, buildCalendar);
+  
+  if(res.headersSent) return;
+
+  return req.isAjax
+    ? res.json(req.session.calendar)
+    : redirect(res, `/calendar`);
 });
