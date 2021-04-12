@@ -11,7 +11,7 @@ import {
 import { asValue } from "awilix";
 import { redirect } from "next/dist/next-server/server/api-utils";
 
-export default withSession(async (req, res) => {
+const handler = async (req, res) => {
   await use(req, res, [isAjax, unauthorized, gravatarClientScope]);
 
   let { password } = req.body;
@@ -49,4 +49,10 @@ export default withSession(async (req, res) => {
   } else {
     req.unauthorized();
   }
+};
+
+const cache = container.resolve("cacheService");
+
+export default withSession(handler, {
+  store: cache.redis.store,
 });

@@ -7,24 +7,19 @@ import {
   gravatarClientScope,
 } from "../middleware";
 
-const cache = container.resolve("cacheService");
-
 export async function buildCalendar(req, res, next) {
   await use(req, res, [isAuthenticated, isAjax, gravatarClientScope]);
   req.session.user.cacheBuster = ShortId();
   const client = req.scope.resolve("gravatarClient");
   const buildCalendar = container.resolve("buildCalendar");
   buildCalendar.client = client;
-  cache
-    .hget(client.email, "calendar")
+  Promise.resolve(req.session && req.session.calendar)
     .then((calendar) => {
       if (calendar) return calendar;
     })
     .then(async (calendar) => {
       if (calendar) return calendar;
-      const _calendar = await buildCalendar.execute();
-      await cache.hset(client.email, "calendar", _calendar);
-      return _calendar;
+      return await buildCalendar.execute();
     })
     .then((calendar) => {
       req.session.calendar = calendar;

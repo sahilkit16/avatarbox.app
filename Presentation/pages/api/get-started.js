@@ -7,8 +7,9 @@ import {
   isAjax,
 } from "../../middleware";
 import { redirect } from "next/dist/next-server/server/api-utils";
+import { container } from "../../../Common/di-container";
 
-export default withSession(async (req, res) => {
+const handler = async (req, res) => {
   await use(req, res, [isAjax, unauthorized, gravatarClientScope]);
   const loginVm = new LoginVM();
   loginVm.email = req.body.email;
@@ -31,4 +32,10 @@ export default withSession(async (req, res) => {
   } else {
     res.end();
   }
+};
+
+const cache = container.resolve("cacheService");
+
+export default withSession(handler, {
+  store: cache.redis.store,
 });

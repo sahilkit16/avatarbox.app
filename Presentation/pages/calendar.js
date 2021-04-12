@@ -12,9 +12,13 @@ import { applySession } from "next-session";
 import { use, buildCalendar } from "../middleware";
 import { PusherClient } from "../../Infrastructure/pusher.client";
 import { ImageShortageError } from "../../Domain/image-shortage.error";
+import { container } from "../../Common/di-container";
 
 export async function getServerSideProps({ req, res }) {
-  await applySession(req, res);
+  const cache = container.resolve("cacheService");
+  await applySession(req, res, {
+    store: cache.redis.store,
+  });
   await use(req, res, [buildCalendar]);
   const { user, calendar } = req.session;
   const model = new CalendarVM();

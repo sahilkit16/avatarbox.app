@@ -10,9 +10,13 @@ import * as actions from "../actions/app.actions";
 import ShortId from "shortid";
 import { applySession } from "next-session";
 import { PusherClient } from "../../Infrastructure/pusher.client";
+import { container } from "../../Common/di-container";
 
 export async function getServerSideProps({ req, res, query }) {
-  await applySession(req, res);
+  const cache = container.resolve("cacheService");
+  await applySession(req, res, {
+    store: cache.redis.store,
+  });
   if (!req.session) req.session = {};
   const userid = query.next && req.session.userid;
   const user = req.session.user;

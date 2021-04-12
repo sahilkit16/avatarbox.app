@@ -4,12 +4,10 @@ import { container } from "../../../Common/di-container";
 
 const cache = container.resolve("cacheService");
 
-export default withSession(async (req, res) => {
-  if(req.session){
-    if (req.session.user) {
-      await cache.hdel(req.session.user.email, "calendar");
-    }
-    req.session.destroy();
-  }
-  redirect(res, "/");
-});
+export default withSession(
+  async (req, res) => {
+    if (req.session) req.session.destroy();
+    redirect(res, "/");
+  },
+  { store: cache.redis.store }
+);
