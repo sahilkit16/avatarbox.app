@@ -1,18 +1,23 @@
 import redis from "redis";
+import * as ConnectRedis from "connect-redis";
+import { expressSession } from "next-session";
 import { config } from "dotenv";
+
 config();
 
 export class RedisClient {
   constructor() {
-    this._client = redis.createClient(process.env.REDIS_URI);
-    this._client.on("error", (error) => {
+    this.client = redis.createClient(process.env.REDIS_URI);
+    const RedisStore = ConnectRedis(expressSession);
+    this.store = new RedisStore({ client: this.client });
+    this.client.on("error", (error) => {
       console.log(error);
     });
   }
 
   async set(key, value) {
     return new Promise((resolve, reject) => {
-      this._client.set(key, value, (err, reply) => {
+      this.client.set(key, value, (err, reply) => {
         if (err) reject(err);
         resolve(reply);
       });
@@ -21,7 +26,7 @@ export class RedisClient {
 
   async get(key) {
     return new Promise((resolve, reject) => {
-      this._client.get(key, (err, reply) => {
+      this.client.get(key, (err, reply) => {
         if (err) reject(err);
         resolve(reply);
       });
@@ -30,7 +35,7 @@ export class RedisClient {
 
   async delete(key) {
     return new Promise((resolve, reject) => {
-      this._client.del(key, (err, reply) => {
+      this.client.del(key, (err, reply) => {
         if (err) reject(err);
         resolve(reply);
       });
@@ -39,7 +44,7 @@ export class RedisClient {
 
   async hset(key, field, value) {
     return new Promise((resolve, reject) => {
-      this._client.hset(key, field, value, (err, reply) => {
+      this.client.hset(key, field, value, (err, reply) => {
         if (err) reject(err);
         resolve(reply);
       });
@@ -48,7 +53,7 @@ export class RedisClient {
 
   async hget(key, field) {
     return new Promise((resolve, reject) => {
-      this._client.hget(key, field, (err, reply) => {
+      this.client.hget(key, field, (err, reply) => {
         if (err) reject(err);
         resolve(reply);
       });
@@ -57,7 +62,7 @@ export class RedisClient {
 
   async hdel(key, field) {
     return new Promise((resolve, reject) => {
-      this._client.hdel(key, field, (err, reply) => {
+      this.client.hdel(key, field, (err, reply) => {
         if (err) reject(err);
         resolve(reply);
       });
@@ -65,9 +70,9 @@ export class RedisClient {
   }
 
   expire(key, seconds) {
-    this._client.expire(key, seconds);
+    this.client.expire(key, seconds);
   }
   end() {
-    this._client.end(true);
+    this.client.end(true);
   }
 }
