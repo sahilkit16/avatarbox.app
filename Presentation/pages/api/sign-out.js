@@ -5,9 +5,11 @@ import { container } from "../../../Common/di-container";
 const cache = container.resolve("cacheService");
 
 export default withSession(async (req, res) => {
-  if (req.session.user) {
-    await cache.hdel(req.session.user.email, "calendar");
+  if(req.session){
+    if (req.session.user) {
+      await cache.hdel(req.session.user.email, "calendar");
+    }
+    req.session.destroy();
   }
-  req.session.destroy();
   redirect(res, "/");
 });
