@@ -30,23 +30,22 @@ export const toggleCalendar = () => {
       headers: {
         accept: "application/json",
       },
-    })
-      .then(async (res) => {
-        if (res.ok) {
-          const calendar = await res.json();
-          resolve(calendar);
-        } else {
-          const text = await res.text();
-          if (isJson(text)) {
-            const err = JSON.parse(text);
-            if (err.code == NoImages || err.code == SingleImage) {
-              reject(new ImageShortageError(err.code));
-            }
-          } else {
-            reject(new Error(text || res.statusText));
+    }).then(async (res) => {
+      if (res.ok) {
+        const calendar = await res.json();
+        resolve(calendar);
+      } else {
+        const text = await res.text();
+        if (isJson(text)) {
+          const err = JSON.parse(text);
+          if (err.code == NoImages || err.code == SingleImage) {
+            reject(new ImageShortageError(err.code));
           }
+        } else {
+          reject(new Error(text || res.statusText));
         }
-      })
+      }
+    });
   });
 };
 
