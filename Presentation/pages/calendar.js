@@ -65,6 +65,7 @@ class CalendarPage extends React.Component {
       .toggleCalendar()
       .then(() =>
         this.props.reloadCalendar().then(() => {
+          this.slideShow.reload();
           window.location.hash = "#";
           this.setState({ isLoading: false });
           setTimeout(() => {

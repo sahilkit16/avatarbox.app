@@ -37,4 +37,9 @@ export class SlideShowVM {
       .addEventListener("click", this.next);
     this.jump(0);
   }
+  reload() {
+    this.slides = null;
+    this.length = null;
+    this.load();
+  }
 }
