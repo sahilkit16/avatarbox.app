@@ -39,7 +39,7 @@ class AvatarBoxSite extends Document {
           <link
             rel="stylesheet"
             type="text/css"
-            href="https://www.avatarbox.io/css/bundle.0000.min.css"
+            href="https://www.avatarbox.io/css/bundle.min.css"
           />
         </Head>
         <body id="menu">
