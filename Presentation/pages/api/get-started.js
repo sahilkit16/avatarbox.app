@@ -10,10 +10,7 @@ import { redirect } from "next/dist/next-server/server/api-utils";
 import { container } from "../../../Common/di-container";
 
 const handler = async (req, res) => {
-  await use(req, res, [isAjax, unauthorized, gravatarClientScope);
-  
-  console.log('headers: ', req.headers);
-  console.log('policy: ', contentSecurityPolicy);
+  await use(req, res, [isAjax, unauthorized, gravatarClientScope]);
   
   const loginVm = new LoginVM();
   loginVm.email = req.body.email;

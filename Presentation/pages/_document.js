@@ -1,11 +1,12 @@
 /* eslint-disable react/no-danger */
 import Document, { Html, Head, Main, NextScript } from "next/document";
-const cacheBuster = "dca58cb6";
+const cspHeader = process.env.CSP_HEADER;
+const cacheBuster = "m948noprw";
 class AvatarBoxSite extends Document {
   render() {
     return (
       <Html lang="en" id="here">
-        <meta httpEquiv="Content-Security-Policy" content="connect-src 'self' wss://ws-mt1.pusher.com https://*.sentry.io;default-src 'self' https://avatarbox.io https://*.avatarbox.io;font-src 'self' https://maxcdn.bootstrapcdn.com https://fonts.gstatic.com;img-src 'self' https://avatarbox.io https://*.avatarbox.io https://www.gravatar.com http://en.gravatar.com https://unsplash.it https://i.picsum.photos https://picsum.photos https://www.facebook.com https://www.google-analytics.com data:;script-src 'self' https://avatarbox.io https://*.avatarbox.io 'unsafe-eval' https://www.google-analytics.com https://cdnjs.cloudflare.com https://js.pusher.com https://cdn.jsdelivr.net https://connect.facebook.net https://graph.facebook.com http://graph.facebook.com https://z.moatads.com https://weheartit.com https://assets.pinterest.com;style-src 'self' https://avatarbox.io https://*.avatarbox.io 'unsafe-inline' https://maxcdn.bootstrapcdn.com fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net"/>
+        <meta httpEquiv="Content-Security-Policy" content={cspHeader}/>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
