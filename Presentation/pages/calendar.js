@@ -51,7 +51,7 @@ class CalendarPage extends React.Component {
     });
   }
 
-  reload(){
+  reload() {
     this.props.bustCache();
     this.slideShow.reload();
   }
