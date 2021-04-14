@@ -1,12 +1,10 @@
 /* eslint-disable react/no-danger */
 import Document, { Html, Head, Main, NextScript } from "next/document";
-const cspHeader = process.env.CSP_HEADER;
 const cacheBuster = "m948noprw";
 class AvatarBoxSite extends Document {
   render() {
     return (
       <Html lang="en" id="here">
-        <meta httpEquiv="Content-Security-Policy" content={cspHeader}/>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
