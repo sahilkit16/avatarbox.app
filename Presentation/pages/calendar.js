@@ -36,6 +36,7 @@ class CalendarPage extends React.Component {
     this.renderImages = this.renderImages.bind(this);
     this.toggleCalendar = this.toggleCalendar.bind(this);
     this.receiveNotification = this.receiveNotification.bind(this);
+    this.reload = this.reload.bind(this);
     this.state = { isLoading: false };
     this.crashReporter = new CrashReporter();
   }
@@ -45,9 +46,14 @@ class CalendarPage extends React.Component {
     notyf.success(message);
     this.props.reloadCalendar().then(() => {
       setTimeout(() => {
-        this.props.bustCache();
+        this.reload();
       }, 600);
     });
+  }
+
+  reload(){
+    this.props.bustCache();
+    this.slideShow.reload();
   }
 
   componentDidMount() {
@@ -69,7 +75,7 @@ class CalendarPage extends React.Component {
           window.location.hash = "#";
           this.setState({ isLoading: false });
           setTimeout(() => {
-            this.props.bustCache();
+            this.reload();
           }, 600);
         })
       )
