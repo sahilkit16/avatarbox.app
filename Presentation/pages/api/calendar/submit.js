@@ -1,10 +1,16 @@
-import { use, isAjax, buildCalendar, runMiddleware, isAuthenticated } from "../../../middleware";
+import {
+  use,
+  isAjax,
+  buildCalendar,
+  runMiddleware,
+  isAuthenticated,
+} from "../../../middleware";
 import { withSession } from "next-session";
 import { container } from "../../../../Common/di-container";
 import { redirect } from "next/dist/next-server/server/api-utils";
 
 const handler = async (req, res) => {
-  await use(req, res, [ isAuthenticated, isAjax]);
+  await use(req, res, [isAuthenticated, isAjax]);
   const { user } = req.session;
   const isCalendarEnabled = req.session.calendar.isEnabled;
   delete req.session.calendar;

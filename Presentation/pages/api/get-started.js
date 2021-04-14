@@ -11,7 +11,7 @@ import { container } from "../../../Common/di-container";
 
 const handler = async (req, res) => {
   await use(req, res, [isAjax, unauthorized, gravatarClientScope]);
-  
+
   const loginVm = new LoginVM();
   loginVm.email = req.body.email;
 
