@@ -12,17 +12,13 @@ import { applySession } from "next-session";
 import { PusherClient } from "../../Infrastructure/pusher.client";
 import { container } from "../../Common/di-container";
 import { use } from "../middleware";
-import helmet from 'helmet';
-import { contentSecurityPolicy } from '../public/csp-config.js';
 
 export async function getServerSideProps({ req, res, query }) {
   const cache = container.resolve("cacheService");
   await applySession(req, res, {
     store: cache.redis.store,
   });
-  await use(req, res, [helmet({
-    contentSecurityPolicy
-  })]);
+  await use(req, res);
   if (!req.session) req.session = {};
   const userid = query.next && req.session.userid;
   const user = req.session.user;
