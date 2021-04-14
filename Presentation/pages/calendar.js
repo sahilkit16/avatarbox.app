@@ -14,7 +14,7 @@ import { PusherClient } from "../../Infrastructure/pusher.client";
 import { ImageShortageError } from "../../Domain/image-shortage.error";
 import { container } from "../../Common/di-container";
 import helmet from "helmet";
-import { contentSecurityPolicy } from '../public/csp-config.json';
+import { contentSecurityPolicy } from '../public/csp-config.js';
 
 export async function getServerSideProps({ req, res }) {
   const cache = container.resolve("cacheService");
