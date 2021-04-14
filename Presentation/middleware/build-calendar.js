@@ -13,14 +13,8 @@ export async function buildCalendar(req, res, next) {
   const client = req.scope.resolve("gravatarClient");
   const buildCalendar = container.resolve("buildCalendar");
   buildCalendar.client = client;
-  Promise.resolve(req.session && req.session.calendar)
-    .then((calendar) => {
-      if (calendar) return calendar;
-    })
-    .then(async (calendar) => {
-      if (calendar) return calendar;
-      return await buildCalendar.execute();
-    })
+  buildCalendar
+    .execute()
     .then((calendar) => {
       req.session.calendar = calendar;
       next(calendar);

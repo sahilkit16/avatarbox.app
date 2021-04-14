@@ -13,7 +13,6 @@ const handler = async (req, res) => {
   await use(req, res, [isAuthenticated, isAjax]);
   const { user } = req.session;
   const isCalendarEnabled = req.session.calendar.isEnabled;
-  delete req.session.calendar;
   const avbx = container.resolve("avbx");
   if (!isCalendarEnabled) {
     const { email } = user;
