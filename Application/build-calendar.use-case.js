@@ -38,6 +38,15 @@ export class BuildCalendarUseCase {
       throw new ImageShortageError(ErrorCode.NoImages);
     if (userImages && userImages.length == 1)
       throw new ImageShortageError(ErrorCode.SingleImage);
+    const exists = await this.client.exists();
+    console.log('exists: ', exists.success);
+    if(!exists.success){
+      userImages.unshift({ 
+        url: "https://www.gravatar.com/avatar/00000000000000000000000000000000?s=250",
+        name: primaryImage.name
+      })
+      console.log('add image: ', userImages)
+    }
     const primaryImageIndex = userImages
       .map((img) => {
         img.url = img.url.replace("http:", "https:");
@@ -52,7 +61,7 @@ export class BuildCalendarUseCase {
       );
     const images = rotateLeft(userImages, primaryImageIndex).map(
       (img, index) => ({
-        url: `${img.url}?size=200`,
+        url: `${img.url}?size=250`,
         day:
           index == 0
             ? "Now"
@@ -61,6 +70,7 @@ export class BuildCalendarUseCase {
             : days[(moment().day() + index) % 7],
       })
     );
+    
     return { images, isEnabled: this.isEnabled };
   }
 }
