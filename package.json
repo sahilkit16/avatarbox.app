@@ -36,6 +36,7 @@
     "expect": "^26.0.1",
     "express": "^4.17.1",
     "grav.client": "^2.4.21",
+    "helmet": "^4.4.1",
     "mock-local-storage": "^1.1.12",
     "moment": "^2.29.1",
     "next": "^9.3.5",
