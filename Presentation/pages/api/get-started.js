@@ -9,12 +9,16 @@ import {
 import { redirect } from "next/dist/next-server/server/api-utils";
 import { container } from "../../../Common/di-container";
 import helmet from "helmet";
-import { contentSecurityPolicy } from '../../public/csp-config.json';
+import { contentSecurityPolicy } from '../../public/csp-config.js';
 
 const handler = async (req, res) => {
   await use(req, res, [isAjax, unauthorized, gravatarClientScope, helmet({
     contentSecurityPolicy
   })]);
+  
+  console.log('headers: ', req.headers);
+  console.log('policy: ', contentSecurityPolicy);
+  
   const loginVm = new LoginVM();
   loginVm.email = req.body.email;
 

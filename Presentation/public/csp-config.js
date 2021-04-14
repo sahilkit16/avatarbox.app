@@ -1,6 +1,6 @@
-{
-  "contentSecurityPolicy":{
-    "reportOnly": "true",
+module.exports  = {
+  "contentSecurityPolicy": {
+    "reportOnly": false,
      "directives":{
         "connectSrc":[
           "'self'",
@@ -36,6 +36,7 @@
            "https://*.avatarbox.io",
            "'unsafe-eval'",
            "https://www.google-analytics.com",
+           "https://www.googletagmanager.com",
            "https://cdnjs.cloudflare.com",
            "https://js.pusher.com",
            "https://cdn.jsdelivr.net",
@@ -44,7 +45,8 @@
            "http://graph.facebook.com",
            "https://z.moatads.com",
            "https://weheartit.com",
-           "https://assets.pinterest.com"
+           "https://assets.pinterest.com",
+           "https://s7.addthis.com"
         ],
         "styleSrc":[
            "'self'",
