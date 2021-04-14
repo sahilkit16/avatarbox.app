@@ -9,7 +9,6 @@ const handler = async (req, res) => {
   const isCalendarEnabled = req.session.calendar.isEnabled;
   delete req.session.calendar;
   const avbx = container.resolve("avbx");
-  const cache = container.resolve("cacheService");
   if (!isCalendarEnabled) {
     const { email } = user;
     const lastUpdated = new Date(user.lastUpdated);
