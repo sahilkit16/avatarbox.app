@@ -15,6 +15,8 @@ app server for [avatarbox.io](https://avatarbox.io)
 
 **`avatarbox.app`** is a [Next.js](https://nextjs.org) application that allows users to set up automated Gravatar updates.
 
+<img src="https://s3.amazonaws.com/docs.avatarbox.io/20210416_014929.gif" width="200px" />
+
 ## Checklist
 
 - IAM Role: `AvbxAppServer`
