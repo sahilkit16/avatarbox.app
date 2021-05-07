@@ -255,6 +255,12 @@ class IndexPage extends React.Component {
               </div>
               {validationSummary}
             </form>
+            <a href="api/auth/twitter" className={classNames("button is-info")}>
+              <span className="icon">
+                <i className="fa fa-twitter"></i>
+              </span>
+              <span>Sign in with Twitter</span>
+            </a>
           </div>
         </div>
       </div>
