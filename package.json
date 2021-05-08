@@ -41,6 +41,8 @@
     "next": "^9.3.5",
     "next-session": "^3.4.0",
     "notyf": "^3.7.0",
+    "passport": "^0.4.1",
+    "passport-twitter": "^1.0.4",
     "prettier": "^2.0.5",
     "pusher-js": "^6.0.3",
     "react": "^16.13.1",
