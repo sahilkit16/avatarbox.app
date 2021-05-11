@@ -1,5 +1,6 @@
 import * as passport from "passport";
 import * as TwitterStrategy from "passport-twitter";
+import { AvbxTwitterClient } from "avatarbox.sdk";
 
 var strategy = new TwitterStrategy(
   {
@@ -9,11 +10,8 @@ var strategy = new TwitterStrategy(
     callbackURL: process.env.TWITTER_CALLBACK_URL,
   },
   function (token, tokenSecret, profile, done) {
-    console.log("token: ", token);
-    console.log("tokenSecret: ", tokenSecret);
-    // accessToken is the token to call Auth0 API (not needed in the most cases)
-    // extraParams.id_token has the JSON Web Token
-    // profile has all the information from the user
+    profile.token = token;
+    profile.tokenSecret = tokenSecret;
     return done(null, profile);
   }
 );
@@ -21,6 +19,21 @@ var strategy = new TwitterStrategy(
 passport.use(strategy);
 
 passport.serializeUser(function (user, done) {
+  const { token, tokenSecret } = user;
+  const twitterClient = new AvbxTwitterClient(token, tokenSecret);
+  const twitterProfile = {
+    id: user.id,
+    username: user.username,
+    token, tokenSecret
+  };
+  if(user.photos && Array.isArray(user.photos)){
+    twitterProfile.avatars = user.photos.map(photo => {
+      if(photo.value){
+        return photo.value.replace("_normal.", ".");
+      }
+    });
+  }
+  twitterClient.sync(twitterProfile);
   done(null, user);
 });
 
