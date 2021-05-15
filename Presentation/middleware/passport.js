@@ -18,7 +18,7 @@ var strategy = new TwitterStrategy(
 
 passport.use(strategy);
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser(async function (user, done) {
   const { token, tokenSecret } = user;
   const twitterClient = new AvbxTwitterClient(token, tokenSecret);
   const twitterProfile = {
@@ -33,7 +33,7 @@ passport.serializeUser(function (user, done) {
       }
     });
   }
-  twitterClient.sync(twitterProfile);
+  await twitterClient.sync(twitterProfile);
   done(null, user);
 });
 
