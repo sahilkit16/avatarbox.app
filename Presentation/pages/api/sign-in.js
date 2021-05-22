@@ -35,7 +35,9 @@ const handler = async (req, res) => {
 
     user.hash = client.emailHash;
     user.cacheBuster = ShortId();
-    user.lastUpdated = (await avbx.user.find(user.email)).lastUpdated;
+    const _user = await avbx.user.find(user.email);
+    user.id = _user.id;
+    user.lastUpdated = _user.lastUpdated;
     req.session.user = user;
     req.scope.register({
       gravatarClient: asValue(client),

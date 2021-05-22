@@ -19,11 +19,11 @@ const handler = async (req, res) => {
     const lastUpdated = new Date(user.lastUpdated);
     avbx
       .on(email)
-      .then(() => lastUpdated <= avbx.dynamo.calendar.daysAgo(1))
+      .then(() => lastUpdated <= avbx.repo.calendar.daysAgo(1))
       .then((isDueForUpdate) => {
         if (isDueForUpdate) {
-          avbx.touch(email).then(() => {
-            req.session.user.lastUpdated = avbx.dynamo.calendar.now();
+          avbx.touch({ id: user.id, source: "gravatar" }).then(() => {
+            req.session.user.lastUpdated = avbx.repo.calendar.now();
           });
         }
       });
