@@ -24,11 +24,12 @@ passport.serializeUser(async function (user, done) {
   const twitterProfile = {
     id: user.id,
     username: user.username,
-    token, tokenSecret
+    token,
+    tokenSecret,
   };
-  if(user.photos && Array.isArray(user.photos)){
-    twitterProfile.avatars = user.photos.map(photo => {
-      if(photo.value){
+  if (user.photos && Array.isArray(user.photos)) {
+    twitterProfile.avatars = user.photos.map((photo) => {
+      if (photo.value) {
         return photo.value.replace("_normal.", ".");
       }
     });
@@ -41,4 +42,4 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-export const passportMiddleware = passport;
+export const passportTwitter = passport;

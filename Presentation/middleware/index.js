@@ -8,7 +8,8 @@ export * from "./gravatar-client-scope";
 export * from "./is-ajax";
 export * from "./is-authenticated";
 export * from "./unauthorized";
-export * from "./passport";
+export * from "./passport.gravatar";
+export * from "./passport.twitter";
 
 export async function use(req, res, middlewares = []) {
   return Promise.all(
