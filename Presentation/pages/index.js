@@ -19,7 +19,7 @@ export async function getServerSideProps({ req, res, query }) {
   });
   if (!req.session) req.session = {};
   const userid = query.next && req.session.userid;
-  const user = req.session.user;
+  const user = req.session.passport && req.session.passport.user;
   if (user) {
     user.cacheBuster = ShortId();
   }
@@ -28,9 +28,7 @@ export async function getServerSideProps({ req, res, query }) {
   model.formAction = `/api/${userid ? "sign-in" : "get-started"}`;
   model.User = user;
   model.validationMessage = req.session.validationMessage;
-  req.session.validationMessage = null;
   req.session.prompt = null;
-
   return {
     props: model.toObject(),
   };
@@ -69,7 +67,11 @@ class IndexPage extends React.Component {
   componentDidMount() {
     this.emailRef.current.focus();
     if (this.props.validationMessage) {
-      this.setState({ email: null, password: null });
+      this.setState({
+        email: null,
+        password: null,
+        validationMessage: this.props.validationMessage,
+      });
       this.clearInputFields();
     }
     this.setState({ cloak: false });
@@ -173,16 +175,15 @@ class IndexPage extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  render() {
+  get validationSummary() {
     const validationMessage =
-      this.state.validationMessage || this.props.validationMessage;
-    let validationSummary = null;
-    if (validationMessage) {
-      this.clearInputFields();
-      validationSummary = (
-        <span className="has-text-danger">{validationMessage}</span>
-      );
-    }
+      this.props.validationMessage || this.state.validationMessage;
+    return validationMessage ? (
+      <span className="has-text-danger">{validationMessage}</span>
+    ) : null;
+  }
+
+  render() {
     return (
       <div className="hero-body">
         <div className="container has-text-centered">
@@ -253,11 +254,14 @@ class IndexPage extends React.Component {
                   </noscript>
                 </p>
               </div>
-              {validationSummary}
+              {this.validationSummary}
             </form>
-            <a href="api/auth/twitter" className={classNames("button is-info", {
-                "is-hidden": this.props.user
-              })}>
+            <a
+              href="api/auth/twitter"
+              className={classNames("button is-info", {
+                "is-hidden": true, //this.props.user
+              })}
+            >
               <span className="icon">
                 <i className="fa fa-twitter"></i>
               </span>
