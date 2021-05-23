@@ -9,8 +9,7 @@ export async function gravatarClientScope(req, res, next) {
     _handleUnauthorized(req, res);
   };
   req.scope = createContainer().createScope();
-
-  const { user } = req.session;
+  const user = req.session.passport && req.session.passport.user;
   const email = req.body && req.body.email;
   if (user) {
     const avbx = container.resolve("avbx");

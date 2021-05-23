@@ -11,7 +11,7 @@ import { redirect } from "next/dist/next-server/server/api-utils";
 
 const handler = async (req, res) => {
   await use(req, res, [isAuthenticated, isAjax]);
-  const { user } = req.session;
+  const { user } = req.session.passport;
   const isCalendarEnabled = req.session.calendar.isEnabled;
   const avbx = container.resolve("avbx");
   if (!isCalendarEnabled) {
@@ -23,7 +23,7 @@ const handler = async (req, res) => {
       .then((isDueForUpdate) => {
         if (isDueForUpdate) {
           avbx.touch({ id: user.id, source: "gravatar" }).then(() => {
-            req.session.user.lastUpdated = avbx.repo.calendar.now();
+            req.session.passport.user.lastUpdated = avbx.repo.calendar.now();
           });
         }
       });

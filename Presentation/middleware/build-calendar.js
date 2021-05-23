@@ -9,7 +9,7 @@ import {
 
 export async function buildCalendar(req, res, next) {
   await use(req, res, [isAuthenticated, isAjax, gravatarClientScope]);
-  req.session.user.cacheBuster = ShortId();
+  req.session.passport.user.cacheBuster = ShortId();
   const client = req.scope.resolve("gravatarClient");
   const buildCalendar = container.resolve("buildCalendar");
   buildCalendar.client = client;

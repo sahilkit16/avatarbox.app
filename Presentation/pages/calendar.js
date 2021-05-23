@@ -20,7 +20,8 @@ export async function getServerSideProps({ req, res }) {
     store: cache.redis.store,
   });
   await use(req, res, [buildCalendar]);
-  const { user, calendar } = req.session;
+  const { user } = req.session.passport;
+  const { calendar } = req.session;
   const model = new CalendarVM();
   model.User = user;
   model.calendar = calendar;
