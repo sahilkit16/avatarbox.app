@@ -10,6 +10,8 @@ import { AvbxGravatarClient } from "avatarbox.sdk";
 export const container = awilix.createContainer();
 
 container.register({
+  // TODO: register AvbxTwitterClient, rename avbx dependency,
+  //       update references, fix breaking changes
   avbx: awilix.asClass(AvbxGravatarClient),
   crashReporter: awilix.asClass(CrashReporter),
   logger: awilix.asClass(Logger),
