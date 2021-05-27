@@ -79,7 +79,8 @@ class IndexPage extends React.Component {
 
     if (user) {
       const pusherClient = new PusherClient();
-      pusherClient.subscribe(this.props.user.hash, ({ message }) => {
+      const channelName = this.props.user.hash || this.props.user.id;
+      pusherClient.subscribe(channelName, ({ message }) => {
         this.receiveNotification(message);
       });
     }

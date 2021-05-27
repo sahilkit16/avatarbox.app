@@ -7,8 +7,8 @@ export class PusherClient {
       cluster: process.env.PUSHER_CLUSTER,
     });
   }
-  subscribe(emailHash, handler) {
-    this.channel = this.self.subscribe(emailHash);
+  subscribe(channelName, handler) {
+    this.channel = this.self.subscribe(channelName);
     this.channel.bind("update-event", handler);
   }
 }
