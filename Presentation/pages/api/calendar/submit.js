@@ -8,27 +8,30 @@ import {
 import { withSession } from "next-session";
 import { container } from "../../../../Common/di-container";
 import { redirect } from "next/dist/next-server/server/api-utils";
+import { source } from "../../../middleware/source";
 
 const handler = async (req, res) => {
-  await use(req, res, [isAuthenticated, isAjax]);
+  await use(req, res, [isAuthenticated, isAjax, source]);
   const { user } = req.session.passport;
   const isCalendarEnabled = req.session.calendar.isEnabled;
-  const avbx = container.resolve("gravatarClient");
+  const avbx =
+    req.source == "gravatar"
+      ? container.resolve("gravatarClient")
+      : container.resolve("twitterClient");
+
+  const id = user.email || user.id;
+
   if (!isCalendarEnabled) {
-    const { email } = user;
     const lastUpdated = new Date(user.lastUpdated);
-    avbx
-      .on(email)
-      .then(() => lastUpdated <= avbx.repo.calendar.daysAgo(1))
-      .then((isDueForUpdate) => {
-        if (isDueForUpdate) {
-          avbx.touch({ id: user.id, source: "gravatar" }).then(() => {
-            req.session.passport.user.lastUpdated = avbx.repo.calendar.now();
-          });
-        }
+    const isDueForUpdate = lastUpdated <= avbx.repo.calendar.daysAgo(1);
+    await avbx.on(id);
+    if (isDueForUpdate) {
+      await avbx.touch({ id: user.id, source: req.source }).then(() => {
+        req.session.passport.user.lastUpdated = avbx.repo.calendar.now();
       });
+    }
   } else {
-    avbx.off(user.email);
+    await avbx.off(id);
   }
 
   await runMiddleware(req, res, buildCalendar);
