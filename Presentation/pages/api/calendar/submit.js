@@ -13,7 +13,7 @@ const handler = async (req, res) => {
   await use(req, res, [isAuthenticated, isAjax]);
   const { user } = req.session.passport;
   const isCalendarEnabled = req.session.calendar.isEnabled;
-  const avbx = container.resolve("avbx");
+  const avbx = container.resolve("gravatarClient");
   if (!isCalendarEnabled) {
     const { email } = user;
     const lastUpdated = new Date(user.lastUpdated);

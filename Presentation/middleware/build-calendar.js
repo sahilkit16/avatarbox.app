@@ -6,18 +6,32 @@ import {
   isAjax,
   gravatarClientScope,
 } from "../middleware";
+import { GravatarStrategy } from "../../Application/build-calendar.gravatar";
+import { TwitterStrategy } from "../../Application/build-calendar.twitter";
 
 export async function buildCalendar(req, res, next) {
   await use(req, res, [isAuthenticated, isAjax, gravatarClientScope]);
   req.session.passport.user.cacheBuster = ShortId();
-  const client = req.scope.resolve("gravatarClient");
-  const buildCalendar = container.resolve("buildCalendar");
-  buildCalendar.client = client;
-  buildCalendar
-    .execute()
-    .then((calendar) => {
-      req.session.calendar = calendar;
-      next(calendar);
-    })
-    .catch((err) => next(err));
+  let buildCalendar = container.resolve("buildCalendar");
+
+  // TODO: use source field to determine provider (instagram/gravatar/twitter)
+  if (req.scope.registrations["gravatarClient"]) {
+    const client = req.scope && req.scope.resolve("gravatarClient");
+    buildCalendar.strategy = new GravatarStrategy();
+    buildCalendar.strategy.rpcClient = client;
+  } else {
+    buildCalendar.strategy = new TwitterStrategy();
+    buildCalendar.strategy.profile = req.session.passport.user;
+  }
+
+  buildCalendar.onError((error) => {
+    if (req.isAjax) {
+      return res.end();
+    }
+    next(error);
+  });
+
+  const calendar = await buildCalendar.execute();
+  req.session.calendar = calendar;
+  next(calendar);
 }
