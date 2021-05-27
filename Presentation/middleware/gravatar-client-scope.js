@@ -11,8 +11,10 @@ export async function gravatarClientScope(req, res, next) {
   req.scope = createContainer().createScope();
   const user = req.session.passport && req.session.passport.user;
   const email = req.body && req.body.email;
-  if (user) {
-    const avbx = container.resolve("avbx");
+
+  // TODO: use source field to determine provider (instagram/gravatar/twitter)
+  if (user && user.email) {
+    const avbx = container.resolve("gravatarClient");
     avbx
       .fetch(user.email)
       .then((client) => {

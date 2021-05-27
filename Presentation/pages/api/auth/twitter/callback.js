@@ -4,10 +4,8 @@ import { withSession } from "next-session";
 import { AvbxTwitterClient } from "avatarbox.sdk";
 
 const handler = async (req, res) => {
-  await use(req, res, [
-    passportTwitter.initialize(),
-  ]);
-  passportTwitter.authenticate("twitter", async function (err, user, info) {
+  await use(req, res, [passportTwitter.initialize()]);
+  passportTwitter.authenticate("twitter", async function (err, user) {
     if (err) {
       throw err;
     }
@@ -15,13 +13,13 @@ const handler = async (req, res) => {
       return res.redirect("/");
     }
     req.session.passport = {
-      user: await signIn(user)
+      user: await signIn(user),
     };
     return res.redirect("/calendar");
   })(req, res);
 };
 
-async function signIn(user){
+async function signIn(user) {
   const { token, tokenSecret } = user;
   const twitterClient = new AvbxTwitterClient(token, tokenSecret);
   const twitterProfile = {
@@ -37,13 +35,13 @@ async function signIn(user){
       }
     });
   }
-  
+
   // TODO:
   // return await twitterClient.sync(twitterProfile)
   // this change will be in avatarbox.sdk@1.2.4 (currently 1.2.3)
-    
+
   await twitterClient.sync(twitterProfile);
-  return twitterProfile;
+  return await twitterClient.fetch(user.id);
 }
 
 const cache = container.resolve("cacheService");
