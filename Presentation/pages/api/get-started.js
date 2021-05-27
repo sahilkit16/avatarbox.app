@@ -3,6 +3,7 @@ import { withSession } from "next-session";
 import {
   use,
   unauthorized,
+  source,
   gravatarClientScope,
   isAjax,
 } from "../../middleware";
@@ -10,7 +11,7 @@ import { redirect } from "next/dist/next-server/server/api-utils";
 import { container } from "../../../Common/di-container";
 
 const handler = async (req, res) => {
-  await use(req, res, [isAjax, unauthorized, gravatarClientScope]);
+  await use(req, res, [isAjax, unauthorized, source, gravatarClientScope]);
 
   const loginVm = new LoginVM();
   loginVm.email = req.body.email;
