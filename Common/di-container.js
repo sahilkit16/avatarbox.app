@@ -5,14 +5,13 @@ import { Logger } from "./logger";
 import { CacheService } from "../Services/cache.service";
 import { BuildCalendarUseCase } from "../Application/build-calendar.use-case";
 import { PusherClient } from "../Infrastructure/pusher.client";
-import { AvbxGravatarClient } from "avatarbox.sdk";
+import { AvbxGravatarClient, AvbxTwitterClient } from "avatarbox.sdk";
 
 export const container = awilix.createContainer();
 
 container.register({
-  // TODO: register AvbxTwitterClient, rename avbx dependency,
-  //       update references, fix breaking changes
-  avbx: awilix.asClass(AvbxGravatarClient),
+  gravatarClient: awilix.asClass(AvbxGravatarClient),
+  twitterClient: awilix.asClass(AvbxTwitterClient),
   crashReporter: awilix.asClass(CrashReporter),
   logger: awilix.asClass(Logger),
   cacheService: awilix.asClass(CacheService, {
