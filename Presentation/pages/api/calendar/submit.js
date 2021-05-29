@@ -14,6 +14,7 @@ const handler = async (req, res) => {
   await use(req, res, [isAuthenticated, isAjax, source]);
   const { user } = req.session.passport;
   const isCalendarEnabled = req.session.calendar.isEnabled;
+  req.session.calendar = null;
   const avbx =
     req.source == "gravatar"
       ? container.resolve("gravatarClient")

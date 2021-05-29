@@ -5,15 +5,19 @@ export class TwitterStrategy extends StrategyBase {
   constructor() {
     super();
     this.client = container.resolve("twitterClient");
-    this.profile = null;
+    this.id = null;
     this.load = async function () {
-      this.isEnabled = await this.client.isActive(this.profile.id);
-      this.icons = this.profile.avatars.map((avatar) => ({
+      const { avatars, isActive, currentAvatarIndex } = await this.client.fetch(
+        this.id
+      );
+      this.currentAvatarIndex = currentAvatarIndex;
+      this.isEnabled = isActive;
+      this.icons = avatars.map((avatar) => ({
         url: avatar,
       }));
     };
     this.compute = async function () {
-      this.startIndex = this.profile.currentAvatarIndex;
+      this.startIndex = this.currentAvatarIndex;
       return await Promise.resolve();
     };
   }
