@@ -28,6 +28,7 @@ async function signIn(user) {
     token,
     tokenSecret,
   };
+
   if (user.photos && Array.isArray(user.photos)) {
     twitterProfile.avatars = user.photos.map((photo) => {
       if (photo.value) {
@@ -36,12 +37,7 @@ async function signIn(user) {
     });
   }
 
-  // TODO:
-  // return await twitterClient.sync(twitterProfile)
-  // this change will be in avatarbox.sdk@1.2.4 (currently 1.2.3)
-
-  await twitterClient.sync(twitterProfile);
-  return await twitterClient.fetch(user.id);
+  return await twitterClient.sync(twitterProfile);
 }
 
 const cache = container.resolve("cacheService");

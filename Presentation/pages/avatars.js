@@ -26,29 +26,28 @@ class AvatarsPage extends React.Component {
   constructor(props) {
     super(props);
   }
-  get images(){
+  get images() {
     return this.props.calendar.images.map((image, index) => (
       <div key={index} className="image-grid-item">
-        <img className="icon" src={image.url}/>
-      </div>));
+        <img className="icon" src={image.url} />
+      </div>
+    ));
   }
   render() {
-    return (<div className="container">
-              <Head>
-                <link
-                  rel="stylesheet"
-                  type="text/css"
-                  href="/avatars.css"
-                />
-              </Head>
-            <div id="image-grid">
-              {this.images}
-              <div className="image-grid-item is-invisible"></div>
-              <div className="image-grid-item is-invisible"></div>
-              <div className="image-grid-item is-invisible"></div>
-              <div className="image-grid-item is-invisible"></div>
-            </div>
-          </div>);
+    return (
+      <div className="container">
+        <Head>
+          <link rel="stylesheet" type="text/css" href="/avatars.css" />
+        </Head>
+        <div id="image-grid">
+          {this.images}
+          <div className="image-grid-item is-invisible"></div>
+          <div className="image-grid-item is-invisible"></div>
+          <div className="image-grid-item is-invisible"></div>
+          <div className="image-grid-item is-invisible"></div>
+        </div>
+      </div>
+    );
   }
 }
 
