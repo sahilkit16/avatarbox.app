@@ -56,6 +56,16 @@ function NavBar({ model }) {
         >
           <div className="navbar-end">
             <span className={model.user ? "navbar-item" : "is-hidden"}>
+              <a className="has-text-white" href="/calendar">
+                Calendar
+              </a>
+            </span>
+            <span className={model.user ? "navbar-item" : "is-hidden"}>
+              <a className="has-text-white" href="/avatars">
+                Avatars
+              </a>
+            </span>
+            <span className={model.user ? "navbar-item" : "is-hidden"}>
               <a className="has-text-white" href="/api/sign-out">
                 Sign Out
               </a>
