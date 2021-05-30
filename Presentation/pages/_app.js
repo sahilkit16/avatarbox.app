@@ -4,6 +4,7 @@ import HeroHead from "../components/hero-head";
 import HeroSection from "../components/hero-section";
 import CacheSeed from "../components/cache-seed.renderless";
 import ImageShortage from "../components/image-shortage";
+import MobileSidebar from "../components/mobile-sidebar";
 
 function AvatarBoxApp({ Component, pageProps, router }) {
   if (router.route == "/health") {
@@ -21,6 +22,7 @@ function AvatarBoxApp({ Component, pageProps, router }) {
   if (pageProps.navbar) {
     pageProps.navbar.pathName = router.route;
   }
+
   const { user, calendar } = pageProps;
 
   const imageShortagePrompt =
@@ -36,6 +38,7 @@ function AvatarBoxApp({ Component, pageProps, router }) {
         <CacheSeed />
       </HeroSection>
       <CacheSeed />
+      <MobileSidebar />
     </Provider>
   );
 }
