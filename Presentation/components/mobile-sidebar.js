@@ -1,7 +1,14 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import actionTypes from "../actions/action-types";
 
 function MobileSidebar() {
   const { menu, selectedIcon } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const closeMenu = () => {
+    dispatch({
+      type: actionTypes.CLOSE_MENU,
+    });
+  };
   return (
     <div className={menu && menu.visible ? "mobile-sidebar" : "is-hidden"}>
       <article className="panel">
@@ -17,7 +24,9 @@ function MobileSidebar() {
         >
           UPLOAD
         </a>
-        <a className="panel-block">CLOSE</a>
+        <a className="panel-block" onClick={closeMenu}>
+          CLOSE
+        </a>
       </article>
     </div>
   );
