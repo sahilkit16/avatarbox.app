@@ -17,11 +17,10 @@ function MobileSidebar() {
             <img className="is-square" src={selectedIcon && selectedIcon.url} />
           </figure>
         </div>
-        <a className="panel-block">DELETE</a>
-        <a
-          className="panel-block"
-          href="http://localhost:5000/my-avatars/upload.html"
-        >
+        <a className="panel-block" href="#">
+          DELETE
+        </a>
+        <a className="panel-block" href="#">
           UPLOAD
         </a>
         <a className="panel-block" onClick={closeMenu}>
