@@ -57,6 +57,7 @@ html, body{
   position: absolute;
   bottom:0px;
   border-top: 1px solid #f1f1f1;
+  background-color: #fff;
 }
 
 .panel-block {

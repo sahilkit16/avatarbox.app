@@ -12,9 +12,6 @@ export class AvatarsVM {
     this.navbar.isTransparent = false;
     this.hideCoverImage = true;
     this.user = null;
-    this.menu = {
-      visible: false,
-    };
   }
   get User() {
     return this.user;
