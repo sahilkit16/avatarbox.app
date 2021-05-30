@@ -13,7 +13,7 @@ app server for [avatarbox.io](https://avatarbox.io)
 
 ## Getting Started
 
-**`avatarbox.app`** is a [Next.js](https://nextjs.org) application that allows users to set up automated Gravatar updates.
+**`avatarbox.app`** is a [Next.js](https://nextjs.org) application that allows users to manage automated updates for their Gravatar or Twitter profile icon.
 
 ## Checklist
 
