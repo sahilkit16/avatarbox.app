@@ -1,3 +1,9 @@
+html, body{
+  height: 100%;
+  width: 100vw;
+}
+
+/* image grid */
 .image-grid-item {
   width: 200px;
   height: 200px;
@@ -43,3 +49,30 @@
     margin: 3px;
   }
 }
+
+/* mobile sidebar */
+
+.mobile-sidebar {
+  width: 100vw;
+  position: absolute;
+  bottom:0px;
+  border-top: 1px solid #f1f1f1;
+}
+
+.panel-block {
+  justify-content: center;
+}
+
+/* desktop sidebar */
+/* .desktop-sidebar {
+  visibility: hidden;
+} */
+
+/* @media screen and (min-width: 900px) {
+  .mobile-sidebar {
+    visibility: hidden;
+  }
+  .desktop-sidebar {
+    visibility: visible;
+  }
+} */
