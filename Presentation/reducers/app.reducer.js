@@ -20,6 +20,17 @@ export default (state = appState, action) => {
     case ACTION_TYPES.UPDATE_USER: {
       return Object.assign({}, state, { user: action.user });
     }
+    case ACTION_TYPES.SELECT_ICON: {
+      return Object.assign({}, state, {
+        selectedIcon: action.selectedIcon,
+        menu: { visible: true },
+      });
+    }
+    case ACTION_TYPES.CLOSE_MENU: {
+      return Object.assign({}, state, {
+        menu: { visible: false },
+      });
+    }
     default:
       return state;
   }

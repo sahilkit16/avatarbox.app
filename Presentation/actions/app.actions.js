@@ -25,6 +25,19 @@ export const reloadCalendar = () => (dispatch) => {
   });
 };
 
+export const selectIcon = (selectedIcon) => (dispatch) => {
+  return dispatch({
+    type: ACTION_TYPES.SELECT_ICON,
+    selectedIcon,
+  });
+};
+
+export const closeMenu = () => (dispatch) => {
+  return dispatch({
+    type: ACTION_TYPES.CLOSE_MENU,
+  });
+};
+
 export const updateUser = (user) => ({
   type: ACTION_TYPES.UPDATE_USER,
   user,
