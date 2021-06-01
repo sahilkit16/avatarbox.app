@@ -9,6 +9,11 @@ function MobileSidebar() {
       type: actionTypes.CLOSE_MENU,
     });
   };
+  const deleteIcon = () => {
+    dispatch({
+      type: actionTypes.DELETE_ICON,
+    });
+  };
   return (
     <div className={menu && menu.visible ? "mobile-sidebar" : "is-hidden"}>
       <article className="panel">
@@ -17,7 +22,9 @@ function MobileSidebar() {
             <img className="is-square" src={selectedIcon && selectedIcon.url} />
           </figure>
         </div>
-        <a className="panel-block">DELETE</a>
+        <a className="panel-block" onClick={deleteIcon}>
+          DELETE
+        </a>
         <a
           className="panel-block"
           href="http://localhost:5000/my-avatars/upload.html"
