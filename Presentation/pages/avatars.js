@@ -30,6 +30,11 @@ class AvatarsPage extends React.Component {
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
   }
+  componentDidUpdate() {
+    if (this.props.deleteSelectedIcon) {
+      console.log("delete: ", this.props.selectedIcon);
+    }
+  }
   get images() {
     return this.props.calendar.images.map((image, index) => (
       <div
