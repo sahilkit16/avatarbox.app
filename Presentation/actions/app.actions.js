@@ -38,6 +38,12 @@ export const closeMenu = () => (dispatch) => {
   });
 };
 
+export const deleteIcon = () => (dispatch) => {
+  return dispatch({
+    type: ACTION_TYPES.DELETE_ICON,
+  });
+};
+
 export const updateUser = (user) => ({
   type: ACTION_TYPES.UPDATE_USER,
   user,

@@ -5,4 +5,5 @@ export default Object.freeze({
   UPDATE_USER: "UPDATE_USER",
   SELECT_ICON: "SELECT_ICON",
   CLOSE_MENU: "CLOSE_MENU",
+  DELETE_ICON: "DELETE_ICON",
 });
