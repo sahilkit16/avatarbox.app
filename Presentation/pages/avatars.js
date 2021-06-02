@@ -31,8 +31,11 @@ class AvatarsPage extends React.Component {
     this.close = this.close.bind(this);
   }
   componentDidUpdate() {
-    if (this.props.deleteSelectedIcon) {
-      console.log("delete: ", this.props.selectedIcon);
+    if(this.props.deleteSelectedIcon){
+      // TODO: use modal
+      if(confirm("Are you sure?")) {
+        this.close();
+      }
     }
   }
   get images() {
