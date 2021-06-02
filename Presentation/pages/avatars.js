@@ -5,6 +5,7 @@ import { container } from "../../Common/di-container";
 import { applySession } from "next-session";
 import { AvatarsVM } from "../view-models/avatars.vm";
 import { use, isAuthenticated } from "../middleware";
+import { AvatarCollection } from "../../Common/avatar-collection";
 import * as actions from "../actions/app.actions";
 import Head from "next/head";
 
@@ -34,9 +35,14 @@ class AvatarsPage extends React.Component {
     if(this.props.deleteSelectedIcon){
       // TODO: use modal
       if(confirm("Are you sure?")) {
+        this.deleteIcon();
         this.close();
       }
     }
+  }
+  deleteIcon(){
+    const avatars = new AvatarCollection(this.props.user.source);
+    avatars.delete(this.props.selectedIcon.url);
   }
   get images() {
     return this.props.calendar.images.map((image, index) => (
