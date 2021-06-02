@@ -3,7 +3,7 @@ import { TwitterIcons } from "./avatar-collection.twitter";
 import { getImageId } from "./helpers";
 
 export class AvatarCollection {
-  constructor(source){
+  constructor(source) {
     this.source = source;
     switch (source) {
       case "gravatar":
@@ -16,16 +16,20 @@ export class AvatarCollection {
         break;
     }
   }
-  
-  add(imageUrl){
-    const imageId = getImageId(this.source, imageUrl);
-    console.log(imageId);
-    //await this.icons.add(imageUrl);
+
+  set userId(value) {
+    this.icons.userId = value;
+  }
+  set client(value) {
+    this.icons.client = value;
   }
 
-  delete(imageUrl){
+  async add(imageUrl) {
+    return await this.icons.add(imageUrl);
+  }
+
+  async delete(imageUrl) {
     const imageId = getImageId(this.source, imageUrl);
-    console.log(imageId);
-    //await this.icons.delete(imageUrl);
+    return await this.icons.delete(imageId);
   }
 }
