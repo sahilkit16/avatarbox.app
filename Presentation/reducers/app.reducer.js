@@ -1,5 +1,6 @@
 import ACTION_TYPES from "../actions/action-types";
 import appState from "./app.state";
+import shortid from "shortid"
 
 const reducer = (state = appState, action) => {
   switch (action.type) {
@@ -34,7 +35,10 @@ const reducer = (state = appState, action) => {
       });
     }
     case ACTION_TYPES.DELETE_ICON: {
-      return Object.assign({}, state, { deleteSelectedIcon: true });
+      return Object.assign({}, state, { 
+        deleteSelectedIcon: true,
+        version: shortid()
+      });
     }
     default:
       return state;
