@@ -32,15 +32,15 @@ function AvatarBoxApp({ Component, pageProps, router }) {
   return (
     <Provider store={configureStore({ user, calendar })}>
       {imageShortagePrompt}
-        <HeroSection hideCoverImage={pageProps.hideCoverImage}>
-          <HeroHead title={pageProps.title} navbar={pageProps.navbar} />
-          <Component {...pageProps} />
-          <CacheSeed />
-        </HeroSection>
+      <HeroSection hideCoverImage={pageProps.hideCoverImage}>
+        <HeroHead title={pageProps.title} navbar={pageProps.navbar} />
+        <Component {...pageProps} />
         <CacheSeed />
-        <form id="menu-form" method="post" action="/api/menu">
-          <MobileSidebar />
-        </form>
+      </HeroSection>
+      <CacheSeed />
+      <form id="menu-form" method="post" action="/api/menu">
+        <MobileSidebar />
+      </form>
     </Provider>
   );
 }
