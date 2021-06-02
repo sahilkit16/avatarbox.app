@@ -1,8 +1,14 @@
+import { GravatarClient } from "../../sdk/Release/Presentation";
+
 export class GravatarIcons {
-  add(imageUrl){
-
+  constructor() {
+    this.client = new GravatarClient();
+    this.userId = null;
   }
-  delete(imageUrl){
-
+  async add(imageUrl) {
+    return await this.client.saveImageUrl(imageUrl);
+  }
+  async delete(imageName) {
+    return await this.client.deleteUserImage(imageName);
   }
 }

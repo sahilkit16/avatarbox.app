@@ -1,8 +1,14 @@
+import { AvbxTwitterClient } from "avatarbox.sdk";
+
 export class TwitterIcons {
-  add(imageUrl){
-
+  constructor() {
+    this.client = new AvbxTwitterClient();
+    this.userId = null;
   }
-  delete(imageUrl){
-
+  async add(imageUrl) {
+    return await this.client.addImage(this.userId, imageUrl);
+  }
+  async delete(imageId) {
+    return await this.client.deleteImage(this.userId, imageId);
   }
 }
