@@ -12,6 +12,7 @@ passport.use(
     function (token, tokenSecret, profile, done) {
       profile.token = token;
       profile.tokenSecret = tokenSecret;
+      profile.source = "gravatar";
       return done(null, profile);
     }
   )

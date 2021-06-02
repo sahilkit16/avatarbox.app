@@ -32,6 +32,7 @@ passport.serializeUser(async function (user, done) {
   const { id, lastUpdated } = await avbx.user.find(user.email);
   user.id = id;
   user.lastUpdated = lastUpdated;
+  user.source = "gravatar";
   done(null, user);
 });
 
