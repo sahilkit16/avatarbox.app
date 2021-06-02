@@ -23,14 +23,14 @@ export function rotateLeft(collection, _targetIndex) {
   return [...begin, ...end];
 }
 
-export function getImageId(source, imageUrl){
+export function getImageId(source, imageUrl) {
   let imageId = "";
-  const url = imageUrl.replace(/\?.*$/,"");
+  const url = imageUrl.replace(/\?.*$/, "");
   switch (source) {
     case "gravatar":
       const urlParts = url.split("/");
       const imageFileName = urlParts.pop();
-      imageId = imageFileName.replace(/\..*$/,"");
+      imageId = imageFileName.replace(/\..*$/, "");
       break;
     case "twitter":
       imageId = url;
