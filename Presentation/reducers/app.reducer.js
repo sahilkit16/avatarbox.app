@@ -1,6 +1,5 @@
 import ACTION_TYPES from "../actions/action-types";
 import appState from "./app.state";
-import shortid from "shortid"
 
 const reducer = (state = appState, action) => {
   switch (action.type) {
@@ -25,19 +24,11 @@ const reducer = (state = appState, action) => {
       return Object.assign({}, state, {
         selectedIcon: action.selectedIcon,
         menu: { visible: true },
-        deleteSelectedIcon: false,
       });
     }
     case ACTION_TYPES.CLOSE_MENU: {
       return Object.assign({}, state, {
         menu: { visible: false },
-        deleteSelectedIcon: false,
-      });
-    }
-    case ACTION_TYPES.DELETE_ICON: {
-      return Object.assign({}, state, { 
-        deleteSelectedIcon: true,
-        version: shortid()
       });
     }
     default:
