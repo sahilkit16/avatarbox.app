@@ -65,15 +65,44 @@ html, body{
 }
 
 /* desktop sidebar */
-/* .desktop-sidebar {
-  visibility: hidden;
-} */
 
-/* @media screen and (min-width: 900px) {
-  .mobile-sidebar {
-    visibility: hidden;
+.desktop-sidebar {
+  padding-top:3em;
+  visibility: hidden;
+  width: 250px;
+  height: 100vh;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  border-left: 1px solid #f1f1f1;
+  background-color: #fff;
+}
+.desktop-sidebar .menu-icon {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.desktop-sidebar .menu-icon img {
+  object-fit: cover;
+}
+.desktop-sidebar .image.is-250x250 {
+  width: 250px;
+  height: 250px;
+}
+.desktop-sidebar ul.menu-list li{
+  border-bottom: 1px solid #ededed;
+}
+
+@media screen and (min-width: 900px) {
+  .image-grid-item {
+    margin: 5px;
   }
   .desktop-sidebar {
     visibility: visible;
   }
-} */
+  .mobile-sidebar {
+    visibility: hidden;
+  }
+}

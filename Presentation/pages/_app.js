@@ -5,6 +5,7 @@ import HeroSection from "../components/hero-section";
 import CacheSeed from "../components/cache-seed.renderless";
 import ImageShortage from "../components/image-shortage";
 import MobileSidebar from "../components/mobile-sidebar";
+import DesktopSidebar from "../components/desktop-sidebar";
 
 function AvatarBoxApp({ Component, pageProps, router }) {
   if (router.route == "/health") {
@@ -40,6 +41,7 @@ function AvatarBoxApp({ Component, pageProps, router }) {
       <CacheSeed />
       <form id="menu-form" method="post" action="/api/menu">
         <MobileSidebar />
+        <DesktopSidebar />
       </form>
     </Provider>
   );
