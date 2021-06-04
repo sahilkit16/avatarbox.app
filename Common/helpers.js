@@ -39,3 +39,9 @@ export function getImageId(source, imageUrl) {
   }
   return imageId;
 }
+
+export const deleteIcon = () => {
+  if (confirm("Are you sure?")) {
+    document.getElementById("menu-form").submit();
+  }
+};

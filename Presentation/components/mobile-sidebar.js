@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { deleteIcon } from "../../Common/helpers";
 import actionTypes from "../actions/action-types";
 
 function MobileSidebar() {
@@ -8,11 +9,6 @@ function MobileSidebar() {
     dispatch({
       type: actionTypes.CLOSE_MENU,
     });
-  };
-  const deleteIcon = () => {
-    if (confirm("Are you sure?")) {
-      document.getElementById("menu-form").submit();
-    }
   };
   return (
     <div className={menu && menu.visible ? "mobile-sidebar" : "is-hidden"}>
