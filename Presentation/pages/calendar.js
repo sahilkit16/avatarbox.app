@@ -93,7 +93,7 @@ class CalendarPage extends React.Component {
 
   renderImages() {
     return this.props.calendar.images.map((image, index) => (
-      <figure id={`avatar-${index}`} key={`avatar-${index}`}>
+      <figure id={`avatar-${index}`} key={`avatar-${index}`} class="calendar-icon">
         <img
           width="200"
           height="200"
@@ -116,7 +116,7 @@ class CalendarPage extends React.Component {
                   <link
                     rel="stylesheet"
                     type="text/css"
-                    href="https://www.avatarbox.io/css/calendar.min.css"
+                    href="https://www.avatarbox.io/css/calendar.v0.css"
                   />
                 </Head>
                 <header className="card-header">
