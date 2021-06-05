@@ -1,4 +1,4 @@
-import { GravatarClient } from "../../sdk/Release/Presentation";
+import { GravatarClient } from "avatarbox.sdk";
 
 export class GravatarIcons {
   constructor() {
