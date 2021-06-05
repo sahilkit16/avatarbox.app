@@ -54,7 +54,7 @@ html, body{
 
 .mobile-sidebar {
   width: 100vw;
-  position: absolute;
+  position: fixed;
   bottom:0px;
   border-top: 1px solid #f1f1f1;
   background-color: #fff;
