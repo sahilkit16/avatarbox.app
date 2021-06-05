@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import actionTypes from "../actions/action-types";
 import classNames from "classnames";
+import { deleteIcon } from "../../Common/helpers";
 
 function DesktopSidebar() {
   const { menu, selectedIcon } = useSelector((state) => state);
@@ -10,24 +11,18 @@ function DesktopSidebar() {
       type: actionTypes.CLOSE_MENU,
     });
   };
-
   return (
     <aside
       className={classNames("has-text-centered", "desktop-sidebar", {
         "is-hidden": !menu || !menu.visible,
       })}
     >
-      <div id="menu-icon">
-        <figure className="image is-250x250">
-          <img
-            className="is-square"
-            src={`${selectedIcon && selectedIcon.url}`}
-          />
-        </figure>
+      <div className="menu-icon">
+        <img src={`${selectedIcon && selectedIcon.url}`} />
       </div>
       <ul className="menu-list">
         <li>
-          <a href="#">DELETE</a>
+          <a onClick={deleteIcon}>DELETE</a>
         </li>
         <li>
           <a href="#">UPLOAD</a>

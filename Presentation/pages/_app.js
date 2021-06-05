@@ -39,8 +39,10 @@ function AvatarBoxApp({ Component, pageProps, router }) {
         <CacheSeed />
       </HeroSection>
       <CacheSeed />
-      <MobileSidebar />
-      <DesktopSidebar />
+      <form id="menu-form" method="post" action="/api/menu">
+        <MobileSidebar />
+        <DesktopSidebar />
+      </form>
     </Provider>
   );
 }

@@ -72,8 +72,14 @@ html, body {
   background-color: #fff;
 }
 .desktop-sidebar .menu-icon {
+  width: 250px;
+  height: 250px;
   display: flex;
   justify-content: center;
+  overflow: hidden;
+}
+.desktop-sidebar .menu-icon img {
+  object-fit: cover;
 }
 .desktop-sidebar .image.is-250x250 {
   width: 250px;

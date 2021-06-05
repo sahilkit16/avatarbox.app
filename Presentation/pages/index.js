@@ -260,7 +260,7 @@ class IndexPage extends React.Component {
             <a
               href="api/auth/twitter"
               className={classNames("button is-info", {
-                "is-hidden": this.props.user
+                "is-hidden": this.props.user,
               })}
             >
               <span className="icon">

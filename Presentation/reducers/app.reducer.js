@@ -1,7 +1,7 @@
 import ACTION_TYPES from "../actions/action-types";
 import appState from "./app.state";
 
-export default (state = appState, action) => {
+const reducer = (state = appState, action) => {
   switch (action.type) {
     case ACTION_TYPES.BUST_CACHE: {
       const user = Object.assign({}, state.user, {
@@ -35,3 +35,5 @@ export default (state = appState, action) => {
       return state;
   }
 };
+
+export default reducer;
