@@ -16,8 +16,8 @@ export const toggleCalendar = () => (dispatch) => {
   });
 };
 
-export const reloadCalendar = () => (dispatch) => {
-  return fetch.getCalendarImages().then((calendarImages) => {
+export const reloadCalendar = (fromCache = false) => (dispatch) => {
+  return fetch.getCalendarImages(fromCache).then((calendarImages) => {
     dispatch({
       type: ACTION_TYPES.RELOAD_CALENDAR,
       calendarImages,

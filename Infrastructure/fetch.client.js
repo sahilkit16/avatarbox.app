@@ -49,9 +49,10 @@ export const toggleCalendar = () => {
   });
 };
 
-export const getCalendarImages = () => {
+export const getCalendarImages = (fromCache = true) => {
   return new Promise((resolve, reject) => {
-    fetch("/api/calendar/images").then(async (res) => {
+    const path = "/api/calendar/images";
+    fetch(fromCache ? `${path}?fromCache=1` : path).then(async (res) => {
       if (res.ok) {
         resolve(res.json());
       } else {
