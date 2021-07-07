@@ -99,4 +99,7 @@ html, body {
   .mobile-sidebar {
     visibility: hidden;
   }
+  #imageUploader {
+    display: none;
+  }
 }

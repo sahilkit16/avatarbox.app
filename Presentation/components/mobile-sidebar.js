@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { deleteIcon } from "../../Common/helpers";
+import { deleteIcon, handleFileUpload } from "../../Common/helpers";
 import actionTypes from "../actions/action-types";
 
 function MobileSidebar() {
@@ -26,7 +26,7 @@ function MobileSidebar() {
         <a className="panel-block" onClick={deleteIcon}>
           DELETE
         </a>
-        <a className="panel-block" href="#">
+        <a onClick={handleFileUpload} className="panel-block" href="#">
           UPLOAD
         </a>
         <a className="panel-block" onClick={closeMenu}>

@@ -6,6 +6,7 @@ import CacheSeed from "../components/cache-seed.renderless";
 import ImageShortage from "../components/image-shortage";
 import MobileSidebar from "../components/mobile-sidebar";
 import DesktopSidebar from "../components/desktop-sidebar";
+import ImageUploader from "../components/image-uploader";
 
 function AvatarBoxApp({ Component, pageProps, router }) {
   if (router.route == "/health") {
@@ -42,6 +43,7 @@ function AvatarBoxApp({ Component, pageProps, router }) {
       <form id="menu-form" method="post" action="/api/menu">
         <MobileSidebar />
         <DesktopSidebar />
+        <ImageUploader />
       </form>
     </Provider>
   );
