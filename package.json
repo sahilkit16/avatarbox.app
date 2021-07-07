@@ -26,7 +26,7 @@
   "dependencies": {
     "@sentry/browser": "^6.2.1",
     "@sentry/node": "^5.15.5",
-    "avatarbox.sdk": "^1.2.5",
+    "avatarbox.sdk": "file:../sdk",
     "awilix": "^4.2.6",
     "babelify": "^10.0.0",
     "classnames": "^2.2.6",
@@ -53,6 +53,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "shortid": "^2.2.15",
+    "uuid": "^8.3.2",
     "validator": "^13.0.0",
     "winston": "^3.2.1"
   },
