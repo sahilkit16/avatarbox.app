@@ -25,7 +25,9 @@ function DesktopSidebar() {
           <a onClick={deleteIcon}>DELETE</a>
         </li>
         <li>
-          <a onClick={handleFileUpload} href="#">UPLOAD</a>
+          <a onClick={handleFileUpload} href="#">
+            UPLOAD
+          </a>
         </li>
         <li>
           <a className="panel-block" onClick={closeMenu}>
