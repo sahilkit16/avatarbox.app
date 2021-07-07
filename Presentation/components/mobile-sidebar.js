@@ -15,12 +15,12 @@ function MobileSidebar() {
       <input
         type="hidden"
         name="selectedIcon"
-        value={selectedIcon && selectedIcon.url}
+        value={selectedIcon.url}
       />
       <article className="panel">
         <div className="panel-block">
           <figure className="image is-64x64">
-            <img className="is-square" src={selectedIcon && selectedIcon.url} />
+            <img className="is-square" src={selectedIcon.url} />
           </figure>
         </div>
         <a className="panel-block" onClick={deleteIcon}>

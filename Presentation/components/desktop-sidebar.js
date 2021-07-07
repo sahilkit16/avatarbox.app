@@ -18,7 +18,7 @@ function DesktopSidebar() {
       })}
     >
       <div className="menu-icon">
-        <img src={`${selectedIcon && selectedIcon.url}`} />
+        <img src={selectedIcon.url} />
       </div>
       <ul className="menu-list">
         <li>
