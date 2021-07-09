@@ -13,6 +13,7 @@ function MobileSidebar() {
   return (
     <div className={menu && menu.visible ? "mobile-sidebar" : "is-hidden"}>
       <input type="hidden" name="selectedIcon" value={selectedIcon.url} />
+      <input type="hidden" name="imageUrl" id="imageUrl" />
       <article className="panel">
         <div className="panel-block">
           <figure className="image is-64x64">
