@@ -39,9 +39,9 @@ function ImageUploader() {
               document.getElementById("menu-form").submit();
             }
           })
-          .catch(alert);
+          .catch(console.log);
       })
-      .catch(alert);
+      .catch(console.log);
   };
 
   return (
