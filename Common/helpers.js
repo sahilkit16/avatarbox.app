@@ -45,3 +45,7 @@ export const deleteIcon = () => {
     document.getElementById("menu-form").submit();
   }
 };
+
+export const handleFileUpload = () => {
+  document.getElementById("imageUploader").click();
+};

@@ -12,28 +12,50 @@ import { AvatarCollection } from "../../../Common/avatar-collection";
 
 const handler = async (req, res) => {
   await use(req, res, [source, gravatarClientScope]);
-  if (/post/i.test(req.method)) {
-    if (req.body && req.body.selectedIcon) {
-      req.session.calendar = null;
-      const { selectedIcon } = req.body;
-      const avatars = new AvatarCollection(req.source);
-      switch (req.source) {
-        case "gravatar":
-          avatars.client = req.scope.resolve("gravatarClient");
-          break;
-        case "twitter":
-          avatars.userId = req.session.passport.user.id;
-          break;
-        default:
-          break;
-      }
-      await avatars.delete(selectedIcon);
-      await runMiddleware(req, res, buildCalendar);
-    }
+  req.session.calendar = null;
+  if (req.body && req.body.imageUrl) {
+    await uploadIcon(req, res);
+  } else if (req.body && req.body.selectedIcon) {
+    await deleteIcon(req, res);
   }
+  await runMiddleware(req, res, buildCalendar);
   if (res.headersSent) return;
   redirect(res, "/avatars");
 };
+
+async function deleteIcon(req, res) {
+  if (!req.body || !req.body.selectedIcon) return;
+  const { selectedIcon } = req.body;
+  const avatars = new AvatarCollection(req.source);
+  switch (req.source) {
+    case "gravatar":
+      avatars.client = req.scope.resolve("gravatarClient");
+      break;
+    case "twitter":
+      avatars.userId = req.session.passport.user.id;
+      break;
+    default:
+      break;
+  }
+  await avatars.delete(selectedIcon);
+}
+
+async function uploadIcon(req, res) {
+  if (!req.body || !req.body.imageUrl) return;
+  const { imageUrl } = req.body;
+  const avatars = new AvatarCollection(req.source);
+  switch (req.source) {
+    case "gravatar":
+      avatars.client = req.scope.resolve("gravatarClient");
+      break;
+    case "twitter":
+      avatars.userId = req.session.passport.user.id;
+      break;
+    default:
+      break;
+  }
+  await avatars.add(imageUrl);
+}
 
 const cache = container.resolve("cacheService");
 

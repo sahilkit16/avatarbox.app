@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { deleteIcon } from "../../Common/helpers";
+import { deleteIcon, handleFileUpload } from "../../Common/helpers";
 import actionTypes from "../actions/action-types";
 
 function MobileSidebar() {
@@ -12,21 +12,18 @@ function MobileSidebar() {
   };
   return (
     <div className={menu && menu.visible ? "mobile-sidebar" : "is-hidden"}>
-      <input
-        type="hidden"
-        name="selectedIcon"
-        value={selectedIcon && selectedIcon.url}
-      />
+      <input type="hidden" name="selectedIcon" value={selectedIcon.url} />
+      <input type="hidden" name="imageUrl" id="imageUrl" />
       <article className="panel">
         <div className="panel-block">
           <figure className="image is-64x64">
-            <img className="is-square" src={selectedIcon && selectedIcon.url} />
+            <img className="is-square" src={selectedIcon.url} />
           </figure>
         </div>
         <a className="panel-block" onClick={deleteIcon}>
           DELETE
         </a>
-        <a className="panel-block" href="#">
+        <a onClick={handleFileUpload} className="panel-block" href="#">
           UPLOAD
         </a>
         <a className="panel-block" onClick={closeMenu}>

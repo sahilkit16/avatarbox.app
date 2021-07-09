@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import actionTypes from "../actions/action-types";
 import classNames from "classnames";
-import { deleteIcon } from "../../Common/helpers";
+import { deleteIcon, handleFileUpload } from "../../Common/helpers";
 
 function DesktopSidebar() {
   const { menu, selectedIcon } = useSelector((state) => state);
@@ -18,14 +18,16 @@ function DesktopSidebar() {
       })}
     >
       <div className="menu-icon">
-        <img src={`${selectedIcon && selectedIcon.url}`} />
+        <img src={selectedIcon.url} />
       </div>
       <ul className="menu-list">
         <li>
           <a onClick={deleteIcon}>DELETE</a>
         </li>
         <li>
-          <a href="#">UPLOAD</a>
+          <a onClick={handleFileUpload} href="#">
+            UPLOAD
+          </a>
         </li>
         <li>
           <a className="panel-block" onClick={closeMenu}>

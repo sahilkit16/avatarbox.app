@@ -93,7 +93,11 @@ class CalendarPage extends React.Component {
 
   renderImages() {
     return this.props.calendar.images.map((image, index) => (
-      <figure id={`avatar-${index}`} key={`avatar-${index}`} class="calendar-icon">
+      <figure
+        id={`avatar-${index}`}
+        key={`avatar-${index}`}
+        className="calendar-icon"
+      >
         <img
           width="200"
           height="200"

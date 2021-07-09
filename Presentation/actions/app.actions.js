@@ -16,14 +16,16 @@ export const toggleCalendar = () => (dispatch) => {
   });
 };
 
-export const reloadCalendar = (fromCache = false) => (dispatch) => {
-  return fetch.getCalendarImages(fromCache).then((calendarImages) => {
-    dispatch({
-      type: ACTION_TYPES.RELOAD_CALENDAR,
-      calendarImages,
+export const reloadCalendar =
+  (fromCache = false) =>
+  (dispatch) => {
+    return fetch.getCalendarImages(fromCache).then((calendarImages) => {
+      dispatch({
+        type: ACTION_TYPES.RELOAD_CALENDAR,
+        calendarImages,
+      });
     });
-  });
-};
+  };
 
 export const selectIcon = (selectedIcon) => (dispatch) => {
   return dispatch({
@@ -35,6 +37,7 @@ export const selectIcon = (selectedIcon) => (dispatch) => {
 export const closeMenu = () => (dispatch) => {
   return dispatch({
     type: ACTION_TYPES.CLOSE_MENU,
+    selectedIcon: { url: "" },
   });
 };
 
