@@ -37,6 +37,7 @@ export const selectIcon = (selectedIcon) => (dispatch) => {
 export const closeMenu = () => (dispatch) => {
   return dispatch({
     type: ACTION_TYPES.CLOSE_MENU,
+    selectedIcon: { url: "" },
   });
 };
 
