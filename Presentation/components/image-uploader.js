@@ -39,7 +39,7 @@ function ImageUploader() {
               document.getElementById("menu-form").submit();
             }
           })
-          .catch(console.log);
+          .catch(alert);
       })
       .catch(alert);
   };
