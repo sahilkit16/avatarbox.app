@@ -5,7 +5,10 @@ import { S3Service } from "avatarbox.sdk/Release/Services/s3.service";
 const handler = async (req, res) => {
   const { fileName } = req.query;
   const { user } = req.session.passport;
-  const presignedPost = await S3Service.getPresignedPost("icons.avatarbox.io", `u/${user.id}/${fileName}`);
+  const presignedPost = await S3Service.getPresignedPost(
+    "icons.avatarbox.io",
+    `u/${user.id}/${fileName}`
+  );
   res.json(presignedPost);
 };
 
