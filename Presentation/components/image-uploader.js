@@ -47,6 +47,7 @@ function ImageUploader() {
   return (
     <input
       id="imageUploader"
+      className="is-hidden"
       type="file"
       accept="image/png, image/jpeg"
       onChange={handleUpload}
