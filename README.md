@@ -38,12 +38,6 @@ SESSION_KEY=a rolling stone gathers no moss
 KMS_KEY_ID={YOUR-KMS-KEY-ID}
 REGION=us-east-1
 QUEUE_URL={YOUR-SQS-QUEUE-URL}
-MYSQL_HOST=127.0.0.1
-MYSQL_PORT=3306
-MYSQL_USER=mrtillman
-MYSQL_PASSWORD=letmein
-MYSQL_DATABASE=gravatar
-SALT={BCRYPT-SALT}
 ```
 
 Also find [demo.next.config.js](https://github.com/mrtillman/avatarbox.app/blob/master/demo.next.config.js), rename it to `next.config.js` and modify:
