@@ -1,5 +1,6 @@
 import { LoginVM } from "../../view-models/login.vm";
 import { withSession } from "next-session";
+import { withSentry } from "@sentry/nextjs";
 import {
   use,
   unauthorized,
@@ -38,6 +39,8 @@ const handler = async (req, res) => {
 
 const cache = container.resolve("cacheService");
 
-export default withSession(handler, {
-  store: cache.redis.store,
-});
+export default withSentry(
+  withSession(handler, {
+    store: cache.redis.store,
+  })
+);

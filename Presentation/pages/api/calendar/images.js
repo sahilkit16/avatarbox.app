@@ -1,4 +1,5 @@
 import { withSession } from "next-session";
+import { withSentry } from "@sentry/nextjs";
 import { container } from "../../../../Common/di-container";
 import {
   use,
@@ -9,15 +10,17 @@ import {
 
 const cache = container.resolve("cacheService");
 
-export default withSession(
-  async (req, res) => {
-    await use(req, res, [isAuthenticated]);
-    if (req.query.fromCache) {
+export default withSentry(
+  withSession(
+    async (req, res) => {
+      await use(req, res, [isAuthenticated]);
+      if (req.query.fromCache) {
+        return res.json(req.session.calendar.images);
+      }
+      req.session.calendar = null;
+      await runMiddleware(req, res, buildCalendar);
       return res.json(req.session.calendar.images);
-    }
-    req.session.calendar = null;
-    await runMiddleware(req, res, buildCalendar);
-    return res.json(req.session.calendar.images);
-  },
-  { store: cache.redis.store }
+    },
+    { store: cache.redis.store }
+  )
 );

@@ -1,5 +1,6 @@
 import { container } from "../../../Common/di-container";
 import { withSession } from "next-session";
+import { withSentry } from "@sentry/nextjs";
 import { S3Service } from "avatarbox.sdk/Release/Services/s3.service";
 
 const handler = async (req, res) => {
@@ -14,6 +15,8 @@ const handler = async (req, res) => {
 
 const cache = container.resolve("cacheService");
 
-export default withSession(handler, {
-  store: cache.redis.store,
-});
+export default withSentry(
+  withSession(handler, {
+    store: cache.redis.store,
+  })
+);

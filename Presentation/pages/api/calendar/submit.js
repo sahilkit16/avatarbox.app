@@ -6,6 +6,7 @@ import {
   isAuthenticated,
 } from "../../../middleware";
 import { withSession } from "next-session";
+import { withSentry } from "@sentry/nextjs";
 import { container } from "../../../../Common/di-container";
 import { redirect } from "next/dist/server/api-utils";
 import { source } from "../../../middleware/source";
@@ -46,6 +47,8 @@ const handler = async (req, res) => {
 
 const cache = container.resolve("cacheService");
 
-export default withSession(handler, {
-  store: cache.redis.store,
-});
+export default withSentry(
+  withSession(handler, {
+    store: cache.redis.store,
+  })
+);

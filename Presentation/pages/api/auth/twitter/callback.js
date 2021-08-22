@@ -2,6 +2,7 @@ import { use, passportTwitter } from "../../../../middleware";
 import { container } from "../../../../../Common/di-container";
 import { withSession } from "next-session";
 import { AvbxTwitterClient } from "avatarbox.sdk";
+import { withSentry } from "@sentry/nextjs";
 
 const handler = async (req, res) => {
   await use(req, res, [passportTwitter.initialize()]);
@@ -42,6 +43,8 @@ async function signIn(user) {
 
 const cache = container.resolve("cacheService");
 
-export default withSession(handler, {
-  store: cache.redis.store,
-});
+export default withSentry(
+  withSession(handler, {
+    store: cache.redis.store,
+  })
+);
