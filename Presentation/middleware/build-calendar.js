@@ -41,6 +41,8 @@ async function buildCalendarMiddleware(req, res, next) {
 
   calendar = await buildCalendarUseCase.execute();
 
+  if (!calendar) return;
+
   req.session.calendar = calendar;
 
   next(calendar);
