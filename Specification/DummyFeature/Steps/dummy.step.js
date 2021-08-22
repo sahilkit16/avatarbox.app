@@ -1,4 +1,4 @@
-const { setWorldConstructor, Given, Then } = require("cucumber");
+const { setWorldConstructor, Given, Then } = require("@cucumber/cucumber");
 const expect = require("expect");
 const World = require("../../world");
 
