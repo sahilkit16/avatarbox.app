@@ -7,7 +7,7 @@ import {
   buildCalendar,
   gravatarClientScope,
 } from "../../middleware";
-import { redirect } from "next/dist/next-server/server/api-utils";
+import { redirect } from "next/dist/server/api-utils";
 import { AvatarCollection } from "../../../Common/avatar-collection";
 
 const handler = async (req, res) => {

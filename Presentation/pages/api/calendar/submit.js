@@ -7,7 +7,7 @@ import {
 } from "../../../middleware";
 import { withSession } from "next-session";
 import { container } from "../../../../Common/di-container";
-import { redirect } from "next/dist/next-server/server/api-utils";
+import { redirect } from "next/dist/server/api-utils";
 import { source } from "../../../middleware/source";
 
 const handler = async (req, res) => {

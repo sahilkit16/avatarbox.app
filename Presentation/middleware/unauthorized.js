@@ -1,4 +1,4 @@
-import { redirect } from "next/dist/next-server/server/api-utils";
+import { redirect } from "next/dist/server/api-utils";
 
 export function _handleUnauthorized(
   req,

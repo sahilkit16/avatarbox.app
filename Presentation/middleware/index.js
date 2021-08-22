@@ -1,4 +1,4 @@
-import { redirect } from "next/dist/next-server/server/api-utils";
+import { redirect } from "next/dist/server/api-utils";
 import { ImageShortageError } from "../../Domain/image-shortage.error";
 import { ImageShortageVM } from "../view-models/image-shortage.vm";
 
@@ -30,6 +30,7 @@ export function runMiddleware(req, res, middleware) {
             .status(400)
             .json({ code: result.code, message: result.message });
         } else {
+          
           redirect(res, "/");
         }
       } else if (result instanceof Error) {

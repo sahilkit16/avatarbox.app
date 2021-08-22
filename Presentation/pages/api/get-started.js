@@ -7,7 +7,7 @@ import {
   gravatarClientScope,
   isAjax,
 } from "../../middleware";
-import { redirect } from "next/dist/next-server/server/api-utils";
+import { redirect } from "next/dist/server/api-utils";
 import { container } from "../../../Common/di-container";
 
 const handler = async (req, res) => {
