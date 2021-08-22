@@ -30,7 +30,6 @@ export function runMiddleware(req, res, middleware) {
             .status(400)
             .json({ code: result.code, message: result.message });
         } else {
-          
           redirect(res, "/");
         }
       } else if (result instanceof Error) {
