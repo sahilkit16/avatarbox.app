@@ -23,6 +23,7 @@ app server for [avatarbox.io](https://avatarbox.io)
   - AmazonSQSFullAccess
 - KMS Symmetric Key
   - add `AvbxAppServer` as a Key user
+- Twitter Developer Account
 
 Next, find [demo.env](https://github.com/mrtillman/avatarbox.app/blob/master/demo.env), rename it to `.env` and modify:
 
@@ -33,6 +34,9 @@ PUSHER_CLUSTER=xx1
 REDIS_URI=redis://localhost:6379
 SENTRY_DSN=https://000@111.ingest.sentry.io/222
 SESSION_KEY=a rolling stone gathers no moss
+TWITTER_CONSUMER_KEY=...
+TWITTER_CONSUMER_SECRET=...
+TWITTER_CALLBACK_URL=https://example.com/auth/twitter/callback
 
 # for the avatarbox.sdk dependency
 KMS_KEY_ID={YOUR-KMS-KEY-ID}
