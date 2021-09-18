@@ -86,7 +86,7 @@ $ npm run test:spec
 
 Open http://localhost:8080 to view it in the browser.
 
-![avbx-demo](https://d2bi7agqetsdur.cloudfront.net/avbx-demo.gif)
+![avbx-demo](https://d1ql0lesvv7pgp.cloudfront.net/avbx-demo.gif)
 
 ## License
 [MIT](https://github.com/mrtillman/avatarbox.app/blob/main/LICENSE)
